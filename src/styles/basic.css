@@ -1,0 +1,159 @@
+body {
+    font-family: "Segoe UI";}
+.relative {position: relative;}
+.absolute {position: absolute;}
+.fixed {position: fixed;}
+.d-block {display: block;}
+.d-none {display: none !important;}
+.pointer {cursor: pointer;}
+
+.text-left {text-align: left;}
+.text-right {text-align: right;}
+.text-center {text-align: center;}
+
+
+.d-flex {display: flex;}
+.flex-row {
+  flex-direction: row;}
+
+.flex-column {
+  flex-direction: column;}
+
+.flex-row-reverse {
+  flex-direction: row-reverse;}
+
+.flex-column-reverse {
+  flex-direction: column-reverse;}
+.flex-wrap {
+  flex-wrap: wrap;}
+
+.flex-nowrap {
+  flex-wrap: nowrap;}
+
+.flex-wrap-reverse {
+  flex-wrap: wrap-reverse;}
+
+.justify-start {
+  justify-content: flex-start;}
+
+.justify-end {
+  justify-content: flex-end;}
+
+.justify-center {
+  justify-content: center;}
+
+.justify-space-between {
+  justify-content: space-between;}
+
+.justify-space-around {
+  justify-content: space-around;}
+
+.align-start {
+  align-items: flex-start;}
+
+.align-end {
+  align-items: flex-end;}
+
+.align-center {
+  align-items: center;}
+
+.align-baseline {
+  align-items: baseline;}
+
+.align-stretch {
+  align-items: stretch;}
+
+.align-content-start {
+  align-content: flex-start;}
+
+.align-content-end {
+  align-content: flex-end;}
+
+.align-content-center {
+  align-content: center;}
+
+.align-content-space-between {
+  align-content: space-between;}
+
+.align-content-space-around {
+  align-content: space-around;}
+
+.align-content-stretch {
+  align-content: stretch;}
+
+.align-self-auto {
+  align-self: auto;}
+
+.align-self-start {
+  align-self: flex-start;}
+
+.align-self-end {
+  align-self: flex-end;}
+
+.align-self-center {
+  align-self: center;}
+
+.align-self-baseline {
+  align-self: baseline;}
+
+.align-self-stretch {
+  align-self: stretch;}
+
+  
+
+@for $i from 0 to 16 {
+  .pa-$i { padding: calc($i*4)px; }
+}
+@for $i from 0 to 16 {
+  .px-$i { 
+    padding-left: calc($i*4)px;
+    padding-right: calc($i*4)px;
+  }
+}
+@for $i from 0 to 16 {
+  .py-$i { 
+    padding-top: calc($i*4)px;
+    padding-bottom: calc($i*4)px;
+  }
+}
+@for $i from 0 to 16 {
+  .pt-$i { padding-top: calc($i*4)px; }
+}
+@for $i from 0 to 16 {
+  .pr-$i { padding-right: calc($i*4)px; }
+}
+@for $i from 0 to 16 {
+  .pb-$i { padding-bottom: calc($i*4)px; }
+}
+@for $i from 0 to 16 {
+  .pl-$i { padding-left: calc($i*4)px; }
+}
+
+
+@for $i from 0 to 16 {
+  .ma-$i { margin: calc($i*4)px; }
+}
+@for $i from 0 to 16 {
+  .mx-$i { 
+    margin-left: calc($i*4)px;
+    margin-right: calc($i*4)px;
+  }
+}
+@for $i from 0 to 16 {
+  .my-$i { 
+    margin-top: calc($i*4)px;
+    margin-bottom: calc($i*4)px;
+  }
+}
+@for $i from 0 to 16 {
+  .mt-$i { margin-top: calc($i*4)px; }
+}
+@for $i from 0 to 16 {
+  .mr-$i { margin-right: calc($i*4)px; }
+}
+@for $i from 0 to 16 {
+  .mb-$i { margin-bottom: calc($i*4)px; }
+}
+@for $i from 0 to 16 {
+  .ml-$i { margin-left: calc($i*4)px; }
+}
