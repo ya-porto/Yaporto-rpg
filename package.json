@@ -6,15 +6,17 @@
   "scripts": {
     "start": "webpack serve --mode development --open --hot ",
     "build": "webpack --mode production",
-    "lint-fix": "eslint . --ext .tsx --fix",
-    "lint": "eslint . --ext .tsx"
+    "lint-fix": "eslint . --ext .ts,.tsx --fix",
+    "lint": "eslint . --ext .ts,.tsx"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.13.15",
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
     "@babel/preset-env": "^7.13.15",
     "@babel/preset-react": "^7.13.13",
+    "@babel/preset-typescript": "^7.13.0",
     "autoprefixer": "^10.2.5",
     "babel-loader": "^8.2.2",
     "css-loader": "^5.2.2",
