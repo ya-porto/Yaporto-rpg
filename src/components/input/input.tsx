@@ -30,7 +30,7 @@ class Input extends React.Component<IInputCompProps> {
 
 	render() {
 		const {value, type, placeholder, name, className, validation, error} = this.state;
-		const fieldClassName = `field ${className ? className : ''}`;
+		const fieldClassName = `field ${className ?? ''}`;
 		return (
 			<div className={fieldClassName}>
 				<input
