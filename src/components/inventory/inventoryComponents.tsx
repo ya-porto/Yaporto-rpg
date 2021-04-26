@@ -32,21 +32,21 @@ export class ClothItemButton extends PureComponent<ClothItemPrpos> {
 export class CharacterCard extends PureComponent {
 	render() {
 		return (
-			<div id="character" className="character card mx-2 px-6 py-4 d-flex flex-column justify-space-between">
+			<div className="character card mx-2 px-6 py-4 d-flex flex-column justify-space-between">
 				<div className="d-flex flex-column justify-center align-center">
 					<span className="character_name">Персонаж</span>
 					<span className="character_icon"></span>
 					<div className="d-flex flex-row justify-space-around mb-4">
-						<span id="armor" className="clothes_button ma-2"></span>
-						<span id="shield" className="clothes_button ma-2"></span>
-						<span id="weapon" className="clothes_button ma-2"></span>
+						<span className="clothes_button ma-2"></span>
+						<span className="clothes_button ma-2"></span>
+						<span className="clothes_button ma-2"></span>
 					</div>
 
 					<div className="d-flex flex-row flex-wrap mb-4">
-						<span className="character_stats_item ml-15" id="level">Уровень</span>
-						<span className="character_stats_item ml-15" id="health">Жизнь</span>
-						<span className="character_stats_item ml-15" id="defence">Защита</span>
-						<span className="character_stats_item ml-15" id="hitpoints">Урон</span>
+						<span className="character_stats_item ml-15">Уровень</span>
+						<span className="character_stats_item ml-15">Жизнь</span>
+						<span className="character_stats_item ml-15">Защита</span>
+						<span className="character_stats_item ml-15">Урон</span>
 					</div>
 				</div>
 
@@ -73,7 +73,7 @@ export class BackpackCard extends Component<{
 	render() {
 		const {clothes} = this.props;
 		return (
-			<div id="backpack" className="backpack mx-2 px-6 py-4 card d-flex flex-column align-center">
+			<div className="backpack mx-2 px-6 py-4 card d-flex flex-column align-center">
 				<span className="backpack_header">Рюкзак</span>
 
 				{clothes.map(({type, onClick, img}, i) => (
@@ -96,7 +96,7 @@ export class ClothCard extends PureComponent<{
 		const {isViewed} = this.props;
 		if (isViewed) {
 			return (
-				<div id="сlothes" className="clothes mx-2 px-6 py-4 card d-flex flex-column align-center justify-space-between">
+				<div className="clothes mx-2 px-6 py-4 card d-flex flex-column align-center justify-space-between">
 					<div className="d-flex flex-column justify-space-between align-center">
 						<span className="clothes_header">Название шмотки</span>
 						<span style={{width: '150px', height: '150px'}}>
