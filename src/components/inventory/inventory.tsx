@@ -46,8 +46,7 @@ class Inventory extends Component<{}, {
 						onClick: this.getViewedItem,
 						img: 'https://as1.ftcdn.net/jpg/02/16/32/46/500_F_216324673_6cXL2BrX2QI3YrLNPgnkAyC3ZbRvZZ0W.jpg'
 
-					}
-					]} />
+					}]} />
 
 					<ClothCard isViewed={this.state.isViewed} viewedItem={this.state.viewedItem} />
 

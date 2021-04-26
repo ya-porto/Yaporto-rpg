@@ -2,7 +2,7 @@ import React from 'react';
 import {PureComponent, Component} from 'react';
 import {Button} from '../button/index';
 
-//тут лежат все спомогательные компоненты конкретно для этой страницы/модалки. Не разношу по разным файлам чтоб не мусорить проект
+// Тут лежат все спомогательные компоненты конкретно для этой страницы/модалки. Не разношу по разным файлам чтоб не мусорить проект
 
 interface ClothItemPrpos {
     type: string,
@@ -30,10 +30,6 @@ export class ClothItemButton extends PureComponent<ClothItemPrpos> {
 }
 
 export class CharacterCard extends PureComponent {
-	constructor(props: any) {
-		super(props);
-	}
-
 	render() {
 		return (
 			<div id="character" className="character card mx-2 px-6 py-4 d-flex flex-column justify-space-between">
@@ -74,12 +70,6 @@ export class CharacterCard extends PureComponent {
 export class BackpackCard extends Component<{
     clothes: ClothItemPrpos[]
 }> {
-	constructor(props: {
-        clothes: ClothItemPrpos[]
-    }) {
-		super(props);
-	}
-
 	render() {
 		const {clothes} = this.props;
 		return (
@@ -101,14 +91,6 @@ export class ClothCard extends PureComponent<{
     viewedItem: {[k in string]: any}
     isViewed: boolean
 }> {
-	constructor(props: {
-        img?: string,
-        isViewed: boolean,
-        viewedItem: {[k in string]: any}
-    }) {
-		super(props);
-	}
-
 	render() {
 		const {img} = this.props.viewedItem;
 		const {isViewed} = this.props;
