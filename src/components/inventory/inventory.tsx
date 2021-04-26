@@ -1,23 +1,28 @@
 import React, {Component} from 'react';
 import {CharacterCard, BackpackCard, ClothCard} from './inventoryComponents';
+import {ClothItemPrpos} from './inventory.type';
 
 import './inventory.css';
 
 class Inventory extends Component<{}, {
 	isViewed: boolean,
-	viewedItem: {[k in string]: any}
+	viewedItem: ClothItemPrpos
 }> {
 	constructor(props: any) {
 		super(props);
 		this.state = {
 			isViewed: false,
-			viewedItem: {}
+			viewedItem: {
+				type: '',
+				img: '',
+				onClick: () => {}
+			}
 		};
 	}
 
-	getViewedItem = (evt: any): any => {
+	getViewedItem = (data: ClothItemPrpos): void => {
 		this.setState({
-			viewedItem: evt,
+			viewedItem: data,
 			isViewed: true
 		});
 	}
