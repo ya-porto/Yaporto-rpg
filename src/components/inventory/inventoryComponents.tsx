@@ -1,16 +1,9 @@
 import React from 'react';
 import {PureComponent, Component} from 'react';
 import {Button} from '../button/index';
+import {ClothItemPrpos, ClothCardProps} from './inventory.type';
 
 // Тут лежат все спомогательные компоненты конкретно для этой страницы/модалки. Не разношу по разным файлам чтоб не мусорить проект
-
-interface ClothItemPrpos {
-    type: string,
-    onClick: (prop: any) => any,
-    img: string
-
-}
-
 export class ClothItemButton extends PureComponent<ClothItemPrpos> {
 	constructor(props: ClothItemPrpos) {
 		super(props);
@@ -86,11 +79,7 @@ export class BackpackCard extends Component<{
 	}
 }
 
-export class ClothCard extends PureComponent<{
-    img?: string,
-    viewedItem: {[k in string]: any}
-    isViewed: boolean
-}> {
+export class ClothCard extends PureComponent<ClothCardProps> {
 	render() {
 		const {img} = this.props.viewedItem;
 		const {isViewed} = this.props;
