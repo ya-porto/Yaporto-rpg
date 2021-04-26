@@ -39,13 +39,6 @@ class Signin extends React.Component {
 		}
 	};
 
-	onInputChange(v: string) {
-		// Не уверен, что так правильно
-		// динамически изменяю значение любого инпута, передав объект в качестве контекста
-		// @ts-ignore
-		this.value = v;
-	}
-
 	render() {
 		const {inputsData, signinButton} = this.state;
 		return (
@@ -62,13 +55,15 @@ class Signin extends React.Component {
 									placeholder={placeholder}
 									name={name}
 									validation={validation}
-									onChange={this.onInputChange.bind(item)}
+									onChange={(v: string) => {
+										item.value = v;
+									}}
 									key={i}
 								/>;
 							})
 						}
 					</form>
-					<Button className={signinButton.className} onClick={signinButton.onClick}>
+					<Button className={signinButton.className} onClick={signinButton.onClick.bind(this)}>
 						{signinButton.text}
 					</Button>
 					<div className="buttons d-flex flex-column align-center">
