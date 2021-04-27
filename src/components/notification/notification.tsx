@@ -6,12 +6,8 @@ import './style.css';
 // Этот компонент пока не работает
 // TODO нужно сделать компонент глобальным и управлять появлением через глобальное хранилище
 class Notification extends React.Component<INotificationCompProps> {
-	state: Readonly<INotificationCompProps> = {
-		...this.props
-	};
-
 	render() {
-		const {className, type, text} = this.state;
+		const {className, type, text} = this.props;
 		const NotificationClassName = `app-notification app-notification_${type} shadow ${className ?? ''}`;
 		return (
 			<div className={NotificationClassName}>

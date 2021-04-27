@@ -1,35 +1,77 @@
 import React from 'react';
-import {IInputCompProps} from './input.type';
+import {validationEmail, validationEmpty, validationNumber, validationPassword, validationPhone} from '../../utils/validator';
+import {IInputCompProps, IInputCompState} from './input.type';
 import './style.css';
 
 class Input extends React.Component<IInputCompProps> {
-	state: Readonly<IInputCompProps> = {
-		...this.props,
-		error: false
+	state: Readonly<IInputCompState> = {
+		error: {
+			isShow: false,
+			text: ''
+		},
+		validationRules: {
+			required: {
+				fn: (v: string) => validationEmpty(v),
+				text: 'Обязательное поле'
+			},
+			phone: {
+				fn: (v: string) => validationPhone(v),
+				text: 'Невалидный номер телефона'
+			},
+			email: {
+				fn: (v: string) => validationEmail(v),
+				text: 'Невалидная почта'
+			},
+			password: {
+				fn: (v: string) => validationPassword(v),
+				text: 'Невалидный пароль'
+			},
+			number: {
+				fn: (v: string) => validationNumber(v),
+				text: 'Должно быть числом'
+			},
+			equal: {
+				fn: (v1: string, v2: string) => v1 === v2,
+				text: 'Поля не совпадают'
+			}
+		}
 	};
 
-	isValid(): boolean {
-		if (!this.state.validation) {
-			throw Error('Валидация отсутствует');
+	isValid = () => {
+		if (!this.props.validation) {
+			return;
 		}
 
-		this.setState({error: !this.state.validation.fn(this.state.value)});
-		return !this.state.error;
+		for (const k in this.props.validation) {
+			if (Object.prototype.hasOwnProperty.call(this.props.validation, k)) {
+				const validationRule = this.state.validationRules[k];
+				if (!validationRule.fn(this.props.value, k === 'equal' && this.props.validation.equal ? this.props.validation.equal() : null)) {
+					this.setState({
+						error: {
+							isShow: true,
+							text: validationRule.text
+						}
+					});
+					return;
+				}
+			}
+		}
+
+		this.hideError();
 	}
 
-	changeValue(event: React.ChangeEvent<HTMLInputElement>) {
-		const value = event.target.value;
-		// Меняю локально значение
-		this.setState({value});
-		// Меняю значение родителю если ему это нужно
-		// надеюсь, это норм для реакта
-		if (this.props.onChange) {
-			this.props.onChange(value);
-		}
+	hideError = () => {
+		this.setState({
+			error: {
+				isShow: false,
+				text: ''
+			}
+		});
 	}
 
 	render() {
-		const {value, type, placeholder, name, className, validation, error} = this.state;
+		const {value, type, placeholder, name, className, onChange, children} = this.props;
+		const {error} = this.state;
 		const fieldClassName = `field ${className ?? ''}`;
 		return (
 			<div className={fieldClassName}>
@@ -39,19 +81,15 @@ class Input extends React.Component<IInputCompProps> {
 					value={value}
 					placeholder={placeholder}
 					name={name}
-					onChange={this.changeValue.bind(this)}
-					onFocus={() => this.setState({error: false})}
-					onBlur={() => {
-						if (validation) {
-							this.isValid.bind(this)();
-						}
-					}}
+					onChange={onChange}
+					onFocus={this.hideError}
+					onBlur={this.isValid}
 				/>
 				<label htmlFor={name} className="form__label">{placeholder}</label>
 				{
-					error ? <span className="form__error">{validation?.text}</span> : null
+					error.isShow ? <span className="form__error">{error.text}</span> : null
 				}
-				{this.props.children}
+				{children}
 			</div>
 		);
 	}
