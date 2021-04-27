@@ -57,14 +57,14 @@ export default class Character{
             if(images != null){
                 this.image = images
             }
-            console.log(this.prev_y / y_size, this.prev_x / x_size)
             if(mass[this.prev_y / y_size][this.prev_x / x_size][0] == undefined){
                 this.ctx.clearRect(clear_x, clear_y, this.image.width, this.image.height)
                 this.ctx.beginPath();
                 this.ctx.drawImage(this.image, this.prev_x, this.prev_y, this.image.width, this.image.height)
                 this.ctx.closePath();
-                delete mass[clear_y / y_size][clear_x / x_size][0]
+                mass[clear_y / y_size][clear_x / x_size].splice(0, 1)
                 mass[this.prev_y / y_size][this.prev_x / x_size][0] = 'C'
+                console.log(mass)
             }else{
                 this.prev_x = clear_x;
                 this.prev_y = clear_y

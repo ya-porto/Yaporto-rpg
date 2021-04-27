@@ -88,33 +88,45 @@ setTimeout(()=>{
 	console.log(charImgA1)
 	const char1 = new Character(0, 0, charImg, 'canvas', charAttack)
 	document.addEventListener('keydown', function(event){
+			if(!isActive){
 
-			isActive = true
-			if(event.code == 'ArrowUp' || event.code == 'KeyW'){
-				char1.moveCharacter('up', lvlMatrix, 65, 64)
-				return;
-			}
+				isActive = true
+
+				setTimeout(()=>{
+					isActive = false
+				}, 600)
+
+				if(event.code == 'ArrowUp' || event.code == 'KeyW'){
+					char1.moveCharacter('up', lvlMatrix, 65, 64)
+			
+					return;
+				}
+			
+				if(event.code == 'ArrowDown' || event.code == 'KeyS'){
+					char1.moveCharacter('down', lvlMatrix, 65, 64)
+					return;
+				}
+			
+				if(event.code == 'ArrowRight' || event.code == 'KeyD'){
+					char1.moveCharacter('right', lvlMatrix, 65, 64)
+					return;
+				}
+			
+				if(event.code == 'ArrowLeft' || event.code == 'KeyA'){
+					char1.moveCharacter('left', lvlMatrix, 65, 64)
+					return;
+				}
 		
-			if(event.code == 'ArrowDown' || event.code == 'KeyS'){
-				char1.moveCharacter('down', lvlMatrix, 65, 64)
-				return;
+				if(event.code == 'KeyX'){
+					let time = performance.now();
+					char1.attackCharacter(time, 500)
+					return;
+				}
+
+			}else{
+				return
 			}
-		
-			if(event.code == 'ArrowRight' || event.code == 'KeyD'){
-				char1.moveCharacter('right', lvlMatrix, 65, 64)
-				return;
-			}
-		
-			if(event.code == 'ArrowLeft' || event.code == 'KeyA'){
-				char1.moveCharacter('left', lvlMatrix, 65, 64)
-				return;
-			}
-	
-			if(event.code == 'KeyX'){
-				let time = performance.now();
-				char1.attackCharacter(time, 500)
-				return;
-			}
+			
     })
 }, 100)
 export default App;
