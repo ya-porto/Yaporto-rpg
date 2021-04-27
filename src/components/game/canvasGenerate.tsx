@@ -21,23 +21,6 @@ export default class GameCanvas extends PureComponent<props>{
     
     constructor(props: props){
         super(props);
-       
-        if(props.mass != []){
-            props.mass.forEach((element:elementMass) => {
-                const ctx = this.refs.canvas.getContext('2d');
-                const image = element.image;
-                image.width = element.image.width;
-                image.height = element.image.height;
-    
-                setTimeout(() => {
-                    if(ctx){
-                        ctx.beginPath();
-                        ctx.drawImage(image, element.start_x, element.start_y, image.width, image.height)
-                        ctx.closePath();
-                    }
-                })
-            })
-        }
       
     }
 
@@ -48,6 +31,7 @@ export default class GameCanvas extends PureComponent<props>{
                 id="canvas"
                 style={{ 
                     backgroundImage: 'url(' + this.props.image.src + ')',
+                    backgroundSize: 'cover'
                 }} 
                 width={this.props.x_p} 
                 height={this.props.y_p}>
