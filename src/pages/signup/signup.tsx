@@ -1,7 +1,6 @@
 import React from 'react';
 import {Button, IButtonCompProps} from '../../components/button/index';
 import {Input, IInputCompProps} from '../../components/input/index';
-import {validationEmail, validationEmpty, validationPassword, validationPhone} from '../../utils/validator';
 import './style.css';
 
 interface IButton extends IButtonCompProps {
@@ -19,8 +18,8 @@ class Signup extends React.Component {
 			placeholder: 'Почта',
 			name: 'email',
 			validation: {
-				fn: (val: string) => validationEmail(val),
-				text: 'Невалидная почта'
+				required: true,
+				email: true
 			}
 		}, {
 			value: '',
@@ -28,8 +27,7 @@ class Signup extends React.Component {
 			placeholder: 'Логин',
 			name: 'login',
 			validation: {
-				fn: (val: string) => validationEmpty(val),
-				text: 'Логин не может быть пустой строкой'
+				required: true
 			}
 		}, {
 			value: '',
@@ -37,8 +35,7 @@ class Signup extends React.Component {
 			placeholder: 'Имя',
 			name: 'first_name',
 			validation: {
-				fn: (val: string) => validationEmpty(val),
-				text: 'Обязательное поле'
+				required: true
 			}
 		}, {
 			value: '',
@@ -46,8 +43,7 @@ class Signup extends React.Component {
 			placeholder: 'Фамилия',
 			name: 'second_name',
 			validation: {
-				fn: (val: string) => validationEmpty(val),
-				text: 'Обязательное поле'
+				required: true
 			}
 		}, {
 			value: '',
@@ -55,8 +51,8 @@ class Signup extends React.Component {
 			placeholder: 'Телефон',
 			name: 'phone',
 			validation: {
-				fn: (val: string) => validationPhone(val),
-				text: 'Некорректный номер телефона. Введите от 11 до 13 цифр (без пробелов и тире).'
+				required: true,
+				phone: true
 			}
 		}, {
 			value: '',
@@ -64,8 +60,8 @@ class Signup extends React.Component {
 			placeholder: 'Пароль',
 			name: 'password',
 			validation: {
-				fn: (val: string) => validationPassword(val),
-				text: 'Невалидный пароль'
+				required: true,
+				password: true
 			}
 		}, {
 			value: '',
@@ -73,15 +69,7 @@ class Signup extends React.Component {
 			placeholder: 'Пароль (еще раз)',
 			name: 'password_again',
 			validation: {
-				fn: (val: string): boolean => {
-					const pass: IInputCompProps | undefined = this.state.inputsData.find(x => x.name === 'password');
-					if (pass) {
-						return validationPassword(val) && pass.value === val;
-					}
-
-					return false;
-				},
-				text: 'Пароли не совпадают'
+				equal: () => this.state.inputsData.find(x => x.name === 'password')?.value
 			}
 		}],
 		signupButton: {
@@ -107,15 +95,16 @@ class Signup extends React.Component {
 									placeholder={placeholder}
 									name={name}
 									validation={validation}
-									onChange={(v: string) => {
-										item.value = v;
+									onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+										item.value = e.target.value;
+										this.setState({inputsData});
 									}}
 									key={i}
 								/>;
 							})
 						}
 					</form>
-					<Button className={signupButton.className} onClick={signupButton.onClick.bind(this)}>
+					<Button className={signupButton.className} onClick={signupButton.onClick}>
 						{signupButton.text}
 					</Button>
 					<div className="buttons d-flex flex-column align-center">
