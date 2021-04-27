@@ -1,7 +1,6 @@
 import React from 'react';
 import {Button, IButtonCompProps} from '../../components/button/index';
 import {IInputCompProps, Input} from '../../components/input/index';
-import {validationEmpty, validationPassword} from '../../utils/validator';
 import './style.css';
 
 interface IButton extends IButtonCompProps {
@@ -19,8 +18,7 @@ class Signin extends React.Component {
 			placeholder: 'Логин',
 			name: 'login',
 			validation: {
-				fn: (val: string) => validationEmpty(val),
-				text: 'Логин не может быть пустой строкой'
+				required: true
 			}
 		}, {
 			value: '',
@@ -28,8 +26,8 @@ class Signin extends React.Component {
 			placeholder: 'Пароль',
 			name: 'password',
 			validation: {
-				fn: (val: string) => validationPassword(val),
-				text: 'Невалидный пароль'
+				required: true,
+				password: true
 			}
 		}],
 		signinButton: {
@@ -55,15 +53,16 @@ class Signin extends React.Component {
 									placeholder={placeholder}
 									name={name}
 									validation={validation}
-									onChange={(v: string) => {
-										item.value = v;
+									onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+										item.value = e.target.value;
+										this.setState({inputsData});
 									}}
 									key={i}
 								/>;
 							})
 						}
 					</form>
-					<Button className={signinButton.className} onClick={signinButton.onClick.bind(this)}>
+					<Button className={signinButton.className} onClick={signinButton.onClick}>
 						{signinButton.text}
 					</Button>
 					<div className="buttons d-flex flex-column align-center">
