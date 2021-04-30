@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
-import {CharacterCard, BackpackCard, ClothCard} from './inventoryComponents';
-import {ClothItemPrpos} from '../components.type';
+import {BackpackCard} from './BackpackCard';
+import {ClothCard} from './ClothCard';
+import {CharacterCard} from './CharacterCard';
+import {ClothItemPrpos, InventoryType} from '../components.type';
 
 import './inventory.css';
 
-class Inventory extends Component<{}, {
-	isViewed: boolean,
-	viewedItem: ClothItemPrpos
-}> {
+class Inventory extends Component<{}, InventoryType> {
 	constructor(props: any) {
 		super(props);
 		this.state = {

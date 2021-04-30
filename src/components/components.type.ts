@@ -9,3 +9,8 @@ export interface ClothCardProps {
     viewedItem: ClothItemPrpos
     isViewed: boolean
 }
+
+export interface InventoryType {
+	isViewed: boolean,
+	viewedItem: ClothItemPrpos
+}
