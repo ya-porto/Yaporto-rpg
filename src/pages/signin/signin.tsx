@@ -37,6 +37,15 @@ class Signin extends React.Component {
 		}
 	};
 
+	inputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const {name, value} = e.target;
+		const changedData = this.state.inputsData.find(x => x.name === name);
+		if (changedData) {
+			changedData.value = value;
+			this.setState({inputData: this.state.inputsData});
+		}
+	}
+
 	render() {
 		const {inputsData, signinButton} = this.state;
 		return (
@@ -45,21 +54,17 @@ class Signin extends React.Component {
 					<h3 className="title mt-5">Вход</h3>
 					<form className="form mt-4" action="" method="post">
 						{
-							inputsData.map((item, i) => {
-								const {value, type, placeholder, name, validation} = item;
-								return <Input
+							inputsData.map(({value, type, placeholder, name, validation}, i) => (
+								<Input
 									value={value}
 									type={type}
 									placeholder={placeholder}
 									name={name}
 									validation={validation}
-									onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-										item.value = e.target.value;
-										this.setState({inputsData});
-									}}
+									onChange={this.inputChange}
 									key={i}
-								/>;
-							})
+								/>
+							))
 						}
 					</form>
 					<Button className={signinButton.className} onClick={signinButton.onClick}>
