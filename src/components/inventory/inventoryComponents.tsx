@@ -1,26 +1,9 @@
 import React from 'react';
 import {PureComponent, Component} from 'react';
 import {Button} from '../button/index';
-import {ClothItemPrpos, ClothCardProps} from './inventory.type';
+import {ClothItemPrpos, ClothCardProps} from '../components.type';
 
 // Тут лежат все спомогательные компоненты конкретно для этой страницы/модалки. Не разношу по разным файлам чтоб не мусорить проект
-export class ClothItemButton extends PureComponent<ClothItemPrpos> {
-	constructor(props: ClothItemPrpos) {
-		super(props);
-		this.state = {
-			isPutOn: false,
-			type: this.props.type
-		};
-	}
-
-	render() {
-		return (
-			<button onClick={() => this.props.onClick(this.props)} style={{width: '100%', height: '100%'}}>
-				<img src={this.props.img} width="100%" height="100%" alt="Мега картинка"></img>
-			</button>
-		);
-	}
-}
 
 export class CharacterCard extends PureComponent {
 	render() {
@@ -45,12 +28,12 @@ export class CharacterCard extends PureComponent {
 
 				<div className="d-flex flex-row justify-space-around">
 					<Button
-						onClick={() => console.log('click')}
+						onClick={() => ''}
 						children={'В магазин'}
 						className = "green mr-5"
 					/>
 					<Button
-						onClick={() => console.log('click')}
+						onClick={() => ''}
 						children={'Играть'}
 						className = "green"
 					/>
@@ -97,7 +80,7 @@ export class ClothCard extends PureComponent<ClothCardProps> {
 						<span className="text-center">Мега пыщ-пыщ описание шмотки</span>
 					</div>
 					<Button
-						onClick={() => console.log('click')}
+						onClick={() => ''}
 						children={'Надеть'}
 						className = "green"
 					/>
