@@ -3,7 +3,7 @@ import {validationEmail, validationEmpty, validationNumber, validationPassword, 
 import {IInputCompProps, IInputCompState} from './input.type';
 import './style.css';
 
-class Input extends React.Component<IInputCompProps> {
+class Input extends React.PureComponent<IInputCompProps> {
 	state: Readonly<IInputCompState> = {
 		error: {
 			isShow: false,
@@ -45,7 +45,18 @@ class Input extends React.Component<IInputCompProps> {
 		for (const k in this.props.validation) {
 			if (Object.prototype.hasOwnProperty.call(this.props.validation, k)) {
 				const validationRule = this.state.validationRules[k];
-				if (!validationRule.fn(this.props.value, k === 'equal' && this.props.validation.equal ? this.props.validation.equal() : null)) {
+				// Если передаваемая валидация отсутствует, то игнорим ее
+				if (!validationRule) {
+					continue;
+				}
+
+				// Валидация на совпадение значений
+				// если true, то отправляю в функцию второе значение, которое сравниваю
+				const isEqualValidation = k === 'equal' && this.props.validation.equal;
+				// @ts-ignore выше проверка
+				const isValid = validationRule.fn(this.props.value, isEqualValidation ? this.props.validation.equal() : null);
+
+				if (!isValid) {
 					this.setState({
 						error: {
 							isShow: true,
