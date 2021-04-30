@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
-import {CharacterCard, BackpackCard, ClothCard} from './inventoryComponents';
-import {ClothItemPrpos} from './inventory.type';
+import {BackpackCard} from './BackpackCard';
+import {ClothCard} from './ClothCard';
+import {CharacterCard} from './CharacterCard';
+import {ClothItemPrpos, InventoryType} from '../components.type';
 
 import './inventory.css';
 
-class Inventory extends Component<{}, {
-	isViewed: boolean,
-	viewedItem: ClothItemPrpos
-}> {
+class Inventory extends Component<{}, InventoryType> {
 	constructor(props: any) {
 		super(props);
 		this.state = {
@@ -20,7 +19,7 @@ class Inventory extends Component<{}, {
 		};
 	}
 
-	getViewedItem = (data: ClothItemPrpos): void => {
+	viewedItem = (data: ClothItemPrpos): void => {
 		this.setState({
 			viewedItem: data,
 			isViewed: true
@@ -42,13 +41,13 @@ class Inventory extends Component<{}, {
 
 					<BackpackCard clothes={[{
 						type: 'armor',
-						onClick: this.getViewedItem,
+						onClick: this.viewedItem,
 						img: 'https://as1.ftcdn.net/jpg/02/16/32/46/500_F_216324673_6cXL2BrX2QI3YrLNPgnkAyC3ZbRvZZ0W.jpg'
 
 					},
 					{
 						type: 'armor',
-						onClick: this.getViewedItem,
+						onClick: this.viewedItem,
 						img: 'https://as1.ftcdn.net/jpg/02/16/32/46/500_F_216324673_6cXL2BrX2QI3YrLNPgnkAyC3ZbRvZZ0W.jpg'
 
 					}]} />

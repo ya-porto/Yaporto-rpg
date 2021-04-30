@@ -5,7 +5,7 @@
     min-width: 800px;
     top: 0; left: 0; bottom: 0; right: 0;
     background-color: #463a2c;
-    background-image: url('https://image.freepik.com/free-photo/wooden-natural-floor-decoration-concept_53876-31866.jpg');
+    background-image: url('../public/images/wooden-background.jpeg');
 }
 
 .inventory_header {
@@ -19,7 +19,7 @@
     font-size: 0;
     width: 50px;
     height: 50px;
-    background-image: url('https://image.freepik.com/free-vector/set-of-grass-buttons-for-game-menu-isolated-green-icons-for-interface_172107-1445.jpg');
+    background-image: url('../public/images/icons-sprite.jpeg');
     background-position: 58.5% 51.5%;
     border-radius: 5px;
     box-shadow: inset 0px 0px 5px 1px #463a2c;
@@ -27,7 +27,7 @@
 
 .card {
     background-color: #f3e6cb;
-    background-image: url('https://image.freepik.com/free-photo/paperboard-yellow-texture_95678-83.jpg');
+    background-image: url('../public/images/papirus.jpeg');
     background-position: center;
     border-radius: 10px;
     box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.5);
