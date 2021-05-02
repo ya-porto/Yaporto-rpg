@@ -1,6 +1,12 @@
 import React, {PureComponent} from 'react';
-import {ClothCardProps} from '../components.type';
 import {Button} from '../button/index';
+import {ClothProps} from '../clothButton/clothButton'
+
+interface ClothCardProps {
+    img?: string,
+    viewedItem: ClothProps
+    isViewed: boolean
+}
 
 export class ClothCard extends PureComponent<ClothCardProps> {
 	render() {

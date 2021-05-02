@@ -1,25 +1,27 @@
 import React, {Component} from 'react';
-import {BackpackCard} from './BackpackCard';
-import {ClothCard} from './ClothCard';
-import {CharacterCard} from './CharacterCard';
-import {ClothItemPrpos, InventoryType} from '../components.type';
+import {BackpackCard} from '../../components/backpackCard/BackpackCard';
+import {ClothCard} from '../../components/viewedClothCard/viewedClothCard';
+import {ClothProps} from '../../components/clothButton/clothButton'
 
-import './inventory.css';
+import './gameshop.css';
 
-class Inventory extends Component<{}, InventoryType> {
+interface GameShopType {
+    isViewed: boolean,
+	viewedItem: ClothProps
+}
+
+export class GameShop extends Component<{}, GameShopType> {
 	constructor(props: any) {
 		super(props);
 		this.state = {
 			isViewed: false,
 			viewedItem: {
-				type: '',
-				img: '',
-				onClick: () => {}
+				onClick: this.viewedItem,
 			}
 		};
 	}
 
-	viewedItem = (data: ClothItemPrpos): void => {
+	viewedItem = (data: ClothProps): void => {
 		this.setState({
 			viewedItem: data,
 			isViewed: true
@@ -28,29 +30,26 @@ class Inventory extends Component<{}, InventoryType> {
 
 	render() {
 		return (
-			<div className="inventory absolute d-flex flex-column justify-space-around pa-5" id="inventory">
+			<div className="gameshop absolute d-flex flex-column justify-space-around pa-5">
 
 				<div className="d-flex flex-row justify-center ma-2">
-					<h1 className="inventory_header">Инвентарь</h1>
-					<button id="return" className="inventory_return">Назад</button>
+					<h1 className="gameshop_header">Магазин</h1>
+					<button id="return" className="gameshop_return">Назад</button>
 				</div>
 
-				<div className="d-flex flex-row justify-space-between">
-
-					<CharacterCard />
+				<div className="d-flex flex-row ">
 
 					<BackpackCard clothes={[{
 						type: 'armor',
 						onClick: this.viewedItem,
 						img: 'https://as1.ftcdn.net/jpg/02/16/32/46/500_F_216324673_6cXL2BrX2QI3YrLNPgnkAyC3ZbRvZZ0W.jpg'
-
 					},
 					{
 						type: 'armor',
 						onClick: this.viewedItem,
 						img: 'https://as1.ftcdn.net/jpg/02/16/32/46/500_F_216324673_6cXL2BrX2QI3YrLNPgnkAyC3ZbRvZZ0W.jpg'
 
-					}]} />
+					}]} header=''/>
 
 					<ClothCard isViewed={this.state.isViewed} viewedItem={this.state.viewedItem} />
 
@@ -59,4 +58,3 @@ class Inventory extends Component<{}, InventoryType> {
 		);
 	}
 }
-export default Inventory;
