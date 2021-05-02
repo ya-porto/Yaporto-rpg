@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {BackpackCard} from '../../components/backpackCard/BackpackCard';
-import {ClothCard} from '../../components/viewedClothCard/viewedClothCard';
-import {ClothProps} from '../../components/clothButton/clothButton'
+import {ViewedClothCard} from '../../components/viewedClothCard/viewedClothCard';
+import {ClothProps} from '../../components/clothButton/clothButton';
+import {Button} from '../../components/button/index';
 
 import './gameshop.css';
 
@@ -34,7 +35,7 @@ export class GameShop extends Component<{}, GameShopType> {
 
 				<div className="d-flex flex-row justify-center ma-2">
 					<h1 className="gameshop_header">Магазин</h1>
-					<button id="return" className="gameshop_return">Назад</button>
+					<Button className="gameshop_return green" children="Назад" onClick={()=>{}} />
 				</div>
 
 				<div className="d-flex flex-row ">
@@ -51,7 +52,7 @@ export class GameShop extends Component<{}, GameShopType> {
 
 					}]} header=''/>
 
-					<ClothCard isViewed={this.state.isViewed} viewedItem={this.state.viewedItem} />
+					<ViewedClothCard isViewed={this.state.isViewed} viewedItem={this.state.viewedItem} />
 
 				</div>
 			</div>

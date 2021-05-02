@@ -1,6 +1,8 @@
 import React, {PureComponent} from 'react';
 import {Button} from '../button/index';
-import {ClothProps} from '../clothButton/clothButton'
+import {ClothProps} from '../clothButton/clothButton';
+
+import './viewedClothCard.css'
 
 interface ClothCardProps {
     img?: string,
@@ -8,7 +10,7 @@ interface ClothCardProps {
     isViewed: boolean
 }
 
-export class ClothCard extends PureComponent<ClothCardProps> {
+export class ViewedClothCard extends PureComponent<ClothCardProps> {
 	render() {
 		const {img} = this.props.viewedItem;
 		const {isViewed} = this.props;

@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import {BackpackCard} from '../../components/backpackCard/BackpackCard';
-import {ClothCard} from '../../components/viewedClothCard/viewedClothCard';
-import {CharacterCard} from '../../components/characterCard/CharacterCard';
-import {ClothProps} from '../../components/clothButton/clothButton'
+import {ViewedClothCard} from '../../components/viewedClothCard/viewedClothCard';
+import {CharacterCard} from '../../components/characterCard/characterCard';
+import {ClothProps} from '../../components/clothButton/clothButton';
+import {Button} from '../../components/button/index';
 
 import './inventory.css';
 
@@ -35,7 +36,7 @@ class Inventory extends Component<{}, InventoryType> {
 
 				<div className="d-flex flex-row justify-center ma-2">
 					<h1 className="inventory_header">Инвентарь</h1>
-					<button id="return" className="inventory_return">Назад</button>
+					<Button className="inventory_return green" children="Назад" onClick={()=>{}} />
 				</div>
 
 				<div className="d-flex flex-row justify-space-between">
@@ -54,7 +55,7 @@ class Inventory extends Component<{}, InventoryType> {
 
 					}]} header='Рюкзак'/>
 
-					<ClothCard isViewed={this.state.isViewed} viewedItem={this.state.viewedItem} />
+					<ViewedClothCard isViewed={this.state.isViewed} viewedItem={this.state.viewedItem} />
 
 				</div>
 			</div>

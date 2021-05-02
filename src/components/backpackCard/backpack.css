@@ -1,4 +1,10 @@
 .backpack {
     min-height: 400px;
-    width: 100%
+    min-width: 200px;
+    width: 100%;
+}
+
+.backpack_header {
+    font-size: 20px;
+    margin-bottom: 15px;
 }

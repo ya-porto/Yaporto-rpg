@@ -1,5 +1,7 @@
 import React, {PureComponent} from 'react';
 
+import './clothButton.css'
+
 export interface ClothProps {
     defence?: number;
     hitpoint?: number;

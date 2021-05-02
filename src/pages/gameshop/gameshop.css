@@ -16,60 +16,7 @@
     position: absolute;
     top: 10px;
     right: 20px;
-    font-size: 0;
-    width: 50px;
-    height: 50px;
-    background-image: url('../public/images/icons-sprite.jpeg');
-    background-position: 58.5% 51.5%;
-    border-radius: 5px;
-    box-shadow: inset 0px 0px 5px 1px #463a2c;
+    width: 100px;
+    box-shadow: 0px 0px 5px 1px #463a2c;
 }
 
-.card {
-    background-color: #f3e6cb;
-    background-image: url('../public/images/papirus.jpeg');
-    background-position: center;
-    border-radius: 10px;
-    box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.5);
-}
-
-.character {
-    min-width: 250px;
-}
-
-.backpack {
-    min-width: 200px;
-}
-
-.clothes {
-    min-width: 250px;
-}
-
-.clothes_button {
-    width: 75px;
-    height: 75px;
-    background-color: #fff;
-    border: 2px solid black;
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
-}
-
-
-.backpack_header {
-    font-size: 20px;
-    margin-bottom: 15px;
-}
-
-.clothes_header {
-    font-size: 20px;
-    margin-bottom: 15px;
-}
-
-.character_name {
-    font-size: 20px;
-    margin-bottom: 15px;
-}
-
-.baffs {
-    border-top: 1px solid #463a2c;
-    border-bottom: 1px solid #463a2c;
-}
