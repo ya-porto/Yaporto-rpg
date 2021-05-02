@@ -1,0 +1,16 @@
+.page-signin .card {
+    width: 45%;
+    min-height: 60%;
+    max-height: 90%;
+    border-radius: 2%;
+}
+.page-signin .card .title {
+    font-size: 25px;
+}
+.page-signin .card .form {
+    width: 100%;
+    flex: 1;
+}
+.page-signin .card .buttons {
+    width: 100%;
+}
