@@ -7,7 +7,8 @@ import './viewedClothCard.css'
 interface ClothCardProps {
     img?: string,
     viewedItem: ClothProps
-    isViewed: boolean
+	isViewed: boolean,
+	buttonText: string
 }
 
 export class ViewedClothCard extends PureComponent<ClothCardProps> {
@@ -29,7 +30,7 @@ export class ViewedClothCard extends PureComponent<ClothCardProps> {
 					</div>
 					<Button
 						onClick={() => ''}
-						children={'Надеть'}
+						children={this.props.buttonText}
 						className = "green"
 					/>
 				</div>

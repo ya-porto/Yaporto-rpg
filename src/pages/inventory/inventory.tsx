@@ -55,7 +55,7 @@ class Inventory extends Component<{}, InventoryType> {
 
 					}]} header='Рюкзак'/>
 
-					<ViewedClothCard isViewed={this.state.isViewed} viewedItem={this.state.viewedItem} />
+					<ViewedClothCard isViewed={this.state.isViewed} viewedItem={this.state.viewedItem} buttonText="Надеть" />
 
 				</div>
 			</div>

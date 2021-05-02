@@ -52,7 +52,7 @@ export class GameShop extends Component<{}, GameShopType> {
 
 					}]} header=''/>
 
-					<ViewedClothCard isViewed={this.state.isViewed} viewedItem={this.state.viewedItem} />
+					<ViewedClothCard isViewed={this.state.isViewed} viewedItem={this.state.viewedItem} buttonText="Купить" />
 
 				</div>
 			</div>
