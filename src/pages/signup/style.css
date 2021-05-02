@@ -1,0 +1,16 @@
+.page-signup .card {
+    width: 45%;
+    min-height: 60%;
+    max-height: 90%;
+    border-radius: 2%;
+}
+.page-signup .card .title {
+    font-size: 25px;
+}
+.page-signup .card .form {
+    width: 100%;
+    flex: 1;
+}
+.page-signup .card .buttons {
+    width: 100%;
+}
