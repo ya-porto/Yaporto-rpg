@@ -39,11 +39,14 @@ class Signin extends React.Component {
 
 	inputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const {name, value} = e.target;
-		const changedData = this.state.inputsData.find(x => x.name === name);
-		if (changedData) {
-			changedData.value = value;
-			this.setState({inputData: this.state.inputsData});
-		}
+		const newArray = this.state.inputsData.map(item => {
+			if (item.name === name) {
+				item.value = value;
+			}
+
+			return item;
+		});
+		this.setState({inputsData: newArray});
 	}
 
 	render() {
