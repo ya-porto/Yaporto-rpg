@@ -5,7 +5,7 @@ import './errorBoundary.css'
 export class ErrorBoundary extends Component< {},{hasError: boolean}> {
     constructor(props: {children: React.ReactChild}) {
         super(props);
-        this.state = { hasError: true };
+        this.state = { hasError: false };
       }
 
       static getDerivedStateFromError() {
