@@ -22,11 +22,11 @@ export class ClothButton extends PureComponent<ClothProps> {
 			isPutOn: false,
 			type: this.props.type
 		};
-    }
-    
+	}
+
     giveOwnProps = () => {
-        this.props.onClick(this.props)
-    }
+		this.props.onClick(this.props);
+	}
 
 	render() {
 		return (
@@ -35,4 +35,4 @@ export class ClothButton extends PureComponent<ClothProps> {
 			</button>
 		);
 	}
-}
+	}
