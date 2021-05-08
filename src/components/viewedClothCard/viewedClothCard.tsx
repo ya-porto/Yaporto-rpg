@@ -1,8 +1,17 @@
 import React, {PureComponent} from 'react';
-import {ClothCardProps} from '../components.type';
 import {Button} from '../button/index';
+import {ClothProps} from '../clothButton/clothButton';
 
-export class ClothCard extends PureComponent<ClothCardProps> {
+import './viewedClothCard.css'
+
+interface ClothCardProps {
+    img?: string,
+    viewedItem: ClothProps
+	isViewed: boolean,
+	buttonText: string
+}
+
+export class ViewedClothCard extends PureComponent<ClothCardProps> {
 	render() {
 		const {img} = this.props.viewedItem;
 		const {isViewed} = this.props;
@@ -21,7 +30,7 @@ export class ClothCard extends PureComponent<ClothCardProps> {
 					</div>
 					<Button
 						onClick={() => ''}
-						children={'Надеть'}
+						children={this.props.buttonText}
 						className = "green"
 					/>
 				</div>

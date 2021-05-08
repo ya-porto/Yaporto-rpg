@@ -1,8 +1,22 @@
 import React, {PureComponent} from 'react';
-import {ClothItemPrpos} from '../components.type';
 
-export class ClothItemButton extends PureComponent<ClothItemPrpos> {
-	constructor(props: ClothItemPrpos) {
+import './clothButton.css'
+
+export interface ClothProps {
+    defence?: number;
+    hitpoint?: number;
+    img?: string;
+    type?: string;
+    name?: string;
+    baf?: string;
+    description?: string;
+    isBought?: boolean;
+    isPutOn?: boolean;
+    onClick: (data: ClothProps) => void;
+}
+
+export class ClothButton extends PureComponent<ClothProps> {
+	constructor(props: ClothProps) {
 		super(props);
 		this.state = {
 			isPutOn: false,
