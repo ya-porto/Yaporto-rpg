@@ -1,4 +1,5 @@
 export interface ThreadProps {
+    id: number,
     data: string,
     theme: string,
     message: string,
