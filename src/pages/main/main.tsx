@@ -1,4 +1,7 @@
 import React from 'react';
+import {LeaderboardComp} from '../../components/leaderboard/index';
+import {ILeaderboardCompItem} from '../../components/leaderboard/leaderboardItem/index';
+import {mocks} from '../leaderboard/mocks';
 import './style.css';
 
 interface IMain {
@@ -7,7 +10,8 @@ interface IMain {
 		text: string,
 		className?: string,
 		path: string
-	}[]
+	}[],
+	data: ILeaderboardCompItem[]
 }
 class Main extends React.Component {
 	state: Readonly<IMain> = {
@@ -32,11 +36,13 @@ class Main extends React.Component {
 			text: 'Форум',
 			path: 'forum',
 			className: 'buttons-item mr-2'
-		}]
+		}],
+		data: mocks
 	};
 
 	render() {
-		const {buttons} = this.state;
+		const {buttons, data} = this.state;
+		const sortedData = data.sort((a, b) => parseInt(a.score) + parseInt(b.score));
 		return (
 			<div className="page page-main d-flex justify-center">
 				<div className="container d-flex justify-center">
@@ -56,7 +62,7 @@ class Main extends React.Component {
 					</div>
 					<div className="right pa-2">
 						<h2>Leaderboard</h2>
-						Здесь будет лидербоард когда вольем его в sprint5
+						<LeaderboardComp data={sortedData}></LeaderboardComp>
 					</div>
 				</div>
 			</div>
