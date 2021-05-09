@@ -1,0 +1,30 @@
+.page-game .game-header {
+    width: 100%;
+    height: 50px;
+    background: #060606;
+}
+
+.page-game .game-header .game-header__left {
+    color: #fff;
+}
+
+.page-game .game-header .game-header__left .time {
+    color: rgb(187, 44, 44);
+    font-size: 20px;
+}
+.page-game .game-header .game-header__left .lvl {
+    width: 200px;
+    color: #e7dcfd;
+}
+.page-game .game-header .game-header__left .lvl .exp-bar__container {
+    width: 100%;
+    text-align: right;
+    color: white;
+    border: 1px solid #195a8e;
+    border-radius: 5px;
+}
+
+.page-game .game-header .game-header__left .lvl .exp-bar__container .exp-bar {
+    background-color: #195a8e;
+    border-radius: 5px;
+}
