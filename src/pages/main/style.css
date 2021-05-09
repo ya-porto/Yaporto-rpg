@@ -8,9 +8,8 @@
     color: #000;
 }
 .page-main .container .right {
-    height: 30%;
+    height: 20%;
     box-shadow: 10px 8px 6px -9px rgb(0 0 0 / 70%);
     border-bottom-right-radius: 5px;
     text-align: center;
-    overflow-y: scroll;
 }
