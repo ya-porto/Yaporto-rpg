@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import {Button, IButtonCompProps} from '../../components/button/index';
 import {Input, IInputCompProps} from '../../components/input/index';
 import {ErrorBoundary} from '../../components/errorBoundary/errorBoundary';
@@ -114,11 +115,15 @@ class Signup extends React.Component {
 							))
 						}
 					</form>
-					<Button className={signupButton.className} onClick={signupButton.onClick}>
-						{signupButton.text}
-					</Button>
+					<Link to="/home">
+						<Button className={signupButton.className} onClick={signupButton.onClick}>
+							{signupButton.text}
+						</Button>
+					</Link>
 					<div className="buttons d-flex flex-column align-center">
-						<a href="/signin" className="link mt-4">Войти</a>
+						<Link className="link mt-4" to="/signin">
+							Войти
+						</Link>
 					</div>
 				</div>
 				</ErrorBoundary>

@@ -1,6 +1,8 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import {LeaderboardComp} from '../../components/leaderboard/index';
 import {ILeaderboardCompItem} from '../../components/leaderboard/leaderboardItem/index';
+import {ErrorBoundary} from '../../components/errorBoundary/errorBoundary';
 import {mocks} from '../leaderboard/mocks';
 import './style.css';
 
@@ -44,6 +46,7 @@ class Main extends React.Component {
 	render() {
 		const {buttons, data} = this.state;
 		return (
+			<ErrorBoundary>
 			<div className="page page-main d-flex justify-center">
 				<div className="container d-flex justify-center">
 					<div className="left pa-2 d-flex flex-column">
@@ -51,7 +54,7 @@ class Main extends React.Component {
 							{
 								buttons.map(({text, path, className}, i) => (
 									<li key={i} className={className}>
-										<a href={path}>{text}</a>
+										<Link to={path}>{text}</Link>
 									</li>
 								))
 							}
@@ -66,6 +69,8 @@ class Main extends React.Component {
 					</div>
 				</div>
 			</div>
+			</ErrorBoundary>
+			
 		);
 	}
 }

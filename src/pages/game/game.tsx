@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import {Button} from '../../components/button/index';
 import {ErrorBoundary} from '../../components/errorBoundary/errorBoundary';
 import './style.css';
@@ -86,8 +87,8 @@ class Game extends React.Component {
 					</div>
 					<div className="game-header__right d-flex justify-space-between align-center">
 						<Button className="mr-3" onClick={this.timerPause}><i className="fas fa-pause"></i></Button>
-						<Button className="mr-3" onClick={this.showShopMenu}><i className="fas fa-store-alt"></i></Button>
-						<Button onClick={this.showCharacterMenu}><i className="fas fa-user"></i></Button>
+						<Link to="/gameshop"><Button className="mr-3" onClick={this.showShopMenu}><i className="fas fa-store-alt"></i></Button></Link>
+						<Link to="/profile"><Button onClick={this.showCharacterMenu}><i className="fas fa-user"></i></Button></Link>
 					</div>
 				</header>
 				<div className="game">

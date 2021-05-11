@@ -1,4 +1,4 @@
-import {Route, Switch, BrowserRouter} from 'react-router-dom';
+import {Route, Switch, BrowserRouter, Redirect} from 'react-router-dom';
 import React, {Component} from 'react';
 import {GameShop} from '../pages/gameshop/index';
 import {Inventory} from '../pages/inventory/index';
@@ -8,6 +8,7 @@ import {Forum, Thread} from '../pages/forum/index';
 import {Game} from '../pages/game/index';
 import {Leaderboard} from '../pages/leaderboard/index';
 import {Profile} from '../pages/profile/index';
+import {Main} from '../pages/main/index';
 
 
 export class Router extends Component {
@@ -24,6 +25,8 @@ export class Router extends Component {
                     <Route path="/game" component={Game}></Route>
                     <Route path="/leaderboard" component={Leaderboard}></Route>
                     <Route path="/profile" component={Profile}></Route>
+                    <Route path="/home" component={Main}></Route>
+                    <Redirect from="/" to="/home"></Redirect>
 				</Switch>
 			</BrowserRouter>
 		);
