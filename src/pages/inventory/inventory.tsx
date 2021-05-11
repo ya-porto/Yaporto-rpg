@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 import {BackpackCard} from '../../components/backpackCard/BackpackCard';
 import {ViewedClothCard} from '../../components/viewedClothCard/viewedClothCard';
 import {CharacterCard} from '../../components/characterCard/characterCard';
@@ -41,7 +42,25 @@ export class Inventory extends Component<{}, InventoryType> {
 
 				<div className="d-flex flex-row justify-space-between">
 
-					<CharacterCard />
+					<div className="d-flex flex-column justify-space-between">
+						<CharacterCard />
+						<div className="d-flex flex-row justify-space-around">
+							<Link to="/gameshop">
+								<Button
+									onClick={() => ''}
+									children={'В магазин'}
+									className = "green mr-5"
+								/>
+							</Link>
+							<Link to="/game">
+								<Button
+									onClick={() => ''}
+									children={'Играть'}
+									className = "green"
+								/>
+							</Link>
+						</div>
+					</div>
 
 					<BackpackCard clothes={[{
 						type: 'armor',
