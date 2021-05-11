@@ -1,0 +1,16 @@
+.page-main .container {
+    width: 70%;
+}
+.page-main .container .left .buttons  {
+    width: 70%;
+}
+.page-main .container .left .buttons .buttons-item a {
+    color: #000;
+}
+.page-main .container .right {
+    height: 35%;
+    box-shadow: 10px 8px 6px -9px rgb(0 0 0 / 70%);
+    border-bottom-right-radius: 5px;
+    text-align: center;
+    overflow-y: scroll;
+}
