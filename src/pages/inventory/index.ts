@@ -1,2 +1,1 @@
-import Inventory from './inventory';
-export {Inventory};
+export {Inventory} from './inventory';

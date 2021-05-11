@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import {PureComponent} from 'react';
 import {Button} from '../button/index';
 
@@ -26,11 +27,13 @@ export class CharacterCard extends PureComponent {
 				</div>
 
 				<div className="d-flex flex-row justify-space-around">
-					<Button
-						onClick={() => ''}
-						children={'В магазин'}
-						className = "green mr-5"
-					/>
+					<Link to="/gameshop">
+						<Button
+							onClick={() => ''}
+							children={'В магазин'}
+							className = "green mr-5"
+						/>
+					</Link>
 					<Button
 						onClick={() => ''}
 						children={'Играть'}

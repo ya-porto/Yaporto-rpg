@@ -1,0 +1,1 @@
+export {GameShop} from './gameshop';

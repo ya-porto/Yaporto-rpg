@@ -12,7 +12,7 @@ interface InventoryType {
 	viewedItem: ClothProps
 }
 
-class Inventory extends Component<{}, InventoryType> {
+export class Inventory extends Component<{}, InventoryType> {
 	constructor(props: any) {
 		super(props);
 		this.state = {
@@ -62,4 +62,3 @@ class Inventory extends Component<{}, InventoryType> {
 		);
 	}
 }
-export default Inventory;
