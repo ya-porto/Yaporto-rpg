@@ -14,12 +14,11 @@ class Leaderboard extends React.Component {
 
 	render() {
 		const {data} = this.state;
-		const sortedData = data.sort((a, b) => parseInt(a.score) + parseInt(b.score));
 		return (
 			<div className="page page-leaderboard d-flex flex-column justify-center align-center">
 				<div className="card shadow d-flex flex-column justify-start align-center px-10 py-8">
 					<h3 className="title mt-5">Leaderboard</h3>
-					<LeaderboardComp data={sortedData} />
+					<LeaderboardComp data={data} />
 				</div>
 			</div>
 		);

@@ -4,13 +4,14 @@ import {ILeaderboardCompItem} from '../../components/leaderboard/leaderboardItem
 import {mocks} from '../leaderboard/mocks';
 import './style.css';
 
+interface IButtonLink {
+	icon?: string,
+	text: string,
+	className?: string,
+	path: string
+}
 interface IMain {
-	buttons: {
-		icon?: string,
-		text: string,
-		className?: string,
-		path: string
-	}[],
+	buttons: IButtonLink[],
 	data: ILeaderboardCompItem[]
 }
 class Main extends React.Component {
@@ -42,7 +43,6 @@ class Main extends React.Component {
 
 	render() {
 		const {buttons, data} = this.state;
-		const sortedData = data.sort((a, b) => parseInt(a.score) + parseInt(b.score));
 		return (
 			<div className="page page-main d-flex justify-center">
 				<div className="container d-flex justify-center">
@@ -62,7 +62,7 @@ class Main extends React.Component {
 					</div>
 					<div className="right pa-2">
 						<h2>Leaderboard</h2>
-						<LeaderboardComp data={sortedData}></LeaderboardComp>
+						<LeaderboardComp data={data}></LeaderboardComp>
 					</div>
 				</div>
 			</div>
