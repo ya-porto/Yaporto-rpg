@@ -1,2 +1,1 @@
-import {Game} from './game';
-export {Game};
+export {Game} from './game';
