@@ -1,6 +1,7 @@
 import React from 'react';
 import {Button, IButtonCompProps} from '../../components/button/index';
 import {Input, IInputCompProps} from '../../components/input/index';
+import {ErrorBoundary} from '../../components/errorBoundary/errorBoundary';
 import './style.css';
 
 interface IButton extends IButtonCompProps {
@@ -217,6 +218,7 @@ class Profile extends React.Component {
 	render() {
 		const {isEditPasswordShown, isUserInfoShown, isEditUserInfoShown, buttonsProfile} = this.state;
 		return (
+			<ErrorBoundary>
 			<div className="page page-profile d-flex flex-column justify-center align-center">
 				<div className="profile d-flex flex-column justify-center align-center">
 					<div className="profile-avatar d-flex flex-column justify-center align-center">
@@ -235,6 +237,8 @@ class Profile extends React.Component {
 					</div>
 				</div>
 			</div>
+			</ErrorBoundary>
+			
 		);
 	}
 }

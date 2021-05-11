@@ -2,13 +2,15 @@ import React, {PureComponent} from 'react';
 import {ThreadProps} from './thread.type';
 import {Button} from '../../components/button/index';
 import {Input} from '../../components/input/index';
+import {ErrorBoundary} from '../../components/errorBoundary/errorBoundary';
 
 import './thread.css';
 
 export class Thread extends PureComponent<ThreadProps> {
 	render() {
 		return (
-			<div className="thread_page page relative px-14 pt-10">
+			<ErrorBoundary>
+				<div className="thread_page page relative px-14 pt-10">
 				<div className="wrapper d-flex flex-column pa-6">
 					<div className="thread_topic d-flex flex-row">
 						<div className="thread_starter d-flex flex-column justify-center align-center">
@@ -46,6 +48,8 @@ export class Thread extends PureComponent<ThreadProps> {
 					</form>
 				</div>
 			</div>
+			</ErrorBoundary>
+			
 		);
 	}
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import {Button} from '../../components/button/index';
+import {ErrorBoundary} from '../../components/errorBoundary/errorBoundary';
 import './style.css';
 
 interface IGame {
@@ -70,7 +71,8 @@ class Game extends React.Component {
 		const nextLvl = lvl + 1;
 		const exp = this.getExpPercent();
 		return (
-			<div className="page page-game d-flex flex-column justify-start align-center">
+			<ErrorBoundary>
+				<div className="page page-game d-flex flex-column justify-start align-center">
 				<header className="game-header d-flex justify-space-between align-center px-5">
 					<div className="game-header__left d-flex justify-space-between align-center">
 						<div className="time mr-4">{`${time.min}:${time.sec}`}</div>
@@ -92,6 +94,8 @@ class Game extends React.Component {
 					Здесь будет канвас с игрой
 				</div>
 			</div>
+			</ErrorBoundary>
+			
 		);
 	}
 }

@@ -1,5 +1,6 @@
 import React, {PureComponent} from 'react';
 import {ThreadProps} from './thread.type';
+import {ErrorBoundary} from '../../components/errorBoundary/errorBoundary'
 
 import './forum.css';
 
@@ -10,7 +11,8 @@ interface ForumProps {
 export class Forum extends PureComponent<ForumProps> {
 	render() {
 		return (
-			<div className="forum page d-flex flex-column py-10 px-16">
+			<ErrorBoundary>
+				<div className="forum page d-flex flex-column py-10 px-16">
 				<div className="d-flex flex-row justify-center mb-9">
 					<h1>Форум</h1>
 				</div>
@@ -27,6 +29,8 @@ export class Forum extends PureComponent<ForumProps> {
 					})}
 				</div>
 			</div>
+			</ErrorBoundary>
+			
 
 		);
 	}
