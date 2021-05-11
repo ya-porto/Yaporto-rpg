@@ -18,7 +18,7 @@ export class Inventory extends Component<{}, InventoryType> {
 		this.state = {
 			isViewed: false,
 			viewedItem: {
-				onClick: this.viewedItem,
+				onClick: this.viewedItem
 			}
 		};
 	}
@@ -36,7 +36,7 @@ export class Inventory extends Component<{}, InventoryType> {
 
 				<div className="d-flex flex-row justify-center ma-2">
 					<h1 className="inventory_header">Инвентарь</h1>
-					<Button className="inventory_return green" children="Назад" onClick={()=>{}} />
+					<Button className="inventory_return green" children="Назад" onClick={() => {}} />
 				</div>
 
 				<div className="d-flex flex-row justify-space-between">
@@ -53,7 +53,7 @@ export class Inventory extends Component<{}, InventoryType> {
 						onClick: this.viewedItem,
 						img: 'https://as1.ftcdn.net/jpg/02/16/32/46/500_F_216324673_6cXL2BrX2QI3YrLNPgnkAyC3ZbRvZZ0W.jpg'
 
-					}]} header='Рюкзак'/>
+					}]} header="Рюкзак"/>
 
 					<ViewedClothCard isViewed={this.state.isViewed} viewedItem={this.state.viewedItem} buttonText="Надеть" />
 

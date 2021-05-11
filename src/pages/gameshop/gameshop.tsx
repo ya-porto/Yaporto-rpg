@@ -15,8 +15,6 @@ interface GameShopProps {
 	clothes: ClothProps[]
 }
 
-
-
 export class GameShop extends Component<GameShopProps, GameShopState> {
 	clothes: ClothProps[]
 	INITIAL_STATE: GameShopState
@@ -26,13 +24,13 @@ export class GameShop extends Component<GameShopProps, GameShopState> {
 		this.INITIAL_STATE = {
 			isViewed: false,
 			viewedItem: {
-				onClick: this.viewedItem,
+				onClick: this.viewedItem
 			},
 			sorted: 'Весь шмот'
-		}
+		};
 
 		this.state = this.INITIAL_STATE;
-		this.clothes = this.props.clothes
+		this.clothes = this.props.clothes;
 	}
 
 	viewedItem = (data: ClothProps): void => {
@@ -43,37 +41,37 @@ export class GameShop extends Component<GameShopProps, GameShopState> {
 	}
 
 	sortItems =(event: { target: HTMLElement; }) => {
-		const key = event.target?.innerHTML
-		switch(key) {
+		const key = event.target?.innerHTML;
+		switch (key) {
 			case ('Оружие'):
 				this.clothes = this.clothes.filter((cloth: ClothProps) => {
-					return cloth.type === 'weapon'
-				})
+					return cloth.type === 'weapon';
+				});
 				this.setState({
 					isViewed: this.INITIAL_STATE.isViewed,
 					viewedItem: this.INITIAL_STATE.viewedItem,
 					sorted: key
-				})
+				});
 				break;
-			
+
 			case ('Броня'):
 				this.clothes = this.clothes.filter((cloth: ClothProps) => {
-					return cloth.type === 'armor'
-				})
+					return cloth.type === 'armor';
+				});
 				this.setState({
 					isViewed: this.INITIAL_STATE.isViewed,
 					viewedItem: this.INITIAL_STATE.viewedItem,
 					sorted: key
-				})
+				});
 				break;
 
 			case ('Весь шмот'):
-				this.clothes = this.props.clothes
+				this.clothes = this.props.clothes;
 				this.setState({
 					isViewed: this.INITIAL_STATE.isViewed,
 					viewedItem: this.INITIAL_STATE.viewedItem,
 					sorted: key
-				})
+				});
 				break;
 		}
 	}
@@ -84,7 +82,7 @@ export class GameShop extends Component<GameShopProps, GameShopState> {
 
 				<div className="d-flex flex-row justify-center ma-2">
 					<h1 className="gameshop_header">Магазин</h1>
-					<Button className="gameshop_return green" children="Назад" onClick={()=>{}} />
+					<Button className="gameshop_return green" children="Назад" onClick={() => {}} />
 				</div>
 
 				<div className="d-flex flex-row ">

@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import {PureComponent} from 'react';
 import {Button} from '../button/index';
 
-import './characterCard.css'
+import './characterCard.css';
 
 export class CharacterCard extends PureComponent {
 	render() {

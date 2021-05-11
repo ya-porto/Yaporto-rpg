@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
 
-import './clothButton.css'
+import './clothButton.css';
 
 export interface ClothProps {
     defence?: number;
