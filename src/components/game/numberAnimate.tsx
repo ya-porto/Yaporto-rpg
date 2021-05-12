@@ -1,4 +1,4 @@
-export default class numberAnimate{
+export class numberAnimate{
     x_pos: number;
     y_pos: number;
     number: number;

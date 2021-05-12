@@ -43,8 +43,6 @@ charImgA9.src = '/public/images/golem/Attack/Golem_09.png'
 charImgA9.width = 63;
 charImgA9.height = 64;
 
-const charAttack = [
+export const charAttack = [
     charImgA1, charImgA2, charImgA3, charImgA4, charImgA5, charImgA6, charImgA7, charImgA8, charImgA9
 ]
-
-export default charAttack

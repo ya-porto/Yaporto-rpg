@@ -69,8 +69,6 @@ charDie14.width = 63;
 charDie14.height = 64;
 
 
-const charDie = [
+export const charDie = [
     charDie1, charDie2, charDie3, charDie4, charDie5, charDie6, charDie7, charDie8, charDie9, charDie10, charDie11, charDie12, charDie13, charDie14
 ]
-
-export default charDie
