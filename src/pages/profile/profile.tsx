@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button, IButtonCompProps} from '../../components/button/index';
 import {Input, IInputCompProps} from '../../components/input/index';
-import {ErrorBoundary} from '../../components/errorBoundary/errorBoundary';
+import {Menu} from '../../components/menu/menu';
 import './style.css';
 
 interface IButton extends IButtonCompProps {
@@ -202,24 +202,26 @@ class Profile extends React.Component {
 	userInfoTemplate = (): JSX.Element => {
 		const {userInfo} = this.state;
 		return (
-			<ul className="profile-info d-flex flex-column mt-16">
-				{
-					userInfo.map(({value, displayName}, i) => (
-						<li className="profile-info__item relative d-flex justify-space-between mt-5" key={i}>
-							<span className="name">{displayName}</span>
-							<span className="value">{value}</span>
-						</li>
-					))
-				}
-			</ul>
+
+				<ul className="profile-info d-flex flex-column mt-16">
+					{
+						userInfo.map(({value, displayName}, i) => (
+							<li className="profile-info__item relative d-flex justify-space-between mt-5" key={i}>
+								<span className="name">{displayName}</span>
+								<span className="value">{value}</span>
+							</li>
+						))
+					}
+				</ul>
+
 		);
 	}
 
 	render() {
 		const {isEditPasswordShown, isUserInfoShown, isEditUserInfoShown, buttonsProfile} = this.state;
 		return (
-			<ErrorBoundary>
 			<div className="page page-profile d-flex flex-column justify-center align-center">
+			<Menu />
 				<div className="profile d-flex flex-column justify-center align-center">
 					<div className="profile-avatar d-flex flex-column justify-center align-center">
 						<div className="avatar d-flex justify-center align-center mt-1 mr-2">
@@ -236,9 +238,7 @@ class Profile extends React.Component {
 						}
 					</div>
 				</div>
-			</div>
-			</ErrorBoundary>
-			
+			</div>			
 		);
 	}
 }

@@ -5,7 +5,7 @@ import {ViewedClothCard} from '../../components/viewedClothCard/viewedClothCard'
 import {CharacterCard} from '../../components/characterCard/characterCard';
 import {ClothProps} from '../../components/clothButton/clothButton';
 import {Button} from '../../components/button/index';
-import {ErrorBoundary} from '../../components/errorBoundary/errorBoundary';
+import {Menu} from '../../components/menu/menu';
 
 import './inventory.css';
 
@@ -34,12 +34,13 @@ export class Inventory extends Component<{}, InventoryType> {
 
 	render() {
 		return (
-			<ErrorBoundary>
-				<div className="inventory absolute d-flex flex-column justify-space-around pa-5" id="inventory">
+				<div className="page">
+					<Menu />
+					<div className="inventory absolute d-flex flex-column justify-space-around pa-5" id="inventory">
+					
 
 					<div className="d-flex flex-row justify-center ma-2">
 						<h1 className="inventory_header">Инвентарь</h1>
-						<Button className="inventory_return green" children="Назад" onClick={() => {}} />
 					</div>
 
 					<div className="d-flex flex-row justify-space-between">
@@ -80,8 +81,7 @@ export class Inventory extends Component<{}, InventoryType> {
 
 					</div>
 				</div>
-			</ErrorBoundary>
-			
+				</div>
 		);
 	}
 }

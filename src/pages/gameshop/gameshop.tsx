@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {ViewedClothCard} from '../../components/viewedClothCard/viewedClothCard';
 import {ClothProps, ClothButton} from '../../components/clothButton/clothButton';
 import {Button} from '../../components/button/index';
-import {ErrorBoundary} from '../../components/errorBoundary/errorBoundary';
+import {Menu} from '../../components/menu/menu';
 
 import './gameshop.css';
 
@@ -45,7 +45,7 @@ export class GameShop extends Component<GameShopProps, GameShopState> {
 		const key = event.target?.innerHTML;
 		switch (key) {
 			case ('Оружие'):
-				this.clothes = this.clothes.filter((cloth: ClothProps) => {
+				this.clothes = this.clothes?.filter((cloth: ClothProps) => {
 					return cloth.type === 'weapon';
 				});
 				this.setState({
@@ -56,7 +56,7 @@ export class GameShop extends Component<GameShopProps, GameShopState> {
 				break;
 
 			case ('Броня'):
-				this.clothes = this.clothes.filter((cloth: ClothProps) => {
+				this.clothes = this.clothes?.filter((cloth: ClothProps) => {
 					return cloth.type === 'armor';
 				});
 				this.setState({
@@ -79,12 +79,12 @@ export class GameShop extends Component<GameShopProps, GameShopState> {
 
 	render() {
 		return (
-			<ErrorBoundary>
-				<div className="gameshop absolute d-flex flex-column justify-space-around pa-5">
+				<div className="page">
+					<Menu />
+					<div className="gameshop absolute d-flex flex-column justify-space-around pa-5">
 
 					<div className="d-flex flex-row justify-center ma-2">
 						<h1 className="gameshop_header">Магазин</h1>
-						<Button className="gameshop_return green" children="Назад" onClick={() => {}} />
 					</div>
 
 					<div className="d-flex flex-row ">
@@ -102,12 +102,12 @@ export class GameShop extends Component<GameShopProps, GameShopState> {
 								<Button className="green mx-2" children={'Весь шмот'} onClick={this.sortItems}/>
 							</div>
 						</div>
+
 						<ViewedClothCard isViewed={this.state.isViewed} viewedItem={this.state.viewedItem} buttonText="Купить" />
 
 					</div>
-				</div>
-			</ErrorBoundary>
-			
+				</div>		
+				</div>	
 		);
 	}
 }
