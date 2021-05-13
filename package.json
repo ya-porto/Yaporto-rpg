@@ -7,7 +7,9 @@
     "start": "webpack serve --mode development --open --hot",
     "build": "webpack --mode production",
     "lint-fix": "eslint . --ext .ts,.tsx --fix",
-    "lint": "eslint . --ext .ts,.tsx"
+    "lint": "eslint . --ext .ts,.tsx",
+    "tests": "jest",
+    "tests-snaps-rewrite": "jest -u"
   },
   "author": "",
   "license": "ISC",
@@ -20,15 +22,19 @@
     "@babel/preset-env": "^7.13.15",
     "@babel/preset-react": "^7.13.13",
     "@babel/preset-typescript": "^7.13.0",
+    "@types/jest": "^26.0.23",
     "autoprefixer": "^10.2.5",
     "babel-loader": "^8.2.2",
     "css-loader": "^5.2.2",
+    "enzyme": "^3.11.0",
     "html-webpack-plugin": "^5.3.1",
+    "jest": "^26.6.3",
     "mini-css-extract-plugin": "^1.5.0",
     "path": "^0.12.7",
     "postcss-calc": "^8.0.0",
     "postcss-import": "^14.0.0",
     "style-loader": "^2.0.0",
+    "ts-jest": "^26.5.6",
     "webpack": "^5.33.2",
     "webpack-cli": "^4.6.0",
     "webpack-dev-server": "^3.11.2"
@@ -40,15 +46,24 @@
     "@typescript-eslint/eslint-plugin": "^4.20.0",
     "@typescript-eslint/parser": "^4.20.0",
     "copy-webpack-plugin": "^8.1.1",
+    "enzyme-adapter-react-16": "^1.15.6",
     "eslint": "^7.23.0",
     "eslint-config-xo": "^0.35.0",
+    "identity-obj-proxy": "^3.0.0",
     "postcss": "^8.2.9",
     "postcss-cli": "^8.3.1",
     "postcss-for": "^2.1.1",
     "postcss-loader": "^5.2.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^16.0.2",
+    "react-dom": "^16.0.2",
+    "react-test-renderer": "^16.0.2",
     "ts-loader": "^8.1.0",
     "typescript": "^4.2.4"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(css|less|sass|scss)$": "<rootDir>/__mocks__/styleMock.js",
+      "\\.(gif|ttf|eot|svg)$": "<rootDir>/__mocks__/fileMock.js"
+    }
   }
 }
