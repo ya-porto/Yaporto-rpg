@@ -8,8 +8,8 @@ import {ErrorBoundary} from './components/errorBoundary/errorBoundary';
 
 ReactDOM.render((
 	<ErrorBoundary>
-	<Router>
-		<App />
-	</Router>
+		<Router>
+			<App />
+		</Router>
 	</ErrorBoundary>
 ), document.getElementById('app'));

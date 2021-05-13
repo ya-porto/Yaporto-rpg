@@ -73,11 +73,11 @@ class Signin extends React.Component {
 							))
 						}
 					</form>
-						<Link to="/home">
-							<Button className={signinButton.className} onClick={signinButton.onClick}>
-								{signinButton.text}
-							</Button>
-						</Link>
+					<Link to="/home">
+						<Button className={signinButton.className} onClick={signinButton.onClick}>
+							{signinButton.text}
+						</Button>
+					</Link>
 					<div className="buttons d-flex flex-column align-center">
 						<Link to="/signup" className="link mt-4">Нет аккаунта?</Link>
 					</div>

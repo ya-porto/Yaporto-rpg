@@ -28,7 +28,7 @@ class Game extends React.Component {
 
 	timerStart = () => {
 		let timer = setInterval(() => {
-			const secNum = (Number(this.state.time.sec) + 1)
+			const secNum = (Number(this.state.time.sec) + 1);
 			let sec = `${secNum < 10 ? '0' : ''}${secNum.toString()}`;
 			let min = this.state.time.min;
 
@@ -71,7 +71,7 @@ class Game extends React.Component {
 		const nextLvl = lvl + 1;
 		const exp = this.getExpPercent();
 		return (
-				<div className="page page-game d-flex flex-column justify-start align-center">
+			<div className="page page-game d-flex flex-column justify-start align-center">
 				<header className="game-header d-flex justify-space-between align-center px-5">
 					<div className="game-header__left d-flex justify-space-between align-center">
 						<div className="time mr-4">{`${time.min}:${time.sec}`}</div>
@@ -93,7 +93,7 @@ class Game extends React.Component {
 					Здесь будет канвас с игрой
 				</div>
 			</div>
-			
+
 		);
 	}
 }

@@ -203,16 +203,16 @@ class Profile extends React.Component {
 		const {userInfo} = this.state;
 		return (
 
-				<ul className="profile-info d-flex flex-column mt-16">
-					{
-						userInfo.map(({value, displayName}, i) => (
-							<li className="profile-info__item relative d-flex justify-space-between mt-5" key={i}>
-								<span className="name">{displayName}</span>
-								<span className="value">{value}</span>
-							</li>
-						))
-					}
-				</ul>
+			<ul className="profile-info d-flex flex-column mt-16">
+				{
+					userInfo.map(({value, displayName}, i) => (
+						<li className="profile-info__item relative d-flex justify-space-between mt-5" key={i}>
+							<span className="name">{displayName}</span>
+							<span className="value">{value}</span>
+						</li>
+					))
+				}
+			</ul>
 
 		);
 	}
@@ -221,7 +221,7 @@ class Profile extends React.Component {
 		const {isEditPasswordShown, isUserInfoShown, isEditUserInfoShown, buttonsProfile} = this.state;
 		return (
 			<div className="page page-profile d-flex flex-column justify-center align-center">
-			<Menu />
+				<Menu />
 				<div className="profile d-flex flex-column justify-center align-center">
 					<div className="profile-avatar d-flex flex-column justify-center align-center">
 						<div className="avatar d-flex justify-center align-center mt-1 mr-2">
@@ -238,7 +238,7 @@ class Profile extends React.Component {
 						}
 					</div>
 				</div>
-			</div>			
+			</div>
 		);
 	}
 }

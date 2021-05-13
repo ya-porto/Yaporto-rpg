@@ -5,9 +5,8 @@ import {mocks} from '../leaderboard/mocks';
 import {Menu} from '../../components/menu/menu';
 import './style.css';
 
-
 interface IMain {
-	
+
 	data: ILeaderboardCompItem[]
 }
 class Main extends React.Component {
@@ -22,7 +21,7 @@ class Main extends React.Component {
 				<Menu />
 				<div className="container d-flex justify-center">
 					<div className="left pa-2 d-flex flex-column">
-						
+
 						<div className="info mt-5">
 							<p>Здесь будет невероятное описание нашей фантастически крутой (нет) игры</p>
 						</div>
@@ -32,7 +31,7 @@ class Main extends React.Component {
 						<LeaderboardComp data={data}></LeaderboardComp>
 					</div>
 				</div>
-			</div>			
+			</div>
 		);
 	}
 }

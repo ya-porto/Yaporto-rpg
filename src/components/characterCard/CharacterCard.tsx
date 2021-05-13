@@ -1,6 +1,5 @@
 import React from 'react';
 import {PureComponent} from 'react';
-import {Button} from '../button/index';
 
 import './characterCard.css';
 

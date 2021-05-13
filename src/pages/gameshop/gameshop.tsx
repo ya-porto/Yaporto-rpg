@@ -79,9 +79,9 @@ export class GameShop extends Component<GameShopProps, GameShopState> {
 
 	render() {
 		return (
-				<div className="page">
-					<Menu />
-					<div className="gameshop absolute d-flex flex-column justify-space-around pa-5">
+			<div className="page">
+				<Menu />
+				<div className="gameshop absolute d-flex flex-column justify-space-around pa-5">
 
 					<div className="d-flex flex-row justify-center ma-2">
 						<h1 className="gameshop_header">Магазин</h1>
@@ -106,8 +106,8 @@ export class GameShop extends Component<GameShopProps, GameShopState> {
 						<ViewedClothCard isViewed={this.state.isViewed} viewedItem={this.state.viewedItem} buttonText="Купить" />
 
 					</div>
-				</div>		
-				</div>	
+				</div>
+			</div>
 		);
 	}
 }

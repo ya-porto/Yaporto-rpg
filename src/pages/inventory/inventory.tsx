@@ -34,10 +34,9 @@ export class Inventory extends Component<{}, InventoryType> {
 
 	render() {
 		return (
-				<div className="page">
-					<Menu />
-					<div className="inventory absolute d-flex flex-column justify-space-around pa-5" id="inventory">
-					
+			<div className="page">
+				<Menu />
+				<div className="inventory absolute d-flex flex-column justify-space-around pa-5" id="inventory">
 
 					<div className="d-flex flex-row justify-center ma-2">
 						<h1 className="inventory_header">Инвентарь</h1>
@@ -81,7 +80,7 @@ export class Inventory extends Component<{}, InventoryType> {
 
 					</div>
 				</div>
-				</div>
+			</div>
 		);
 	}
 }
