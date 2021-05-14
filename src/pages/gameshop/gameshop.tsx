@@ -44,36 +44,36 @@ export class GameShop extends Component<GameShopProps, GameShopState> {
 	sortItems =(event: { target: HTMLElement; }) => {
 		const key = event.target?.innerHTML;
 		switch (key) {
-			case ('Оружие'):
-				this.clothes = this.clothes?.filter((cloth: ClothProps) => {
-					return cloth.type === 'weapon';
-				});
-				this.setState({
-					isViewed: this.INITIAL_STATE.isViewed,
-					viewedItem: this.INITIAL_STATE.viewedItem,
-					sorted: key
-				});
-				break;
+		case ('Оружие'):
+			this.clothes = this.clothes?.filter((cloth: ClothProps) => {
+				return cloth.type === 'weapon';
+			});
+			this.setState({
+				isViewed: this.INITIAL_STATE.isViewed,
+				viewedItem: this.INITIAL_STATE.viewedItem,
+				sorted: key
+			});
+			break;
 
-			case ('Броня'):
-				this.clothes = this.clothes?.filter((cloth: ClothProps) => {
-					return cloth.type === 'armor';
-				});
-				this.setState({
-					isViewed: this.INITIAL_STATE.isViewed,
-					viewedItem: this.INITIAL_STATE.viewedItem,
-					sorted: key
-				});
-				break;
+		case ('Броня'):
+			this.clothes = this.clothes?.filter((cloth: ClothProps) => {
+				return cloth.type === 'armor';
+			});
+			this.setState({
+				isViewed: this.INITIAL_STATE.isViewed,
+				viewedItem: this.INITIAL_STATE.viewedItem,
+				sorted: key
+			});
+			break;
 
-			case ('Весь шмот'):
-				this.clothes = this.props.clothes;
-				this.setState({
-					isViewed: this.INITIAL_STATE.isViewed,
-					viewedItem: this.INITIAL_STATE.viewedItem,
-					sorted: key
-				});
-				break;
+		case ('Весь шмот'):
+			this.clothes = this.props.clothes;
+			this.setState({
+				isViewed: this.INITIAL_STATE.isViewed,
+				viewedItem: this.INITIAL_STATE.viewedItem,
+				sorted: key
+			});
+			break; // No default
 		}
 	}
 
