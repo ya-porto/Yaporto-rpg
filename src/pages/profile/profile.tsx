@@ -1,6 +1,7 @@
 import React from 'react';
 import {Button, IButtonCompProps} from '../../components/button/index';
 import {Input, IInputCompProps} from '../../components/input/index';
+import {Menu} from '../../components/menu/menu';
 import './style.css';
 
 interface IButton extends IButtonCompProps {
@@ -201,6 +202,7 @@ class Profile extends React.Component {
 	userInfoTemplate = (): JSX.Element => {
 		const {userInfo} = this.state;
 		return (
+
 			<ul className="profile-info d-flex flex-column mt-16">
 				{
 					userInfo.map(({value, displayName}, i) => (
@@ -211,6 +213,7 @@ class Profile extends React.Component {
 					))
 				}
 			</ul>
+
 		);
 	}
 
@@ -218,6 +221,7 @@ class Profile extends React.Component {
 		const {isEditPasswordShown, isUserInfoShown, isEditUserInfoShown, buttonsProfile} = this.state;
 		return (
 			<div className="page page-profile d-flex flex-column justify-center align-center">
+				<Menu />
 				<div className="profile d-flex flex-column justify-center align-center">
 					<div className="profile-avatar d-flex flex-column justify-center align-center">
 						<div className="avatar d-flex justify-center align-center mt-1 mr-2">

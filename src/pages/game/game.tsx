@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import {Button} from '../../components/button/index';
 import './style.css';
 
@@ -27,7 +28,7 @@ class Game extends React.Component {
 
 	timerStart = () => {
 		let timer = setInterval(() => {
-			const secNum = (Number(this.state.time.sec) + 1)
+			const secNum = (Number(this.state.time.sec) + 1);
 			let sec = `${secNum < 10 ? '0' : ''}${secNum.toString()}`;
 			let min = this.state.time.min;
 
@@ -84,14 +85,15 @@ class Game extends React.Component {
 					</div>
 					<div className="game-header__right d-flex justify-space-between align-center">
 						<Button className="mr-3" onClick={this.timerPause}><i className="fas fa-pause"></i></Button>
-						<Button className="mr-3" onClick={this.showShopMenu}><i className="fas fa-store-alt"></i></Button>
-						<Button onClick={this.showCharacterMenu}><i className="fas fa-user"></i></Button>
+						<Link to="/gameshop"><Button className="mr-3" onClick={this.showShopMenu}><i className="fas fa-store-alt"></i></Button></Link>
+						<Link to="/profile"><Button onClick={this.showCharacterMenu}><i className="fas fa-user"></i></Button></Link>
 					</div>
 				</header>
 				<div className="game">
 					Здесь будет канвас с игрой
 				</div>
 			</div>
+
 		);
 	}
 }

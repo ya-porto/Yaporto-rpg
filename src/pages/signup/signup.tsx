@@ -1,7 +1,8 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import {Button, IButtonCompProps} from '../../components/button/index';
 import {Input, IInputCompProps} from '../../components/input/index';
-import {ErrorBoundary} from '../../components/errorBoundary/errorBoundary';
+import {Menu} from '../../components/menu/menu';
 import './style.css';
 
 interface IButton extends IButtonCompProps {
@@ -96,7 +97,7 @@ class Signup extends React.Component {
 		const {inputsData, signupButton} = this.state;
 		return (
 			<div className="page page-signup d-flex flex-column justify-center align-center">
-				<ErrorBoundary>
+				<Menu />
 				<div className="card shadow d-flex flex-column justify-space-between align-center px-10 py-8">
 					<h3 className="title mt-5">Регистрация</h3>
 					<form className="form mt-4" action="" method="post">
@@ -114,14 +115,17 @@ class Signup extends React.Component {
 							))
 						}
 					</form>
-					<Button className={signupButton.className} onClick={signupButton.onClick}>
-						{signupButton.text}
-					</Button>
+					<Link to="/home">
+						<Button className={signupButton.className} onClick={signupButton.onClick}>
+							{signupButton.text}
+						</Button>
+					</Link>
 					<div className="buttons d-flex flex-column align-center">
-						<a href="/signin" className="link mt-4">Войти</a>
+						<Link className="link mt-4" to="/signin">
+							Войти
+						</Link>
 					</div>
 				</div>
-				</ErrorBoundary>
 			</div>
 		);
 	}

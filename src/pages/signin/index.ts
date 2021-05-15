@@ -1,2 +1,1 @@
-import {Signin} from './signin';
-export {Signin};
+export {Signin} from './signin';
