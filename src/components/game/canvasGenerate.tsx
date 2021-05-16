@@ -2,8 +2,8 @@ import React, {PureComponent} from 'react';
 
 
 interface props{
-    x_p: number;
-    y_p: number;
+    xPosition: number;
+    yPosition: number;
     image: HTMLImageElement;
 }
 
@@ -24,8 +24,8 @@ export class GameCanvas extends PureComponent<props>{
                     backgroundImage: 'url(' + this.props.image.src + ')',
                     backgroundSize: 'cover'
                 }} 
-                width={this.props.x_p} 
-                height={this.props.y_p}>
+                width={this.props.xPosition} 
+                height={this.props.yPosition}>
             </canvas>
         );
     }
