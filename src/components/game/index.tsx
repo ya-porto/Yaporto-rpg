@@ -4,7 +4,8 @@ import {lvlGenerate} from './lvlgenerate'
 
 import '../App.css';
 
-
+const MOVEDELAY = 300
+const ATTACKDELAY = 800
 const x_size = 90;
 const y_size = 90;
 
@@ -54,10 +55,10 @@ const lvlMatrix = [
 
 let isActive = false
 
-class App extends Component {
+class Game extends Component {
 	render() {
 		return (
-			<GameCanvas x_p={x_size * 13} y_p={y_size * 8} image={canvasImg}/>
+			<GameCanvas xPosition={x_size * 13} yPosition={y_size * 8} image={canvasImg}/>
 		);
 	}
 }
@@ -82,7 +83,7 @@ setTimeout(()=>{
 						Characters['C'].moveCharacter('up')
 						setTimeout(()=>{
 							isActive = false
-						}, 300)
+						}, MOVEDELAY)
 						break;
 				
 					case 'ArrowDown':
@@ -90,7 +91,7 @@ setTimeout(()=>{
 						Characters['C'].moveCharacter('down')
 						setTimeout(()=>{
 							isActive = false
-						}, 300)
+						}, MOVEDELAY)
 						break;
 
 					case 'ArrowRight':
@@ -98,7 +99,7 @@ setTimeout(()=>{
 						Characters['C'].moveCharacter('right')
 						setTimeout(()=>{
 							isActive = false
-						}, 300)
+						}, MOVEDELAY)
 						break;
 
 					case 'ArrowLeft':
@@ -106,13 +107,13 @@ setTimeout(()=>{
 						Characters['C'].moveCharacter('left')
 						setTimeout(()=>{
 							isActive = false
-						}, 300)
+						}, MOVEDELAY)
 						break;
 
 					default: 
 						setTimeout(()=>{
 							isActive = false
-						}, 300)
+						}, MOVEDELAY)
 						break;
 	
 				}
@@ -129,11 +130,11 @@ setTimeout(()=>{
 			let time = performance.now();
 			setTimeout(()=>{
 				isActive = false
-			}, 800)
+			}, ATTACKDELAY)
 			Characters['C'].attackCharacter(time, 500, Math.floor(event.pageY / y_size),  Math.floor(event.pageX / x_size), Characters)
 			
 		}
 	
 	})
 }, 400)
-export default App;
+export default Game;

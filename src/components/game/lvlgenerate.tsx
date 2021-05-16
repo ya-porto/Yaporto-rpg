@@ -1,6 +1,8 @@
 import {Character} from './character'
 import {charDie} from './deathSprite'
 import {charAttack} from './attackSprite'
+import {objPersonaj} from './game.objPersonaj'
+
 
 const sprite1 = new Image()
 sprite1.src = '/public/images/sprite1.png'
@@ -12,14 +14,8 @@ charImg.src = '/public/images/golem/Attack/Golem_01.png'
 charImg.width = 90;
 charImg.height = 90;
 
-interface objNeed{
-	type: string;
-	hp?: string;
-	attack?: string;
-	armor?: string;
-}
 
-export const lvlGenerate = (mass: Array<Array<objNeed | null>>, x_size: number, y_size: number, canvas_id: string): object => {
+export const lvlGenerate = (mass: Array<Array<objPersonaj | null>>, x_size: number, y_size: number, canvas_id: string): object => {
     const canv = document.getElementById(canvas_id) as HTMLCanvasElement;
     const obj = {}
     const ctx = canv.getContext('2d')

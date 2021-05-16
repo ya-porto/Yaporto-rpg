@@ -1,15 +1,7 @@
 import {isCross} from './isCross'
 import {isEnemyCross} from './isEnemyCross'
 import {numberAnimate} from './numberAnimate'
-
-
-
-interface objNeed{
-	type: string;
-	hp?: string;
-	attack?: string;
-	armor?: string;
-}
+import {objPersonaj} from './game.objPersonaj'
 
 export class Character{
     ctx: CanvasRenderingContext2D | null;
@@ -27,7 +19,7 @@ export class Character{
     deathMass: Array<HTMLImageElement>;
     x_size: number;
     y_size: number;
-    canvasMatrix:  Array<Array<objNeed | null>>;
+    canvasMatrix:  Array<Array<objPersonaj | null>>;
     x_position: number;
     y_position: number;
     isDead: boolean;
@@ -36,7 +28,7 @@ export class Character{
     enemy: Character;
     attackInterval: number;
 
-    constructor(start_x:number, start_y:number, image:HTMLImageElement, canvas_id:string, attackMass: Array<HTMLImageElement>, deathMass:  Array<HTMLImageElement> = [], hp: number = 100, attack: number = 10, armor: number = 0,  canvasMatrix: Array<Array<objNeed | null>>, x_size: number, y_size: number, isEnemy: boolean){
+    constructor(start_x:number, start_y:number, image:HTMLImageElement, canvas_id:string, attackMass: Array<HTMLImageElement>, deathMass:  Array<HTMLImageElement> = [], hp: number = 100, attack: number = 10, armor: number = 0,  canvasMatrix: Array<Array<objPersonaj | null>>, x_size: number, y_size: number, isEnemy: boolean){
         this.hp = hp;
         this.isDead = false;
         this.canvasMatrix = canvasMatrix;
@@ -162,7 +154,7 @@ export class Character{
                     }, this.animationTime / (this.attackMass.length - 1))
                     setTimeout(()=>{
                         this.enemy.getDamage(this.getParams()['attack'])
-                        let number = new numberAnimate(this.enemy.getPosition()[1] * this.x_size, this.enemy.getPosition()[0] * this.y_size, this.getParams()['attack'], 'canvas', 600, 70, 60)
+                        new numberAnimate(this.enemy.getPosition()[1] * this.x_size, this.enemy.getPosition()[0] * this.y_size, this.getParams()['attack'], 'canvas', 600, 70, 60)
                     }, 600)
                 }
             }
@@ -218,7 +210,7 @@ export class Character{
         }
     }
 
-    attackCharacter(startTime: number, animationTime: number, y_pos: number, x_pos: number, characters){
+    attackCharacter(startTime: number, animationTime: number, y_pos: number, x_pos: number, characters: Array<Character>){
         if(!this.isDead){
 
             this.startTime = startTime;
@@ -234,7 +226,7 @@ export class Character{
                 if(char && char.type != '*' && char != null ){
                     setTimeout(()=>{
                         characters[char.type].getDamage(characters['C'].getParams()['attack'])
-                        let number = new numberAnimate(x_pos * this.x_size, y_pos * this.y_size, characters['C'].getParams()['attack'], 'canvas', 600, 70, 60)
+                        new numberAnimate(x_pos * this.x_size, y_pos * this.y_size, characters['C'].getParams()['attack'], 'canvas', 600, 70, 60)
                     }, 400)
                 }
             }
