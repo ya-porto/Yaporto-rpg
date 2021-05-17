@@ -2,7 +2,7 @@
     "compilerOptions": {
         "jsx": "react",
         "target": "esnext",
-        "module": "esnext",
+        "module": "commonjs",
         "lib": ["DOM", "ESNext"],
         "noImplicitAny": true,
         "noUnusedLocals": true,
