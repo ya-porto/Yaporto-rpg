@@ -25,7 +25,7 @@ class Controller {
 	getUserInfo() {
 		return http.get(`${baseUrl}auth/user`, {withCredentials: true})
 			.then((res: AxiosResponse): IUserInfoData => res.data)
-			.catch((e: AxiosError) => Promise.reject(e.response?.data.reason));
+			.catch((e: AxiosError) => Promise.reject(e));
 	}
 }
 
