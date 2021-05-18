@@ -1,5 +1,5 @@
 import React, {RefObject} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, RouteComponentProps} from 'react-router-dom';
 import {Button, IButtonCompProps} from '../../components/button';
 import {Input, IInputCompProps} from '../../components/input';
 import {Menu} from '../../components/menu/menu';
@@ -16,7 +16,7 @@ interface ISignup {
 	inputsData: IInputCompPropsWithRefs[],
 	signupButton: IButton
 }
-class Signup extends React.Component {
+class Signup extends React.Component<RouteComponentProps> {
 	state: Readonly<ISignup> = {
 		inputsData: [{
 			value: '',
@@ -93,8 +93,7 @@ class Signup extends React.Component {
 				let data: ISignupData | {} = {};
 
 				// Валидация и сбор данных
-				for (let i = 0; i < inputList.length; i++) {
-					const input = inputList[i];
+				inputList.forEach(input => {
 					const node = input.ref.current;
 
 					if (!node || !node.isValid()) {
@@ -104,13 +103,12 @@ class Signup extends React.Component {
 					if (input.name) {
 						data[input.name] = input.value;
 					}
-				}
+				});
 
 				// Все норм. Я валидирую
 				// @ts-ignore
 				authController.signup(data).then(() => {
-					// Чет я не понял как в реакт роутере менять урл
-					window.location.href = '/home';
+					this.props.history.push('/home');
 				}).catch(e => {
 					console.log(e);
 				});

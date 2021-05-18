@@ -1,5 +1,5 @@
 import React, {RefObject} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, RouteComponentProps} from 'react-router-dom';
 import {Button, IButtonCompProps} from '../../components/button';
 import {IInputCompProps, Input} from '../../components/input';
 import {Menu} from '../../components/menu/menu';
@@ -17,7 +17,7 @@ interface ISignin {
 	inputsData: IInputCompPropsWithRefs[],
 	signinButton: IButton
 }
-class Signin extends React.Component {
+class Signin extends React.Component<RouteComponentProps> {
 	state: Readonly<ISignin> = {
 		inputsData: [{
 			value: '',
@@ -47,8 +47,7 @@ class Signin extends React.Component {
 				let data: ISigninData | {} = {};
 
 				// Валидация и сбор данных
-				for (let i = 0; i < inputList.length; i++) {
-					const input = inputList[i];
+				inputList.forEach(input => {
 					const node = input.ref.current;
 
 					if (!node || !node.isValid()) {
@@ -58,13 +57,12 @@ class Signin extends React.Component {
 					if (input.name) {
 						data[input.name] = input.value;
 					}
-				}
+				});
 
 				// Все норм. Я валидирую
 				// @ts-ignore
 				authController.signin(data).then(() => {
-					// Чет я не понял как в реакт роутере менять урл
-					window.location.href = '/home';
+					this.props.history.push('/home');
 				}).catch(e => {
 					console.log(e);
 				});

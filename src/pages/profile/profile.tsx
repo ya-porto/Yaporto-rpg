@@ -1,4 +1,5 @@
 import React, {RefObject} from 'react';
+import {RouteComponentProps} from 'react-router-dom';
 import {Button, IButtonCompProps} from '../../components/button';
 import {Input, IInputCompProps} from '../../components/input';
 import {Menu} from '../../components/menu/menu';
@@ -30,7 +31,7 @@ interface IProfile {
 	userInfo: IUserInfo[],
 	userAvatar: string
 }
-class Profile extends React.Component {
+class Profile extends React.Component<RouteComponentProps> {
 	state: Readonly<IProfile> = {
 		isUserInfoShown: true,
 		isEditUserInfoShown: false,
@@ -133,8 +134,7 @@ class Profile extends React.Component {
 			className: 'profile-buttons__item relative d-flex mt-5 pointer logout',
 			onClick: () => {
 				authController.logout().then(() => {
-					// Чет я не понял как в реакт роутере менять урл
-					window.location.href = '/signin';
+					this.props.history.push('/signin');
 				}).catch(e => {
 					console.log(e);
 				});
