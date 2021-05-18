@@ -13,9 +13,9 @@ module.exports = {
 		extensions: ['.tsx', '.ts', '.jsx', '.js']
 	},
 	devServer: {
-		contentBase: path.join(__dirname, 'src'),
+		contentBase: path.join(__dirname, 'dist'),
 		historyApiFallback: true,
-		port: 8080,
+		port: 4000,
 	  },
 	module: {
 		rules: [
@@ -46,7 +46,7 @@ module.exports = {
 					{
 						loader: 'file-loader',
 						options: {
-							name: 'fonts/[name].[hash:5].[ext]'
+							name: 'fonts/[name].[ext]'
 						}
 					}
 				]
@@ -55,8 +55,7 @@ module.exports = {
 	},
 	plugins: [
 		new MiniCssExtractPlugin({
-			filename: 'css/[name].[contenthash:5].[id].css',
-			chunkFilename: 'css/[name].[contenthash:5].[id].css'
+			filename: 'css/style.css',
 		}),
 		new HtmlWebpackPlugin({
 			template: './public/index.html'
@@ -64,7 +63,8 @@ module.exports = {
 		new CopyWebpackPlugin({
 			patterns: [
 				{from: './src/styles/fonts', to: 'fonts'},
-				{from: './public/images', to: 'images'}
+				{from: './public/images', to: 'images'},
+				{from: './sw.js'},
 			]
 		}
 		)

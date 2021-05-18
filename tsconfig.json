@@ -3,7 +3,7 @@
         "jsx": "react",
         "target": "esnext",
         "module": "esnext",
-        "lib": ["DOM", "ESNext"],
+        "lib": ["DOM", "ESNext", "webworker"],
         "noImplicitAny": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
