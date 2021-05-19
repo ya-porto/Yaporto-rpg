@@ -3,6 +3,98 @@
     opacity: 0;
     z-index: -1;
   }
+  .button {
+      width: 100%;
+      padding: 12px 0;
+      text-align: center;
+      font-size: 17px;
+      border-radius: 8px;
+      color: #fff;
+  }
+  .button.primary {
+      background-color: #3369f3;
+  }
+  .field {
+    position: relative;
+    padding: 15px 0 0;
+    margin-top: 10px;
+    width: 100%;
+  }
+  .form__field {
+    font-family: inherit;
+    width: 100%;
+    border: 0;
+    border-bottom: 2px solid #3369f3;
+    outline: 0;
+    font-size: 1.3rem;
+    color: #1e1e1e;
+    padding: 7px 0;
+    background: transparent;
+    transition: border-color 0.2s;
+  }
+  .form__field::placeholder {
+    color: transparent;
+  }
+  .form__field:placeholder-shown ~ .form__label {
+    font-size: 1rem;
+    cursor: text;
+    top: 20px;
+  }
+  .form__label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: .8rem;
+    color: #999;
+  }
+  .form__error {
+      color: #ff2f2f;
+      font-size: .8rem;
+  }
+  .form__field:focus ~ .form__label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: .8rem;
+    color: #1e1e1e;
+  }
+  
+  .field_gray .form__field{
+    background-color: #efefef;
+    color: #999;
+    border: none;
+    border-radius: 5px;
+    padding-left: 1rem;
+  }
+  .field_gray .form__field::placeholder {
+    color: #999;
+  }
+  .field_center .form__field:placeholder-shown::placeholder {
+    text-align: center;
+  }
+  .field .fas {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transition: 0.2s;
+  }
+  .field_gray .fas {
+    color: #999;
+  }
+  .field_center .form__field:placeholder-shown ~ .fas {
+    left: 40%;
+  }
+  .field > .form__field {
+    padding-left: 2rem;
+  }
+  .field_center .form__field:focus::placeholder {
+    text-align: left;
+  }
+  .field_center .form__field:focus ~ .fas {
+    left: 10px;
+  }
   
   .popup {
     position: absolute;
@@ -36,11 +128,30 @@
     font-weight: 600;
   }
   
+  .modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    top: 0;
+    left: 0;
+    z-index: 999;
+  }
+  .modal .modal-content {
+    max-width: 80%;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 1px 1px 6px 0px rgba(0,0,0,0.7);
+    border-radius: 15px;
+    z-index: 9999;
+  }
+  
   .page {
       width: 100%;
       height: 100vh;
-      padding-top: 100px;
-      padding-bottom: 50px;
   }
   
   .shadow {box-shadow: 1px 1px 6px 0px rgba(0,0,0,0.7);}
@@ -50,15 +161,28 @@
       cursor: pointer;
   }
 
-  .green {
-    background-color: #58882f;
+  @keyframes showNotification {
+    from { transform: translateY(-45px); }
+    to { transform: translateY(0px); }
+   }
+  .app-notification {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 10px;
+    margin: 0 auto;
+    width: auto;
+    max-width: 15%;
+    color: #fff;
+    text-align: center;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transform: translateY(-45px);
+    animation: showNotification 1s forwards
   }
-
-  .card {
-    background-color: #f3e6cb;
-    background-image: url('../public/images/papirus.jpeg');
-    background-position: center;
-    border-radius: 10px;
-    box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.5);
-}
-
+  .app-notification.app-notification_error {
+    background-color: #ff5252;
+  }
+  .app-notification.app-notification_success {
+    background-color: #4caf50;
+  }
