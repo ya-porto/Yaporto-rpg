@@ -4,6 +4,7 @@ const CACHE_NAME = 'cahe-v1';
 const urls = [
   '/index.html',
   '/bundle.js',
+  '/css/style.css'
 ]
 // При установке воркера мы кешируем часть данных (статику).
 self.addEventListener('install', function(event) {
