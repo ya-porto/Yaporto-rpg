@@ -1,0 +1,9 @@
+.page-leaderboard .card {
+    width: 45%;
+    min-height: 60%;
+    max-height: 90%;
+    border-radius: 2%;
+}
+.page-leaderboard .card .title {
+    font-size: 25px;
+}

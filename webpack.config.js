@@ -12,6 +12,11 @@ module.exports = {
 	resolve: {
 		extensions: ['.tsx', '.ts', '.jsx', '.js']
 	},
+	devServer: {
+		contentBase: path.join(__dirname, 'src'),
+		historyApiFallback: true,
+		port: 8080,
+	  },
 	module: {
 		rules: [
 			{

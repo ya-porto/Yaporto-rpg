@@ -1,0 +1,25 @@
+.gameshop {
+    margin: auto;
+    width: 900px;
+    height: 580px;
+    min-width: 800px;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background-color: #463a2c;
+    background-image: url('../public/images/wooden-background.jpeg');
+}
+
+.gameshop_header {
+    color:  #000;
+}
+
+.shop {
+    min-height: 400px;
+    min-width: 200px;
+    width: 100%;
+}
+
+.shop_header {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
