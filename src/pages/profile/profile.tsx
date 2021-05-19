@@ -132,13 +132,7 @@ class Profile extends React.Component<RouteComponentProps> {
 		}, {
 			text: 'Выйти',
 			className: 'profile-buttons__item relative d-flex mt-5 pointer logout',
-			onClick: () => {
-				authController.logout().then(() => {
-					this.props.history.push('/signin');
-				}).catch(e => {
-					console.log(e);
-				});
-			}
+			onClick: () => this.signoutClick()
 		}],
 		userInfo: [{
 			displayName: 'Почта',
@@ -361,6 +355,14 @@ class Profile extends React.Component<RouteComponentProps> {
 				});
 			}
 		}
+	}
+
+	signoutClick = () => {
+		authController.logout().then(() => {
+			this.props.history.push('/signin');
+		}).catch(e => {
+			console.log(e);
+		});
 	}
 
 	render() {

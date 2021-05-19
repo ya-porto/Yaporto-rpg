@@ -42,31 +42,7 @@ class Signin extends React.Component<RouteComponentProps> {
 		signinButton: {
 			text: 'Авторизоваться',
 			className: 'primary',
-			onClick: () => {
-				const inputList = this.state.inputsData;
-				let data: ISigninData | {} = {};
-
-				// Валидация и сбор данных
-				inputList.forEach(input => {
-					const node = input.ref.current;
-
-					if (!node || !node.isValid()) {
-						return;
-					}
-
-					if (input.name) {
-						data[input.name] = input.value;
-					}
-				});
-
-				// Все норм. Я валидирую
-				// @ts-ignore
-				authController.signin(data).then(() => {
-					this.props.history.push('/home');
-				}).catch(e => {
-					console.log(e);
-				});
-			}
+			onClick: () => this.signinClick()
 		}
 	};
 
@@ -80,6 +56,32 @@ class Signin extends React.Component<RouteComponentProps> {
 			return item;
 		});
 		this.setState({inputsData: newArray});
+	}
+
+	signinClick = () => {
+		const inputList = this.state.inputsData;
+		let data: ISigninData | {} = {};
+
+		// Валидация и сбор данных
+		inputList.forEach(input => {
+			const node = input.ref.current;
+
+			if (!node || !node.isValid()) {
+				return;
+			}
+
+			if (input.name) {
+				data[input.name] = input.value;
+			}
+		});
+
+		// Все норм. Я валидирую
+		// @ts-ignore
+		authController.signin(data).then(() => {
+			this.props.history.push('/home');
+		}).catch(e => {
+			console.log(e);
+		});
 	}
 
 	render() {

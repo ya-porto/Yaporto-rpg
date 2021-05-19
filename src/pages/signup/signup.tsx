@@ -88,31 +88,7 @@ class Signup extends React.Component<RouteComponentProps> {
 		signupButton: {
 			text: 'Зарегистрироваться',
 			className: 'primary mt-5',
-			onClick: () => {
-				const inputList = this.state.inputsData;
-				let data: ISignupData | {} = {};
-
-				// Валидация и сбор данных
-				inputList.forEach(input => {
-					const node = input.ref.current;
-
-					if (!node || !node.isValid()) {
-						return;
-					}
-
-					if (input.name) {
-						data[input.name] = input.value;
-					}
-				});
-
-				// Все норм. Я валидирую
-				// @ts-ignore
-				authController.signup(data).then(() => {
-					this.props.history.push('/home');
-				}).catch(e => {
-					console.log(e);
-				});
-			}
+			onClick: () => this.signupClick()
 		}
 	};
 
@@ -126,6 +102,32 @@ class Signup extends React.Component<RouteComponentProps> {
 			return item;
 		});
 		this.setState({inputsData: newArray});
+	}
+
+	signupClick = () => {
+		const inputList = this.state.inputsData;
+		let data: ISignupData | {} = {};
+
+		// Валидация и сбор данных
+		inputList.forEach(input => {
+			const node = input.ref.current;
+
+			if (!node || !node.isValid()) {
+				return;
+			}
+
+			if (input.name) {
+				data[input.name] = input.value;
+			}
+		});
+
+		// Все норм. Я валидирую
+		// @ts-ignore
+		authController.signup(data).then(() => {
+			this.props.history.push('/home');
+		}).catch(e => {
+			console.log(e);
+		});
 	}
 
 	render() {
