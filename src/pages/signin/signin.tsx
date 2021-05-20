@@ -1,18 +1,23 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
-import {Button, IButtonCompProps} from '../../components/button/index';
-import {IInputCompProps, Input} from '../../components/input/index';
+import React, {RefObject} from 'react';
+import {Link, RouteComponentProps} from 'react-router-dom';
+import {Button, IButtonCompProps} from '../../components/button';
+import {IInputCompProps, Input} from '../../components/input';
 import {Menu} from '../../components/menu/menu';
+import {authController, ISigninData} from '../../controllers/auth';
 import './style.css';
 
 interface IButton extends IButtonCompProps {
 	text: string
 }
+
+interface IInputCompPropsWithRefs extends IInputCompProps {
+	ref: RefObject<Input>
+}
 interface ISignin {
-	inputsData: IInputCompProps[],
+	inputsData: IInputCompPropsWithRefs[],
 	signinButton: IButton
 }
-class Signin extends React.Component {
+class Signin extends React.Component<RouteComponentProps> {
 	state: Readonly<ISignin> = {
 		inputsData: [{
 			value: '',
@@ -21,7 +26,8 @@ class Signin extends React.Component {
 			name: 'login',
 			validation: {
 				required: true
-			}
+			},
+			ref: React.createRef()
 		}, {
 			value: '',
 			type: 'password',
@@ -30,12 +36,13 @@ class Signin extends React.Component {
 			validation: {
 				required: true,
 				password: true
-			}
+			},
+			ref: React.createRef()
 		}],
 		signinButton: {
 			text: 'Авторизоваться',
 			className: 'primary',
-			onClick: () => console.log('Валидируем и логинимся')
+			onClick: () => this.signinClick()
 		}
 	};
 
@@ -51,6 +58,32 @@ class Signin extends React.Component {
 		this.setState({inputsData: newArray});
 	}
 
+	signinClick = () => {
+		const inputList = this.state.inputsData;
+		let data: ISigninData | {} = {};
+
+		// Валидация и сбор данных
+		inputList.forEach(input => {
+			const node = input.ref.current;
+
+			if (!node || !node.isValid()) {
+				return;
+			}
+
+			if (input.name) {
+				data[input.name] = input.value;
+			}
+		});
+
+		// Все норм. Я валидирую
+		// @ts-ignore
+		authController.signin(data).then(() => {
+			this.props.history.push('/home');
+		}).catch(e => {
+			console.log(e);
+		});
+	}
+
 	render() {
 		const {inputsData, signinButton} = this.state;
 		return (
@@ -60,7 +93,7 @@ class Signin extends React.Component {
 					<h3 className="title mt-5">Вход</h3>
 					<form className="form mt-4" action="" method="post">
 						{
-							inputsData.map(({value, type, placeholder, name, validation}, i) => (
+							inputsData.map(({value, type, placeholder, name, validation, ref}, i) => (
 								<Input
 									value={value}
 									type={type}
@@ -69,15 +102,14 @@ class Signin extends React.Component {
 									validation={validation}
 									onChange={this.inputChange}
 									key={i}
+									ref={ref}
 								/>
 							))
 						}
 					</form>
-					<Link to="/home">
-						<Button className={signinButton.className} onClick={signinButton.onClick}>
-							{signinButton.text}
-						</Button>
-					</Link>
+					<Button className={signinButton.className} onClick={signinButton.onClick}>
+						{signinButton.text}
+					</Button>
 					<div className="buttons d-flex flex-column align-center">
 						<Link to="/signup" className="link mt-4">Нет аккаунта?</Link>
 					</div>
