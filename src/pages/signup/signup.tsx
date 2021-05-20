@@ -1,17 +1,22 @@
-import React from 'react';
-import {Button, IButtonCompProps} from '../../components/button/index';
-import {Input, IInputCompProps} from '../../components/input/index';
-import {ErrorBoundary} from '../../components/errorBoundary/errorBoundary';
+import React, {RefObject} from 'react';
+import {Link, RouteComponentProps} from 'react-router-dom';
+import {Button, IButtonCompProps} from '../../components/button';
+import {Input, IInputCompProps} from '../../components/input';
+import {Menu} from '../../components/menu/menu';
+import {authController, ISignupData} from '../../controllers/auth';
 import './style.css';
 
 interface IButton extends IButtonCompProps {
 	text: string
 }
+interface IInputCompPropsWithRefs extends IInputCompProps {
+	ref: RefObject<Input>
+}
 interface ISignup {
-	inputsData: IInputCompProps[],
+	inputsData: IInputCompPropsWithRefs[],
 	signupButton: IButton
 }
-class Signup extends React.Component {
+class Signup extends React.Component<RouteComponentProps> {
 	state: Readonly<ISignup> = {
 		inputsData: [{
 			value: '',
@@ -21,7 +26,8 @@ class Signup extends React.Component {
 			validation: {
 				required: true,
 				email: true
-			}
+			},
+			ref: React.createRef()
 		}, {
 			value: '',
 			type: 'input',
@@ -29,7 +35,8 @@ class Signup extends React.Component {
 			name: 'login',
 			validation: {
 				required: true
-			}
+			},
+			ref: React.createRef()
 		}, {
 			value: '',
 			type: 'input',
@@ -37,7 +44,8 @@ class Signup extends React.Component {
 			name: 'first_name',
 			validation: {
 				required: true
-			}
+			},
+			ref: React.createRef()
 		}, {
 			value: '',
 			type: 'input',
@@ -45,7 +53,8 @@ class Signup extends React.Component {
 			name: 'second_name',
 			validation: {
 				required: true
-			}
+			},
+			ref: React.createRef()
 		}, {
 			value: '',
 			type: 'tel',
@@ -54,7 +63,8 @@ class Signup extends React.Component {
 			validation: {
 				required: true,
 				phone: true
-			}
+			},
+			ref: React.createRef()
 		}, {
 			value: '',
 			type: 'password',
@@ -63,7 +73,8 @@ class Signup extends React.Component {
 			validation: {
 				required: true,
 				password: true
-			}
+			},
+			ref: React.createRef()
 		}, {
 			value: '',
 			type: 'password',
@@ -71,12 +82,13 @@ class Signup extends React.Component {
 			name: 'password_again',
 			validation: {
 				equal: () => this.state.inputsData.find(x => x.name === 'password')?.value
-			}
+			},
+			ref: React.createRef()
 		}],
 		signupButton: {
 			text: 'Зарегистрироваться',
 			className: 'primary mt-5',
-			onClick: () => console.log('Валидируем и регистрируем')
+			onClick: () => this.signupClick()
 		}
 	};
 
@@ -92,16 +104,42 @@ class Signup extends React.Component {
 		this.setState({inputsData: newArray});
 	}
 
+	signupClick = () => {
+		const inputList = this.state.inputsData;
+		let data: ISignupData | {} = {};
+
+		// Валидация и сбор данных
+		inputList.forEach(input => {
+			const node = input.ref.current;
+
+			if (!node || !node.isValid()) {
+				return;
+			}
+
+			if (input.name) {
+				data[input.name] = input.value;
+			}
+		});
+
+		// Все норм. Я валидирую
+		// @ts-ignore
+		authController.signup(data).then(() => {
+			this.props.history.push('/home');
+		}).catch(e => {
+			console.log(e);
+		});
+	}
+
 	render() {
 		const {inputsData, signupButton} = this.state;
 		return (
 			<div className="page page-signup d-flex flex-column justify-center align-center">
-				<ErrorBoundary>
+				<Menu />
 				<div className="card shadow d-flex flex-column justify-space-between align-center px-10 py-8">
 					<h3 className="title mt-5">Регистрация</h3>
 					<form className="form mt-4" action="" method="post">
 						{
-							inputsData.map(({value, type, placeholder, name, validation}, i) => (
+							inputsData.map(({value, type, placeholder, name, validation, ref}, i) => (
 								<Input
 									value={value}
 									type={type}
@@ -110,6 +148,7 @@ class Signup extends React.Component {
 									validation={validation}
 									onChange={this.inputChange}
 									key={i}
+									ref={ref}
 								/>
 							))
 						}
@@ -118,10 +157,11 @@ class Signup extends React.Component {
 						{signupButton.text}
 					</Button>
 					<div className="buttons d-flex flex-column align-center">
-						<a href="/signin" className="link mt-4">Войти</a>
+						<Link className="link mt-4" to="/signin">
+							Войти
+						</Link>
 					</div>
 				</div>
-				</ErrorBoundary>
 			</div>
 		);
 	}

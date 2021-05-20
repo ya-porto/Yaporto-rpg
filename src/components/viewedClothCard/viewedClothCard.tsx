@@ -2,7 +2,7 @@ import React, {PureComponent} from 'react';
 import {Button} from '../button/index';
 import {ClothProps} from '../clothButton/clothButton';
 
-import './viewedClothCard.css'
+import './viewedClothCard.css';
 
 interface ClothCardProps {
     img?: string,

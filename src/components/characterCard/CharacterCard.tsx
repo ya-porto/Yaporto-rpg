@@ -1,8 +1,7 @@
 import React from 'react';
 import {PureComponent} from 'react';
-import {Button} from '../button/index';
 
-import './characterCard.css'
+import './characterCard.css';
 
 export class CharacterCard extends PureComponent {
 	render() {
@@ -23,19 +22,6 @@ export class CharacterCard extends PureComponent {
 						<span className="character_stats_item ml-15">Защита</span>
 						<span className="character_stats_item ml-15">Урон</span>
 					</div>
-				</div>
-
-				<div className="d-flex flex-row justify-space-around">
-					<Button
-						onClick={() => ''}
-						children={'В магазин'}
-						className = "green mr-5"
-					/>
-					<Button
-						onClick={() => ''}
-						children={'Играть'}
-						className = "green"
-					/>
 				</div>
 			</div>
 		);

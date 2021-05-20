@@ -2,7 +2,7 @@ import React from 'react';
 import {Component} from 'react';
 import {ClothButton, ClothProps} from '../clothButton/clothButton';
 
-import './backpack.css'
+import './backpack.css';
 interface BackpackCardProps {
 		clothes: ClothProps[],
 		header: string
