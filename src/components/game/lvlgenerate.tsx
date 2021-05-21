@@ -5,12 +5,12 @@ import {objPersonaj} from './game.objPersonaj'
 
 
 const sprite1 = new Image()
-sprite1.src = '/public/images/sprite1.png'
+sprite1.src = '../../images/sprite1.png'
 sprite1.width = 90;
 sprite1.height = 70;
 
 const charImg = new Image()
-charImg.src = '/public/images/golem/Attack/Golem_01.png'
+charImg.src = '../../images/golem/Attack/Golem_01.png'
 charImg.width = 90;
 charImg.height = 90;
 

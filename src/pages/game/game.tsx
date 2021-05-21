@@ -2,6 +2,8 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {Button} from '../../components/button/index';
 import './style.css';
+import {store, changeTime} from '../../redux/storeGame'
+import {Game as GameCanvas} from '../../components/game/index'
 
 interface IGame {
 	time: { min: string, sec: string, id: number | null },
@@ -36,7 +38,7 @@ class Game extends React.Component {
 				min = (Number(this.state.time.min) + 1).toString();
 				sec = '00';
 			}
-
+			store.dispatch(changeTime({min: min, sec: sec}))
 			this.setState({
 				time: {
 					min,
@@ -90,7 +92,7 @@ class Game extends React.Component {
 					</div>
 				</header>
 				<div className="game">
-					Здесь будет канвас с игрой
+					<GameCanvas></GameCanvas>
 				</div>
 			</div>
 
