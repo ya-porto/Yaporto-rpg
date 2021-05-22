@@ -7,7 +7,7 @@ exports[`Preloader test Snapshot 1`] = `
   <img
     alt="Загрузка"
     draggable="false"
-    src="../../public/images/sword_preloader.png"
+    src="../../images/sword_preloader.png"
   />
 </div>
 `;
