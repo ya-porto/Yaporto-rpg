@@ -9,7 +9,7 @@ class Preloader extends React.Component {
 		return (
 			<div
 				className="preloader-container">
-				<img src="../../public/images/sword_preloader.png" alt="Загрузка" draggable="false" />
+				<img src="../../images/sword_preloader.png" alt="Загрузка" draggable="false" />
 			</div>
 		);
 	}

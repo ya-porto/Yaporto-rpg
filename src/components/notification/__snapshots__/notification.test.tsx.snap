@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Notification test Snapshot error 1`] = `
+<div
+  className="app-notification app-notification_error shadow "
+>
+  Error text
+</div>
+`;
+
+exports[`Notification test Snapshot success 1`] = `
+<div
+  className="app-notification app-notification_success shadow "
+>
+  Success  text
+</div>
+`;

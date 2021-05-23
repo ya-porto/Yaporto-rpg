@@ -1,3 +1,10 @@
+.modal .modal_close {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 25px;
+}
 
 .page-profile .profile {
     width: 80%;
@@ -50,7 +57,8 @@
 
 .page-profile .profile .profile-info,
 .page-profile .profile .profile-buttons,
-.page-profile .profile .field {
+.page-profile .profile .field,
+.page-profile .profile .button__save {
     width: 30%;
 }
 

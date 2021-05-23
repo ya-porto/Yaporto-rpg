@@ -2,8 +2,8 @@
     "compilerOptions": {
         "jsx": "react",
         "target": "esnext",
-        "module": "esnext",
-        "lib": ["DOM", "ESNext", "webworker"],
+        "module": "commonjs",
+        "lib": ["DOM", "ESNext"],
         "noImplicitAny": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
