@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import {BackpackCard} from '../../components/backpackCard/BackpackCard';
+import {BackpackCard} from '../../components/backpackCard/backpackCard';
 import {ViewedClothCard} from '../../components/viewedClothCard/viewedClothCard';
 import {CharacterCard} from '../../components/characterCard/characterCard';
 import {ClothProps} from '../../components/clothButton/clothButton';
