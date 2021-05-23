@@ -10,7 +10,7 @@ const x_size = 90;
 const y_size = 90;
 
 const canvasImg = new Image();
-canvasImg.src = '/public/images/bg.jpeg'
+canvasImg.src = '/images/bg.jpeg'
 
 const char1 = {
 	type: 'C',
