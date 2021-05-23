@@ -24,7 +24,7 @@ export class Router extends Component {
 					<Route path="/forum/thread" component={requireAuthentication(Thread)}></Route>
 					<Route path="/game" component={requireAuthentication(Game)}></Route>
 					<Route path="/leaderboard" component={Leaderboard}></Route>
-					<Route path="/profile" component={Profile}></Route>
+					<Route path="/profile" component={requireAuthentication(Profile)}></Route>
 					<Route path="/home" component={Main}></Route>
 					<Redirect from="/" to="/home"></Redirect>
 				</Switch>
