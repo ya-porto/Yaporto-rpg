@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, configureStore } from '@reduxjs/toolkit'
 import {authController} from '../controllers/auth'
 
-export const fetchUserById: any = createAsyncThunk(
+export const fetchUserBy: any = createAsyncThunk(
     'users/getFullInfo',
     async (thunkAPI) => {
         const response = await authController.getUserInfo()
@@ -25,8 +25,7 @@ const counterSlice = createSlice({
 
     },
 	extraReducers: {
-		[fetchUserById.fulfilled]: (state, action) => {
-        // Add user to the state array
+		[fetchUserBy.fulfilled]: (state, action) => {
             state.user = action.payload
         }
 	}
@@ -35,4 +34,3 @@ const counterSlice = createSlice({
   export const store = configureStore({
 	  reducer: counterSlice.reducer
   })
-  

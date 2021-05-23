@@ -11,11 +11,11 @@ export const isEnemyCross = (mass1: Array<number>, mass2: Array<Array<objPersona
     }
 
     if(mass2[y][x - 1] !== null &&  mass2[y][x - 1].type == 'C'){
-		return mass2[y][x - 1]
+		  return mass2[y][x - 1]
     }
 
     if(mass2[y + 1][x] !== null &&  mass2[y + 1][x].type == 'C'){
-		return mass2[y + 1][x]
+		  return mass2[y + 1][x]
     }
 
     if(mass2[y][x + 1] !== null &&  mass2[y][x + 1].type == 'C'){

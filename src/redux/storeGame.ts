@@ -3,7 +3,6 @@ import { createSlice, configureStore } from '@reduxjs/toolkit'
 const counterSlice = createSlice({
 	name: 'Game',
 	initialState: {
-
 		game:{
 			time:  {min: '00', sec: '00'},
 			lvl: 1,
