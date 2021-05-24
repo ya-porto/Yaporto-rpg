@@ -1,21 +1,36 @@
 import React from 'react';
 import {LeaderboardComp} from '../../components/leaderboard/index';
 import {ILeaderboardCompItem} from '../../components/leaderboard/leaderboardItem/index';
-import {mocks} from '../leaderboard/mocks';
 import {Menu} from '../../components/menu/menu';
+import {leaderboardController} from '../../controllers/leaderboard';
 import './style.css';
 
 interface IMain {
-
-	data: ILeaderboardCompItem[]
+	leaderboardData: {
+		data: ILeaderboardCompItem
+	}[]
 }
 class Main extends React.Component {
 	state: Readonly<IMain> = {
-		data: mocks
+		leaderboardData: []
 	};
 
+	componentDidMount() {
+		this.getLeaderboardData();
+	}
+
+	getLeaderboardData = () => {
+		leaderboardController.getLeaderboard({cursor: 0, limit: 50})
+			.then(data => {
+				this.setState({leaderboardData: data});
+			})
+			.catch(e => {
+				console.log(e);
+			});
+	}
+
 	render() {
-		const {data} = this.state;
+		const {leaderboardData} = this.state;
 		return (
 			<div className="page page-main d-flex justify-center">
 				<Menu />
@@ -28,7 +43,7 @@ class Main extends React.Component {
 					</div>
 					<div className="right pa-2">
 						<h2>Leaderboard</h2>
-						<LeaderboardComp data={data}></LeaderboardComp>
+						<LeaderboardComp data={leaderboardData}></LeaderboardComp>
 					</div>
 				</div>
 			</div>
