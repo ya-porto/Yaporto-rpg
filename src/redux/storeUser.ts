@@ -1,5 +1,8 @@
 import { createAsyncThunk, createSlice, configureStore } from '@reduxjs/toolkit'
 import {authController} from '../controllers/auth'
+import "core-js/stable";
+import "regenerator-runtime/runtime";
+
 
 export const fetchUserBy: any = createAsyncThunk(
     'users/getFullInfo',

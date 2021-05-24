@@ -168,7 +168,7 @@ class Profile extends React.Component<RouteComponentProps> {
 	}
 
 	getUserInfo = () => {
-
+		store.dispatch(fetchUserBy())
 		authController.getUserInfo().then((data: IUserInfoData) => {
 			const userInfo = [...this.state.userInfo];
 
