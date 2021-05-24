@@ -1,17 +1,29 @@
 import React from 'react';
 import {LeaderboardComp} from '../../components/leaderboard/index';
 import {ILeaderboardCompItem} from '../../components/leaderboard/leaderboardItem/index';
-import {mocks} from './mocks';
 import {Menu} from '../../components/menu/menu';
 import './style.css';
+import {leaderboardController} from '../../controllers/leaderboard';
 
 interface ILeaderboard {
-	data: ILeaderboardCompItem[]
+	data: {
+		data: ILeaderboardCompItem
+	}[]
 }
 class Leaderboard extends React.Component {
 	state: Readonly<ILeaderboard> = {
-		data: mocks
+		data: []
 	};
+
+	componentDidMount() {
+		leaderboardController.getLeaderboard({cursor: 0, limit: 50})
+			.then(data => {
+				this.setState({data});
+			})
+			.catch(e => {
+				console.log(e);
+			});
+	}
 
 	render() {
 		const {data} = this.state;
@@ -23,7 +35,6 @@ class Leaderboard extends React.Component {
 					<LeaderboardComp data={data} />
 				</div>
 			</div>
-
 		);
 	}
 }

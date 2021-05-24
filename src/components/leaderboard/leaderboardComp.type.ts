@@ -1,7 +1,9 @@
 import {ILeaderboardCompItem} from './leaderboardItem/index';
 
 interface ILeaderboardComp {
-  data: ILeaderboardCompItem[]
+  data: {
+    data: ILeaderboardCompItem
+  }[]
 }
 
 export {ILeaderboardComp};
