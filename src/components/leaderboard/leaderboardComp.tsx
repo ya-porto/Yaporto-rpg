@@ -5,11 +5,11 @@ import './style.css';
 
 class LeaderboardComp extends React.Component<ILeaderboardComp> {
 	render() {
-		const {data} = this.props;
+		const {leaderboardData} = this.props;
 		return (
 			<ul className="leaderboard">
 				{
-					data.map((item, i) => {
+					leaderboardData.map((item, i) => {
 						return <li className="pointer" key={i}>
 							<LeaderboardCompItem
 								name={item.data.name}
