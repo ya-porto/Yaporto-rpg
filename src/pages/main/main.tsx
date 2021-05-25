@@ -1,17 +1,11 @@
 import React from 'react';
-import {LeaderboardComp} from '../../components/leaderboard/index';
-import {ILeaderboardCompItem} from '../../components/leaderboard/leaderboardItem/index';
+import {LeaderboardComp, ILeaderboardComp} from '../../components/leaderboard';
 import {Menu} from '../../components/menu/menu';
-import {leaderboardController} from '../../controllers/leaderboard';
+import {leaderboardController} from '../../controllers/leaderboardController';
 import './style.css';
 
-interface IMain {
-	leaderboardData: {
-		data: ILeaderboardCompItem
-	}[]
-}
 class Main extends React.Component {
-	state: Readonly<IMain> = {
+	state: Readonly<ILeaderboardComp> = {
 		leaderboardData: []
 	};
 
@@ -43,7 +37,7 @@ class Main extends React.Component {
 					</div>
 					<div className="right pa-2">
 						<h2>Leaderboard</h2>
-						<LeaderboardComp data={leaderboardData}></LeaderboardComp>
+						<LeaderboardComp leaderboardData={leaderboardData}></LeaderboardComp>
 					</div>
 				</div>
 			</div>

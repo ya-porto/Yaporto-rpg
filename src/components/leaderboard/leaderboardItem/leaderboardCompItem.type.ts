@@ -1,4 +1,4 @@
-import {ILeaderBoardDataFields} from '../../../controllers/leaderboard';
+import {ILeaderBoardDataFields} from '../../../controllers/leaderboardController';
 
 interface ILeaderboardCompItem extends ILeaderBoardDataFields {
   place?: number
