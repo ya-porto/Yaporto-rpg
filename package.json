@@ -6,7 +6,8 @@
   "scripts": {
     "start": "webpack serve --mode development --open --hot",
     "express": "node ./express.js",
-    "build": "webpack --mode production",
+    "build": "npm run clean && webpack --mode production",
+    "clean": "rm -rf dist/",
     "lint-fix": "eslint . --ext .ts,.tsx --fix",
     "lint": "eslint . --ext .ts,.tsx",
     "tests": "jest",
