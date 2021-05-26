@@ -7,7 +7,7 @@ import {Modal} from '../../components/modal';
 import {authController, IUserInfoData} from '../../controllers/auth';
 import {IChangePassword, IChangeUserInfo, userController} from '../../controllers/user';
 import './style.css';
-import {fetchUserBy, store} from '../../redux/storeUser'
+import {fetchUserBy, store} from '../../redux/storeUser';
 
 interface IButton extends IButtonCompProps {
 	text: string
@@ -168,7 +168,7 @@ class Profile extends React.Component<RouteComponentProps> {
 	}
 
 	getUserInfo = () => {
-		store.dispatch(fetchUserBy())
+		store.dispatch(fetchUserBy());
 		authController.getUserInfo().then((data: IUserInfoData) => {
 			const userInfo = [...this.state.userInfo];
 

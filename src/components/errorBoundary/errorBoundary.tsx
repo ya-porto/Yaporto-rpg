@@ -23,7 +23,7 @@ export class ErrorBoundary extends Component< {}, {error: null | Error, startLoa
 
 	componentDidMount() {
 		const endLoad = performance.now();
-		console.info(`The application was loaded for ${endLoad - this.state.startLoad} ms`)
+		console.info(`The application was loaded for ${endLoad - this.state.startLoad} ms`);
 	}
 
 	render() {

@@ -1,39 +1,38 @@
-import { createAsyncThunk, createSlice, configureStore } from '@reduxjs/toolkit'
-import {authController} from '../controllers/auth'
-import "core-js/stable";
-import "regenerator-runtime/runtime";
-
+import {createAsyncThunk, createSlice, configureStore} from '@reduxjs/toolkit';
+import {authController} from '../controllers/auth';
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
 
 export const fetchUserBy: any = createAsyncThunk(
-    'users/getFullInfo',
-    async (thunkAPI) => {
-        const response = await authController.getUserInfo()
-        return response
-    }
-)
+	'users/getFullInfo',
+	async () => {
+		const response = await authController.getUserInfo();
+		return response;
+	}
+);
 
 const counterSlice = createSlice({
 	name: 'User',
 	initialState: {
-		user:{
+		user: {
 			mail: null,
 			login: null,
 			name: null,
 			secondName: null,
 			nameInChat: null,
-            phone: null,
-		},
+			phone: null
+		}
 	},
-    reducers:{
+	reducers: {
 
-    },
+	},
 	extraReducers: {
 		[fetchUserBy.fulfilled]: (state, action) => {
-            state.user = action.payload
-        }
+			state.user = action.payload;
+		}
 	}
-  })
-  
-  export const store = configureStore({
-	  reducer: counterSlice.reducer
-  })
+});
+
+export const store = configureStore({
+	reducer: counterSlice.reducer
+});
