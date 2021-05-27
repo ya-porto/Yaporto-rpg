@@ -1,7 +1,6 @@
-interface ILeaderboardCompItem {
-  name: string,
-  avatar: string,
-  score: string,
+import {ILeaderBoardDataFields} from '../../../controllers/leaderboardController';
+
+interface ILeaderboardCompItem extends ILeaderBoardDataFields {
   place?: number
 }
 

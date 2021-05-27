@@ -3,7 +3,7 @@ import {ILeaderboardCompItem} from './leaderboardCompItem.type';
 
 class LeaderboardCompItem extends React.Component<ILeaderboardCompItem> {
 	render() {
-		const {name, avatar, score, place} = this.props;
+		const {name, avatar, portoTime, place} = this.props;
 		const isPrizePlace = place && place < 4;
 
 		return (
@@ -16,7 +16,7 @@ class LeaderboardCompItem extends React.Component<ILeaderboardCompItem> {
 				</div>
 				<div className="leaderboard-item__text d-flex flex-column align-item-left ml-3">
 					<span className="name">{name}</span>
-					<span className="score">{score}</span>
+					<span className="score">Time: {portoTime}</span>
 				</div>
 				<div className="leaderboard-item__info align-self-end">
 					Rank {place}
