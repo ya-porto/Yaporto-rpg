@@ -11,11 +11,11 @@ interface IButtonLink {
 }
 
 interface IMenu {
-    buttons: IButtonLink[],
+	buttons: IButtonLink[],
 }
 
 export class Menu extends Component {
-    state: Readonly<IMenu> = {
+	state: Readonly<IMenu> = {
 		// Потом в зависимости от того залогинен ли пользователь, будем рендерить нужное
 		buttons: [{
 			text: 'Играть',
@@ -59,5 +59,5 @@ export class Menu extends Component {
 				</ul>
 			</div>
 		);
-    }
+	}
 }

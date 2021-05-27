@@ -5,7 +5,7 @@
     min-width: 800px;
     top: 0; left: 0; bottom: 0; right: 0;
     background-color: #463a2c;
-    background-image: url('../public/images/wooden-background.jpeg');
+    background-image: url('../images/wooden-background.jpeg');
 }
 
 .gameshop_header {

@@ -37,9 +37,9 @@ class Input extends React.PureComponent<IInputCompProps> {
 		}
 	};
 
-	isValid = () => {
+	isValid = (): boolean => {
 		if (!this.props.validation) {
-			return;
+			return true;
 		}
 
 		for (const k in this.props.validation) {
@@ -63,12 +63,14 @@ class Input extends React.PureComponent<IInputCompProps> {
 							text: validationRule.text
 						}
 					});
-					return;
+					return false;
 				}
 			}
 		}
 
 		this.hideError();
+
+		return true;
 	}
 
 	hideError = () => {

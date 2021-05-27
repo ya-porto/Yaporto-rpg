@@ -4,21 +4,19 @@ import {LeaderboardCompItem} from './leaderboardItem/index';
 import './style.css';
 
 class LeaderboardComp extends React.Component<ILeaderboardComp> {
-	state = {
-		sortedData: this.props.data.sort((a, b) => parseInt(b.score) - parseInt(a.score))
-	}
-
 	render() {
-		const {sortedData} = this.state;
+		const {leaderboardData} = this.props;
 		return (
 			<ul className="leaderboard">
 				{
-					sortedData.map(({name, avatar, score}, i) => {
+					leaderboardData.map((item, i) => {
 						return <li className="pointer" key={i}>
 							<LeaderboardCompItem
-								name={name}
-								avatar={avatar}
-								score={score}
+								name={item.data.name}
+								avatar={item.data.avatar}
+								portoTime={item.data.portoTime}
+								min={item.data.min}
+								sec={item.data.sec}
 								place={i + 1}
 							/>
 						</li>;
