@@ -6,6 +6,7 @@ import App from './components/App';
 import {Router} from './router/router';
 import {ErrorBoundary} from './components/errorBoundary/errorBoundary';
 
+// Этот файл нам будет не нужен, оставлю пока не втащили роутер и стор в ssr
 
 if ('serviceWorker' in navigator) {
 	console.log('here')
