@@ -1,13 +1,14 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-	entry: ['./src/index.tsx', './src/styles/style.css'],
+	target: 'node',
+	entry: ['./server/server.ts', './src/styles/style.css'],
 	output: {
 		path: path.join(__dirname, '/dist'),
-		filename: 'bundle.js'
+        filename: 'server.js',
+        libraryTarget: 'commonjs2'
 	},
 	resolve: {
 		extensions: ['.tsx', '.ts', '.jsx', '.js']
@@ -56,9 +57,6 @@ module.exports = {
 	plugins: [
 		new MiniCssExtractPlugin({
 			filename: 'css/style.css',
-		}),
-		new HtmlWebpackPlugin({
-			template: './public/index.html'
 		}),
 		new CopyWebpackPlugin({
 			patterns: [
