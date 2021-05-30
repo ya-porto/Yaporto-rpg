@@ -3,6 +3,8 @@ import {isCross} from './isCross';
 import {isEnemyCross} from './isEnemyCross';
 import {NumberAnimate} from './numberAnimate';
 import {objPersonaj} from './game.objPersonaj';
+import { getDocument } from 'ssr-window';
+const document = getDocument();
 
 export class Character {
 	ctx: CanvasRenderingContext2D | null;

@@ -2,15 +2,17 @@ import {Character} from './character';
 import {charDie} from './deathSprite';
 import {charAttack} from './attackSprite';
 import {objPersonaj} from './game.objPersonaj';
+import { getDocument } from 'ssr-window';
+const document = getDocument();
 
 const picturePadding: number = 7;
 
-const sprite1 = new Image();
+const sprite1 = document.createElement ('img');
 sprite1.src = '/images/sprite1.png';
 sprite1.width = 90;
 sprite1.height = 70;
 
-const charImg = new Image();
+const charImg = document.createElement ('img');
 charImg.src = '/images/golem/Attack/Golem_01.png';
 charImg.width = 90;
 charImg.height = 90;

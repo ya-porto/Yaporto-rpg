@@ -1,8 +1,7 @@
 import { Request, Response } from 'express';
 import React from 'react';
 import {renderToStaticMarkup, renderToString} from 'react-dom/server';
-// import App from '../src/components/App';
-import {Game} from '../src/pages/game/index';
+import App from '../src/components/App';
 
 function makeHTMLPage(content: string) {
     // Тут мы создаем страницу, которую будем раздавать
@@ -23,7 +22,7 @@ function makeHTMLPage(content: string) {
   }
 
 export default (req: Request, res: Response) => {
-    const appContent = (<Game />)
+    const appContent = (<App />)
     // Здесь рендерим в строку jsx-компонент
     const reactDom = renderToString(appContent);
     res.send(makeHTMLPage(reactDom));
