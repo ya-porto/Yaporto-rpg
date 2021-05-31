@@ -22,7 +22,7 @@ export class Router extends Component {
 					<Route exact path="/inventory" component={requireAuthentication(Inventory)}></Route>
 					<Route exact path="/forum" component={requireAuthentication(Forum)}></Route>
 					<Route path="/forum/thread" component={requireAuthentication(Thread)}></Route>
-					<Route path="/game" component={requireAuthentication(Game)}></Route>
+					<Route path="/game" component={Game}></Route>
 					<Route path="/leaderboard" component={Leaderboard}></Route>
 					<Route path="/profile" component={requireAuthentication(Profile)}></Route>
 					<Route path="/home" component={Main}></Route>
