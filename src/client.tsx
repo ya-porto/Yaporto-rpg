@@ -2,11 +2,13 @@ import './styles/style.css';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { loadableReady } from '@loadable/component';
-import App from './components/App';
-import {Router} from './router/router';
-import {ErrorBoundary} from './components/errorBoundary/errorBoundary';
+import {App} from './components/App';
 
+import {ConnectedRouter} from 'connected-react-router';
+import {Provider} from 'react-redux';
+import {createReduxStore} from './redux/rootStore';
+
+const {store, history} = createReduxStore();
 
 if ('serviceWorker' in navigator) {
 	navigator.serviceWorker.register('/sw.js', {scope: '/'}).then(function (reg) {
@@ -22,13 +24,11 @@ if ('serviceWorker' in navigator) {
 	});
 }
 
-
-loadableReady(() => {
-    ReactDOM.hydrate((
-		<ErrorBoundary>
-			<Router>
-				<App />
-			</Router>
-		</ErrorBoundary>
-	), document.getElementById('app'));
-});
+ReactDOM.hydrate(
+	<Provider store={store}>
+		<ConnectedRouter history={history}>
+			<App />
+		</ConnectedRouter>
+	</Provider>,
+	document.getElementById('app')
+);
