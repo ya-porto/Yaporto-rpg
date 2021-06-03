@@ -11,7 +11,7 @@ import {createReduxStore, getInitialState} from './redux/rootStore';
 
 export default (req: Request, res: Response) => {
 	const statsFile = path.resolve('./dist/loadable-stats.json');
-	const chunkExtractor = new ChunkExtractor({ statsFile });
+	const chunkExtractor = new ChunkExtractor({statsFile});
 
 	const location = req.url;
 	const context: StaticRouterContext = {};
@@ -36,8 +36,9 @@ export default (req: Request, res: Response) => {
 	res.send(makeHTMLPage(reactDom, chunkExtractor, reduxState));
 };
 
-function makeHTMLPage(reactDom: string, chunkExtractor: ChunkExtractor, reduxState = {}) {
-	const scriptTags = chunkExtractor.getScriptTags();
+function makeHTMLPage(reactDom: string, _chunkExtractor: ChunkExtractor, reduxState = {}) {
+	// Пока скрыл подключение SW
+	// const scriptTags = chunkExtractor.getScriptTags();
 	// Тут мы создаем страницу, которую будем раздавать
 	return `
         <html lang="ru">
@@ -50,7 +51,7 @@ function makeHTMLPage(reactDom: string, chunkExtractor: ChunkExtractor, reduxSta
 								<script>
 										window.__INITIAL_STATE__ = ${JSON.stringify(reduxState)}
 								</script>
-                ${scriptTags}
+								<script src="./main.js"></script>
             </body>
         </html>,
     )`;

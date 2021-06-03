@@ -1,4 +1,4 @@
-import { getDocument } from 'ssr-window';
+import {getDocument} from 'ssr-window';
 const document = getDocument();
 
 export class NumberAnimate {

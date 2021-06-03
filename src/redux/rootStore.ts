@@ -2,6 +2,7 @@ import {configureStore, getDefaultMiddleware} from '@reduxjs/toolkit';
 import {routerMiddleware, RouterState} from 'connected-react-router';
 import {createBrowserHistory, createMemoryHistory} from 'history';
 import createRootReducer from './rootReducer';
+import {State} from './types';
 
 export const isServer = !(
 	typeof window !== 'undefined' &&
@@ -10,8 +11,7 @@ export const isServer = !(
 );
 
 export const createReduxStore = (initialState = {}, url = '/') => {
-	// eslint-disable-next-line no-negated-condition
-	const preloadedState = !isServer ? window.__INITIAL_STATE__ : initialState;
+	const preloadedState = isServer ? initialState : window.__INITIAL_STATE__;
 
 	if (!isServer) {
 		// @ts-ignore
@@ -33,7 +33,7 @@ export const createReduxStore = (initialState = {}, url = '/') => {
 	return {store, history};
 };
 
-export const getInitialState = (pathname: string = '/'): RootState => {
+export const getInitialState = (pathname: string = '/'): State => {
 	return {
 		router: {
 			location: {pathname, search: '', hash: '', key: ''},

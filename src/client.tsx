@@ -7,21 +7,29 @@ import {App} from './components/App';
 import {ConnectedRouter} from 'connected-react-router';
 import {Provider} from 'react-redux';
 import {createReduxStore} from './redux/rootStore';
+import {State} from './redux/types';
 
-const {store, history} = createReduxStore();
+const {store, history} = createReduxStore(window.__INITIAL_STATE__);
 
-if ('serviceWorker' in navigator) {
-	navigator.serviceWorker.register('/sw.js', {scope: '/'}).then(function (reg) {
-		if (reg.installing) {
-			console.log('Service worker installing');
-		} else if (reg.waiting) {
-			console.log('Service worker installed');
-		} else if (reg.active) {
-			console.log('Service worker active');
-		}
-	}).catch(function (error) {
-		console.log('Registration failed with ' + error);
-	});
+// If ('serviceWorker' in navigator) {
+// 	navigator.serviceWorker.register('/sw.js', {scope: '/'}).then(function (reg) {
+// 		if (reg.installing) {
+// 			console.log('Service worker installing');
+// 		} else if (reg.waiting) {
+// 			console.log('Service worker installed');
+// 		} else if (reg.active) {
+// 			console.log('Service worker active');
+// 		}
+// 	}).catch(function (error) {
+// 		console.log('Registration failed with ' + error);
+// 	});
+// }
+
+declare global {
+	interface Window {
+			__INITIAL_STATE__: State;
+			__REDUX_DEVTOOLS_EXTENSION_COMPOSE__: Function;
+	}
 }
 
 ReactDOM.hydrate(
