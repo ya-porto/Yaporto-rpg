@@ -36,9 +36,8 @@ export default (req: Request, res: Response) => {
 	res.send(makeHTMLPage(reactDom, chunkExtractor, reduxState));
 };
 
-function makeHTMLPage(reactDom: string, _chunkExtractor: ChunkExtractor, reduxState = {}) {
-	// Пока скрыл подключение SW
-	// const scriptTags = chunkExtractor.getScriptTags();
+function makeHTMLPage(reactDom: string, chunkExtractor: ChunkExtractor, reduxState = {}) {
+	const scriptTags = chunkExtractor.getScriptTags();
 	// Тут мы создаем страницу, которую будем раздавать
 	return `
         <html lang="ru">
@@ -51,7 +50,7 @@ function makeHTMLPage(reactDom: string, _chunkExtractor: ChunkExtractor, reduxSt
 								<script>
 										window.__INITIAL_STATE__ = ${JSON.stringify(reduxState)}
 								</script>
-								<script src="./main.js"></script>
+								${scriptTags}
             </body>
         </html>,
     )`;

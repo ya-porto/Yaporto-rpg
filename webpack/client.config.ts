@@ -28,6 +28,12 @@ const config: Configuration = {
 		extensions: ['*', '.js', '.jsx', '.json', '.ts', '.tsx'],
 		plugins: [new TsconfigPathsPlugin({configFile: './tsconfig.json'})]
 	},
+	externals: {
+		react: 'react',
+		'react-dom': 'react-dom',
+		'react-router-dom': 'react-router-dom',
+		'react-router': 'react-router'
+	},
 	plugins: [
 		new CopyWebpackPlugin({
 			patterns: [
