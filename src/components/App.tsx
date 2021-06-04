@@ -8,7 +8,7 @@ import {Signup} from 'pages/signup';
 import React from 'react';
 import {hot} from 'react-hot-loader/root';
 import {Switch, Route} from 'react-router-dom';
-import {Navigation as NavigationList} from '../constants';
+import {Navigation as NavigationList} from '../client/constants';
 
 import './App.css';
 
@@ -22,7 +22,6 @@ function App(): JSX.Element {
 				<Route exact path={NavigationList.Signin} component={Signin} />
 				<Route exact path={NavigationList.Profile} component={Profile} />
 				<Route exact path={NavigationList.Leaderboard} component={Leaderboard} />
-				<Route exact path="*" component={Main} />
 			</Switch>
 		</div>
 	);

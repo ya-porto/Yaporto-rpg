@@ -4,10 +4,10 @@ import {Request, Response} from 'express';
 import React from 'react';
 import {StaticRouterContext} from 'react-router';
 import {Provider} from 'react-redux';
-import {renderToString} from 'react-dom/server';
-import {App} from './components/App';
+import {renderToStaticMarkup, renderToString} from 'react-dom/server';
+import {App} from '../components/App';
 import {StaticRouter} from 'react-router-dom';
-import {createReduxStore, getInitialState} from './redux/rootStore';
+import {createReduxStore, getInitialState} from '../redux/rootStore';
 
 export default (req: Request, res: Response) => {
 	const statsFile = path.resolve('./dist/loadable-stats.json');
@@ -36,22 +36,23 @@ export default (req: Request, res: Response) => {
 	res.send(makeHTMLPage(reactDom, chunkExtractor, reduxState));
 };
 
-function makeHTMLPage(reactDom: string, chunkExtractor: ChunkExtractor, reduxState = {}) {
-	const scriptTags = chunkExtractor.getScriptTags();
+function makeHTMLPage(reactDom: string, _chunkExtractor: ChunkExtractor, reduxState = {}) {
+	// Нужно будет понять зачем и как это рендерить
+	// const scriptTags = chunkExtractor.getScrgiptTags();
 	// Тут мы создаем страницу, которую будем раздавать
-	return `
-        <html lang="ru">
-            <head>
-                <title>From SSR with Love</title>
-                <link rel='stylesheet' href='./css/style.css'></link>
-            </head>
-            <body>
-                <main id="app" dangerouslySetInnerHTML={{__html: ${reactDom}}} />
-								<script>
-										window.__INITIAL_STATE__ = ${JSON.stringify(reduxState)}
-								</script>
-								${scriptTags}
-            </body>
-        </html>,
-    )`;
+	const html = renderToStaticMarkup(
+		<html lang="ru">
+			<head>
+				<title>From SSR with Love</title>
+				<link rel="stylesheet" href="./css/style.css"></link>
+			</head>
+			<body>
+				<main id="app" dangerouslySetInnerHTML={{__html: reactDom}} />
+				<script dangerouslySetInnerHTML={{
+					__html: `window.__INITIAL_STATE__ = ${JSON.stringify(reduxState)}`
+				}} />
+			</body>
+		</html>
+	);
+	return `<!doctype html>${html}`;
 }

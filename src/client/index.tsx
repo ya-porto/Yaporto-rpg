@@ -1,13 +1,13 @@
-import './styles/style.css';
+import '../styles/style.css';
 
 import ReactDOM from 'react-dom';
-import {App} from './components/App';
+import {App} from '../components/App';
 import {loadableReady} from '@loadable/component';
 
 import {ConnectedRouter} from 'connected-react-router';
 import {Provider} from 'react-redux';
-import {createReduxStore} from './redux/rootStore';
-import {State} from './redux/types';
+import {createReduxStore} from '../redux/rootStore';
+import {State} from '../redux/types';
 import React from 'react';
 
 const {store, history} = createReduxStore(window.__INITIAL_STATE__);

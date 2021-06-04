@@ -20,7 +20,7 @@ export const ROUTES = {
 	FORUM: {
 		INDEX: '/forum'
 	},
-	NOT_FOUND: {
-		INDEX: '*'
+	LEADERBOARD: {
+		INDEX: '/leaderboard'
 	}
 };
