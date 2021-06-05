@@ -5,6 +5,7 @@ import React from 'react';
 import {StaticRouterContext} from 'react-router';
 import {Provider} from 'react-redux';
 import {renderToStaticMarkup, renderToString} from 'react-dom/server';
+import parse from 'html-react-parser';
 import {App} from '../components/App';
 import {StaticRouter} from 'react-router-dom';
 import {createReduxStore, getInitialState} from '../redux/rootStore';
@@ -36,9 +37,10 @@ export default (req: Request, res: Response) => {
 	res.send(makeHTMLPage(reactDom, chunkExtractor, reduxState));
 };
 
-function makeHTMLPage(reactDom: string, _chunkExtractor: ChunkExtractor, reduxState = {}) {
+function makeHTMLPage(reactDom: string, chunkExtractor: ChunkExtractor, reduxState = {}) {
 	// Нужно будет понять зачем и как это рендерить
-	// const scriptTags = chunkExtractor.getScrgiptTags();
+	const scriptTags = chunkExtractor.getScriptTags();
+
 	// Тут мы создаем страницу, которую будем раздавать
 	const html = renderToStaticMarkup(
 		<html lang="ru">
@@ -47,10 +49,11 @@ function makeHTMLPage(reactDom: string, _chunkExtractor: ChunkExtractor, reduxSt
 				<link rel="stylesheet" href="./css/style.css"></link>
 			</head>
 			<body>
-				<main id="app" dangerouslySetInnerHTML={{__html: reactDom}} />
+				<main id="app">{parse(reactDom)}</main>
 				<script dangerouslySetInnerHTML={{
 					__html: `window.__INITIAL_STATE__ = ${JSON.stringify(reduxState)}`
 				}} />
+				{parse(scriptTags)}
 			</body>
 		</html>
 	);
