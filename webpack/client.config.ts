@@ -28,7 +28,6 @@ const config: Configuration = {
 		extensions: ['*', '.js', '.jsx', '.json', '.ts', '.tsx'],
 		plugins: [new TsconfigPathsPlugin({configFile: './tsconfig.json'})]
 	},
-	
 	plugins: [
 		new CopyWebpackPlugin({
 			patterns: [

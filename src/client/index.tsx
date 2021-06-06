@@ -4,13 +4,13 @@ import ReactDOM from 'react-dom';
 import {App} from '../components/App';
 import {loadableReady} from '@loadable/component';
 
-import {ConnectedRouter} from 'connected-react-router';
 import {Provider} from 'react-redux';
 import {createReduxStore} from '../redux/rootStore';
 import {State} from '../redux/types';
 import React from 'react';
+import {BrowserRouter} from 'react-router-dom';
 
-const {store, history} = createReduxStore(window.__INITIAL_STATE__);
+const {store} = createReduxStore(window.__INITIAL_STATE__);
 
 if ('serviceWorker' in navigator) {
 	navigator.serviceWorker.register('/sw.js', {scope: '/'}).then(function (reg) {
@@ -36,9 +36,9 @@ declare global {
 loadableReady(() => {
 	ReactDOM.hydrate(
 		<Provider store={store}>
-			<ConnectedRouter history={history}>
+			<BrowserRouter>
 				<App />
-			</ConnectedRouter>
+			</BrowserRouter>
 		</Provider>,
 		document.getElementById('app')
 	);
