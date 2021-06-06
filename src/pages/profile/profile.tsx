@@ -8,6 +8,8 @@ import {authController, IUserInfoData} from '../../controllers/auth';
 import {IChangePassword, IChangeUserInfo, userController} from '../../controllers/user';
 import './style.css';
 import {fetchUserBy, store} from '../../redux/storeUser';
+import {getDocument} from 'ssr-window';
+const document = getDocument();
 
 interface IButton extends IButtonCompProps {
 	text: string
