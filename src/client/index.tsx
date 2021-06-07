@@ -14,6 +14,16 @@ const {store} = createReduxStore(window.__INITIAL_STATE__);
 
 if ('serviceWorker' in navigator) {
 	navigator.serviceWorker.register('/sw.js', {scope: '/'}).then(function (reg) {
+
+		const data = {
+			type: 'CACHE_URLS',
+			payload: [
+				location.href,
+				...performance.getEntriesByType('resource').map((r) => r.name)
+			]
+		};
+		reg.installing?.postMessage(data);
+
 		if (reg.installing) {
 			console.log('Service worker installing');
 		} else if (reg.waiting) {
