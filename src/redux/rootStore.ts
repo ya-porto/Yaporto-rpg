@@ -3,6 +3,7 @@ import {routerMiddleware, RouterState} from 'connected-react-router';
 import {createBrowserHistory, createMemoryHistory} from 'history';
 import createRootReducer from './rootReducer';
 import {State} from './types';
+import {initialState} from './initialState';
 
 export const isServer = !(
 	typeof window !== 'undefined' &&
@@ -37,6 +38,7 @@ export const getInitialState = (pathname: string = '/'): State => {
 	return {
 		router: {
 			location: {pathname, search: '', hash: '', key: ''},
+			initialState: initialState,
 			action: 'POP'
 		} as unknown as RouterState
 	};

@@ -1,27 +1,25 @@
 import {createSlice, configureStore} from '@reduxjs/toolkit';
+import {getWindow} from 'ssr-window';
+import {isServer} from './rootStore';
+
+const window = getWindow();
+
+const initialState = isServer ? {} : window.__INITIAL_STATE__.router.initialState;
+console.log(initialState);
 
 const counterSlice = createSlice({
 	name: 'Character',
-	initialState: {
-		character: {
-			startedHp: 100,
-			startedArmor: 0,
-			startedDps: 10,
-			lvl: 1,
-			exp: 0
-		}
-	},
+	initialState: initialState.character,
 	reducers: {
 		changeHp: (state: any, action: any) => {
-			state.character.startedHp += action.payload;
+			state.startedHp += action.payload;
 		},
 
 		changeArmor: (state: any, action: any) => {
-			state.character.startedArmor += action.payload;
+			state.startedArmor += action.payload;
 		},
-
 		changeDps: (state: any, action: any) => {
-			state.character.startedDps += action.payload;
+			state.startedDps += action.payload;
 		}
 	}
 });

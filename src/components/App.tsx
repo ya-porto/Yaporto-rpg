@@ -10,6 +10,9 @@ import {hot} from 'react-hot-loader/root';
 import {Switch, Route} from 'react-router-dom';
 import {Navigation as NavigationList} from '../client/constants';
 
+import {store} from '../redux/storeGame';
+
+store.subscribe(() => console.log(store.getState()));
 import './App.css';
 
 function App(): JSX.Element {

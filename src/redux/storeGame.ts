@@ -1,16 +1,18 @@
 import {createSlice, configureStore} from '@reduxjs/toolkit';
+import {getWindow} from 'ssr-window';
+import {isServer} from './rootStore';
+
+const window = getWindow();
+
+const initialState = isServer ? {} : window.__INITIAL_STATE__.router.initialState;
+console.log(initialState);
 
 const counterSlice = createSlice({
 	name: 'Game',
-	initialState: {
-		game: {
-			time: {min: '00', sec: '00'},
-			lvl: 1
-		}
-	},
+	initialState: initialState.game,
 	reducers: {
 		changeTime: (state: any, action: any) => {
-			state.game.time = action.payload;
+			state.time = action.payload;
 		}
 	}
 });
