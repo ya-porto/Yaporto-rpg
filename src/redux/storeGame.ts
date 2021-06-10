@@ -1,11 +1,5 @@
 import {createSlice, configureStore} from '@reduxjs/toolkit';
-import {getWindow} from 'ssr-window';
-import {isServer} from './rootStore';
-
-const window = getWindow();
-
-const initialState = isServer ? {} : window.__INITIAL_STATE__.router.initialState;
-console.log(initialState);
+import {initialState} from './stateFromSSR';
 
 const counterSlice = createSlice({
 	name: 'Game',

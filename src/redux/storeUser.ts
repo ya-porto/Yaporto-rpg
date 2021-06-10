@@ -2,13 +2,7 @@ import {createAsyncThunk, createSlice, configureStore} from '@reduxjs/toolkit';
 import {authController} from '../controllers/auth';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
-import {getWindow} from 'ssr-window';
-import {isServer} from './rootStore';
-
-const window = getWindow();
-
-const initialState = isServer ? {} : window.__INITIAL_STATE__.router.initialState;
-console.log(initialState);
+import {initialState} from './stateFromSSR';
 
 export const fetchUserBy: any = createAsyncThunk(
 	'users/getFullInfo',
