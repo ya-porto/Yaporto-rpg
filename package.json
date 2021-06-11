@@ -8,7 +8,7 @@
     "build": "NODE_ENV=production NODE_PATH=. npm run clean && webpack --mode production",
     "dev:server": "nodemon ./dist/server.js --watch & npm run dev:hotreloading",
     "dev:webpack": "NODE_ENV=development NODE_PATH=. npm run clean && webpack --mode development -w",
-    "dev:hotreloading": "browser-sync start --proxy 'https://localhost:4000' --files './dist' --reload-delay 800",
+    "dev:hotreloading": "browser-sync start --proxy 'https://local.ya-praktikum.tech:4000' --files './dist' --reload-delay 800",
     "clean": "rm -rf dist/",
     "lint-fix": "eslint . --ext .ts,.tsx --fix",
     "lint": "eslint . --ext .ts,.tsx",

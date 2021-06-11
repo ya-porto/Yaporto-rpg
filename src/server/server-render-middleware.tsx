@@ -8,7 +8,7 @@ import {renderToStaticMarkup, renderToString} from 'react-dom/server';
 import parse from 'html-react-parser';
 import {App} from '../components/App';
 import {StaticRouter} from 'react-router-dom';
-import {createReduxStore, getInitialState} from '../redux/rootStore';
+import {createReduxStore} from '../redux/rootStore';
 import httpContext from 'express-http-context'
 
 export default (req: Request, res: Response) => {
@@ -19,7 +19,9 @@ export default (req: Request, res: Response) => {
 	const context: StaticRouterContext = {};
 
 	const userData = {user: httpContext.get('user')}
-	const {store} = createReduxStore(getInitialState(location), location);
+	
+	const {store} = createReduxStore({}, userData);
+	console.log(store)
 
 	const appContent = chunkExtractor.collectChunks(
 		<Provider store={store}>
