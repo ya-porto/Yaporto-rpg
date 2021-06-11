@@ -57,6 +57,5 @@ function makeHTMLPage(reactDom: string, chunkExtractor: ChunkExtractor, reduxSta
 			</body>
 		</html>
 	);
-	console.log(`<!doctype html>${html}`);
 	return `<!doctype html>${html}`;
 }

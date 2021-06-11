@@ -20,8 +20,6 @@ const store = configureStore({
 	}
 })
 
-console.log(store)
-
 if (!IS_DEV) {
 	if ('serviceWorker' in navigator) {
 		navigator.serviceWorker.register('/sw.js', {scope: '/'}).then(function (reg) {
