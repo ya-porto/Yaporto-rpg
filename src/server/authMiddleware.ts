@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { NextFunction, Request,Response } from 'express';
+import httpContext from 'express-http-context';
 
 const PRAKTIKUM_AUTH_ENDPOINT = 'https://ya-praktikum.tech/api/v2/auth/user';
 
@@ -8,45 +9,17 @@ async function authMiddleware(req: Request, res: Response, next: NextFunction) {
             .entries(req.cookies)
             .map(([key, value]) => `${key}=${value}`)
             .join(';');
-    console.log(cookies)
+            console.log(cookies)
     
     try {
         const {data} = await axios.get(PRAKTIKUM_AUTH_ENDPOINT, {
             headers: {Cookie: cookies}
         })
-        console.log(data)
+        httpContext.set('user', data)
     } catch (err) {
-
+        httpContext.set('user', {})
     }
 
     await next();
 };
 export {authMiddleware};
-
-
-// import {Context, Next} from 'koa';
-// import axios from 'axios';
-
-// const PRAKTIKUM_AUTH_ENDPOINT = '<https://ya-praktikum.tech/api/v2/auth/user>';
-// async function authMiddleware(ctx: Context, next: Next) {
-//     const authData = {
-//         authCookie: ctx.cookies.get('authCookie'),
-//         uuid: ctx.cookies.get('uuid'),
-//     };
-//     const cookies = Object
-//         .entries(authData)
-//         .map(([key, value]) => `${key}=${value}`)
-//         .join(';');
-//         console.log
-//     try {
-//         const { data } = await axios.get(PRAKTIKUM_AUTH_ENDPOINT, {
-//             headers: { Cookie: cookies },
-//         });
-//         console.log(data)
-//         ctx.state.user = data;
-//     } catch (err) {
-//         ctx.state.user = null;
-//     }
-//     await next();
-// };
-// export {authMiddleware};

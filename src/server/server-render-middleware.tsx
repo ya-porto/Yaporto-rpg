@@ -9,6 +9,7 @@ import parse from 'html-react-parser';
 import {App} from '../components/App';
 import {StaticRouter} from 'react-router-dom';
 import {createReduxStore, getInitialState} from '../redux/rootStore';
+import httpContext from 'express-http-context'
 
 export default (req: Request, res: Response) => {
 	const statsFile = path.resolve('./dist/loadable-stats.json');
@@ -16,6 +17,8 @@ export default (req: Request, res: Response) => {
 
 	const location = req.url;
 	const context: StaticRouterContext = {};
+
+	const userData = {user: httpContext.get('user')}
 	const {store} = createReduxStore(getInitialState(location), location);
 
 	const appContent = chunkExtractor.collectChunks(
