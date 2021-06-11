@@ -7,7 +7,8 @@ import {Modal} from '../../components/modal';
 import {authController, IUserInfoData} from '../../controllers/auth';
 import {IChangePassword, IChangeUserInfo, userController} from '../../controllers/user';
 import './style.css';
-import {fetchUserBy, store} from '../../redux/storeUser';
+import {store} from '../../redux/rootStore';
+import {fetchUserBy} from '../../redux/userSlice';
 import {getDocument} from 'ssr-window';
 const document = getDocument();
 

@@ -1,16 +1,25 @@
 import '../styles/style.css';
-
 import ReactDOM from 'react-dom';
 import {App} from '../components/App';
 import {loadableReady} from '@loadable/component';
-
+import { configureStore } from '@reduxjs/toolkit'
 import {Provider} from 'react-redux';
-import {createReduxStore} from '../redux/rootStore';
-import {State} from '../redux/types';
+import {RootState, characterReducer, gameReducer, userReducer} from '../redux/rootStore';
 import React from 'react';
 import {BrowserRouter} from 'react-router-dom';
 
-const {store} = createReduxStore(window.__INITIAL_STATE__);
+const initialState = window.__INITIAL_STATE__
+// сюда добавить редьюсер
+const store = configureStore({
+	preloadedState: initialState,
+	reducer: {
+		game: gameReducer,
+		user: userReducer,
+		character: characterReducer
+	}
+})
+
+console.log(store)
 
 if ('serviceWorker' in navigator) {
 	navigator.serviceWorker.register('/sw.js', {scope: '/'}).then(function (reg) {
@@ -38,7 +47,7 @@ if ('serviceWorker' in navigator) {
 
 declare global {
 	interface Window {
-			__INITIAL_STATE__: State;
+			__INITIAL_STATE__: RootState;
 			__REDUX_DEVTOOLS_EXTENSION_COMPOSE__: Function;
 	}
 }

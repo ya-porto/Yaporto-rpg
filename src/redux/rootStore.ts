@@ -1,45 +1,14 @@
-import {configureStore, getDefaultMiddleware} from '@reduxjs/toolkit';
-import {routerMiddleware, RouterState} from 'connected-react-router';
-import {createBrowserHistory, createMemoryHistory} from 'history';
-import createRootReducer from './rootReducer';
-import {State} from './types';
-import {initialState} from './initialState';
+import {configureStore} from '@reduxjs/toolkit';
+import characterReducer from './characterSlice';
+import gameReducer from './gameSlice';
+import userReducer from './userSlice';
 
-export const isServer = !(
-	typeof window !== 'undefined' &&
-  window.document &&
-  window.document.createElement
-);
-
-export const createReduxStore = (initialState = {}, url = '/') => {
-	const preloadedState = isServer ? initialState : window.__INITIAL_STATE__;
-
-	if (!isServer) {
-		// @ts-ignore
-		delete window.__INITIAL_STATE__;
+export const store = configureStore({
+	reducer: {
+		game: gameReducer,
+		user: userReducer,
+		character: characterReducer
 	}
-
-	const history = isServer ?
-		createMemoryHistory({initialEntries: [url]}) :
-		createBrowserHistory();
-	const middleware = [...getDefaultMiddleware(), routerMiddleware(history)];
-
-	const store = configureStore({
-		reducer: createRootReducer(history),
-		preloadedState,
-		middleware,
-		devTools: !isServer
-	});
-
-	return {store, history};
-};
-
-export const getInitialState = (pathname: string = '/'): State => {
-	return {
-		router: {
-			location: {pathname, search: '', hash: '', key: ''},
-			initialState: initialState,
-			action: 'POP'
-		} as unknown as RouterState
-	};
-};
+})
+export type RootState = ReturnType<typeof store.getState>
+export {characterReducer, gameReducer, userReducer}
