@@ -9,7 +9,6 @@ async function authMiddleware(req: Request, res: Response, next: NextFunction) {
             .entries(req.cookies)
             .map(([key, value]) => `${key}=${value}`)
             .join(';');
-            console.log(cookies)
     
     try {
         const {data} = await axios.get(PRAKTIKUM_AUTH_ENDPOINT, {
@@ -17,7 +16,7 @@ async function authMiddleware(req: Request, res: Response, next: NextFunction) {
         })
         httpContext.set('user', data)
     } catch (err) {
-        httpContext.set('user', {})
+        
     }
 
     await next();

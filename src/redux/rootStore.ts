@@ -1,22 +1,28 @@
-import {configureStore} from '@reduxjs/toolkit';
-import {isServer} from '../utils/isServerEnvChecker';
-import merge from 'deepmerge';
+import {configureStore, EnhancedStore} from '@reduxjs/toolkit';
 
-export const createReduxStore = (initialState = {}, _additionalState = {}) => {
-	const state: {} = merge(initialState, _additionalState);
-	const preloadedState = isServer ? state : window.__INITIAL_STATE__;
-
-	if (!isServer) {
-		// @ts-ignore
-		delete window.__INITIAL_STATE__;
-	}
+import characterReducer from './characterSlice';
+import gameReducer from './gameSlice';
+import userReducer from './userSlice';
 
 
-	const store = configureStore({
-		reducer: {},
-		preloadedState,
-		devTools: !isServer
-	});
+export function createStore(reducers: reducers, preloadedState={}): EnhancedStore {
+	return configureStore({
+		reducer: reducers,
+		preloadedState
+	})
 
-	return {store};
-};
+
+}
+
+interface reducers {
+	user: typeof userReducer,
+	game: typeof gameReducer,
+	character: typeof characterReducer
+}
+
+export const reducers = {
+	user: userReducer,
+	game: gameReducer,
+	character: characterReducer
+}
+export {characterReducer, gameReducer, userReducer}

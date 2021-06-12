@@ -1,17 +1,26 @@
-import '../styles/style.css';
-
 import ReactDOM from 'react-dom';
-import {App} from '../components/App';
 import {loadableReady} from '@loadable/component';
-
 import {Provider} from 'react-redux';
-import {createReduxStore} from '../redux/rootStore';
-import {State} from '../redux/types';
 import React from 'react';
 import {BrowserRouter} from 'react-router-dom';
-import {IS_DEV} from '../../webpack/env';
+import {getWindow} from 'ssr-window';
 
-const {store} = createReduxStore(window.__INITIAL_STATE__);
+import {IS_DEV} from '../../webpack/env';
+import {isServer} from '../utils/isServerEnvChecker';
+import {createStore, reducers} from '../redux/rootStore';
+import {App} from '../components/App';
+import '../styles/style.css';
+
+declare global {
+	interface Window {
+			__INITIAL_STATE__: {};
+			__REDUX_DEVTOOLS_EXTENSION_COMPOSE__: Function;
+	}
+}
+
+const initialState = isServer ? getWindow().__INITIAL_STATE__ : window.__INITIAL_STATE__
+
+export const store = createStore(reducers, initialState)
 
 if (!IS_DEV) {
 	if ('serviceWorker' in navigator) {
@@ -29,20 +38,15 @@ if (!IS_DEV) {
 	}
 }
 
-declare global {
-	interface Window {
-			__INITIAL_STATE__: State;
-			__REDUX_DEVTOOLS_EXTENSION_COMPOSE__: Function;
-	}
+if(!isServer) {
+	loadableReady(() => {
+		ReactDOM.hydrate(
+			<Provider store={store}>
+				<BrowserRouter>
+					<App />
+				</BrowserRouter>
+			</Provider>,
+			document.getElementById('app')
+		);
+	});
 }
-
-loadableReady(() => {
-	ReactDOM.hydrate(
-		<Provider store={store}>
-			<BrowserRouter>
-				<App />
-			</BrowserRouter>
-		</Provider>,
-		document.getElementById('app')
-	);
-});
