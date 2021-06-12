@@ -84,6 +84,18 @@ class Signin extends React.Component<RouteComponentProps> {
 		});
 	}
 
+	yaSignin = () => {
+		const redirect = `${window.location.origin}/home`;
+		authController.getOauthId(redirect)
+			.then(data => {
+				// eslint-disable-next-line camelcase
+				authController.yaOauth({code: data.service_id, redirect_uri: redirect});
+			})
+			.catch(e => {
+				console.log(e);
+			});
+	}
+
 	render() {
 		const {inputsData, signinButton} = this.state;
 		return (
@@ -113,6 +125,7 @@ class Signin extends React.Component<RouteComponentProps> {
 					<div className="buttons d-flex flex-column align-center">
 						<Link to="/signup" className="link mt-4">Нет аккаунта?</Link>
 					</div>
+					<Button className="primary mt-5" onClick={this.yaSignin}>Войте с помощью <span style={{color: 'yellow'}}>Я</span>ндекс</Button>
 				</div>
 			</div>
 		);

@@ -1,2 +1,2 @@
-import {authController, ISigninData, ISignupData, IUserInfoData} from './auth';
-export {authController, ISigninData, ISignupData, IUserInfoData};
+import {authController, ISigninData, ISignupData, IUserInfoData, IYaOauthData} from './auth';
+export {authController, ISigninData, ISignupData, IUserInfoData, IYaOauthData};
