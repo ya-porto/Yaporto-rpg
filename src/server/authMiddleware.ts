@@ -14,6 +14,8 @@ async function authMiddleware(req: Request, res: Response, next: NextFunction) {
         const {data} = await axios.get(PRAKTIKUM_AUTH_ENDPOINT, {
             headers: {Cookie: cookies}
         })
+        //  Меняем флаг для рендера меню
+        data['isAuth'] = true;
         httpContext.set('user', data)
     } catch (err) {
         

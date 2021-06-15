@@ -124,7 +124,7 @@ class Signup extends React.Component<RouteComponentProps> {
 		// Все норм. Я валидирую
 		// @ts-ignore
 		authController.signup(data).then(() => {
-			this.props.history.push('/home');
+			this.props.history.push('/');
 		}).catch(e => {
 			console.log(e);
 		});

@@ -9,11 +9,11 @@ import {ROUTES} from '../../client/routes';
 
 const allRoutes = (function flatRoutes(routesMap: object): string[] {
 	return Object.values(routesMap).reduce<string[]>(
-		(routes, path) =>
-			routes.concat(typeof path === 'object' ? flatRoutes(path) : path),
-		[]
-	);
-})(ROUTES);
+		  (routes, path) =>
+			  routes.concat(typeof path.INDEX === 'object' ? flatRoutes(path.INDEX) : path.INDEX),
+		  []
+	  );
+  })(ROUTES);
 
 const middleware: Array<RequestHandler | ErrorRequestHandler | any> = [
 	cookieParserMiddleware(),
