@@ -2,15 +2,15 @@ import '../styles/style.css';
 import ReactDOM from 'react-dom';
 import {App} from '../components/App';
 import {loadableReady} from '@loadable/component';
-import { configureStore } from '@reduxjs/toolkit'
+import {configureStore} from '@reduxjs/toolkit';
 import {Provider} from 'react-redux';
 import {RootState, characterReducer, gameReducer, userReducer} from '../redux/rootStore';
 import React from 'react';
 import {BrowserRouter} from 'react-router-dom';
 import {IS_DEV} from '../../webpack/env';
 
-const initialState = window.__INITIAL_STATE__
-// сюда добавить редьюсер
+const initialState = window.__INITIAL_STATE__;
+// Сюда добавить редьюсер
 const store = configureStore({
 	preloadedState: initialState,
 	reducer: {
@@ -18,7 +18,7 @@ const store = configureStore({
 		user: userReducer,
 		character: characterReducer
 	}
-})
+});
 
 if (!IS_DEV) {
 	if ('serviceWorker' in navigator) {

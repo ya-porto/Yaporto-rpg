@@ -17,7 +17,6 @@ export default (req: Request, res: Response) => {
 	const location = req.url;
 	const context: StaticRouterContext = {};
 
-
 	const appContent = chunkExtractor.collectChunks(
 		<Provider store={store}>
 			<StaticRouter context={context} location={location}>
