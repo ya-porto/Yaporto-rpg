@@ -2,7 +2,8 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {Button} from '../../components/button/index';
 import './style.css';
-import {store, changeTime} from '../../redux/storeGame';
+import {store} from '../../redux/rootStore';
+import {changeTime} from '../../redux/gameSlice';
 import {Game as GameCanvas} from '../../components/game/index';
 
 interface IGame {
