@@ -9,6 +9,6 @@ export const store = configureStore({
 		user: userReducer,
 		character: characterReducer
 	}
-})
+});
 export type RootState = ReturnType<typeof store.getState>
 export {characterReducer, gameReducer, userReducer}
