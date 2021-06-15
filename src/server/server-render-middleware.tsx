@@ -14,7 +14,7 @@ import {createStore, reducers} from '../redux/rootStore';
 
 
 
-// type RootState = ReturnType<typeof store.getState>
+
 export default (req: Request, res: Response) => {
 	const statsFile = path.resolve('./dist/loadable-stats.json');
 	const chunkExtractor = new ChunkExtractor({statsFile});

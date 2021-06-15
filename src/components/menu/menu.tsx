@@ -2,22 +2,12 @@ import React from 'react';
 import { useSelector } from 'react-redux'
 import {Link} from 'react-router-dom';
 
+import {RootState} from '../../redux/types';
 import {ROUTES} from '../../client/routes';
 import './menu.css';
 
-interface IButtonLink {
-	icon?: string,
-	text: string,
-	className?: string,
-	path: string
-}
-
-interface IMenu {
-	buttons: IButtonLink[],
-}
-
 export function Menu() {
-	const isAuth = useSelector((state) => state.user.isAuth);
+	const isAuth = useSelector((state: RootState) => state.user.isAuth);
 
 	const routes = Object.values(ROUTES).filter(path => !path.hasOwnProperty('AUTH') || path['AUTH'] === isAuth)
 	return (
