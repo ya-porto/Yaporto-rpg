@@ -2,7 +2,7 @@ import axios from 'axios';
 import { NextFunction, Request,Response } from 'express';
 import httpContext from 'express-http-context';
 
-import {toggleAuthFlag} from '../utils/changeAuthFlag';
+import {toggleAuthFlag} from '../utils/toggleAuthFlag';
 
 const PRAKTIKUM_AUTH_ENDPOINT = 'https://ya-praktikum.tech/api/v2/auth/user';
 

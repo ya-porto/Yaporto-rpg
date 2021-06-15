@@ -1,13 +1,20 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {authController} from '../controllers/auth';
-import merge from 'deepmerge'
+import merge from 'deepmerge';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
+
+import {authController} from '../controllers/auth';
+import {toggleAuthFlag} from '../utils/toggleAuthFlag';
+
+
 
 export const fetchUserBy: any = createAsyncThunk(
 	'users/getFullInfo',
 	async () => {
 		const response = await authController.getUserInfo();
+		if(!response['isAuth']) {
+            toggleAuthFlag(response)
+        }
 		return response;
 	}
 );
