@@ -4,17 +4,15 @@ import characterReducer from './characterSlice';
 import gameReducer from './gameSlice';
 import userReducer from './userSlice';
 
-
-export function createStore(reducers: reducers, preloadedState={}): EnhancedStore {
+export function createStore(reducers: reducers, preloadedState = {}): EnhancedStore {
 	return configureStore({
 		reducer: reducers,
 		preloadedState
-	})
-
-
+	});
 }
-
-interface reducers {
+// Линтер не понимает что тут объявляется интерфейс
+/* eslint-disable */
+interface reducers { 
 	user: typeof userReducer,
 	game: typeof gameReducer,
 	character: typeof characterReducer
@@ -24,5 +22,5 @@ export const reducers = {
 	user: userReducer,
 	game: gameReducer,
 	character: characterReducer
-}
-export {characterReducer, gameReducer, userReducer}
+};
+export {characterReducer, gameReducer, userReducer};

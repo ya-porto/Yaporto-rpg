@@ -18,7 +18,8 @@ class Controller {
 		return http.post(`${baseUrl}auth/logout`, {}, {withCredentials: true})
 			.catch((e: AxiosError) => Promise.reject(e.response?.data.reason));
 	}
-// Убрать
+
+	// Убрать
 	getUserInfo() {
 		return http.get(`${baseUrl}auth/user`, {withCredentials: true})
 			.then((res: AxiosResponse): IUserInfoData => res.data)

@@ -18,9 +18,9 @@ declare global {
 	}
 }
 
-const initialState = isServer ? getWindow().__INITIAL_STATE__ : window.__INITIAL_STATE__
+const initialState = isServer ? getWindow().__INITIAL_STATE__ : window.__INITIAL_STATE__;
 
-export const store = createStore(reducers, initialState)
+export const store = createStore(reducers, initialState);
 
 if (!IS_DEV) {
 	if ('serviceWorker' in navigator) {
@@ -38,7 +38,7 @@ if (!IS_DEV) {
 	}
 }
 
-if(!isServer) {
+if (!isServer) {
 	loadableReady(() => {
 		ReactDOM.hydrate(
 			<Provider store={store}>
