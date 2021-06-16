@@ -1,5 +1,10 @@
 import React, {RefObject} from 'react';
+import {Dispatch} from 'redux';
+import {connect} from 'react-redux';
 import {Link, RouteComponentProps} from 'react-router-dom';
+
+import {fetchUserBy} from '../../redux/userSlice';
+import {RootState} from '../../redux/types';
 import {Button, IButtonCompProps} from '../../components/button';
 import {IInputCompProps, Input} from '../../components/input';
 import {Menu} from '../../components/menu/menu';
@@ -17,7 +22,12 @@ interface ISignin {
 	inputsData: IInputCompPropsWithRefs[],
 	signinButton: IButton
 }
-class Signin extends React.Component<RouteComponentProps> {
+
+interface SigninProps extends RouteComponentProps {
+	user: RootState;
+	dispatch: Dispatch;
+}
+class Signin extends React.Component<SigninProps> {
 	state: Readonly<ISignin> = {
 		inputsData: [{
 			value: '',
@@ -58,6 +68,10 @@ class Signin extends React.Component<RouteComponentProps> {
 		this.setState({inputsData: newArray});
 	}
 
+	getUserInfo = async () => {
+		await this.props.dispatch(fetchUserBy())	
+	}
+
 	signinClick = () => {
 		const inputList = this.state.inputsData;
 		let data: ISigninData | {} = {};
@@ -78,7 +92,8 @@ class Signin extends React.Component<RouteComponentProps> {
 		// Все норм. Я валидирую
 		// @ts-ignore
 		authController.signin(data).then(() => {
-			this.props.history.push('/');
+			this.getUserInfo()
+
 		}).catch(e => {
 			console.log(e);
 		});
@@ -107,9 +122,11 @@ class Signin extends React.Component<RouteComponentProps> {
 							))
 						}
 					</form>
-					<Button className={signinButton.className} onClick={signinButton.onClick}>
-						{signinButton.text}
-					</Button>
+					<Link to='/'>
+						<Button className={signinButton.className} onClick={signinButton.onClick}>
+							{signinButton.text}
+						</Button>
+					</Link>
 					<div className="buttons d-flex flex-column align-center">
 						<Link to="/signup" className="link mt-4">Нет аккаунта?</Link>
 					</div>
@@ -119,4 +136,8 @@ class Signin extends React.Component<RouteComponentProps> {
 	}
 }
 
-export {Signin};
+const mapStateToProps = (state: RootState) => ({
+	user: state.user
+  });
+  
+export default connect(mapStateToProps)(Signin);

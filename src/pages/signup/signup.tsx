@@ -1,5 +1,10 @@
 import React, {RefObject} from 'react';
+import {Dispatch} from 'redux';
+import {connect} from 'react-redux';
 import {Link, RouteComponentProps} from 'react-router-dom';
+
+import {fetchUserBy} from '../../redux/userSlice';
+import {RootState} from '../../redux/types';
 import {Button, IButtonCompProps} from '../../components/button';
 import {Input, IInputCompProps} from '../../components/input';
 import {Menu} from '../../components/menu/menu';
@@ -16,7 +21,12 @@ interface ISignup {
 	inputsData: IInputCompPropsWithRefs[],
 	signupButton: IButton
 }
-class Signup extends React.Component<RouteComponentProps> {
+
+interface SignupProps extends RouteComponentProps {
+	user: RootState;
+	dispatch: Dispatch;
+}
+class Signup extends React.Component<SignupProps> {
 	state: Readonly<ISignup> = {
 		inputsData: [{
 			value: '',
@@ -104,6 +114,10 @@ class Signup extends React.Component<RouteComponentProps> {
 		this.setState({inputsData: newArray});
 	}
 
+	getUserInfo = async () => {
+		await this.props.dispatch(fetchUserBy())	
+	}
+
 	signupClick = () => {
 		const inputList = this.state.inputsData;
 		let data: ISignupData | {} = {};
@@ -124,7 +138,7 @@ class Signup extends React.Component<RouteComponentProps> {
 		// Все норм. Я валидирую
 		// @ts-ignore
 		authController.signup(data).then(() => {
-			this.props.history.push('/');
+			this.getUserInfo()
 		}).catch(e => {
 			console.log(e);
 		});
@@ -153,9 +167,11 @@ class Signup extends React.Component<RouteComponentProps> {
 							))
 						}
 					</form>
-					<Button className={signupButton.className} onClick={signupButton.onClick}>
-						{signupButton.text}
-					</Button>
+					<Link to='/'>
+						<Button className={signupButton.className} onClick={signupButton.onClick}>
+							{signupButton.text}
+						</Button>
+					</Link>
 					<div className="buttons d-flex flex-column align-center">
 						<Link className="link mt-4" to="/signin">
 							Войти
@@ -167,4 +183,8 @@ class Signup extends React.Component<RouteComponentProps> {
 	}
 }
 
-export {Signup};
+const mapStateToProps = (state: RootState) => ({
+	user: state.user
+  });
+  
+export default connect(mapStateToProps)(Signup);

@@ -1,9 +1,9 @@
 import {Game} from 'pages/game';
 import {Leaderboard} from 'pages/leaderboard';
 import {Main} from 'pages/main';
-import {Profile} from 'pages/profile';
-import {Signin} from 'pages/signin';
-import {Signup} from 'pages/signup';
+import Profile from 'pages/profile';
+import Signin from 'pages/signin';
+import Signup from 'pages/signup';
 
 import React from 'react';
 import {hot} from 'react-hot-loader/root';
