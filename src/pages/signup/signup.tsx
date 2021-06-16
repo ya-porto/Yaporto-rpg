@@ -139,7 +139,7 @@ class Signup extends React.Component<SignupProps> {
 		// @ts-ignore
 		authController.signup(data).then(() => {
 			this.getUserInfo();
-		})['catch'](e => {
+		}).catch(e => {
 			console.log(e);
 		});
 	}

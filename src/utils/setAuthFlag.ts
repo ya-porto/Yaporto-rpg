@@ -1,3 +1,3 @@
 export function setAuthFlag(data: {}, value: boolean) {
-	data.isAuth = value;
+    data['isAuth'] = value;
 }

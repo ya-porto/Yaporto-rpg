@@ -20,20 +20,10 @@ async function authMiddleware(req: Request, res: Response, next: NextFunction) {
 		setAuthFlag(data, true);
 
 		httpContext.set('user', data);
+			/* eslint-disable */
 	} catch (err) {
 
 	}
-
-	try {
-		const {data} = await axios.get(PRAKTIKUM_AUTH_ENDPOINT, {
-			headers: {Cookie: cookies}
-		});
-		httpContext.set('user', data);
-	/* eslint-disable */
-	} catch (err) {
-
-	}
-
 	await next();
 }
 

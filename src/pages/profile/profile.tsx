@@ -160,6 +160,7 @@ class Profile extends React.Component<ProfileProps> {
 	componentDidUpdate(prevProps: ProfileProps) {
 		if (this.props.user !== prevProps.user) {
 			const {userInfo} = this.state;
+			/*eslint-disable*/
 			userInfo.map(item => {
 				this.props.user.hasOwnProperty(item.name) ? item.value = this.props.user[item.name] : false;
 			});

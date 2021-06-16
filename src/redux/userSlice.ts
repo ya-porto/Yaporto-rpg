@@ -10,7 +10,7 @@ export const fetchUserBy: any = createAsyncThunk(
 	async () => {
 		const response = await authController.getUserInfo();
 
-		if (!response.isAuth) {
+		if (!response['isAuth']) {
 			setAuthFlag(response, true);
 		}
 
