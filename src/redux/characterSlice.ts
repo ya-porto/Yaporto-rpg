@@ -25,4 +25,4 @@ export const characterSlice = createSlice({
 
 export const {changeHp, changeArmor, changeDps} = characterSlice.actions;
 
-export default characterSlice.reducer
+export default characterSlice.reducer;

@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {authController} from '../controllers/auth';
-import merge from 'deepmerge'
+import merge from 'deepmerge';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
@@ -24,16 +24,16 @@ const userSlice = createSlice({
 	},
 	reducers: {
 		updateUserData: (state, action) => {
-			merge(state, action.payload)
+			merge(state, action.payload);
 		}
 	},
 	extraReducers: {
 		[fetchUserBy.fulfilled]: (state, action) => {
-			merge(state, action.payload)
+			merge(state, action.payload);
 		}
 	}
 });
 
-export const {updateUserData} = userSlice.actions
+export const {updateUserData} = userSlice.actions;
 
-export default userSlice.reducer
+export default userSlice.reducer;
