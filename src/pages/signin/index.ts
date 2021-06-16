@@ -1,2 +1,2 @@
 import Signin from './signin';
-export default Signin
+export default Signin;

@@ -12,9 +12,6 @@ import httpContext from 'express-http-context';
 import {App} from '../components/App';
 import {createStore, reducers} from '../redux/rootStore';
 
-
-
-
 export default (req: Request, res: Response) => {
 	const statsFile = path.resolve('./dist/loadable-stats.json');
 	const chunkExtractor = new ChunkExtractor({statsFile});
@@ -22,8 +19,8 @@ export default (req: Request, res: Response) => {
 	const location = req.url;
 	const context: StaticRouterContext = {};
 
-	const userData = {user: httpContext.get('user')}
-	const store = createStore (reducers, userData)
+	const userData = {user: httpContext.get('user')};
+	const store = createStore(reducers, userData);
 
 	const appContent = chunkExtractor.collectChunks(
 		<Provider store={store}>

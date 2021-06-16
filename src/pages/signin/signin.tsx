@@ -69,7 +69,7 @@ class Signin extends React.Component<SigninProps> {
 	}
 
 	getUserInfo = async () => {
-		await this.props.dispatch(fetchUserBy())	
+		await this.props.dispatch(fetchUserBy());
 	}
 
 	signinClick = () => {
@@ -92,9 +92,8 @@ class Signin extends React.Component<SigninProps> {
 		// Все норм. Я валидирую
 		// @ts-ignore
 		authController.signin(data).then(() => {
-			this.getUserInfo()
-
-		}).catch(e => {
+			this.getUserInfo();
+		})['catch'](e => {
 			console.log(e);
 		});
 	}
@@ -122,7 +121,7 @@ class Signin extends React.Component<SigninProps> {
 							))
 						}
 					</form>
-					<Link to='/'>
+					<Link to="/">
 						<Button className={signinButton.className} onClick={signinButton.onClick}>
 							{signinButton.text}
 						</Button>
@@ -138,6 +137,6 @@ class Signin extends React.Component<SigninProps> {
 
 const mapStateToProps = (state: RootState) => ({
 	user: state.user
-  });
-  
+});
+
 export default connect(mapStateToProps)(Signin);

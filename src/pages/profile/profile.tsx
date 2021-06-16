@@ -160,17 +160,16 @@ class Profile extends React.Component<ProfileProps> {
 	componentDidUpdate(prevProps: ProfileProps) {
 		if (this.props.user !== prevProps.user) {
 			const {userInfo} = this.state;
-			userInfo.map((item)=> {
-				this.props.user.hasOwnProperty(item['name']) ? item['value'] = this.props.user[item['name']] : false
-			})
-			this.setState({userInfo: userInfo})
-			this.setState({userAvatar: this.props.user.avatar ? 'https://ya-praktikum.tech/api/v2/resources' + this.props.user.avatar : '../../images/avatar-example.png'})
+			userInfo.map(item => {
+				this.props.user.hasOwnProperty(item.name) ? item.value = this.props.user[item.name] : false;
+			});
+			this.setState({userInfo: userInfo});
+			this.setState({userAvatar: this.props.user.avatar ? 'https://ya-praktikum.tech/api/v2/resources' + this.props.user.avatar : '../../images/avatar-example.png'});
 		}
 	}
 
-
 	getUserInfo = async () => {
-		await this.props.dispatch(fetchUserBy())	
+		await this.props.dispatch(fetchUserBy());
 	}
 
 	inputChange = (data: IUserInfo, inputsArray: string) => {
@@ -293,7 +292,7 @@ class Profile extends React.Component<ProfileProps> {
 		// Все норм. Я валидирую
 		// @ts-ignore
 		userController.changeUserInfo(data).then(() => {
-			this.getUserInfo()
+			this.getUserInfo();
 		})
 		.then(()=> {
 			this.showUserInfo()
@@ -345,8 +344,8 @@ class Profile extends React.Component<ProfileProps> {
 	}
 
 	signoutClick = () => {
-		authController.logout().then(()=> {
-			this.props.dispatch(resetUserData())
+		authController.logout().then(() => {
+			this.props.dispatch(resetUserData());
 		})
 		.catch(e => {
 			console.log(e);
@@ -356,15 +355,14 @@ class Profile extends React.Component<ProfileProps> {
 	showProfileButtons = () => {
 		return (
 			<>
-				<Button onClick={this.showEditUserInfo} className='profile-buttons__item relative d-flex mt-5 pointer link'>Изменить данные</Button>
-				<Button onClick={this.showEditPassword} className='profile-buttons__item relative d-flex mt-5 pointer link'>Изменить пароль</Button>
-				<Link to='/'><Button onClick={this.signoutClick} className='profile-buttons__item relative d-flex mt-5 pointer logout'>Выйти</Button></Link>
+				<Button onClick={this.showEditUserInfo} className="profile-buttons__item relative d-flex mt-5 pointer link">Изменить данные</Button>
+				<Button onClick={this.showEditPassword} className="profile-buttons__item relative d-flex mt-5 pointer link">Изменить пароль</Button>
+				<Link to="/"><Button onClick={this.signoutClick} className="profile-buttons__item relative d-flex mt-5 pointer logout">Выйти</Button></Link>
 			</>
-		)
+		);
 	}
 
 	render() {
-
 		const {isEditPasswordShown, isUserInfoShown, isEditUserInfoShown, isModalShown, userAvatar} = this.state;
 		return (
 			<>
@@ -404,7 +402,7 @@ class Profile extends React.Component<ProfileProps> {
 
 const mapStateToProps = (state: RootState) => ({
 	user: state.user
-  });
-  
+});
+
 export default connect(mapStateToProps)(Profile);
 

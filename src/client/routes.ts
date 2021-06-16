@@ -1,7 +1,7 @@
-export const ROUTES = { 
+export const ROUTES = {
 	MAIN: {
 		NAME: 'Домашяя',
-		INDEX: '/',
+		INDEX: '/'
 	},
 	PROFILE: {
 		NAME: 'Профиль',
@@ -30,6 +30,6 @@ export const ROUTES = {
 	},
 	LEADERBOARD: {
 		NAME: 'Лидерборд',
-		INDEX: '/leaderboard',
+		INDEX: '/leaderboard'
 	}
 };
