@@ -16,6 +16,7 @@ function App(): JSX.Element {
 	return (
 		<div>
 			<Switch>
+				<Route exact path="/" component={Main} />
 				<Route exact path="/home" component={Main} />
 				<Route exact path={NavigationList.Game} component={Game} />
 				<Route exact path={NavigationList.Signup} component={Signup} />

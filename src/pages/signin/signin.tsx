@@ -85,11 +85,11 @@ class Signin extends React.Component<RouteComponentProps> {
 	}
 
 	yaSignin = () => {
-		const redirect = `${window.location.origin}/home`;
+		const redirect = window.location.origin;
 		authController.getOauthId(redirect)
 			.then(data => {
-				// eslint-disable-next-line camelcase
-				authController.yaOauth({code: data.service_id, redirect_uri: redirect});
+				const URL = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${data.service_id}&redirect_uri=${redirect}`;
+				document.location.href = URL;
 			})
 			.catch(e => {
 				console.log(e);
@@ -122,10 +122,10 @@ class Signin extends React.Component<RouteComponentProps> {
 					<Button className={signinButton.className} onClick={signinButton.onClick}>
 						{signinButton.text}
 					</Button>
+					<Button className="primary mt-5" onClick={this.yaSignin}>Войте с помощью <span style={{color: 'yellow'}}>Я</span>ндекс</Button>
 					<div className="buttons d-flex flex-column align-center">
 						<Link to="/signup" className="link mt-4">Нет аккаунта?</Link>
 					</div>
-					<Button className="primary mt-5" onClick={this.yaSignin}>Войте с помощью <span style={{color: 'yellow'}}>Я</span>ндекс</Button>
 				</div>
 			</div>
 		);
