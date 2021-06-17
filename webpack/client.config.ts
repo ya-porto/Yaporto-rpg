@@ -33,7 +33,9 @@ const config: Configuration = {
 			patterns: [
 				{from: './src/styles/fonts', to: 'fonts'},
 				{from: './images', to: 'images'},
-				{from: './sw.js'}
+				{from: './sw.js'},
+				{from: './selfsigned.crt'},
+				{from: './selfsigned.key'}
 			]
 		}
 		),

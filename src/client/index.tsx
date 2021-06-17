@@ -1,24 +1,26 @@
-import '../styles/style.css';
 import ReactDOM from 'react-dom';
-import {App} from '../components/App';
 import {loadableReady} from '@loadable/component';
-import {configureStore} from '@reduxjs/toolkit';
 import {Provider} from 'react-redux';
-import {RootState, characterReducer, gameReducer, userReducer} from '../redux/rootStore';
 import React from 'react';
 import {BrowserRouter} from 'react-router-dom';
-import {IS_DEV} from '../../webpack/env';
+import {getWindow} from 'ssr-window';
 
-const initialState = window.__INITIAL_STATE__;
-// Сюда добавить редьюсер
-const store = configureStore({
-	preloadedState: initialState,
-	reducer: {
-		game: gameReducer,
-		user: userReducer,
-		character: characterReducer
+import {IS_DEV} from '../../webpack/env';
+import {isServer} from '../utils/isServerEnvChecker';
+import {createStore, reducers} from '../redux/rootStore';
+import {App} from '../components/App';
+import '../styles/style.css';
+
+declare global {
+	interface Window {
+			__INITIAL_STATE__: {};
+			__REDUX_DEVTOOLS_EXTENSION_COMPOSE__: Function;
 	}
-});
+}
+
+const initialState = isServer ? getWindow().__INITIAL_STATE__ : window.__INITIAL_STATE__;
+
+export const store = createStore(reducers, initialState);
 
 if (!IS_DEV) {
 	if ('serviceWorker' in navigator) {
@@ -36,20 +38,15 @@ if (!IS_DEV) {
 	}
 }
 
-declare global {
-	interface Window {
-			__INITIAL_STATE__: RootState;
-			__REDUX_DEVTOOLS_EXTENSION_COMPOSE__: Function;
-	}
+if (!isServer) {
+	loadableReady(() => {
+		ReactDOM.hydrate(
+			<Provider store={store}>
+				<BrowserRouter>
+					<App />
+				</BrowserRouter>
+			</Provider>,
+			document.getElementById('app')
+		);
+	});
 }
-
-loadableReady(() => {
-	ReactDOM.hydrate(
-		<Provider store={store}>
-			<BrowserRouter>
-				<App />
-			</BrowserRouter>
-		</Provider>,
-		document.getElementById('app')
-	);
-});

@@ -5,10 +5,12 @@ import React from 'react';
 import {StaticRouterContext} from 'react-router';
 import {Provider} from 'react-redux';
 import {renderToStaticMarkup, renderToString} from 'react-dom/server';
-import parse from 'html-react-parser';
-import {App} from '../components/App';
 import {StaticRouter} from 'react-router-dom';
-import {store} from '../redux/rootStore';
+import parse from 'html-react-parser';
+import httpContext from 'express-http-context';
+
+import {App} from '../components/App';
+import {createStore, reducers} from '../redux/rootStore';
 
 export default (req: Request, res: Response) => {
 	const statsFile = path.resolve('./dist/loadable-stats.json');
@@ -16,6 +18,9 @@ export default (req: Request, res: Response) => {
 
 	const location = req.url;
 	const context: StaticRouterContext = {};
+
+	const userData = {user: httpContext.get('user')};
+	const store = createStore(reducers, userData);
 
 	const appContent = chunkExtractor.collectChunks(
 		<Provider store={store}>

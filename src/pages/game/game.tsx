@@ -1,11 +1,11 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {Button} from '../../components/button/index';
-import './style.css';
-import {store} from '../../redux/rootStore';
+import {store} from '../../client/index';
+
 import {changeTime} from '../../redux/gameSlice';
 import {Game as GameCanvas} from '../../components/game/index';
-
+import {Button} from '../../components/button/index';
+import './style.css';
 interface IGame {
 	time: { min: string, sec: string, id: number | null },
 	lvl: number,

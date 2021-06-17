@@ -1,15 +1,17 @@
 import React, {RefObject} from 'react';
 import {RouteComponentProps} from 'react-router-dom';
+import {getDocument} from 'ssr-window';
+
 import {Button, IButtonCompProps} from '../../components/button';
 import {Input, IInputCompProps} from '../../components/input';
 import {Menu} from '../../components/menu/menu';
 import {Modal} from '../../components/modal';
 import {authController, IUserInfoData} from '../../controllers/auth';
 import {IChangePassword, IChangeUserInfo, userController} from '../../controllers/user';
-import './style.css';
-import {store} from '../../redux/rootStore';
+import {store} from '../../client/index';
 import {fetchUserBy} from '../../redux/userSlice';
-import {getDocument} from 'ssr-window';
+import './style.css';
+
 const document = getDocument();
 
 interface IButton extends IButtonCompProps {

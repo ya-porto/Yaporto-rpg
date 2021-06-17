@@ -1,15 +1,26 @@
-import {configureStore} from '@reduxjs/toolkit';
+import {configureStore, EnhancedStore} from '@reduxjs/toolkit';
+
 import characterReducer from './characterSlice';
 import gameReducer from './gameSlice';
 import userReducer from './userSlice';
 
-export const store = configureStore({
-	reducer: {
-		game: gameReducer,
-		user: userReducer,
-		character: characterReducer
-	}
-});
-export type RootState = ReturnType<typeof store.getState>
+export function createStore(reducers: reducers, preloadedState = {}): EnhancedStore {
+	return configureStore({
+		reducer: reducers,
+		preloadedState
+	});
+}
+// Линтер не понимает что тут объявляется интерфейс
+/* eslint-disbale-next-line */
+interface reducers { 
+	user: typeof userReducer,
+	game: typeof gameReducer,
+	character: typeof characterReducer
+}
 
+export const reducers = {
+	user: userReducer,
+	game: gameReducer,
+	character: characterReducer
+};
 export {characterReducer, gameReducer, userReducer};
