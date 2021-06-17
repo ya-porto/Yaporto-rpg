@@ -20,9 +20,9 @@ async function authMiddleware(req: Request, res: Response, next: NextFunction) {
 		setAuthFlag(data, true);
 
 		httpContext.set('user', data);
-			/* eslint-disable */
+	/* eslint-disbale-next-line */
 	} catch (err) {
-
+		console.log(err)
 	}
 	await next();
 }

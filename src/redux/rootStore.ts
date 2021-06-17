@@ -11,7 +11,7 @@ export function createStore(reducers: reducers, preloadedState = {}): EnhancedSt
 	});
 }
 // Линтер не понимает что тут объявляется интерфейс
-/* eslint-disable */
+/* eslint-disbale-next-line */
 interface reducers { 
 	user: typeof userReducer,
 	game: typeof gameReducer,
