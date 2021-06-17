@@ -15,9 +15,9 @@ async function authMiddleware(req: Request, res: Response, next: NextFunction) {
 			headers: {Cookie: cookies}
 		});
 		httpContext.set('user', data);
-	/* eslint-disable */
+	/* eslint-disbale-next-line */
 	} catch (err) {
-
+		console.log(err)
 	}
 
 	await next();
