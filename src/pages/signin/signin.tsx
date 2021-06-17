@@ -93,7 +93,7 @@ class Signin extends React.Component<SigninProps> {
 		// @ts-ignore
 		authController.signin(data).then(() => {
 			this.getUserInfo();
-		})['catch'](e => {
+		}).catch(e => {
 			console.log(e);
 		});
 	}
