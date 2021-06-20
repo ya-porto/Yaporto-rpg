@@ -1,19 +1,19 @@
 # Use starter image
-FROM node:12
+FROM ubuntu:latest
+RUN apt update && apt install -y nodejs && apt install -y npm && apt install -y netcat
 
 # Create app directory
 WORKDIR /var/www/
 
 # Install app dependencies
-COPY package*.json /var/www/
+COPY server-app/ /var/www/
+COPY utils/wait-for.sh wait-for.sh
+RUN chmod +x wait-for.sh
 RUN npm install
 
-# Bundle app source
-COPY . /var/www/
 
 # Expose port
-EXPOSE 4000
+EXPOSE 3000
 
 # Default command to run
 RUN npm run build
-CMD npm run start 

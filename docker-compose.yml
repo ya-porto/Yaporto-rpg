@@ -1,0 +1,40 @@
+# docker-compose.yaml
+version: "3"
+
+services:
+    # MongoDB ставим впереди server-app, так как тот server-app от этого сервиса
+    mongo:
+        # Здесь именно image, потому что мы его сами не пишем, он будет взят с докерхаба
+        image: mongo
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: user
+            MONGO_INITDB_ROOT_PASSWORD: password
+        volumes:
+          - ./mongo:/data/db
+        ports:
+          - "27017:27017"
+        # Появился новый параметр — networks, о нём ниже
+        networks:
+            # Назвать сеть можно как угодно
+            - awesome
+
+    server-app:
+        # Этим ключом мы скажем docker-compose, чтобы он собирал докерфайл, который 
+        # находится в папке рядом с docker-compose.yaml
+        build:
+            context: .
+        # Проброс порта так же, как в командной строке — на какой порт хоста какой порт контейнера
+        ports:
+          - "3000:3000"
+        # Зависимость от сервиса mongo
+        depends_on:
+            - mongo
+        # Важно добавить сеть всем сервисам, которые должны взаимодействовать между собой
+        networks:
+            - awesome
+        command: ./wait-for.sh mongo:27017 -- npm run start
+
+# Настройки созданной сети между сервисами
+networks:
+    awesome:
+        driver: bridge
