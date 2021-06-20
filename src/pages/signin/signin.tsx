@@ -1,3 +1,4 @@
+import {getOauthUrlRedirect} from 'client/constants';
 import React, {RefObject} from 'react';
 import {Link, RouteComponentProps} from 'react-router-dom';
 import {Button, IButtonCompProps} from '../../components/button';
@@ -88,7 +89,7 @@ class Signin extends React.Component<RouteComponentProps> {
 		const redirect = window.location.origin;
 		authController.getOauthId(redirect)
 			.then(data => {
-				const URL = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${data.service_id}&redirect_uri=${redirect}`;
+				const URL = getOauthUrlRedirect(data.service_id, redirect);
 				document.location.href = URL;
 			})
 			.catch(e => {
