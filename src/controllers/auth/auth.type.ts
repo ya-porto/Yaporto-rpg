@@ -24,4 +24,9 @@ interface IUserInfoData {
   avatar: string
 }
 
-export {ISigninData, ISignupData, IUserInfoData};
+interface IYaOauthData {
+  code: string,
+  redirect_uri: string
+}
+
+export {ISigninData, ISignupData, IUserInfoData, IYaOauthData};

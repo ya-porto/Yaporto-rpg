@@ -1,3 +1,4 @@
+import {getOauthUrlRedirect} from 'client/constants';
 import React, {RefObject} from 'react';
 import {Dispatch} from 'redux';
 import {connect} from 'react-redux';
@@ -98,6 +99,18 @@ class Signin extends React.Component<SigninProps> {
 		});
 	}
 
+	yaSignin = () => {
+		const redirect = window.location.origin;
+		authController.getOauthId(redirect)
+			.then(data => {
+				const URL = getOauthUrlRedirect(data.service_id, redirect);
+				document.location.href = URL;
+			})
+			.catch(e => {
+				console.log(e);
+			});
+	}
+
 	render() {
 		const {inputsData, signinButton} = this.state;
 		return (
@@ -121,11 +134,18 @@ class Signin extends React.Component<SigninProps> {
 							))
 						}
 					</form>
+<<<<<<< HEAD
 					<Link to="/">
 						<Button className={signinButton.className} onClick={signinButton.onClick}>
 							{signinButton.text}
 						</Button>
 					</Link>
+=======
+					<Button className={signinButton.className} onClick={signinButton.onClick}>
+						{signinButton.text}
+					</Button>
+					<Button className="primary mt-5" onClick={this.yaSignin}>Войте с помощью <span style={{color: 'yellow'}}>Я</span>ндекс</Button>
+>>>>>>> 7db4d96e5498fed862e1ccf26a81fa6dc68bc7be
 					<div className="buttons d-flex flex-column align-center">
 						<Link to="/signup" className="link mt-4">Нет аккаунта?</Link>
 					</div>
