@@ -31,6 +31,10 @@ const dbName = 'docker'
 
 const client = new MongoClient(uri)
 
+// server.listen(PORT, () => {
+// 	console.log(`Example app listening on port ${PORT}`);
+// });
+
 client.connect(function(err) {
 	if(err) {
 		console.error('Cant connect to MongoDB');
