@@ -1,3 +1,4 @@
+import {getOauthUrlRedirect} from 'client/constants';
 import React, {RefObject} from 'react';
 import {Link, RouteComponentProps} from 'react-router-dom';
 import {Button, IButtonCompProps} from '../../components/button';
@@ -84,6 +85,18 @@ class Signin extends React.Component<RouteComponentProps> {
 		});
 	}
 
+	yaSignin = () => {
+		const redirect = window.location.origin;
+		authController.getOauthId(redirect)
+			.then(data => {
+				const URL = getOauthUrlRedirect(data.service_id, redirect);
+				document.location.href = URL;
+			})
+			.catch(e => {
+				console.log(e);
+			});
+	}
+
 	render() {
 		const {inputsData, signinButton} = this.state;
 		return (
@@ -110,6 +123,7 @@ class Signin extends React.Component<RouteComponentProps> {
 					<Button className={signinButton.className} onClick={signinButton.onClick}>
 						{signinButton.text}
 					</Button>
+					<Button className="primary mt-5" onClick={this.yaSignin}>Войте с помощью <span style={{color: 'yellow'}}>Я</span>ндекс</Button>
 					<div className="buttons d-flex flex-column align-center">
 						<Link to="/signup" className="link mt-4">Нет аккаунта?</Link>
 					</div>
