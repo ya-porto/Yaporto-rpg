@@ -17,10 +17,6 @@ function App(): JSX.Element {
 		<div>
 			<Switch>
 				<Route exact path="/" component={Main} />
-<<<<<<< HEAD
-=======
-				<Route exact path="/home" component={Main} />
->>>>>>> 7db4d96e5498fed862e1ccf26a81fa6dc68bc7be
 				<Route exact path={NavigationList.Game} component={Game} />
 				<Route exact path={NavigationList.Signup} component={Signup} />
 				<Route exact path={NavigationList.Signin} component={Signin} />
