@@ -160,7 +160,6 @@ class Profile extends React.Component<ProfileProps> {
 	componentDidUpdate(prevProps: ProfileProps) {
 		if (this.props.user !== prevProps.user) {
 			const {userInfo} = this.state;
-			/*eslint-disable*/
 			userInfo.map(item => {
 				this.props.user.hasOwnProperty(item.name) ? item.value = this.props.user[item.name] : false;
 			});
@@ -170,7 +169,7 @@ class Profile extends React.Component<ProfileProps> {
 	}
 
 	getUserInfo = async () => {
-		await this.props.dispatch(fetchUserBy());
+		this.props.dispatch(fetchUserBy());
 	}
 
 	inputChange = (data: IUserInfo, inputsArray: string) => {
@@ -295,9 +294,7 @@ class Profile extends React.Component<ProfileProps> {
 		userController.changeUserInfo(data).then(() => {
 			this.getUserInfo();
 		})
-		.then(()=> {
-			this.showUserInfo()
-		}).catch(e => {
+		.then(() => this.showUserInfo()).catch(e => {
 			console.log(e);
 		});
 	}
