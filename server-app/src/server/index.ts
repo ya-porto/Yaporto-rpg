@@ -23,10 +23,10 @@ app.use(router);
 const server = https.createServer(options, app);
 
 
-const login = 'user'
-const password = 'password'
+const login = process.env.MONGO_USER
+const password = process.env.MONGO_PASSWORD
 
-const uri = `mongodb://${login}:${password}@mongo:27017`;
+const uri = `mongodb://${login}:${password}@${process.env.MONGO_HOST}:27017`;
 const dbName = 'docker'
 
 const client = new MongoClient(uri)

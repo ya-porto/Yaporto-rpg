@@ -19,6 +19,10 @@ services:
             - awesome
 
     server-app:
+        environment:
+            - MONGO_HOST=mongo
+        env_file:
+            ./dev.env
         # Этим ключом мы скажем docker-compose, чтобы он собирал докерфайл, который 
         # находится в папке рядом с docker-compose.yaml
         build:
