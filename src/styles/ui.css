@@ -62,18 +62,15 @@
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center;
-	min-width: 700px;
-	min-height: 500px;
-	padding: 100px 200px 100px 200px;
-	overflow: auto;
+  min-width: 700px;
+  min-height: 500px;
   }
 
   .card {
 	background-image: url('../images/scroll.png');
 	background-repeat: no-repeat;
 	background-size: contain;
-    background-position: center;
-    border-radius: 10px;
-    box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.5);
+  background-position: center;
+  border-radius: 10px;
 }
 

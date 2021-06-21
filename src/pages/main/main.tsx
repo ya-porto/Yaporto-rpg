@@ -46,13 +46,8 @@ class Main extends React.Component {
 		return (
 			<div className="page page-main d-flex justify-center">
 				<Menu />
-				<div className="card_big container d-flex justify-center">
-					<div className="left pa-2 d-flex flex-column">
-
-						<div className="info mt-5">
-							<p>Здесь будет невероятное описание нашей фантастически крутой (нет) игры</p>
-						</div>
-					</div>
+				<div className="card_big container d-flex flex-column align-center justify-center">
+						<p>Здесь будет невероятное описание нашей фантастически крутой (нет) игры</p>
 				</div>
 			</div>
 		);

@@ -258,7 +258,7 @@ class Profile extends React.Component<ProfileProps> {
 		const {userInfo} = this.state;
 
 		return (
-			<ul className="profile-info d-flex flex-column mt-16">
+			<ul className="profile-info d-flex flex-column mt-4">
 				{
 					userInfo.map(({value, displayName}, i) => (
 						<li className="profile-info__item relative d-flex justify-space-between mt-5" key={i}>
@@ -376,7 +376,7 @@ class Profile extends React.Component<ProfileProps> {
 
 				<div className="page page-profile d-flex flex-column justify-center align-center">
 					<Menu />
-					<div className="profile d-flex flex-column justify-center align-center">
+					<div className="profile card_big d-flex flex-column justify-center align-center">
 						<div className="profile-avatar d-flex flex-column justify-center align-center">
 							<div className="avatar d-flex justify-center align-center mt-1 mr-2">
 								<img src={userAvatar} alt="avatar" draggable="false"/>
