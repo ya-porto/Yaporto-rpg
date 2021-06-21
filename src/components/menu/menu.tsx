@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux'
-import {Link} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 
 import {RootState} from '../../redux/types';
 import {ROUTES} from '../../client/routes';
@@ -16,7 +16,7 @@ export function Menu() {
 				{
 					routes.map(({NAME, INDEX}, i) => (
 						<li key={i} className='buttons-item mr-2'>
-							<Link to={INDEX}>{NAME}</Link>
+							<NavLink className='menu_link d-flex justify-center align-center' to={INDEX}><p>{NAME}</p></NavLink>
 						</li>
 					))
 				}

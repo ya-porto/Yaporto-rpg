@@ -1,6 +1,8 @@
 import {Game} from 'pages/game';
 import {Leaderboard} from 'pages/leaderboard';
 import {Main} from 'pages/main';
+import {GameShop} from 'pages/gameshop';
+import {Inventory} from 'pages/inventory';
 import Profile from 'pages/profile';
 import Signin from 'pages/signin';
 import Signup from 'pages/signup';
@@ -22,6 +24,8 @@ function App(): JSX.Element {
 				<Route exact path={NavigationList.Signin} component={Signin} />
 				<Route exact path={NavigationList.Profile} component={Profile} />
 				<Route exact path={NavigationList.Leaderboard} component={Leaderboard} />
+				<Route exact path={NavigationList.GameShop} component={GameShop} />
+				<Route exact path={NavigationList.Inventory} component={Inventory} />
 			</Switch>
 		</div>
 	);

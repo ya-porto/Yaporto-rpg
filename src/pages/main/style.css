@@ -10,7 +10,6 @@
 .page-main .container .right {
     min-height: 60%;
     min-width: 250px;
-    box-shadow: 10px 8px 6px -9px rgb(0 0 0 / 70%);
     border-bottom-right-radius: 5px;
     text-align: center;
     overflow-y: scroll;

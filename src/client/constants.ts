@@ -4,7 +4,9 @@ export enum Navigation {
   Signup = '/signup',
   Profile = '/profile',
   Game = '/game',
-  Leaderboard = '/leaderboard'
+  Leaderboard = '/leaderboard',
+  GameShop = '/gameshop',
+  Inventory = '/inventory'
 }
 
 export function getOauthUrlRedirect(serviceId: string, url: string = window.location.origin) {
