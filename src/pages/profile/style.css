@@ -1,11 +1,3 @@
-.modal_close {
-    position: absolute;
-    top: 5px;
-    right: 10px;
-    cursor: pointer;
-    font-size: 25px;
-}
-
 .profile {
     width: 80%;
 }
@@ -93,3 +85,20 @@
     height: 30%;
     width: 20%;
 }
+
+/* Группа стилей для анимации модалки на странице. Там специально постфиксы прописаны, которых нет в jsx флайле */
+
+.show-modal-enter {
+    transform-origin: top center;
+    transform: rotate(-90deg);
+    transition: transform 500ms;
+}
+
+.show-modal-enter-active {
+    transform: none;
+}
+
+.show-modal-exit {
+    transform: none;
+}
+

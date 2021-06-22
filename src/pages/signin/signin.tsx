@@ -1,4 +1,4 @@
-import {getOauthUrlRedirect} from 'client/constants';
+import {getOauthUrlRedirect} from '../../client/constants';
 import React, {RefObject} from 'react';
 import {Dispatch} from 'redux';
 import {connect} from 'react-redux';

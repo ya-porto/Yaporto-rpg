@@ -2,6 +2,7 @@ import React, {RefObject} from 'react';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 import {RouteComponentProps, Link} from 'react-router-dom';
+import {CSSTransition} from 'react-transition-group'
 import {getDocument} from 'ssr-window';
 
 import {Button} from '../../components/button';
@@ -44,7 +45,7 @@ class Profile extends React.Component<ProfileProps> {
 		isUserInfoShown: true,
 		isEditUserInfoShown: false,
 		isEditPasswordShown: false,
-		isModalShown: true,
+		isModalShown: false,
 		inputsUserInfo: [{
 			value: '',
 			type: 'email',
@@ -315,8 +316,8 @@ class Profile extends React.Component<ProfileProps> {
 					}
 				</ul>
 				<div className="profile-buttons d-flex flex-column justify-start align-end mt-4">
-					<Button onClick={this.showEditPassword} className="mt-5">Изменить пароль</Button>
 					<Button onClick={this.showEditUserInfo} className="mt-5">Изменить данные</Button>
+					<Button onClick={this.showEditPassword} className="mt-5">Изменить пароль</Button>
 					<Link to="/"><Button onClick={this.signoutClick} className="mt-5">Выйти</Button></Link>
 				</div>
 			</div>
@@ -373,15 +374,18 @@ class Profile extends React.Component<ProfileProps> {
 		const {isEditPasswordShown, isUserInfoShown, isEditUserInfoShown, isModalShown, userAvatar} = this.state;
 		return (
 			<>
-				<Modal onClick={this.toggleModal} show={isModalShown} modalContentClassName="relative">
-					<i className="fas fa-times modal_close" onClick={this.toggleModal}></i>
-					<h3 className="title">Загрузите файл</h3>
-					<form className="mt-5" id="changeAvatarForm">
-						<label className="link" htmlFor="avatar">Выберите файл на компьютере</label>
-						<input id="avatar" type="file" name="avatar" accept="image/*" />
-					</form>
-					<Button className="button__save primary mt-5" onClick={this.changeAvatar}>Изменить</Button>
-				</Modal>
+				<CSSTransition in={this.state.isModalShown} timeout={1000} classNames="show-modal">
+					<Modal onClick={this.toggleModal} show={isModalShown}>
+						<div className="relative pt-7 text-center">
+							<h3>Загрузите файл</h3>
+							<form className="mt-5" id="changeAvatarForm">
+								<label className="link" htmlFor="avatar">Выберите файл на компьютере</label>
+								<input id="avatar" type="file" name="avatar" accept="image/*" />
+							</form>
+							<Button className="button__save primary mt-5" onClick={this.changeAvatar}>Изменить</Button>
+						</div>
+					</Modal>
+				</CSSTransition>
 
 				<div className="page d-flex flex-column justify-center align-center">
 					<Menu />

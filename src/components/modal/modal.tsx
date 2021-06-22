@@ -10,7 +10,7 @@ class Modal extends React.Component<IModalCompProps> {
 		return (
 			show ?
 				<div onClick={onClick} className={modalClassNameBuilt}>
-					<div className={modalContentClassNameBuilt}>
+					<div onClick={(e) => e.stopPropagation()} className={modalContentClassNameBuilt}>
 						{this.props.children}
 					</div>
 				</div> : null
