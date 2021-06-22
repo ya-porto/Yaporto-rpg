@@ -4,15 +4,6 @@
     top: 0;
 }
 
-.buttons {
-    width: 70%;
-}
-
-.buttons-item {
-
-    text-align: center;
-}
-
 .menu_link {
     background-image: url('/images/menu-icon.png');
     background-position: center;
@@ -23,4 +14,13 @@
     border-radius: 50px;
     color: #331e01;
     margin-right: 5px;
+}
+
+.menu-link-inner {
+    font-size: 16px;
+    transition: 0.2s;
+}
+
+.menu-link-inner:hover {
+    font-size: 17px;
 }

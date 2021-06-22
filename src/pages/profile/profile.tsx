@@ -44,7 +44,7 @@ class Profile extends React.Component<ProfileProps> {
 		isUserInfoShown: true,
 		isEditUserInfoShown: false,
 		isEditPasswordShown: false,
-		isModalShown: false,
+		isModalShown: true,
 		inputsUserInfo: [{
 			value: '',
 			type: 'email',
@@ -218,58 +218,6 @@ class Profile extends React.Component<ProfileProps> {
 		});
 	}
 
-	editUserInfoTemplate = (): JSX.Element => {
-		const {inputsUserInfo} = this.state;
-		return (
-			<>
-				{
-					inputsUserInfo.map((item, i) => (
-						<Input
-							{...item}
-							onChange={this.inputUserInfoChange}
-							key={i}
-						/>
-					))
-				}
-				<Button className="button__save primary mt-5" onClick={this.changeUserInfo}>Сохранить</Button>
-			</>
-		);
-	}
-
-	editPasswordTemplate = (): JSX.Element => {
-		const {inputsPassword} = this.state;
-		return (
-			<>
-				{
-					inputsPassword.map((item, i) => (
-						<Input
-							{...item}
-							onChange={this.inputPasswordChange}
-							key={i}
-						/>
-					))
-				}
-				<Button className="button__save primary mt-5" onClick={this.changePassword}>Сохранить</Button>
-			</>
-		);
-	}
-
-	userInfoTemplate = (): JSX.Element => {
-		const {userInfo} = this.state;
-
-		return (
-			<ul className="profile-info d-flex flex-column mt-4">
-				{
-					userInfo.map(({value, displayName}, i) => (
-						<li className="profile-info__item relative d-flex justify-space-between mt-5" key={i}>
-							<span className="name">{displayName}</span>
-							<span className="value">{value}</span>
-						</li>
-					))
-				}
-			</ul>
-		);
-	}
 
 	changeUserInfo = () => {
 		const inputList = this.state.inputsUserInfo;
@@ -350,13 +298,74 @@ class Profile extends React.Component<ProfileProps> {
 		});
 	}
 
-	showProfileButtons = () => {
+
+	userInfoTemplate = (): JSX.Element => {
+		const {userInfo} = this.state;
+
 		return (
-			<>
-				<Button onClick={this.showEditUserInfo} className="profile-buttons__item relative d-flex mt-5 pointer link">Изменить данные</Button>
-				<Button onClick={this.showEditPassword} className="profile-buttons__item relative d-flex mt-5 pointer link">Изменить пароль</Button>
-				<Link to="/"><Button onClick={this.signoutClick} className="profile-buttons__item relative d-flex mt-5 pointer logout">Выйти</Button></Link>
-			</>
+			<div className='profile-inner d-flex justify-space-between'>
+				<ul className="profile-info d-flex flex-column mt-4">
+					{
+						userInfo.map(({value, displayName}, i) => (
+							<li className="profile-info__item relative d-flex justify-space-between mt-5" key={i}>
+								<span className="name">{displayName}</span>
+								<span className="value">{value}</span>
+							</li>
+						))
+					}
+				</ul>
+				<div className="profile-buttons d-flex flex-column justify-start align-end mt-4">
+					<Button onClick={this.showEditPassword} className="mt-5">Изменить пароль</Button>
+					<Button onClick={this.showEditUserInfo} className="mt-5">Изменить данные</Button>
+					<Link to="/"><Button onClick={this.signoutClick} className="mt-5">Выйти</Button></Link>
+				</div>
+			</div>
+		);
+	}
+
+	editUserInfoTemplate = (): JSX.Element => {
+		const {inputsUserInfo} = this.state;
+		return (
+			<div className='profile-inner d-flex justify-space-between'>
+				<div className='profile-info d-flex flex-column mt-4'>
+				{
+					inputsUserInfo.map((item, i) => (
+						<Input
+							{...item}
+							onChange={this.inputUserInfoChange}
+							key={i}
+						/>
+					))
+				}
+				</div>`
+				<div className='profile-buttons d-flex flex-column justify-start align-end mt-4'>
+					<Button className="mt-3" onClick={this.changeUserInfo}>Сохранить</Button>
+					<Button className="mt-3	" onClick={this.showUserInfo}>Назад</Button>
+				</div>
+			</div>
+		);
+	}
+
+	editPasswordTemplate = (): JSX.Element => {
+		const {inputsPassword} = this.state;
+		return (
+			<div className='profile-inner d-flex justify-space-between'>
+				<div className='profile-info d-flex flex-column mt-4'>
+				{
+					inputsPassword.map((item, i) => (
+						<Input
+							{...item}
+							onChange={this.inputPasswordChange}
+							key={i}
+						/>
+					))
+				}
+				</div>
+				<div className='profile-buttons d-flex flex-column justify-start align-end mt-6'>
+				<Button className="mt-3" onClick={this.changePassword}>Сохранить</Button>
+				<Button className="primary mt-3" onClick={this.showUserInfo}>Назад</Button>
+				</div>
+			</div>
 		);
 	}
 
@@ -364,7 +373,7 @@ class Profile extends React.Component<ProfileProps> {
 		const {isEditPasswordShown, isUserInfoShown, isEditUserInfoShown, isModalShown, userAvatar} = this.state;
 		return (
 			<>
-				<Modal show={isModalShown} modalContentClassName="relative">
+				<Modal onClick={this.toggleModal} show={isModalShown} modalContentClassName="relative">
 					<i className="fas fa-times modal_close" onClick={this.toggleModal}></i>
 					<h3 className="title">Загрузите файл</h3>
 					<form className="mt-5" id="changeAvatarForm">
@@ -374,11 +383,11 @@ class Profile extends React.Component<ProfileProps> {
 					<Button className="button__save primary mt-5" onClick={this.changeAvatar}>Изменить</Button>
 				</Modal>
 
-				<div className="page page-profile d-flex flex-column justify-center align-center">
+				<div className="page d-flex flex-column justify-center align-center">
 					<Menu />
-					<div className="profile card_big d-flex flex-column justify-center align-center">
-						<div className="profile-avatar d-flex flex-column justify-center align-center">
-							<div className="avatar d-flex justify-center align-center mt-1 mr-2">
+					<div className="card_big d-flex relative flex-column justify-center align-center">
+						<div className="profile-avatar d-flex absolute flex-column justify-center align-center">
+							<div className="avatar d-flex justify-center align-center">
 								<img src={userAvatar} alt="avatar" draggable="false"/>
 								<div className="avatar_hover d-flex justify-center align-center pointer" onClick={this.toggleModal}>Поменять аватар</div>
 							</div>
@@ -386,11 +395,6 @@ class Profile extends React.Component<ProfileProps> {
 						{isUserInfoShown ? this.userInfoTemplate() : null}
 						{isEditPasswordShown ? this.editPasswordTemplate() : null}
 						{isEditUserInfoShown ? this.editUserInfoTemplate() : null}
-						<div className="profile-buttons d-flex flex-column mt-10">
-							{
-								isUserInfoShown ? this.showProfileButtons() : null
-							}
-						</div>
 					</div>
 				</div>
 			</>

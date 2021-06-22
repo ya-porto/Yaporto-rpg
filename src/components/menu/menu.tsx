@@ -12,11 +12,11 @@ export function Menu() {
 	const routes = Object.values(ROUTES).filter(path => !path.hasOwnProperty('AUTH') || path['AUTH'] === isAuth)
 	return (
 		<div className="menu absolute d-flex justify-center align-center">
-			<ul className="buttons d-flex justify-space-around">
+			<ul className="d-flex justify-space-around">
 				{
 					routes.map(({NAME, INDEX}, i) => (
-						<li key={i} className='buttons-item mr-2'>
-							<NavLink className='menu_link d-flex justify-center align-center' to={INDEX}><p>{NAME}</p></NavLink>
+						<li key={i} className='mr-2'>
+							<NavLink className='menu_link d-flex justify-center align-center' to={INDEX}><span className='menu-link-inner'>{NAME}</span></NavLink>
 						</li>
 					))
 				}

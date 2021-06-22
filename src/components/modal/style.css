@@ -11,10 +11,14 @@
     z-index: 999;
   }
   .modal .modal-content {
-    max-width: 80%;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 1px 1px 6px 0px rgba(0,0,0,0.7);
+    position: absolute;
+    top: 0;
+    background-image: url('/images/modal-background.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 400px;
+    width: 350px;
+    padding: 180px 40px 60px 50px;
     border-radius: 15px;
     z-index: 9999;
   }

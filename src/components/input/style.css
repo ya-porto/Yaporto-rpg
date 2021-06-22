@@ -1,6 +1,6 @@
-.field {
+.input {
     position: relative;
-    padding: 15px 0 0;
+    padding: 10px 0 0;
     margin-top: 10px;
     width: 100%;
   }
@@ -8,19 +8,19 @@
     font-family: inherit;
     width: 100%;
     border: 0;
-    border-bottom: 2px solid #3369f3;
+    border-bottom: 1px solid #5d801b;
     outline: 0;
-    font-size: 1.3rem;
-    color: #1e1e1e;
-    padding: 7px 0;
+    color: #331e01;
+    padding: 5px 0;
     background: transparent;
     transition: border-color 0.2s;
+    text-align: right;
   }
   .form__field::placeholder {
     color: transparent;
   }
   .form__field:placeholder-shown ~ .form__label {
-    font-size: 1rem;
+    font-size: 12px;
     cursor: text;
     top: 20px;
   }
@@ -29,20 +29,20 @@
     top: 0;
     display: block;
     transition: 0.2s;
-    font-size: .8rem;
-    color: #999;
+    font-size: 11px;
+    color: #331e01;
   }
   .form__error {
       color: #ff2f2f;
-      font-size: .8rem;
+      font-size: 10px;
   }
   .form__field:focus ~ .form__label {
     position: absolute;
     top: 0;
     display: block;
     transition: 0.2s;
-    font-size: .8rem;
-    color: #1e1e1e;
+    font-size: 11px;
+    color: #331e01;
   }
   
   .field_gray .form__field{
@@ -58,7 +58,7 @@
   .field_center .form__field:placeholder-shown::placeholder {
     text-align: center;
   }
-  .field .fas {
+  .input .fas {
     position: absolute;
     top: 50%;
     left: 10px;
@@ -70,7 +70,7 @@
   .field_center .form__field:placeholder-shown ~ .fas {
     left: 40%;
   }
-  .field > .form__field {
+  .input > .form__field {
     padding-left: 2rem;
   }
   .field_center .form__field:focus::placeholder {

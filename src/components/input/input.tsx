@@ -85,7 +85,7 @@ class Input extends React.PureComponent<IInputCompProps> {
 	render() {
 		const {value, type, placeholder, name, className, onChange, children} = this.props;
 		const {error} = this.state;
-		const fieldClassName = `field ${className ?? ''}`;
+		const fieldClassName = `input ${className ?? ''}`;
 		return (
 			<div className={fieldClassName}>
 				<input
