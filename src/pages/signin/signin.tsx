@@ -1,5 +1,11 @@
+import {getOauthUrlRedirect} from 'client/constants';
 import React, {RefObject} from 'react';
+import {Dispatch} from 'redux';
+import {connect} from 'react-redux';
 import {Link, RouteComponentProps} from 'react-router-dom';
+
+import {fetchUserBy} from '../../redux/userSlice';
+import {RootState} from '../../redux/types';
 import {Button, IButtonCompProps} from '../../components/button';
 import {IInputCompProps, Input} from '../../components/input';
 import {Menu} from '../../components/menu/menu';
@@ -17,7 +23,12 @@ interface ISignin {
 	inputsData: IInputCompPropsWithRefs[],
 	signinButton: IButton
 }
-class Signin extends React.Component<RouteComponentProps> {
+
+interface SigninProps extends RouteComponentProps {
+	user: RootState;
+	dispatch: Dispatch;
+}
+class Signin extends React.Component<SigninProps> {
 	state: Readonly<ISignin> = {
 		inputsData: [{
 			value: '',
@@ -58,6 +69,10 @@ class Signin extends React.Component<RouteComponentProps> {
 		this.setState({inputsData: newArray});
 	}
 
+	getUserInfo = async () => {
+		await this.props.dispatch(fetchUserBy());
+	}
+
 	signinClick = () => {
 		const inputList = this.state.inputsData;
 		let data: ISigninData | {} = {};
@@ -78,10 +93,22 @@ class Signin extends React.Component<RouteComponentProps> {
 		// Все норм. Я валидирую
 		// @ts-ignore
 		authController.signin(data).then(() => {
-			this.props.history.push('/home');
+			this.getUserInfo();
 		}).catch(e => {
 			console.log(e);
 		});
+	}
+
+	yaSignin = () => {
+		const redirect = window.location.origin;
+		authController.getOauthId(redirect)
+			.then(data => {
+				const URL = getOauthUrlRedirect(data.service_id, redirect);
+				document.location.href = URL;
+			})
+			.catch(e => {
+				console.log(e);
+			});
 	}
 
 	render() {
@@ -107,9 +134,18 @@ class Signin extends React.Component<RouteComponentProps> {
 							))
 						}
 					</form>
+<<<<<<< HEAD
+					<Link to="/">
+						<Button className={signinButton.className} onClick={signinButton.onClick}>
+							{signinButton.text}
+						</Button>
+					</Link>
+=======
 					<Button className={signinButton.className} onClick={signinButton.onClick}>
 						{signinButton.text}
 					</Button>
+					<Button className="primary mt-5" onClick={this.yaSignin}>Войте с помощью <span style={{color: 'yellow'}}>Я</span>ндекс</Button>
+>>>>>>> 7db4d96e5498fed862e1ccf26a81fa6dc68bc7be
 					<div className="buttons d-flex flex-column align-center">
 						<Link to="/signup" className="link mt-4">Нет аккаунта?</Link>
 					</div>
@@ -119,4 +155,8 @@ class Signin extends React.Component<RouteComponentProps> {
 	}
 }
 
-export {Signin};
+const mapStateToProps = (state: RootState) => ({
+	user: state.user
+});
+
+export default connect(mapStateToProps)(Signin);
