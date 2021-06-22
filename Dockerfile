@@ -9,7 +9,7 @@ WORKDIR /var/www/
 COPY server-app/ /var/www/
 COPY utils/wait-for.sh wait-for.sh
 RUN chmod +x wait-for.sh
-RUN npm install
+RUN npm ci
 
 
 # Expose port
