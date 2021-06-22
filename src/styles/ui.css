@@ -38,12 +38,16 @@
 
   
   .page {
-	background-image: url('/images/forest-background.jpeg');
-	background-size: contain;
-	width: 100%;
-	height: 100vh;
-	padding-top: 100px;
-	padding-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url('/images/forest-background.jpeg');
+    background-size: contain;
+    width: 100%;
+    height: 100vh;
+    padding-top: 100px;
+    padding-bottom: 50px;
   }
   
   .shadow {box-shadow: 1px 1px 6px 0px rgba(76,46,0,0.7);}
@@ -58,12 +62,21 @@
   }
 
   .card_big {
-	background-image: url('../images/scroll.png');
-	background-repeat: no-repeat;
-	background-size: contain;
-	background-position: center;
-  min-width: 700px;
-  min-height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../images/scroll.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    min-width: 700px;
+    min-height: 500px;
+  }
+
+  .card_big_inner {
+    height: 60%;
+    width: 60%;
   }
 
   .card {

@@ -304,7 +304,7 @@ class Profile extends React.Component<ProfileProps> {
 		const {userInfo} = this.state;
 
 		return (
-			<div className='profile-inner d-flex justify-space-between'>
+			<div className='card_big_inner d-flex justify-space-between'>
 				<ul className="profile-info d-flex flex-column mt-4">
 					{
 						userInfo.map(({value, displayName}, i) => (
@@ -327,7 +327,7 @@ class Profile extends React.Component<ProfileProps> {
 	editUserInfoTemplate = (): JSX.Element => {
 		const {inputsUserInfo} = this.state;
 		return (
-			<div className='profile-inner d-flex justify-space-between'>
+			<div className='card_big_inner d-flex justify-space-between'>
 				<div className='profile-info d-flex flex-column mt-4'>
 				{
 					inputsUserInfo.map((item, i) => (
@@ -350,7 +350,7 @@ class Profile extends React.Component<ProfileProps> {
 	editPasswordTemplate = (): JSX.Element => {
 		const {inputsPassword} = this.state;
 		return (
-			<div className='profile-inner d-flex justify-space-between'>
+			<div className='card_big_inner d-flex justify-space-between'>
 				<div className='profile-info d-flex flex-column mt-4'>
 				{
 					inputsPassword.map((item, i) => (
@@ -387,9 +387,9 @@ class Profile extends React.Component<ProfileProps> {
 					</Modal>
 				</CSSTransition>
 
-				<div className="page d-flex flex-column justify-center align-center">
+				<div className="page">
 					<Menu />
-					<div className="card_big d-flex relative flex-column justify-center align-center">
+					<div className="card_big relative">
 						<div className="profile-avatar d-flex absolute flex-column justify-center align-center">
 							<div className="avatar d-flex justify-center align-center">
 								<img src={userAvatar} alt="avatar" draggable="false"/>

@@ -97,7 +97,6 @@ class Signup extends React.Component<SignupProps> {
 		}],
 		signupButton: {
 			text: 'Зарегистрироваться',
-			className: 'primary mt-5',
 			onClick: () => this.signupClick()
 		}
 	};
@@ -147,35 +146,44 @@ class Signup extends React.Component<SignupProps> {
 	render() {
 		const {inputsData, signupButton} = this.state;
 		return (
-			<div className="page page-signup d-flex flex-column justify-center align-center">
+			<div className="page">
 				<Menu />
-				<div className="card shadow d-flex flex-column justify-space-between align-center px-10 py-8">
-					<h3 className="title mt-5">Регистрация</h3>
-					<form className="form mt-4" action="" method="post">
-						{
-							inputsData.map(({value, type, placeholder, name, validation, ref}, i) => (
-								<Input
-									value={value}
-									type={type}
-									placeholder={placeholder}
-									name={name}
-									validation={validation}
-									onChange={this.inputChange}
-									key={i}
-									ref={ref}
-								/>
-							))
-						}
-					</form>
-					<Link to="/">
-						<Button className={signupButton.className} onClick={signupButton.onClick}>
-							{signupButton.text}
-						</Button>
-					</Link>
-					<div className="buttons d-flex flex-column align-center">
-						<Link className="link mt-4" to="/signin">
-							Войти
-						</Link>
+				<div className="card_big">
+					<div className="signup_card_inner d-flex justify-space-between">
+						<div className="signup_left">
+							<form className="signup_form mt-4" action="" method="post">
+								{
+									inputsData.map(({value, type, placeholder, name, validation, ref}, i) => (
+										<Input
+											value={value}
+											type={type}
+											placeholder={placeholder}
+											name={name}
+											validation={validation}
+											onChange={this.inputChange}
+											key={i}
+											ref={ref}
+										/>
+									))
+								}
+							</form>
+						</div>
+
+						<div className="signup_right d-flex flex-column align-end justify-space-between">
+							<h3 className="signup_header mt-5">Регистрация</h3>
+							
+							<div className="signup_buttons d-flex flex-column align-end mb-7">
+								<Link to="/">
+									<Button onClick={signupButton.onClick}>
+										{signupButton.text}
+									</Button>
+								</Link>
+									<Link className="link mt-2" to="/signin">
+										Есть аккаунт
+								</Link>
+							</div>
+						</div>
+						
 					</div>
 				</div>
 			</div>
