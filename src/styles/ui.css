@@ -80,11 +80,29 @@
   }
 
   .card {
-	background-image: url('../images/scroll.png');
+	background-image: url('../images/papirus.jpeg');
 	background-repeat: no-repeat;
-	background-size: contain;
+	background-size: cover;
   background-position: center;
   border-radius: 10px;
+}
+
+.card_wooden {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: absolute;
+  bottom: -20px;
+  width: 900px;
+  height: 800px;
+  padding-left: 250px;
+  padding-right: 250px;
+  padding-bottom: 300px;
+  background-color: none;
+  background-image: url('../images/wooden-background.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .hide {
