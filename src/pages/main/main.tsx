@@ -1,12 +1,14 @@
-import {authController} from 'controllers/auth';
+import {authController} from '../../controllers/auth';
 import React from 'react';
-import {parseQueryString} from 'utils/parseQueryString';
+import {parseQueryString} from '../../utils/parseQueryString';
 import {Menu} from '../../components/menu/menu';
 import {leaderboardController} from '../../controllers/leaderboardController';
 import './style.css';
 
 class Main extends React.Component {
-
+	state = {
+		lightTheme: true
+	}
 
 	componentDidMount() {
 		this.continueOauth();
@@ -44,7 +46,8 @@ class Main extends React.Component {
 
 	render() {
 		return (
-			<div className="page page-main d-flex justify-center">
+			
+			<div className={this.state.lightTheme ? 'page page-main d-flex justify-center' : 'page_dark page-main d-flex justify-center'}>
 				<Menu />
 				<div className="card_big container d-flex flex-column align-center justify-center">
 						<p>Здесь будет невероятное описание нашей фантастически крутой (нет) игры</p>

@@ -91,7 +91,7 @@ class Input extends React.PureComponent<IInputCompProps> {
 				<input
 					className="form__field"
 					type={type}
-					value={value}
+					defaultValue={value}
 					placeholder={placeholder}
 					name={name}
 					onChange={onChange}

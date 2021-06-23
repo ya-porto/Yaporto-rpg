@@ -33,7 +33,8 @@ interface IProfile {
 	inputsUserInfo: IInputCompPropsWithRefs[],
 	inputsPassword: IInputCompPropsWithRefs[],
 	userInfo: IUserInfo[],
-	userAvatar: string
+	userAvatar: string,
+	lightTheme: boolean
 }
 
 interface ProfileProps extends RouteComponentProps {
@@ -42,6 +43,7 @@ interface ProfileProps extends RouteComponentProps {
 }
 class Profile extends React.Component<ProfileProps> {
 	state: Readonly<IProfile> = {
+		lightTheme: true,
 		isUserInfoShown: true,
 		isEditUserInfoShown: false,
 		isEditPasswordShown: false,
@@ -387,9 +389,9 @@ class Profile extends React.Component<ProfileProps> {
 					</Modal>
 				</CSSTransition>
 
-				<div className="page">
+				<div className={this.state.lightTheme ? 'page' : 'page_dark'}>
 					<Menu />
-					<div className="card_big relative">
+					<div className="card_big">
 						<div className="profile-avatar d-flex absolute flex-column justify-center align-center">
 							<div className="avatar d-flex justify-center align-center">
 								<img src={userAvatar} alt="avatar" draggable="false"/>

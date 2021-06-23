@@ -1,3 +1,8 @@
+  h1 {
+    font-size: 25px;
+    color: #272625;
+  }
+  
   input[type=file] {
     position: absolute;
     opacity: 0;
@@ -49,11 +54,24 @@
     padding-top: 100px;
     padding-bottom: 50px;
   }
+
+  .page_dark {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url('/images/forest-background-dark.jpeg');
+    background-size: contain;
+    width: 100%;
+    height: 100vh;
+    padding-top: 100px;
+    padding-bottom: 50px;
+  }
   
   .shadow {box-shadow: 1px 1px 6px 0px rgba(76,46,0,0.7);}
   
   .link {
-      color: #4c2e00;
+      color: #272625;
       cursor: pointer;
   }
 
@@ -62,6 +80,7 @@
   }
 
   .card_big {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -85,6 +104,8 @@
 	background-size: cover;
   background-position: center;
   border-radius: 10px;
+  width: 100%;
+  height: 100%;
 }
 
 .card_wooden {

@@ -1,7 +1,7 @@
 interface IButtonCompProps {
   disabled?: boolean,
   className?: string,
-  onClick: (event?: { target: HTMLElement; }) => void
+  onClick?: (arg: any) => void
 }
 
 export {IButtonCompProps};

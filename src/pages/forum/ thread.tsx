@@ -3,49 +3,64 @@ import {ThreadProps} from './thread.type';
 import {Button} from '../../components/button/index';
 import {Input} from '../../components/input/index';
 import {Menu} from '../../components/menu/menu';
+import {threadMock} from '../../_mocks/forumMocks';
 
 import './thread.css';
 
 export class Thread extends PureComponent<ThreadProps> {
+	state = {
+		thread: threadMock,
+		reply: ''
+	}
+
+	reply = (commentMessage: string) => {
+		console.log(commentMessage)
+		this.setState({reply: '"' + commentMessage.slice(0, 25) + '...' + '"'})
+	}
 	render() {
+		const {threadStarter, message, comments} = this.state.thread
 		return (
-			<div className="thread_page page relative px-14 pt-10">
+			<div className="page">
 				<Menu />
-				<div className="wrapper d-flex flex-column pa-6">
-					<div className="thread_topic d-flex flex-row">
-						<div className="thread_starter d-flex flex-column justify-center align-center">
-							<span className="thread_starter_avatar mb-2">
-								<img src={this.props.threadStarter?.avatar} />
-							</span>
-							<span className="thread_starter_login">{this.props.threadStarter?.login}</span>
-						</div>
-						<div className="thread_topic_message py-6 px-3">
-							{this.props.message}
-						</div>
-					</div>
-
-					{this.props.comments?.map((comment, i) => {
-						return (
-							<div className="thread_comment d-flex flex-row mt-6" key={i}>
-								<div className="thread_commentator d-flex flex-column justify-center align-center">
-									<span className="thread_commentator_avatar mb-2">
-										<img src={comment.commentator.avatar} />
-									</span>
-									<span className="thread_commentator_login">
-										{comment.commentator.login}
-									</span>
-								</div>
-								<div className="thread_comment_message py-6 px-3">
-									{comment.commentMessage}
-								</div>
+				<div className="thread">
+					<div className="card px-16 pb-10 pt-10 scroll">
+						<div className="thread_topic d-flex flex-row">
+							<div className="thread_starter d-flex flex-column justify-center align-center">
+								<span className="thread_starter_avatar mb-2">
+									<img src={threadStarter?.avatar} />
+								</span>
+								<span className="thread_starter_login">{threadStarter?.login}</span>
 							</div>
-						);
-					})}
+							<div className="thread_topic_message py-6 px-3">
+								{message}
+							</div>
+						</div>
 
-					<form className="thread_comment_field d-flex flex-column mt-6">
-						<Input value="" type="textarea" placeholder="Ваш комментарий" />
-						<Button onClick={() => {}} className="green mt-6">Написать комментарий</Button>
-					</form>
+						{comments?.map((comment, i) => {
+							const {commentMessage} = comment
+							return (
+								<div className="thread_comment relative d-flex flex-row mt-6" key={i}>
+									<button className="thread_reply_button" onClick={() => this.reply(commentMessage)}>Ответить</button>
+									<div className="thread_commentator d-flex flex-column justify-center align-center">
+										<span className="thread_commentator_avatar mb-2">
+											<img src={comment.commentator.avatar} />
+										</span>
+										<span className="thread_commentator_login">
+											{comment.commentator.login}
+										</span>
+									</div>
+									<div className="thread_comment_message py-6 px-3">
+										{commentMessage}
+									</div>
+								</div>
+							);
+						})}
+
+						<form className="thread_comment_field d-flex flex-column align-center mt-6">
+							<Input className="thred_input" value={this.state.reply} type="textarea" placeholder="Ваш комментарий" />
+							<Button className="thread_button mt-6 py-2">Написать комментарий</Button>
+						</form>
+					</div>
 				</div>
 			</div>
 

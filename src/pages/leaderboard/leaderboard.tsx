@@ -6,7 +6,7 @@ import {leaderboardController} from '../../controllers/leaderboardController';
 
 class Leaderboard extends React.Component {
 	state: Readonly<ILeaderboardComp> = {
-		leaderboardData: []
+		leaderboardData: [],
 	};
 
 	componentDidMount() {
@@ -22,10 +22,11 @@ class Leaderboard extends React.Component {
 	render() {
 		const {leaderboardData} = this.state;
 		return (
-			<div className="page page-leaderboard d-flex flex-column justify-center align-center">
+			
+			<div className='page page-leaderboard d-flex flex-column justify-center align-center'>
 				<Menu />
 				<div className="card shadow d-flex flex-column justify-start align-center px-10 py-8">
-					<h3 className="title mt-5">Leaderboard</h3>
+					<h1 className="title mt-5">Leaderboard</h1>
 					<LeaderboardComp leaderboardData={leaderboardData} />
 				</div>
 			</div>

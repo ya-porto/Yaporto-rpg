@@ -170,7 +170,7 @@ class Signup extends React.Component<SignupProps> {
 						</div>
 
 						<div className="signup_right d-flex flex-column align-end justify-space-between">
-							<h3 className="signup_header mt-5">Регистрация</h3>
+							<h1 className="signup_header mt-5">Регистрация</h1>
 							
 							<div className="signup_buttons d-flex flex-column align-end mb-7">
 								<Link to="/">

@@ -49,12 +49,12 @@ export class Inventory extends Component<{}, InventoryType> {
 								<BackpackCard clothes={[{
 									type: 'armor',
 									onClick: this.viewedItem,
-									img: 'https://as1.ftcdn.net/jpg/02/16/32/46/500_F_216324673_6cXL2BrX2QI3YrLNPgnkAyC3ZbRvZZ0W.jpg'
+									img: ''
 								},
 								{
 									type: 'armor',
 									onClick: this.viewedItem,
-									img: 'https://as1.ftcdn.net/jpg/02/16/32/46/500_F_216324673_6cXL2BrX2QI3YrLNPgnkAyC3ZbRvZZ0W.jpg'
+									img: ''
 
 								}]} header="Рюкзак"/>
 							</div>
