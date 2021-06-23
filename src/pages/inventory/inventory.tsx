@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import {BackpackCard} from '../../components/backpackCard/backpackCard';
 import {ViewedClothCard} from '../../components/viewedClothCard/viewedClothCard';
 import {CharacterCard} from '../../components/characterCard/characterCard';
@@ -36,48 +36,47 @@ export class Inventory extends Component<{}, InventoryType> {
 		return (
 			<div className="page">
 				<Menu />
-				<div className="inventory absolute d-flex flex-column justify-space-around pa-5" id="inventory">
+				<div className="card_wooden">
 
 					<div className="d-flex flex-row justify-center ma-2">
 						<h1 className="inventory_header">Инвентарь</h1>
 					</div>
 
-					<div className="d-flex flex-row justify-space-between">
+					<div className="inventory_wrapper d-flex flex-row justify-space-between">
 
-						<div className="d-flex flex-column justify-space-between">
-							<CharacterCard />
-							<div className="d-flex flex-row justify-space-around">
-								<Link to="/gameshop">
-									<Button
-										onClick={() => ''}
-										children={'В магазин'}
-										className = "green mr-5"
-									/>
-								</Link>
-								<Link to="/game">
-									<Button
-										onClick={() => ''}
-										children={'Играть'}
-										className = "green"
-									/>
-								</Link>
+							<div className="inventory d-flex flex-column justify-space-between">
+								<CharacterCard />
+								<BackpackCard clothes={[{
+									type: 'armor',
+									onClick: this.viewedItem,
+									img: 'https://as1.ftcdn.net/jpg/02/16/32/46/500_F_216324673_6cXL2BrX2QI3YrLNPgnkAyC3ZbRvZZ0W.jpg'
+								},
+								{
+									type: 'armor',
+									onClick: this.viewedItem,
+									img: 'https://as1.ftcdn.net/jpg/02/16/32/46/500_F_216324673_6cXL2BrX2QI3YrLNPgnkAyC3ZbRvZZ0W.jpg'
+
+								}]} header="Рюкзак"/>
 							</div>
+
+							<ViewedClothCard isViewed={this.state.isViewed} viewedItem={this.state.viewedItem} buttonText="Надеть" />
+
+						<div className="inventory_buttons d-flex flex-column justify-space-betweend">
+							<NavLink className="green inventory_button" to="/gameshop">
+								<Button
+									onClick={() => ''}
+									children={'В магазин'}
+									className="green inventory_button"
+								/>
+							</NavLink>
+							<NavLink className="green inventory_button" to="/game">
+								<Button
+									onClick={() => ''}
+									children={'Играть'}
+									className="green inventory_button"
+								/>
+							</NavLink>
 						</div>
-
-						<BackpackCard clothes={[{
-							type: 'armor',
-							onClick: this.viewedItem,
-							img: 'https://as1.ftcdn.net/jpg/02/16/32/46/500_F_216324673_6cXL2BrX2QI3YrLNPgnkAyC3ZbRvZZ0W.jpg'
-						},
-						{
-							type: 'armor',
-							onClick: this.viewedItem,
-							img: 'https://as1.ftcdn.net/jpg/02/16/32/46/500_F_216324673_6cXL2BrX2QI3YrLNPgnkAyC3ZbRvZZ0W.jpg'
-
-						}]} header="Рюкзак"/>
-
-						<ViewedClothCard isViewed={this.state.isViewed} viewedItem={this.state.viewedItem} buttonText="Надеть" />
-
 					</div>
 				</div>
 			</div>

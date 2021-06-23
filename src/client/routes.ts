@@ -32,12 +32,4 @@ export const ROUTES = {
 		NAME: 'Лидерборд',
 		INDEX: '/leaderboard'
 	},
-	GAMESHOP: {
-		NAME: 'Магазин',
-		INDEX: '/gameshop'
-	},
-	INVENTORY: {
-		NAME: 'Инвентарь',
-		INDEX: '/inventory'
-	}
 };
