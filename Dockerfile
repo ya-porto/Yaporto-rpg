@@ -16,4 +16,4 @@ RUN npm install
 EXPOSE 3000
 
 # Default command to run
-RUN npm run build
+# RUN npm run build

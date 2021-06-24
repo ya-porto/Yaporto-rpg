@@ -4,7 +4,7 @@ import httpContext from 'express-http-context';
 
 const PRAKTIKUM_AUTH_ENDPOINT = 'https://ya-praktikum.tech/api/v2/auth/user';
 
-async function authMiddleware(req: Request, res: Response, next: NextFunction) {
+async function authMiddleware(req: Request, _res: Response, next: NextFunction) {
 	const cookies = Object
 		.entries(req.cookies)
 		.map(([key, value]) => `${key}=${value}`)
@@ -17,7 +17,7 @@ async function authMiddleware(req: Request, res: Response, next: NextFunction) {
 		httpContext.set('user', data);
 	/* eslint-disbale-next-line */
 	} catch (err) {
-		console.log(err)
+		console.log(err);
 	}
 
 	await next();
