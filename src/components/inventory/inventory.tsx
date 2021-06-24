@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import {NavLink} from 'react-router-dom';
-import {BackpackCard} from '../../components/backpackCard/backpackCard';
-import {ViewedClothCard} from '../../components/viewedClothCard/viewedClothCard';
-import {CharacterCard} from '../../components/characterCard/characterCard';
-import {ClothProps} from '../../components/clothButton/clothButton';
-import {Button} from '../../components/button/index';
-import {Menu} from '../../components/menu/menu';
+import {BackpackCard} from '../backpackCard/backpackCard';
+import {ViewedClothCard} from '../viewedClothCard/viewedClothCard';
+import {CharacterCard} from '../characterCard/characterCard';
+import {ClothProps} from '../clothButton/clothButton';
+import {Button} from '../button/index';
+import {Menu} from '../menu/menu';
 
 import './inventory.css';
 
@@ -34,8 +34,6 @@ export class Inventory extends Component<{}, InventoryType> {
 
 	render() {
 		return (
-			<div className="page">
-				<Menu />
 				<div className="card_wooden">
 
 					<div className="d-flex flex-row justify-center ma-2">
@@ -79,7 +77,6 @@ export class Inventory extends Component<{}, InventoryType> {
 						</div>
 					</div>
 				</div>
-			</div>
 		);
 	}
 }

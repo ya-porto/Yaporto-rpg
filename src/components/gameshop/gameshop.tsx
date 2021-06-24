@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import {ViewedClothCard} from '../../components/viewedClothCard/viewedClothCard';
-import {ClothProps, ClothButton} from '../../components/clothButton/clothButton';
-import {Button} from '../../components/button/index';
-import {Menu} from '../../components/menu/menu';
+import {ViewedClothCard} from '../viewedClothCard/viewedClothCard';
+import {ClothProps, ClothButton} from '../clothButton/clothButton';
+import {Button} from '../button/index';
+import {Menu} from '../menu/menu';
 
 import './gameshop.css';
 
@@ -79,8 +79,6 @@ export class GameShop extends Component<GameShopProps, GameShopState> {
 
 	render() {
 		return (
-			<div className="page">
-				<Menu />
 				<div className="card_wooden">
 
 					<div className="d-flex flex-row justify-center ma-2">
@@ -107,7 +105,6 @@ export class GameShop extends Component<GameShopProps, GameShopState> {
 						<Button className="green gameshop_button" children={'Всё'} onClick={this.sortItems}/>
 					</div>
 				</div>
-			</div>
 		);
 	}
 }
