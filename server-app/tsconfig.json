@@ -13,7 +13,7 @@
         "strictNullChecks": true,
         "allowSyntheticDefaultImports": true,
         "suppressImplicitAnyIndexErrors": true,
-        "baseUrl": "src"
+        "baseUrl": "server-app/src"
     },
     "exclude": [
         "node_modules"
