@@ -25,7 +25,8 @@ const initialState = {
 	first_name: null,
 	second_name: null,
 	display_name: null,
-	phone: null
+	phone: null,
+	lightTheme: true
 };
 
 const userSlice = createSlice({
@@ -36,7 +37,7 @@ const userSlice = createSlice({
 			Object.assign(state, action.payload);
 		},
 		resetUserData: state => {
-			Object.assign(state, initialState);
+			Object.assign(state, initialState)
 		}
 	},
 	extraReducers: {

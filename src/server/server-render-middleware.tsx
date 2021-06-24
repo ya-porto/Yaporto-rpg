@@ -20,6 +20,8 @@ export default (req: Request, res: Response) => {
 	const context: StaticRouterContext = {};
 
 	const userData = {user: httpContext.get('user')};
+	// Оставляем потому что редьюсер в тулките удаляет из стейта ключ если в новом объекте его нет
+	userData.user['lightTheme'] = true
 	const store = createStore(reducers, userData);
 
 	const appContent = chunkExtractor.collectChunks(

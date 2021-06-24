@@ -12,13 +12,11 @@ export class BackpackCard extends Component<BackpackCardProps> {
 	render() {
 		const {clothes} = this.props;
 		return (
-			<div className="backpack mx-2 px-6 py-4 card d-flex flex-column align-center align-self-stretch">
-				<span className="backpack_header">{this.props.header}</span>
+			<div className="backpack mx-2 px-6 py-4 card d-flex flex-column align-center">
+				<span className="backpack_header mb-2">{this.props.header}</span>
 
 				{clothes.map(({type, onClick, img}, i) => (
-					<span className="clothes_button ma-2" key={i}>
-						<ClothButton type={type} onClick={onClick} img={img} />
-					</span>
+					<ClothButton className="clothes_button ma-2" type={type} onClick={onClick} img={img} key={i}/>
 				))}
 			</div>
 		);

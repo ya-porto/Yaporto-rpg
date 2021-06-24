@@ -13,6 +13,20 @@ export const forumMock: ThreadProps[] = [{
 	theme: 'Привет мир',
 	message: 'Первое сообщение',
 	commentsQuantity: '5'
+},
+{
+	id: 2,
+	data: '05.07.2020',
+	theme: 'Привет мир',
+	message: 'Первое сообщение',
+	commentsQuantity: '5'
+},
+{
+	id: 2,
+	data: '05.07.2020',
+	theme: 'Привет мир',
+	message: 'Первое сообщение',
+	commentsQuantity: '5'
 }];
 
 export const threadMock: ThreadProps = {
