@@ -1,39 +1,51 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {authController} from '../controllers/auth';
-import merge from 'deepmerge';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
+
+import {authController} from '../controllers/auth';
+import {setAuthFlag} from '../utils/setAuthFlag';
 
 export const fetchUserBy: any = createAsyncThunk(
 	'users/getFullInfo',
 	async () => {
 		const response = await authController.getUserInfo();
+
+		if (!response['isAuth']) {
+			setAuthFlag(response, true);
+		}
+
 		return response;
 	}
 );
 
+const initialState = {
+	isAuth: false,
+	email: null,
+	login: null,
+	first_name: null,
+	second_name: null,
+	display_name: null,
+	phone: null
+};
+
 const userSlice = createSlice({
 	name: 'user',
-	initialState: {
-		mail: null,
-		login: null,
-		name: null,
-		secondName: null,
-		nameInChat: null,
-		phone: null
-	},
+	initialState: initialState,
 	reducers: {
 		updateUserData: (state, action) => {
-			merge(state, action.payload);
+			Object.assign(state, action.payload);
+		},
+		resetUserData: state => {
+			Object.assign(state, initialState);
 		}
 	},
 	extraReducers: {
 		[fetchUserBy.fulfilled]: (state, action) => {
-			merge(state, action.payload);
+			Object.assign(state, action.payload);
 		}
 	}
 });
 
-export const {updateUserData} = userSlice.actions;
+export const {updateUserData, resetUserData} = userSlice.actions;
 
 export default userSlice.reducer;
