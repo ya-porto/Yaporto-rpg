@@ -1,4 +1,7 @@
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+
+import {RootState} from '../../redux/types';
 import {ThreadProps} from './thread.type';
 import {Menu} from '../../components/menu/menu';
 // Оставляем до реализации получения сообщений с бека
@@ -7,17 +10,18 @@ import {forumMock} from '../../_mocks/forumMocks';
 import './forum.css';
 
 interface ForumProps {
+	user: RootState
     threads: ThreadProps[]
 }
 
-export class Forum extends PureComponent<ForumProps> {
+class Forum extends Component<ForumProps> {
 	state = {
 		threads: forumMock
 	}
 	render() {
 		const {threads} = this.state;
 		return (
-			<div className="page">
+			<div className={this.props.user.lightTheme ? "page" : "page_dark"}>
 				<Menu />
 				<div className = "forum">
 					<div className = "card px-16 pb-10 pt-10">
@@ -41,3 +45,9 @@ export class Forum extends PureComponent<ForumProps> {
 		);
 	}
 }
+
+const mapStateToProps = (state: RootState) => ({
+	user: state.user
+});
+
+export default connect(mapStateToProps)(Forum);

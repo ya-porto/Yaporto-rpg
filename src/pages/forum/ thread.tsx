@@ -1,4 +1,7 @@
 import React, {PureComponent} from 'react';
+import {connect} from 'react-redux';
+
+import {RootState} from '../../redux/types';
 import {ThreadProps} from './thread.type';
 import {Button} from '../../components/button/index';
 import {Input} from '../../components/input/index';
@@ -7,7 +10,10 @@ import {threadMock} from '../../_mocks/forumMocks';
 
 import './thread.css';
 
-export class Thread extends PureComponent<ThreadProps> {
+interface IThread extends ThreadProps {
+	user: RootState
+}
+class Thread extends PureComponent<IThread> {
 	state = {
 		thread: threadMock,
 		reply: ''
@@ -20,7 +26,7 @@ export class Thread extends PureComponent<ThreadProps> {
 	render() {
 		const {threadStarter, message, comments} = this.state.thread
 		return (
-			<div className="page">
+			<div className={this.props.user.lightTheme ? "page" : "page_dark"}>
 				<Menu />
 				<div className="thread">
 					<div className="card px-16 pb-10 pt-10 scroll">
@@ -67,3 +73,9 @@ export class Thread extends PureComponent<ThreadProps> {
 		);
 	}
 }
+
+const mapStateToProps = (state: RootState) => ({
+	user: state.user
+});
+
+export default connect(mapStateToProps)(Thread);

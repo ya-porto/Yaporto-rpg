@@ -43,7 +43,7 @@ interface ProfileProps extends RouteComponentProps {
 }
 class Profile extends React.Component<ProfileProps> {
 	state: Readonly<IProfile> = {
-		lightTheme: true,
+		lightTheme: this.props.user.lightTheme,
 		isUserInfoShown: true,
 		isEditUserInfoShown: false,
 		isEditPasswordShown: false,

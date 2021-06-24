@@ -22,7 +22,6 @@ interface IInputCompPropsWithRefs extends IInputCompProps {
 interface ISignin {
 	inputsData: IInputCompPropsWithRefs[],
 	signinButton: IButton,
-	lightTheme: boolean
 }
 
 interface SigninProps extends RouteComponentProps {
@@ -31,7 +30,6 @@ interface SigninProps extends RouteComponentProps {
 }
 class Signin extends React.Component<SigninProps> {
 	state: Readonly<ISignin> = {
-		lightTheme: true,
 		inputsData: [{
 			value: '',
 			type: 'input',
@@ -114,9 +112,10 @@ class Signin extends React.Component<SigninProps> {
 	}
 
 	render() {
+		console.log(this.props.user)
 		const {inputsData, signinButton} = this.state;
 		return (
-			<div className={this.state.lightTheme ? 'page' : 'page_dark'}>
+			<div className={this.props.user.lightTheme ? 'page' : 'page_dark'}>
 				<Menu />
 				<div className="card_big">
 					<div className="card_big_inner d-flex flex-column align-center">
