@@ -1,20 +1,19 @@
+export interface AuthorProps {
+    id: number,
+    avatar?: string,
+    name: string
+}
 export interface ThreadProps {
     id: number,
-    data: string,
-    theme: string,
-    message: string,
-    commentsQuantity: string,
-    threadStarter?: {
-        login: string,
-        avatar: string,
-    }
-    comments?:
-        {
-            commentMessage: string,
-            commentator: {
-                login: string,
-                avatar: string
-            }
-        } []
+    author: AuthorProps,
+    title: string,
+    text: string,
+    comments?: CommentProps[]
+}
 
+export interface CommentProps {
+    id: number,
+    author: AuthorProps,
+    text: string,
+    likes: number[]
 }

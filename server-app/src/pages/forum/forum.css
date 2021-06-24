@@ -8,6 +8,7 @@
 .topics {
     height: 80%;
     margin: auto;
+    overflow-y: visible;
 }
 
 .topic {
@@ -38,4 +39,12 @@
 
 .thread_comments {
     font-size: 12px;
+}
+
+.create__title {
+    text-align: right;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    cursor: pointer;
 }
