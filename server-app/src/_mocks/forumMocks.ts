@@ -1,4 +1,4 @@
-import {ThreadProps} from '../pages/forum/thread.type';
+import {ThreadProps} from '../controllers/forum/forum.type';
 
 export const threadMocks: ThreadProps[] = [{
 	id: 3,
