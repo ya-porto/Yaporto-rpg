@@ -1,26 +1,35 @@
 export const ROUTES = {
-	INDEX_REDIRECT: {
+	MAIN: {
+		NAME: 'Домашяя',
 		INDEX: '/'
 	},
-	MAIN: {
-		INDEX: '/home'
-	},
 	PROFILE: {
-		INDEX: '/profile'
+		NAME: 'Профиль',
+		INDEX: '/profile',
+		AUTH: true
 	},
 	SIGNIN: {
-		INDEX: '/signin'
+		NAME: 'Войти',
+		INDEX: '/signin',
+		AUTH: false
 	},
 	SIGNUP: {
-		INDEX: '/signup'
+		NAME: 'Регистрация',
+		INDEX: '/signup',
+		AUTH: false
 	},
 	GAME: {
-		INDEX: '/game'
+		NAME: 'Играть',
+		INDEX: '/game',
+		AUTH: true
 	},
 	FORUM: {
-		INDEX: '/forum'
+		NAME: 'Форум',
+		INDEX: '/forum',
+		AUTH: true
 	},
 	LEADERBOARD: {
+		NAME: 'Лидерборд',
 		INDEX: '/leaderboard'
-	}
+	},
 };

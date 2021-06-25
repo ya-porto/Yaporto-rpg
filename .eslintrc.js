@@ -8,6 +8,7 @@
   "plugins": ["@typescript-eslint"],
   "rules": {
       "max-len": [2 , 200],
+      'dot-notation': [0, { "allowKeywords": false }],
       "indent": ["error", "tab"],
       "@typescript-eslint/no-unused-vars": 2,
       "no-new": "off",

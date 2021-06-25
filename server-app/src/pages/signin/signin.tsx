@@ -1,5 +1,11 @@
+import {getOauthUrlRedirect} from '../../client/constants';
 import React, {RefObject} from 'react';
+import {Dispatch} from 'redux';
+import {connect} from 'react-redux';
 import {Link, RouteComponentProps} from 'react-router-dom';
+
+import {fetchUserBy} from '../../redux/userSlice';
+import {RootState} from '../../redux/types';
 import {Button, IButtonCompProps} from '../../components/button';
 import {IInputCompProps, Input} from '../../components/input';
 import {Menu} from '../../components/menu/menu';
@@ -15,9 +21,14 @@ interface IInputCompPropsWithRefs extends IInputCompProps {
 }
 interface ISignin {
 	inputsData: IInputCompPropsWithRefs[],
-	signinButton: IButton
+	signinButton: IButton,
 }
-class Signin extends React.Component<RouteComponentProps> {
+
+interface SigninProps extends RouteComponentProps {
+	user: RootState;
+	dispatch: Dispatch;
+}
+class Signin extends React.Component<SigninProps> {
 	state: Readonly<ISignin> = {
 		inputsData: [{
 			value: '',
@@ -58,6 +69,10 @@ class Signin extends React.Component<RouteComponentProps> {
 		this.setState({inputsData: newArray});
 	}
 
+	getUserInfo = async () => {
+		await this.props.dispatch(fetchUserBy());
+	}
+
 	signinClick = () => {
 		const inputList = this.state.inputsData;
 		let data: ISigninData | {} = {};
@@ -78,40 +93,57 @@ class Signin extends React.Component<RouteComponentProps> {
 		// Все норм. Я валидирую
 		// @ts-ignore
 		authController.signin(data).then(() => {
-			this.props.history.push('/home');
+			this.getUserInfo();
 		}).catch(e => {
 			console.log(e);
 		});
 	}
 
+	yaSignin = () => {
+		const redirect = window.location.origin;
+		authController.getOauthId(redirect)
+			.then(data => {
+				const URL = getOauthUrlRedirect(data.service_id, redirect);
+				document.location.href = URL;
+			})
+			.catch(e => {
+				console.log(e);
+			});
+	}
+
 	render() {
+		console.log(this.props.user)
 		const {inputsData, signinButton} = this.state;
 		return (
-			<div className="page page-signin d-flex flex-column justify-center align-center">
+			<div className={this.props.user.lightTheme ? 'page' : 'page_dark'}>
 				<Menu />
-				<div className="card shadow d-flex flex-column justify-space-between align-center px-10 py-8">
-					<h3 className="title mt-5">Вход</h3>
-					<form className="form mt-4" action="" method="post">
-						{
-							inputsData.map(({value, type, placeholder, name, validation, ref}, i) => (
-								<Input
-									value={value}
-									type={type}
-									placeholder={placeholder}
-									name={name}
-									validation={validation}
-									onChange={this.inputChange}
-									key={i}
-									ref={ref}
-								/>
-							))
-						}
-					</form>
-					<Button className={signinButton.className} onClick={signinButton.onClick}>
-						{signinButton.text}
-					</Button>
-					<div className="buttons d-flex flex-column align-center">
-						<Link to="/signup" className="link mt-4">Нет аккаунта?</Link>
+				<div className="card_big">
+					<div className="card_big_inner d-flex flex-column align-center">
+						<h1 className="mt-5">Вход</h1>
+						<form className="signin_form mt-4" action="" method="post">
+							{
+								inputsData.map(({value, type, placeholder, name, validation, ref}, i) => (
+									<Input
+										value={value}
+										type={type}
+										placeholder={placeholder}
+										name={name}
+										validation={validation}
+										onChange={this.inputChange}
+										key={i}
+										ref={ref}
+									/>
+								))
+							}
+						</form>
+						<Link to="/">
+							<Button className={signinButton.className} onClick={signinButton.onClick}>
+								{signinButton.text}
+							</Button>
+						</Link>
+						<div className="signin_buttons d-flex flex-column align-center">
+							<Link to="/signup" className="link mt-4">Нет аккаунта?</Link>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -119,4 +151,8 @@ class Signin extends React.Component<RouteComponentProps> {
 	}
 }
 
-export {Signin};
+const mapStateToProps = (state: RootState) => ({
+	user: state.user
+});
+
+export default connect(mapStateToProps)(Signin);

@@ -1,21 +1,14 @@
-.thread_page {
-    background-image: url('../../../images/wooden-background.jpeg');
-}
-
-.wrapper {
-    top: 0; left: 0; right: 0; bottom: 0;
+.thread {
     width: 100%;
-    min-height: 600px;
-    background-color: #fff;
-    border: 2px solid #463a2c;
-    box-shadow: 5px 5px 15px #463a2c;
+    height: 100%;
+    padding: 0px 100px 0px 100px;
 }
 
 .thread_topic {
     width: 100%;
     height: 150px;
-    border-top: 1px solid #463a2c;
-    border-bottom: 1px solid #463a2c;
+    border: 1px solid #463a2c;
+    border-radius: 10px;
 }
 
 .thread_starter {
@@ -45,8 +38,8 @@
     width: auto;
     height: 120px;
     margin-left: 70px;
-    border-top: 1px solid #463a2c;
-    border-bottom: 1px solid #463a2c;
+    border: 1px solid #463a2c;
+    border-radius: 10px;
 }
 
 .thread_commentator {
@@ -58,10 +51,26 @@
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    border: 1px solid black;
+    border: 1px solid  #463a2c;
+}
+
+.thread_reply_button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 11px;
+    color: #331e01;
+    border-bottom: 2px solid #331e01;
 }
 
 .thread_comment_field {
     min-height: 150px;
-    border-top: 1px solid #463a2c;
+}
+
+.thread_button {
+    width: 25%;
+    min-width: 250px;
+    border-bottom: none;
+    border: 1px solid  #463a2c;
+    border-radius: 5px;
 }
