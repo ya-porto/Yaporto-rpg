@@ -21,7 +21,7 @@ interface IInputCompPropsWithRefs extends IInputCompProps {
 }
 interface ISignin {
 	inputsData: IInputCompPropsWithRefs[],
-	signinButton: IButton
+	signinButton: IButton,
 }
 
 interface SigninProps extends RouteComponentProps {
@@ -112,34 +112,38 @@ class Signin extends React.Component<SigninProps> {
 	}
 
 	render() {
+		console.log(this.props.user)
 		const {inputsData, signinButton} = this.state;
 		return (
-			<div className="page page-signin d-flex flex-column justify-center align-center">
+			<div className={this.props.user.lightTheme ? 'page' : 'page_dark'}>
 				<Menu />
-				<div className="card shadow d-flex flex-column justify-space-between align-center px-10 py-8">
-					<h3 className="title mt-5">Вход</h3>
-					<form className="form mt-4" action="" method="post">
-						{
-							inputsData.map(({value, type, placeholder, name, validation, ref}, i) => (
-								<Input
-									value={value}
-									type={type}
-									placeholder={placeholder}
-									name={name}
-									validation={validation}
-									onChange={this.inputChange}
-									key={i}
-									ref={ref}
-								/>
-							))
-						}
-					</form>
-					<Button className={signinButton.className} onClick={signinButton.onClick}>
-						{signinButton.text}
-					</Button>
-					<Button className="primary mt-5" onClick={this.yaSignin}>Войте с помощью <span style={{color: 'yellow'}}>Я</span>ндекс</Button>
-					<div className="buttons d-flex flex-column align-center">
-						<Link to="/signup" className="link mt-4">Нет аккаунта?</Link>
+				<div className="card_big">
+					<div className="card_big_inner d-flex flex-column align-center">
+						<h1 className="mt-5">Вход</h1>
+						<form className="signin_form mt-4" action="" method="post">
+							{
+								inputsData.map(({value, type, placeholder, name, validation, ref}, i) => (
+									<Input
+										value={value}
+										type={type}
+										placeholder={placeholder}
+										name={name}
+										validation={validation}
+										onChange={this.inputChange}
+										key={i}
+										ref={ref}
+									/>
+								))
+							}
+						</form>
+						<Link to="/">
+							<Button className={signinButton.className} onClick={signinButton.onClick}>
+								{signinButton.text}
+							</Button>
+						</Link>
+						<div className="signin_buttons d-flex flex-column align-center">
+							<Link to="/signup" className="link mt-4">Нет аккаунта?</Link>
+						</div>
 					</div>
 				</div>
 			</div>

@@ -8,19 +8,16 @@ export class CharacterCard extends PureComponent {
 		return (
 			<div className="character card mx-2 px-6 py-4 d-flex flex-column justify-space-between">
 				<div className="d-flex flex-column justify-center align-center">
-					<span className="character_name">Персонаж</span>
-					<span className="character_icon"></span>
-					<div className="d-flex flex-row justify-space-around mb-4">
-						<span className="clothes_button ma-2"></span>
-						<span className="clothes_button ma-2"></span>
-						<span className="clothes_button ma-2"></span>
-					</div>
-
-					<div className="d-flex flex-row flex-wrap mb-4">
-						<span className="character_stats_item ml-15">Уровень</span>
-						<span className="character_stats_item ml-15">Жизнь</span>
-						<span className="character_stats_item ml-15">Защита</span>
-						<span className="character_stats_item ml-15">Урон</span>
+					<span className="character_name mb-2">Персонаж</span>
+					<div className="d-flex flex-row justify-space-between">
+						<div className="d-flex flex-column">
+							<span >Уровень</span>
+							<span >Жизнь</span>
+						</div>
+						<div className="d-flex flex-column ml-4">
+							<span >Защита</span>
+							<span >Урон</span>
+						</div>
 					</div>
 				</div>
 			</div>

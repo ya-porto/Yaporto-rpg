@@ -1,23 +1,11 @@
 .character {
-    min-width: 300px;
-}
-
-.character_icon {
-    width: 100%;
-    min-height: 150px;
+    height: 45%;
 }
 
 .character_name {
-    font-size: 18px;
-    margin-bottom: 16px
+    font-size: 14px;
 }
 
-.character_stats_item {
+/* .character_stats_item {
     width: 50px;
-}
-
-
-.character_name {
-    font-size: 20px;
-    margin-bottom: 15px;
-}
+} */

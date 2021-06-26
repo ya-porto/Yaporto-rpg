@@ -31,5 +31,5 @@ export const ROUTES = {
 	LEADERBOARD: {
 		NAME: 'Лидерборд',
 		INDEX: '/leaderboard'
-	}
+	},
 };

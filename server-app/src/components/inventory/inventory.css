@@ -1,0 +1,33 @@
+.inventory_wrapper  {
+    padding-top: 50px;
+    padding-bottom: 25px;
+    height: 300px;
+    width: 100%;
+}
+
+.inventory {
+    height: 100%;
+    width: 60%;
+}
+
+.inventory_header {
+    position: absolute;
+    top: 60px;
+}
+
+.inventory_buttons {
+    position: absolute;
+    left: 95px;
+    top: 250px;
+    width: 70px;
+    height: 200px;
+}
+
+.inventory_button {
+    border: none;
+    font-size: 14px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    box-shadow: inset 1px 5px 15px #331e01;
+}

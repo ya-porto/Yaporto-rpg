@@ -1,11 +1,13 @@
 .button {
-    width: 100%;
-    padding: 12px 6px;
     text-align: center;
     font-size: 17px;
-    border-radius: 8px;
-    color: #fff;
+    padding: 2px;
+    color: #331e01;
+    border-bottom: 2px solid #331e01;
+    transition: 0.2s;
 }
-.button.primary {
-    background-color: #3369f3;
+
+.button:hover {
+    color: #aa7543;
+    border-bottom: 2px solid #aa7543;
 }

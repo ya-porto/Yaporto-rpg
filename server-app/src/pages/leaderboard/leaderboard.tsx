@@ -1,12 +1,26 @@
 import React from 'react';
+import {Dispatch} from 'redux';
+import {connect} from 'react-redux';
+
+import {leaderboardController} from '../../controllers/leaderboardController';
+import {RootState} from '../../redux/types';
 import {LeaderboardComp, ILeaderboardComp} from '../../components/leaderboard';
 import {Menu} from '../../components/menu/menu';
-import './style.css';
-import {leaderboardController} from '../../controllers/leaderboardController';
 
-class Leaderboard extends React.Component {
-	state: Readonly<ILeaderboardComp> = {
-		leaderboardData: []
+import './style.css';
+
+interface ILeadreboard extends ILeaderboardComp {
+	lightTheme: boolean;
+}
+
+interface LeaderboardProps {
+	user: RootState;
+	dispatch: Dispatch;
+}
+class Leaderboard extends React.Component<LeaderboardProps> {
+	state: ILeadreboard = {
+		lightTheme: true,
+		leaderboardData: [],
 	};
 
 	componentDidMount() {
@@ -22,10 +36,11 @@ class Leaderboard extends React.Component {
 	render() {
 		const {leaderboardData} = this.state;
 		return (
-			<div className="page page-leaderboard d-flex flex-column justify-center align-center">
+			
+			<div className={this.props.user.lightTheme ? 'page page-leaderboard d-flex flex-column justify-center align-center' : 'page_dark page-leaderboard d-flex flex-column justify-center align-center'}>
 				<Menu />
 				<div className="card shadow d-flex flex-column justify-start align-center px-10 py-8">
-					<h3 className="title mt-5">Leaderboard</h3>
+					<h1 className="title mt-5">Leaderboard</h1>
 					<LeaderboardComp leaderboardData={leaderboardData} />
 				</div>
 			</div>
@@ -33,4 +48,8 @@ class Leaderboard extends React.Component {
 	}
 }
 
-export {Leaderboard};
+const mapStateToProps = (state: RootState) => ({
+	user: state.user
+});
+
+export default connect(mapStateToProps)(Leaderboard);

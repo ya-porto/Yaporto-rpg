@@ -1,15 +1,20 @@
-.page-signup .card {
-    width: 45%;
-    min-height: 60%;
-    border-radius: 2%;
+
+.signup_card_inner {
+    height: 75%;
+    width: 70%;
 }
-.page-signup .card .title {
-    font-size: 25px;
+.signup_left {
+    width: 50%;
+    height:100%;
 }
-.page-signup .card .form {
-    width: 100%;
+
+.signup_right {
+    height:100%;
+}
+.signup_form {
     flex: 1;
 }
-.page-signup .card .buttons {
-    width: 100%;
+
+.signup_header {
+    font-size: 28px;
 }

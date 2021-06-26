@@ -3,6 +3,7 @@ import React, {PureComponent} from 'react';
 import './clothButton.css';
 
 export interface ClothProps {
+	className?: string;
     defence?: number;
     hitpoint?: number;
     img?: string;
@@ -30,7 +31,7 @@ export class ClothButton extends PureComponent<ClothProps> {
 
 	render() {
 		return (
-			<button onClick={this.giveOwnProps} style={{width: '100%', height: '100%'}}>
+			<button className={this.props.className} onClick={this.giveOwnProps}>
 				<img src={this.props.img} width="100%" height="100%" alt="Мега картинка"></img>
 			</button>
 		);

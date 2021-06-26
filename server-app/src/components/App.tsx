@@ -1,9 +1,10 @@
 import {Game} from '../pages/game';
-import {Leaderboard} from '../pages/leaderboard';
-import {Main} from '../pages/main';
+import Leaderboard from '../pages/leaderboard';
+import Main from '../pages/main';
 import Profile from '../pages/profile';
 import Signin from '../pages/signin';
 import Signup from '../pages/signup';
+import {forum} from '../pages/forum';
 
 import React from 'react';
 import {hot} from 'react-hot-loader/root';
@@ -22,6 +23,7 @@ function App(): JSX.Element {
 				<Route exact path={NavigationList.Signin} component={Signin} />
 				<Route exact path={NavigationList.Profile} component={Profile} />
 				<Route exact path={NavigationList.Leaderboard} component={Leaderboard} />
+				<Route exact path={NavigationList.Forum} component={forum} />
 			</Switch>
 		</div>
 	);
