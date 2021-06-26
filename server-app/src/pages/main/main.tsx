@@ -6,7 +6,6 @@ import {RootState} from '../../redux/types';
 import {authController} from '../../controllers/auth';
 import {parseQueryString} from '../../utils/parseQueryString';
 import {Menu} from '../../components/menu/menu';
-import {leaderboardController} from '../../controllers/leaderboardController';
 import './style.css';
 
 
@@ -16,19 +15,11 @@ interface MainProps {
 }
 class Main extends React.Component<MainProps> {
 
-	componentDidMount() {
+	componentWillUpdate() {
+		// Этот кусок не работает, в браузере не вызывается метод ЖЦ, надо выносить в миддлвару на беке
 		this.continueOauth();
 	}
 
-	getLeaderboardData = () => {
-		leaderboardController.getLeaderboard({cursor: 0, limit: 50})
-			.then(data => {
-				this.setState({leaderboardData: data});
-			})
-			.catch(e => {
-				console.log(e);
-			});
-	}
 
 	continueOauth = () => {
 		const searchParams = window.location.search;
@@ -53,7 +44,7 @@ class Main extends React.Component<MainProps> {
 	render() {
 		return (
 			
-			<div className={this.props.user.lightTheme ? 'page page-main d-flex justify-center' : 'page_dark page-main d-flex justify-center'}>
+			<div className={`page ${this.props.user.theme} page-main d-flex justify-center`}>
 				<Menu />
 				<div className="card_big container d-flex flex-column align-center justify-center">
 						<p>Здесь будет невероятное описание нашей фантастически крутой (нет) игры</p>

@@ -1,7 +1,8 @@
 import {createSlice} from '@reduxjs/toolkit';
+import {sliceNames} from './slicenames';
 
 export const characterSlice = createSlice({
-	name: 'character',
+	name: sliceNames.character,
 	initialState: {
 		startedHp: 100,
 		startedArmor: 0,

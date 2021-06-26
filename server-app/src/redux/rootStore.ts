@@ -15,7 +15,7 @@ export function createStore(reducers: reducers, preloadedState = {}): EnhancedSt
 interface reducers { 
 	user: typeof userReducer,
 	game: typeof gameReducer,
-	character: typeof characterReducer
+	character: typeof characterReducer,
 }
 
 export const reducers = {

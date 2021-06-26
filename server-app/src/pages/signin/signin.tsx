@@ -112,10 +112,9 @@ class Signin extends React.Component<SigninProps> {
 	}
 
 	render() {
-		console.log(this.props.user)
 		const {inputsData, signinButton} = this.state;
 		return (
-			<div className={this.props.user.lightTheme ? 'page' : 'page_dark'}>
+			<div className={`page ${this.props.user.theme}`}>
 				<Menu />
 				<div className="card_big">
 					<div className="card_big_inner d-flex flex-column align-center">

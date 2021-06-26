@@ -9,8 +9,9 @@ import {StaticRouter} from 'react-router-dom';
 import parse from 'html-react-parser';
 import httpContext from 'express-http-context';
 
-import {App} from '../components/App';
-import {createStore, reducers} from '../redux/rootStore';
+import {App} from '../../components/App';
+import {createStore, reducers} from '../../redux/rootStore';
+import {sliceNames} from '../../redux/slicenames';
 
 export default (req: Request, res: Response) => {
 	const statsFile = path.resolve('./dist/loadable-stats.json');
@@ -19,10 +20,12 @@ export default (req: Request, res: Response) => {
 	const location = req.url;
 	const context: StaticRouterContext = {};
 
-	const userData = {user: httpContext.get('user')};
-	// Оставляем потому что редьюсер в тулките удаляет из стейта ключ если в новом объекте его нет
-	userData.user['lightTheme'] = true
-	const store = createStore(reducers, userData);
+	const userData = httpContext.get(sliceNames.user)
+	userData['theme'] = httpContext.get('userThemes')?.theme
+	userData['themes'] = httpContext.get('userThemes')?.themes
+
+	const preloadedData = {user: userData}
+	const store = createStore(reducers, preloadedData);
 
 	const appContent = chunkExtractor.collectChunks(
 		<Provider store={store}>

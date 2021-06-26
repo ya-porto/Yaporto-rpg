@@ -26,7 +26,7 @@ class Thread extends PureComponent<IThread> {
 	render() {
 		const {threadStarter, message, comments} = this.state.thread
 		return (
-			<div className={this.props.user.lightTheme ? "page" : "page_dark"}>
+			<div className={`${this.props.user.theme} page`}>
 				<Menu />
 				<div className="thread">
 					<div className="card px-16 pb-10 pt-10 scroll">

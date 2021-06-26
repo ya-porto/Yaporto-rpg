@@ -3,22 +3,18 @@ import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
 import {authController} from '../controllers/auth';
-import {setAuthFlag} from '../utils/setAuthFlag';
+import {sliceNames} from './slicenames';
 
-export const fetchUserBy: any = createAsyncThunk(
+const fetchUserBy: any = createAsyncThunk(
 	'users/getFullInfo',
 	async () => {
 		const response = await authController.getUserInfo();
-
-		if (!response['isAuth']) {
-			setAuthFlag(response, true);
-		}
-
+		response['isAuth'] = true
 		return response;
 	}
 );
 
-const initialState = {
+const userInitialState = {
 	isAuth: false,
 	email: null,
 	login: null,
@@ -26,27 +22,46 @@ const initialState = {
 	second_name: null,
 	display_name: null,
 	phone: null,
-	lightTheme: true
+	theme: 'light',
+	themes: []
 };
 
 const userSlice = createSlice({
-	name: 'user',
-	initialState: initialState,
+	name: sliceNames.user,
+	initialState: userInitialState,
 	reducers: {
+		updateTheme: (state, action) => {
+			state.theme = action.payload
+		},
 		updateUserData: (state, action) => {
-			Object.assign(state, action.payload);
+			state.display_name = action.payload.display_name
+			state.email = action.payload.email
+			state.login = action.payload.login
+			state.first_name = action.payload.first_name
+			state.second_name = action.payload.second_name
+			state.phone = action.payload.phone
+			state.theme = action.payload.theme
+			state.isAuth = action.payload.isAuth
 		},
 		resetUserData: state => {
-			Object.assign(state, initialState)
+			Object.assign(state, userInitialState)
 		}
 	},
 	extraReducers: {
 		[fetchUserBy.fulfilled]: (state, action) => {
-			Object.assign(state, action.payload);
+			state.display_name = action.payload.display_name
+			state.email = action.payload.email
+			state.login = action.payload.login
+			state.first_name = action.payload.first_name
+			state.second_name = action.payload.second_name
+			state.phone = action.payload.phone
+			state.theme = action.payload.theme
+			state.isAuth = action.payload.isAuth
 		}
 	}
 });
 
-export const {updateUserData, resetUserData} = userSlice.actions;
+export const {updateUserData, resetUserData, updateTheme} = userSlice.actions;
+export {fetchUserBy}
 
 export default userSlice.reducer;
