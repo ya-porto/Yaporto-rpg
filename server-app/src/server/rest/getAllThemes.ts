@@ -11,7 +11,6 @@ async function  getAllThemes (req: Request, res: Response, next: NextFunction) {
             }})
         })
         .catch(err => console.error(err))
-
         res.status(200).send(result)
 
     next()

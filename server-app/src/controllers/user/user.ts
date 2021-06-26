@@ -1,5 +1,5 @@
 
-import {http, AxiosError} from '../../modules/http';
+import {http, AxiosError, AxiosResponse} from '../../modules/http';
 import {IChangeUserInfo, IChangePassword} from './user.type';
 import {serverUrl} from '../../utils/baseUrls';
 import {restEndpoints} from '../../utils/restEndpoints';
@@ -28,8 +28,14 @@ class Controller {
 	}
 
 	getAllThemes() {
-		console.log('im sending request on url', serverUrl, 'and endpoint', restEndpoints.getAllThemes)
 		return http.get(`${serverUrl}${restEndpoints.getAllThemes}`)
+			.then((res: AxiosResponse) => res.data)
+			.catch((e: AxiosError) => Promise.reject(e.response?.data.reason));
+	}
+
+	getUserTheme(id: number) {
+		return http.get(`${serverUrl}${restEndpoints.getUserTheme}id=${id}`)
+			.then((res: AxiosResponse) => res.data)
 			.catch((e: AxiosError) => Promise.reject(e.response?.data.reason));
 	}
 }

@@ -4,7 +4,7 @@ import {Dispatch} from 'redux';
 import {connect} from 'react-redux';
 import {Link, RouteComponentProps} from 'react-router-dom';
 
-import {fetchUserBy, getAllThemes} from '../../redux/userSlice';
+import {fetchUserBy, getAllThemes, getUserTheme} from '../../redux/userSlice';
 import {RootState} from '../../redux/types';
 import {Button, IButtonCompProps} from '../../components/button';
 import {IInputCompProps, Input} from '../../components/input';
@@ -74,8 +74,11 @@ class Signin extends React.Component<SigninProps> {
 	}
 
 	getAllThemes = async () => {
-		console.log('im trying to async dispatch')
 		await this.props.dispatch(getAllThemes())
+	}
+
+	getUserTheme = async () => {
+		await this.props.dispatch(getUserTheme(this.props.user.id))
 	}
 
 	signinClick = () => {
@@ -98,7 +101,10 @@ class Signin extends React.Component<SigninProps> {
 		// Все норм. Я валидирую
 		// @ts-ignore
 		authController.signin(data).then(() => {
-			this.getUserInfo();
+			this.getUserInfo()
+				.then(() => {
+					console.log('пошел за темой юзера')
+					this.getUserTheme()})
 			this.getAllThemes();
 		})
 		.catch(e => {

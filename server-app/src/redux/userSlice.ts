@@ -18,8 +18,15 @@ const fetchUserBy: any = createAsyncThunk(
 const getAllThemes: any = createAsyncThunk(
 	'getThemes',
 	async () => {
-		console.log('im inside thunk')
 		const response = await userController.getAllThemes();
+		return response;
+	}
+)
+
+const getUserTheme: any = createAsyncThunk(
+	'getUserThemes',
+	async (id: number) => {
+		const response = await userController.getUserTheme(id);
 		return response;
 	}
 )
@@ -70,11 +77,14 @@ const userSlice = createSlice({
 		},
 		[getAllThemes.fulfilled]: (state, action) => {
 			state.themes = action.payload
+		},
+		[getUserTheme.fulfilled]: (state, action) => {
+			state.theme = action.payload
 		}
 	}
 });
 
 export const {updateUserData, resetUserData, updateTheme} = userSlice.actions;
-export {fetchUserBy, getAllThemes}
+export {fetchUserBy, getAllThemes, getUserTheme}
 
 export default userSlice.reducer;

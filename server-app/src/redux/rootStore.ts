@@ -7,7 +7,7 @@ import userReducer from './userSlice';
 export function createStore(reducers: reducers, preloadedState = {}): EnhancedStore {
 	return configureStore({
 		reducer: reducers,
-		preloadedState
+		preloadedState,
 	});
 }
 // Линтер не понимает что тут объявляется интерфейс

@@ -9,7 +9,8 @@ import {IS_DEV} from '../../webpack/env';
 
 import {restEndpoints} from '../utils/restEndpoints';
 import getAllThemes from './rest/getAllThemes';
-import changeThemeApi from './rest/changeThemeApi'
+import changeThemeApi from './rest/changeThemeApi';
+import getUserTheme from './rest/getUserTheme';
 
 const key = fs.readFileSync(__dirname + '/selfsigned.key');
 const cert = fs.readFileSync(__dirname + '/selfsigned.crt');
@@ -25,6 +26,7 @@ const PORT = process.env.PORT || 4001;
 // express.json тут нужен чтоб прочитать тело запроса в последующих ручках. иначе будет андефайнд
 app.use(express.json())
 app.get(restEndpoints.getAllThemes, getAllThemes)
+app.get(restEndpoints.getUserTheme, getUserTheme)
 app.put(restEndpoints.changeTheme, changeThemeApi)
 app.use(router);
 
