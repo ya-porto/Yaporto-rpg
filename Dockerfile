@@ -16,4 +16,4 @@ EXPOSE 4000
 
 # Default command to run
 RUN npm run build
-CMD npm run express 
+CMD npm run start 

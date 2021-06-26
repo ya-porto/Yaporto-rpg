@@ -1,10 +1,11 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import {store} from '../../client/index';
+
+import {changeTime} from '../../redux/gameSlice';
+import {Game as GameCanvas} from '../../components/game/index';
 import {Button} from '../../components/button/index';
 import './style.css';
-import {store, changeTime} from '../../redux/storeGame';
-import {Game as GameCanvas} from '../../components/game/index';
-
 interface IGame {
 	time: { min: string, sec: string, id: number | null },
 	lvl: number,
@@ -74,7 +75,7 @@ class Game extends React.Component {
 		const nextLvl = lvl + 1;
 		const exp = this.getExpPercent();
 		return (
-			<div className="page page-game d-flex flex-column justify-start align-center">
+			<div className="page-game d-flex flex-column justify-start align-center">
 				<header className="game-header d-flex justify-space-between align-center px-5">
 					<div className="game-header__left d-flex justify-space-between align-center">
 						<div className="time mr-4">{`${time.min}:${time.sec}`}</div>

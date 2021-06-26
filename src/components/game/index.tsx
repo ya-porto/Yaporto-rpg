@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {GameCanvas} from './canvasGenerate';
 import {lvlGenerate} from './lvlgenerate';
+import {getDocument} from 'ssr-window';
+const document = getDocument();
 
 import '../App.css';
 
@@ -9,7 +11,7 @@ const ATTACKDELAY = 800;
 const xSize = 90;
 const ySize = 90;
 
-const canvasImg = new Image();
+const canvasImg = document.createElement('img');
 canvasImg.src = '/images/bg.jpeg';
 
 const char1 = {

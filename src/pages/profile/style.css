@@ -1,35 +1,28 @@
-.modal .modal_close {
-    position: absolute;
-    top: 5px;
-    right: 10px;
-    cursor: pointer;
-    font-size: 25px;
-}
-
-.page-profile .profile {
+.profile {
     width: 80%;
 }
 
-.page-profile .profile .profile-avatar {
+.profile-avatar {
+    top: -20px;
     width: 12%;
 }
 
-.page-profile .profile .profile-avatar .avatar {
+.avatar {
     position: relative;
-    width: 150px;
-    height: 150px;
+    width: 130px;
+    height: 130px;
     border-radius: 50%;
-    background-color: #efefef;
+    background-color: #bcb05f;
     color: #999;
     font-size: 35px;
     overflow: hidden;
 }
 
-.page-profile .profile .profile-avatar .avatar img {
+.avatar img {
     width: 100%;
 }
 
-.page-profile .profile .profile-avatar .avatar .avatar_hover {
+ .avatar_hover {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -45,69 +38,62 @@
     transition: opacity 0.2s;
 }
 
-.page-profile .profile .profile-avatar .avatar:hover .avatar_hover {
+ .avatar:hover .avatar_hover {
     opacity: 1;
 }
 
-.page-profile .profile .profile-avatar .name {
+ .profile-avatar .name {
     font-size: 20px;
-    color: #1e1e1e;
+    color: #331e01;
     font-weight: 600;
 }
 
-.page-profile .profile .profile-info,
-.page-profile .profile .profile-buttons,
-.page-profile .profile .field,
-.page-profile .profile .button__save {
-    width: 30%;
+.profile-buttons{
+    width: 70%;
 }
 
-.page-profile .profile .profile-info li::after,
-.page-profile .profile .profile-buttons .profile-buttons__item::after {
+.profile-info,
+.profile,
+.field,
+.profile-buttons {
+    width: 50%;
+}
+
+.profile-info li::after {
     content: '';
     position: absolute;
     bottom: -8px;
     width: 100%;
     height: 1px;
-    background-color: #eaeaea;
+    background-color:  #5d801b;
 }
 
-.page-profile .profile .profile-info .profile-buttons__item:last-child:after {
-    content: none;
-}
-
-.page-profile .profile .profile-buttons .profile-buttons__item:last-child:after {
-    content: none;
-}
-.page-profile .profile .profile-buttons .profile-buttons__item.link {
-    color: #3369f3;
-}
-.page-profile .profile .profile-buttons .profile-buttons__item.link,
-.page-profile .profile .profile-buttons .profile-buttons__item.logout {
-    padding: 0;
-}
-
-.page-profile .profile .profile-buttons .profile-buttons__item.logout {
-    color: #ff0000;
-}
-
-.page-profile .profile .profile-info {
+.profile-info {
     font-weight: 600;
 }
 
-.page-profile .profile .profile-info .profile-info__item .name {
-    color: #1e1e1e;
-}
-
-.page-profile .profile .profile-info .profile-info__item .value {
-    color: #999;
-}
-
-.page-profile .profile .profile-buttons .profile-buttons__item button {
-    font-size: 16px;
+ .profile-info__item .value {
+    color:#bcb05f;
 }
 
 .modal-content.avatar {
     height: 30%;
     width: 20%;
 }
+
+/* Группа стилей для анимации модалки на странице. Там специально постфиксы прописаны, которых нет в jsx флайле */
+
+.show-modal-enter {
+    transform-origin: top center;
+    transform: rotate(-90deg);
+    transition: transform 500ms;
+}
+
+.show-modal-enter-active {
+    transform: none;
+}
+
+.show-modal-exit {
+    transform: none;
+}
+

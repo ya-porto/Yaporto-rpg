@@ -1,3 +1,6 @@
+import {getDocument} from 'ssr-window';
+const document = getDocument();
+
 export class NumberAnimate {
 	xPos: number;
 	yPos: number;

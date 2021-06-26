@@ -1,17 +1,21 @@
 import React, {RefObject} from 'react';
-import {RouteComponentProps} from 'react-router-dom';
-import {Button, IButtonCompProps} from '../../components/button';
+import {connect} from 'react-redux';
+import {Dispatch} from 'redux';
+import {RouteComponentProps, Link} from 'react-router-dom';
+import {CSSTransition} from 'react-transition-group'
+import {getDocument} from 'ssr-window';
+
+import {Button} from '../../components/button';
 import {Input, IInputCompProps} from '../../components/input';
+import {RootState} from '../../redux/types';
 import {Menu} from '../../components/menu/menu';
 import {Modal} from '../../components/modal';
-import {authController, IUserInfoData} from '../../controllers/auth';
+import {authController} from '../../controllers/auth';
 import {IChangePassword, IChangeUserInfo, userController} from '../../controllers/user';
+import {fetchUserBy, resetUserData} from '../../redux/userSlice';
 import './style.css';
-import {fetchUserBy, store} from '../../redux/storeUser';
 
-interface IButton extends IButtonCompProps {
-	text: string
-}
+const document = getDocument();
 interface IUserInfo {
 	value: string,
 	name: string,
@@ -28,12 +32,18 @@ interface IProfile {
 	isModalShown: boolean,
 	inputsUserInfo: IInputCompPropsWithRefs[],
 	inputsPassword: IInputCompPropsWithRefs[],
-	buttonsProfile: IButton[],
 	userInfo: IUserInfo[],
-	userAvatar: string
+	userAvatar: string,
+	lightTheme: boolean
 }
-class Profile extends React.Component<RouteComponentProps> {
+
+interface ProfileProps extends RouteComponentProps {
+	user: RootState;
+	dispatch: Dispatch;
+}
+class Profile extends React.Component<ProfileProps> {
 	state: Readonly<IProfile> = {
+		lightTheme: this.props.user.lightTheme,
 		isUserInfoShown: true,
 		isEditUserInfoShown: false,
 		isEditPasswordShown: false,
@@ -122,74 +132,47 @@ class Profile extends React.Component<RouteComponentProps> {
 			},
 			ref: React.createRef()
 		}],
-		buttonsProfile: [{
-			text: 'Изменить данные',
-			className: 'profile-buttons__item relative d-flex mt-5 pointer link',
-			onClick: () => this.showEditUserInfo()
-		}, {
-			text: 'Изменить пароль',
-			className: 'profile-buttons__item relative d-flex mt-5 pointer link',
-			onClick: () => this.showEditPassword()
-		}, {
-			text: 'Выйти',
-			className: 'profile-buttons__item relative d-flex mt-5 pointer logout',
-			onClick: () => this.signoutClick()
-		}],
 		userInfo: [{
 			displayName: 'Почта',
 			name: 'email',
-			value: ''
+			value: this.props.user.email
 		}, {
 			displayName: 'Логин',
 			name: 'login',
-			value: ''
+			value: this.props.user.login
 		}, {
 			displayName: 'Имя',
 			name: 'first_name',
-			value: ''
+			value: this.props.user.first_name
 		}, {
 			displayName: 'Фамилия',
 			name: 'second_name',
-			value: ''
+			value: this.props.user.second_name
 		}, {
 			displayName: 'Имя в чате',
 			name: 'display_name',
-			value: ''
+			value: this.props.user.display_name
 		}, {
 			displayName: 'Телефон',
 			name: 'phone',
-			value: ''
+			value: this.props.user.phone
 		}],
-		userAvatar: '../../images/avatar-example.png'
+		userAvatar: this.props.user.avatar ? 'https://ya-praktikum.tech/api/v2/resources' + this.props.user.avatar : '../../images/avatar-example.png'
 	};
 
-	componentDidMount() {
-		this.getUserInfo();
+	componentDidUpdate(prevProps: ProfileProps) {
+		if (this.props.user !== prevProps.user) {
+			const {userInfo} = this.state;
+			userInfo.map(item => {
+				this.props.user.hasOwnProperty(item.name) ? item.value = this.props.user[item.name] : false;
+			});
+			this.setState({userInfo: userInfo});
+			this.setState({userAvatar: this.props.user.avatar ? 'https://ya-praktikum.tech/api/v2/resources' + this.props.user.avatar : '../../images/avatar-example.png'});
+		}
 	}
 
-	getUserInfo = () => {
-		store.dispatch(fetchUserBy());
-		authController.getUserInfo().then((data: IUserInfoData) => {
-			const userInfo = [...this.state.userInfo];
-
-			userInfo.forEach(x => {
-				if (data[x.name]) {
-					x.value = data[x.name];
-				}
-			});
-
-			this.setState({
-				...this.state,
-				isUserInfoShown: true,
-				isEditUserInfoShown: false,
-				isEditPasswordShown: false,
-				isModalShown: false,
-				userInfo,
-				userAvatar: data.avatar ? `https://ya-praktikum.tech/api/v2/resources${data.avatar}` : this.state.userAvatar
-			});
-		}).catch(e => {
-			console.log(e);
-		});
+	getUserInfo = async () => {
+		this.props.dispatch(fetchUserBy());
 	}
 
 	inputChange = (data: IUserInfo, inputsArray: string) => {
@@ -238,57 +221,6 @@ class Profile extends React.Component<RouteComponentProps> {
 		});
 	}
 
-	editUserInfoTemplate = (): JSX.Element => {
-		const {inputsUserInfo} = this.state;
-		return (
-			<>
-				{
-					inputsUserInfo.map((item, i) => (
-						<Input
-							{...item}
-							onChange={this.inputUserInfoChange}
-							key={i}
-						/>
-					))
-				}
-				<Button className="button__save primary mt-5" onClick={this.changeUserInfo}>Сохранить</Button>
-			</>
-		);
-	}
-
-	editPasswordTemplate = (): JSX.Element => {
-		const {inputsPassword} = this.state;
-		return (
-			<>
-				{
-					inputsPassword.map((item, i) => (
-						<Input
-							{...item}
-							onChange={this.inputPasswordChange}
-							key={i}
-						/>
-					))
-				}
-				<Button className="button__save primary mt-5" onClick={this.changePassword}>Сохранить</Button>
-			</>
-		);
-	}
-
-	userInfoTemplate = (): JSX.Element => {
-		const {userInfo} = this.state;
-		return (
-			<ul className="profile-info d-flex flex-column mt-16">
-				{
-					userInfo.map(({value, displayName}, i) => (
-						<li className="profile-info__item relative d-flex justify-space-between mt-5" key={i}>
-							<span className="name">{displayName}</span>
-							<span className="value">{value}</span>
-						</li>
-					))
-				}
-			</ul>
-		);
-	}
 
 	changeUserInfo = () => {
 		const inputList = this.state.inputsUserInfo;
@@ -312,7 +244,8 @@ class Profile extends React.Component<RouteComponentProps> {
 		// @ts-ignore
 		userController.changeUserInfo(data).then(() => {
 			this.getUserInfo();
-		}).catch(e => {
+		})
+		.then(() => this.showUserInfo()).catch(e => {
 			console.log(e);
 		});
 	}
@@ -338,7 +271,7 @@ class Profile extends React.Component<RouteComponentProps> {
 		// Все норм. Я валидирую
 		// @ts-ignore
 		userController.changePassword(data).then(() => {
-			this.getUserInfo();
+			this.getUserInfo().then(()=> this.showUserInfo())
 		}).catch(e => {
 			console.log(e);
 		});
@@ -361,31 +294,106 @@ class Profile extends React.Component<RouteComponentProps> {
 
 	signoutClick = () => {
 		authController.logout().then(() => {
-			this.props.history.push('/signin');
-		}).catch(e => {
+			this.props.dispatch(resetUserData());
+		})
+		.catch(e => {
 			console.log(e);
 		});
 	}
 
+
+	userInfoTemplate = (): JSX.Element => {
+		const {userInfo} = this.state;
+
+		return (
+			<div className='card_big_inner d-flex justify-space-between'>
+				<ul className="profile-info d-flex flex-column mt-4">
+					{
+						userInfo.map(({value, displayName}, i) => (
+							<li className="profile-info__item relative d-flex justify-space-between mt-5" key={i}>
+								<span className="name">{displayName}</span>
+								<span className="value">{value}</span>
+							</li>
+						))
+					}
+				</ul>
+				<div className="profile-buttons d-flex flex-column justify-start align-end mt-4">
+					<Button onClick={this.showEditUserInfo} className="mt-5">Изменить данные</Button>
+					<Button onClick={this.showEditPassword} className="mt-5">Изменить пароль</Button>
+					<Link to="/"><Button onClick={this.signoutClick} className="mt-5">Выйти</Button></Link>
+				</div>
+			</div>
+		);
+	}
+
+	editUserInfoTemplate = (): JSX.Element => {
+		const {inputsUserInfo} = this.state;
+		return (
+			<div className='card_big_inner d-flex justify-space-between'>
+				<div className='profile-info d-flex flex-column mt-4'>
+				{
+					inputsUserInfo.map((item, i) => (
+						<Input
+							{...item}
+							onChange={this.inputUserInfoChange}
+							key={i}
+						/>
+					))
+				}
+				</div>`
+				<div className='profile-buttons d-flex flex-column justify-start align-end mt-4'>
+					<Button className="mt-3" onClick={this.changeUserInfo}>Сохранить</Button>
+					<Button className="mt-3	" onClick={this.showUserInfo}>Назад</Button>
+				</div>
+			</div>
+		);
+	}
+
+	editPasswordTemplate = (): JSX.Element => {
+		const {inputsPassword} = this.state;
+		return (
+			<div className='card_big_inner d-flex justify-space-between'>
+				<div className='profile-info d-flex flex-column mt-4'>
+				{
+					inputsPassword.map((item, i) => (
+						<Input
+							{...item}
+							onChange={this.inputPasswordChange}
+							key={i}
+						/>
+					))
+				}
+				</div>
+				<div className='profile-buttons d-flex flex-column justify-start align-end mt-6'>
+				<Button className="mt-3" onClick={this.changePassword}>Сохранить</Button>
+				<Button className="primary mt-3" onClick={this.showUserInfo}>Назад</Button>
+				</div>
+			</div>
+		);
+	}
+
 	render() {
-		const {isEditPasswordShown, isUserInfoShown, isEditUserInfoShown, isModalShown, buttonsProfile, userAvatar} = this.state;
+		const {isEditPasswordShown, isUserInfoShown, isEditUserInfoShown, isModalShown, userAvatar} = this.state;
 		return (
 			<>
-				<Modal show={isModalShown} modalContentClassName="relative">
-					<i className="fas fa-times modal_close" onClick={this.toggleModal}></i>
-					<h3 className="title">Загрузите файл</h3>
-					<form className="mt-5" id="changeAvatarForm">
-						<label className="link" htmlFor="avatar">Выберите файл на компьютере</label>
-						<input id="avatar" type="file" name="avatar" accept="image/*" />
-					</form>
-					<Button className="button__save primary mt-5" onClick={this.changeAvatar}>Изменить</Button>
-				</Modal>
+				<CSSTransition in={this.state.isModalShown} timeout={1000} classNames="show-modal">
+					<Modal onClick={this.toggleModal} show={isModalShown}>
+						<div className="relative pt-7 text-center">
+							<h3>Загрузите файл</h3>
+							<form className="mt-5" id="changeAvatarForm">
+								<label className="link" htmlFor="avatar">Выберите файл на компьютере</label>
+								<input id="avatar" type="file" name="avatar" accept="image/*" />
+							</form>
+							<Button className="button__save primary mt-5" onClick={this.changeAvatar}>Изменить</Button>
+						</div>
+					</Modal>
+				</CSSTransition>
 
-				<div className="page page-profile d-flex flex-column justify-center align-center">
+				<div className={this.state.lightTheme ? 'page' : 'page_dark'}>
 					<Menu />
-					<div className="profile d-flex flex-column justify-center align-center">
-						<div className="profile-avatar d-flex flex-column justify-center align-center">
-							<div className="avatar d-flex justify-center align-center mt-1 mr-2">
+					<div className="card_big">
+						<div className="profile-avatar d-flex absolute flex-column justify-center align-center">
+							<div className="avatar d-flex justify-center align-center">
 								<img src={userAvatar} alt="avatar" draggable="false"/>
 								<div className="avatar_hover d-flex justify-center align-center pointer" onClick={this.toggleModal}>Поменять аватар</div>
 							</div>
@@ -393,11 +401,6 @@ class Profile extends React.Component<RouteComponentProps> {
 						{isUserInfoShown ? this.userInfoTemplate() : null}
 						{isEditPasswordShown ? this.editPasswordTemplate() : null}
 						{isEditUserInfoShown ? this.editUserInfoTemplate() : null}
-						<div className="profile-buttons d-flex flex-column mt-10">
-							{
-								isUserInfoShown ? buttonsProfile.map((item, i) => <Button {...item} key={i}>{item.text}</Button>) : null
-							}
-						</div>
 					</div>
 				</div>
 			</>
@@ -405,4 +408,9 @@ class Profile extends React.Component<RouteComponentProps> {
 	}
 }
 
-export {Profile};
+const mapStateToProps = (state: RootState) => ({
+	user: state.user
+});
+
+export default connect(mapStateToProps)(Profile);
+
