@@ -2,7 +2,7 @@ import express from 'express';
 import router from './router';
 import fs from 'fs';
 import https from 'https';
-// import {MongoClient} from 'mongodb';
+import {MongoClient} from 'mongodb';
 
 import {sequelize} from '../../db/sequelize';
 import {IS_DEV} from '../../webpack/env';
@@ -21,7 +21,7 @@ const options = {
 
 
 const app = express();
-const PORT = process.env.PORT || 4001;
+const PORT = process.env.PORT || 3000;
 
 // express.json тут нужен чтоб прочитать тело запроса в последующих ручках. иначе будет андефайнд
 app.use(express.json())
@@ -37,33 +37,37 @@ app.use(router);
 const server = https.createServer(options, app);
 
 
-// const login = process.env.MONGO_USER
-// const password = process.env.MONGO_PASSWORD
+const login = process.env.MONGO_USER
+const password = process.env.MONGO_PASSWORD
 
-// const uri = `mongodb://${login}:${password}@${process.env.MONGO_HOST}:27017`;
-// const dbName = 'docker'
+const uri = `mongodb://${login}:${password}@${process.env.MONGO_HOST}:27017`;
+const dbName = 'docker'
 
-// const client = new MongoClient(uri)
+const client = new MongoClient(uri)
 
-server.listen(PORT, () => {
-	console.log(`Example app listening on port ${PORT}`);
-});
+IS_DEV ?
 
-// client.connect(function(err) {
-// 	if(err) {
-// 		console.error('Cant connect to MongoDB');
-// 		throw err;
-// 	}
+	server.listen(PORT, () => {
+		console.log(`Example app listening on port ${PORT}`);
+	})
 
-// 	console.log('Connected successfully to server');
+ :
 
-// 	const db = client.db(dbName);
+	client.connect(function(err) {
+		if(err) {
+			console.error('Cant connect to MongoDB');
+			throw err;
+		}
 
-// 	server.listen(PORT, () => {
-// 		console.log(`Example app listening on port ${PORT}`);
-// 		console.log('Database: ', db);
-// 	});
-// })
+		console.log('Connected successfully to server');
+
+		const db = client.db(dbName);
+
+		server.listen(PORT, () => {
+			console.log(`Example app listening on port ${PORT}`);
+			console.log('Database: ', db);
+		});
+	})
 
 
 // Начинаем подключаться к БД
