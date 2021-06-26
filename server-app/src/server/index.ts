@@ -6,7 +6,10 @@ import https from 'https';
 
 import {sequelize} from '../../db/sequelize';
 import {IS_DEV} from '../../webpack/env';
-import {rests} from './rest/index';
+
+import {restEndpoints} from '../utils/restEndpoints';
+import getAllThemes from './rest/getAllThemes';
+import changeThemeApi from './rest/changeThemeApi'
 
 const key = fs.readFileSync(__dirname + '/selfsigned.key');
 const cert = fs.readFileSync(__dirname + '/selfsigned.crt');
@@ -20,7 +23,10 @@ const app = express();
 const PORT = process.env.PORT || 4001;
 
 // express.json тут нужен чтоб прочитать тело запроса в последующих ручках. иначе будет андефайнд
-app.use(router, express.json(), rests);
+app.use(express.json())
+app.get(restEndpoints.getAllThemes, getAllThemes)
+app.put(restEndpoints.changeTheme, changeThemeApi)
+app.use(router);
 
 
 // Чтобы эта байда завелась в host надо вписать 127.0.0.1 local.ya-praktikum.tech

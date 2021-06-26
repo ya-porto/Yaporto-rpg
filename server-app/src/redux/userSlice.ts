@@ -3,6 +3,7 @@ import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
 import {authController} from '../controllers/auth';
+import {userController} from '../controllers/user';
 import {sliceNames} from './slicenames';
 
 const fetchUserBy: any = createAsyncThunk(
@@ -13,6 +14,15 @@ const fetchUserBy: any = createAsyncThunk(
 		return response;
 	}
 );
+
+const getAllThemes: any = createAsyncThunk(
+	'getThemes',
+	async () => {
+		console.log('im inside thunk')
+		const response = await userController.getAllThemes();
+		return response;
+	}
+)
 
 const userInitialState = {
 	isAuth: false,
@@ -57,11 +67,14 @@ const userSlice = createSlice({
 			state.phone = action.payload.phone
 			state.theme = action.payload.theme
 			state.isAuth = action.payload.isAuth
+		},
+		[getAllThemes.fulfilled]: (state, action) => {
+			state.themes = action.payload
 		}
 	}
 });
 
 export const {updateUserData, resetUserData, updateTheme} = userSlice.actions;
-export {fetchUserBy}
+export {fetchUserBy, getAllThemes}
 
 export default userSlice.reducer;

@@ -26,6 +26,12 @@ class Controller {
 		return http.put(`${serverUrl}${restEndpoints.changeTheme}`, data)
 			.catch((e: AxiosError) => Promise.reject(e.response?.data.reason));
 	}
+
+	getAllThemes() {
+		console.log('im sending request on url', serverUrl, 'and endpoint', restEndpoints.getAllThemes)
+		return http.get(`${serverUrl}${restEndpoints.getAllThemes}`)
+			.catch((e: AxiosError) => Promise.reject(e.response?.data.reason));
+	}
 }
 
 const userController = new Controller();

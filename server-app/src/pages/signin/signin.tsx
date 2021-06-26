@@ -4,7 +4,7 @@ import {Dispatch} from 'redux';
 import {connect} from 'react-redux';
 import {Link, RouteComponentProps} from 'react-router-dom';
 
-import {fetchUserBy} from '../../redux/userSlice';
+import {fetchUserBy, getAllThemes} from '../../redux/userSlice';
 import {RootState} from '../../redux/types';
 import {Button, IButtonCompProps} from '../../components/button';
 import {IInputCompProps, Input} from '../../components/input';
@@ -73,6 +73,11 @@ class Signin extends React.Component<SigninProps> {
 		await this.props.dispatch(fetchUserBy());
 	}
 
+	getAllThemes = async () => {
+		console.log('im trying to async dispatch')
+		await this.props.dispatch(getAllThemes())
+	}
+
 	signinClick = () => {
 		const inputList = this.state.inputsData;
 		let data: ISigninData | {} = {};
@@ -94,7 +99,9 @@ class Signin extends React.Component<SigninProps> {
 		// @ts-ignore
 		authController.signin(data).then(() => {
 			this.getUserInfo();
-		}).catch(e => {
+			this.getAllThemes();
+		})
+		.catch(e => {
 			console.log(e);
 		});
 	}

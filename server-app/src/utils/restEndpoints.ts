@@ -1,3 +1,4 @@
 export const restEndpoints = {
-    changeTheme: '/api/themes/'
+    changeTheme: '/api/themes/',
+    getAllThemes : '/api/themes/all'
 }

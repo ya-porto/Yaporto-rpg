@@ -1,13 +1,16 @@
-import {Response, Request} from 'express';
+import {Response, Request, NextFunction} from 'express';
 import {UserThemes} from '../../../db/sequelize';
 
-const  changeThemeApi = (req: Request, res: Response) => {
-    UserThemes.create ({
+async function changeThemeApi (req: Request, res: Response, next: NextFunction) {
+    const result = await UserThemes.create ({
         user_id: req.body.user_id,
         theme_id: req.body.theme_id
     })
-    .then((result) => res.json(result))
     .catch(err => console.error(err))
+
+    res.status(200).send(result)
+
+    next()
 }
 
-export{changeThemeApi}
+export default changeThemeApi

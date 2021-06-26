@@ -19,14 +19,12 @@ async function userThemeMiddleware (res: Response, req: Request, next: NextFunct
 
     // Получаем айди юзера, она до этого положена в контекст мидддлварой с авторизацией
     const id = httpContext.get(sliceNames.user)?.id
-    console.log(id)
 
     // Задаем дефолтное значение для подстраховки
     let userTheme: string | void | undefined = 'light'
 
     // Если юзер получен, идем в бд получать подключенную тему
     if(id) {
-        console.log('я все равно пошел в базу')
         const response = await UserThemes.findOne({
             where: {
                 user_id: id
@@ -42,7 +40,6 @@ async function userThemeMiddleware (res: Response, req: Request, next: NextFunct
             userTheme = response
         }
     } 
-
     // Складываем в контекст чтобы передать дальше в миддлвару рендера страницы
     httpContext.set('userThemes', {themes: themes, theme: userTheme})
     // Передаем управление следующей миддлваре

@@ -1,4 +1,4 @@
-import {ErrorRequestHandler, RequestHandler, Router} from 'express';
+import express, {ErrorRequestHandler, RequestHandler, Router} from 'express';
 import cookieParserMiddleware from 'cookie-parser';
 import csrfMiddleware from 'csurf';
 import {authMiddleware} from '../middlewares/authMiddleware';
@@ -20,6 +20,7 @@ const middleware: Array<RequestHandler | ErrorRequestHandler | any> = [
 	cookieParserMiddleware(),
 	csrfMiddleware({cookie: true}),
 	httpContext.middleware,
+	express.json(),
 	authMiddleware,
 	userThemeMiddleware
 ];

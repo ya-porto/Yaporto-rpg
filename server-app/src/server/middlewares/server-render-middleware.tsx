@@ -21,10 +21,8 @@ export default (req: Request, res: Response) => {
 	const context: StaticRouterContext = {};
 
 	const userData = httpContext.get(sliceNames.user)
-	userData['theme'] = httpContext.get('userThemes')?.theme
-	userData['themes'] = httpContext.get('userThemes')?.themes
 
-	const preloadedData = {user: userData}
+	const preloadedData = {user: userData ? Object.assign(userData, httpContext.get('userThemes')) : userData}
 	const store = createStore(reducers, preloadedData);
 
 	const appContent = chunkExtractor.collectChunks(
