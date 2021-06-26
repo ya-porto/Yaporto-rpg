@@ -28,11 +28,10 @@ async function userThemeMiddleware (res: Response, req: Request, next: NextFunct
         const response = await UserThemes.findOne({
             where: {
                 user_id: id
-            },
-            raw: true
+            }
         })
         // Тут оно  ругается что такого ключа нет в типе Model из sequelize, если описывать типы по туториалу, тогда полностью ломается запрос в ручке на смену темы
-        .then(res => {return res?.theme_id})
+        .then(res => {return res?.getDataValue('theme_id')})
         .catch(err => console.error(err))
 
         // Проверяем что ответ пришел и он не undefined прежде чем переписывать переменную

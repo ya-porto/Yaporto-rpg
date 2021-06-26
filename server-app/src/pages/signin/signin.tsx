@@ -103,7 +103,6 @@ class Signin extends React.Component<SigninProps> {
 		authController.signin(data).then(() => {
 			this.getUserInfo()
 				.then(() => {
-					console.log('пошел за темой юзера')
 					this.getUserTheme()})
 			this.getAllThemes();
 		})

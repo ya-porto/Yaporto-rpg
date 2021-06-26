@@ -2,12 +2,12 @@ import React from 'react';
 import {Dispatch} from 'redux';
 import {connect} from 'react-redux';
 
+import {leaderboardController} from '../../controllers/leaderboardController';
 import {RootState} from '../../redux/types';
 import {LeaderboardComp, ILeaderboardComp} from '../../components/leaderboard';
 import {Menu} from '../../components/menu/menu';
 
 import './style.css';
-
 interface LeaderboardProps {
 	user: RootState;
 	dispatch: Dispatch;
@@ -17,6 +17,15 @@ class Leaderboard extends React.Component<LeaderboardProps> {
 		leaderboardData: [],
 	};
 
+	componentDidMount() {
+		leaderboardController.getLeaderboard({cursor: 0, limit: 50})
+			.then(data => {
+				this.setState({leaderboardData: data});
+			})
+			.catch(e => {
+				console.log(e);
+			});
+	}
 
 	render() {
 		const {leaderboardData} = this.state;

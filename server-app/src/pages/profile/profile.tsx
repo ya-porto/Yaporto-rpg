@@ -34,8 +34,6 @@ interface IProfile {
 	inputsPassword: IInputCompPropsWithRefs[],
 	userInfo: IUserInfo[],
 	userAvatar: string,
-	theme: string,
-	themes: {[key in string]: string}[]
 
 }
 
@@ -45,8 +43,6 @@ interface ProfileProps extends RouteComponentProps {
 }
 class Profile extends React.Component<ProfileProps> {
 	state: Readonly<IProfile> = {
-		theme: this.props.user.theme,
-		themes: this.props.user.themes,
 		isUserInfoShown: true,
 		isEditUserInfoShown: false,
 		isEditPasswordShown: false,
@@ -171,10 +167,6 @@ class Profile extends React.Component<ProfileProps> {
 			});
 			this.setState({userInfo: userInfo});
 			this.setState({userAvatar: this.props.user.avatar ? 'https://ya-praktikum.tech/api/v2/resources' + this.props.user.avatar : '../../images/avatar-example.png'});
-		}
-
-		if(this.props.user.theme !== prevProps.user.theme) {
-			this.setState({theme: this.props.user.theme})
 		}
 	}
 
@@ -321,11 +313,11 @@ class Profile extends React.Component<ProfileProps> {
 	}
 
 	showChangeThemeOption =( ) => {
-		if (this.state.themes?.length > 0) {
+		if (this.props.user.themes?.length > 0) {
 			return (
 				<div className="mt-5">
 					<p>Выберите тему</p>
-					{this.state.themes?.map((theme, id) => {
+					{this.props.user.themes?.map((theme: {[key in string]: string}, id) => {
 						return (
 							<Button className="mr-3" key={id} onClick={() => this.changeTheme(theme.theme_id)}>{theme.theme_name}</Button>
 						)
@@ -426,7 +418,7 @@ class Profile extends React.Component<ProfileProps> {
 					</Modal>
 				</CSSTransition>
 
-				<div className={`page ${this.state.theme}`}>
+				<div className={`page ${this.props.user.theme}`}>
 					<Menu />
 					<div className="card_big">
 						<div className="profile-avatar d-flex absolute flex-column justify-center align-center">
