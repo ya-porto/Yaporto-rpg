@@ -11,6 +11,7 @@ import { setEnemiesAmount, toggleModalDeath } from '../../redux/gameSlice';
 import { Modal } from '../modal';
 import { Button } from '../button';
 import { leaderboardController } from '../../controllers/leaderboardController';
+import {CSSTransition} from 'react-transition-group'
 
 const MOVEDELAY = 300;
 const ATTACKDELAY = 800;
@@ -104,22 +105,27 @@ export class Game extends Component {
 		const {isModalDeathShown,isModalWinShown} = this.state
 		return (
 			<>
-				<Modal show={isModalDeathShown}>
-					<div className="relative pt-7 text-center">
-						<h3 style={{color: 'red', fontSize: '50px'}}>YOU DIED</h3>
-						<Button className="primary mt-5 mr-4" onClick={this.startAgain}>Повторить уровень</Button>
-						<Button className="primary mt-5" onClick={this.goHome}>Домой</Button>
-					</div>
-				</Modal>
-				<Modal show={isModalWinShown}>
-					<div className="relative pt-5 text-center">
-						<h3>Вы прошли уровень, заработав {this.getPoints()} очков</h3>
-						<div className="d-flex flex-column">
-							<Button className="primary mt-5 mr-4" onClick={this.startAgain}>Повторить уровень (сброс результата)</Button>
-							<Button className="primary mt-5" onClick={this.saveAndGoHome}>Домой (сохранить результат)</Button>
+				<CSSTransition in={isModalDeathShown} timeout={1000} classNames="show-modal">
+					<Modal show={isModalDeathShown}>
+						<div className="relative pt-7 text-center">
+							<h3 style={{color: 'red', fontSize: '50px'}}>YOU DIED</h3>
+							<Button className="primary mt-5 mr-4" onClick={this.startAgain}>Повторить уровень</Button>
+							<Button className="primary mt-5" onClick={this.goHome}>Домой</Button>
 						</div>
-					</div>
-				</Modal>
+					</Modal>
+				</CSSTransition>
+				
+				<CSSTransition in={isModalWinShown} timeout={1000} classNames="show-modal">
+					<Modal show={isModalWinShown}>
+						<div className="relative pt-5 text-center">
+							<h3>Вы прошли уровень, заработав {this.getPoints()} очков</h3>
+							<div className="d-flex flex-column">
+								<Button className="primary mt-5 mr-4" onClick={this.startAgain}>Повторить уровень (сброс результата)</Button>
+								<Button className="primary mt-5" onClick={this.saveAndGoHome}>Домой (сохранить результат)</Button>
+							</div>
+						</div>
+					</Modal>
+				</CSSTransition>
 				<GameCanvas xPosition={xSize * 13} yPosition={ySize * 8} image={canvasImg} />
 			</>
 		);
