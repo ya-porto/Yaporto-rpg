@@ -5,9 +5,14 @@ export const gameSlice = createSlice({
 	initialState: {
 		time: {min: '00', sec: '00'},
 		lvl: 1,
+		exp: {
+			now: 5,
+			max: 10
+		},
 		timerId: null,
-		isModalDeathShown: false,
-		isModalWinShown: false,
+		isPause: false,
+		isDead: false,
+		isWin: false,
 		enemiesAmount: 0
 	},
 	reducers: {
@@ -16,16 +21,18 @@ export const gameSlice = createSlice({
 		},
 		setTimerId: (state: any, action: any) => {
 			state.timerId = action.payload
+			state.isPause = false
 		},
 		stopTimer: (state: any) => {
 			clearInterval(state.timerId)
 			state.timerId = null
+			state.isPause = true
 		},
-		toggleModalDeath: (state: any, action: any) => {
-			state.isModalDeathShown = action.payload
+		setDeath: (state: any) => {
+			state.isDead = true
 		},
-		toggleModalWin: (state: any, action: any) => {
-			state.isModalWinShown = action.payload
+		setWin: (state: any) => {
+			state.isWin = true
 		},
 		setEnemiesAmount: (state: any, action: any) => {
 			state.enemiesAmount = action.payload
@@ -36,6 +43,6 @@ export const gameSlice = createSlice({
 	}
 });
 
-export const {changeTime, setTimerId, stopTimer, toggleModalDeath, toggleModalWin, setEnemiesAmount, decrimentEnemiesAmount} = gameSlice.actions;
+export const {changeTime, setTimerId, stopTimer, setDeath, setWin, setEnemiesAmount, decrimentEnemiesAmount} = gameSlice.actions;
 
 export default gameSlice.reducer;
