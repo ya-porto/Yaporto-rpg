@@ -4,6 +4,14 @@ import fs from 'fs';
 import https from 'https';
 import {MongoClient} from 'mongodb';
 
+import {sequelize} from '../../db/sequelize';
+import {IS_DEV} from '../../webpack/env';
+
+import {restEndpoints} from '../utils/restEndpoints';
+import getAllThemes from './rest/getAllThemes';
+import changeThemeApi from './rest/changeThemeApi';
+import getUserTheme from './rest/getUserTheme';
+
 const key = fs.readFileSync(__dirname + '/selfsigned.key');
 const cert = fs.readFileSync(__dirname + '/selfsigned.crt');
 const options = {
@@ -11,9 +19,15 @@ const options = {
 	cert: cert
 };
 
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// express.json тут нужен чтоб прочитать тело запроса в последующих ручках. иначе будет андефайнд
+app.use(express.json())
+app.get(restEndpoints.getAllThemes, getAllThemes)
+app.get(restEndpoints.getUserTheme, getUserTheme)
+app.put(restEndpoints.changeTheme, changeThemeApi)
 app.use(router);
 
 
@@ -31,26 +45,89 @@ const dbName = 'docker'
 
 const client = new MongoClient(uri)
 
-// server.listen(PORT, () => {
-// 	console.log(`Example app listening on port ${PORT}`);
-// });
-
-client.connect(function(err) {
-	if(err) {
-		console.error('Cant connect to MongoDB');
-		throw err;
-	}
-
-	console.log('Connected successfully to server');
-
-	const db = client.db(dbName);
+IS_DEV ?
 
 	server.listen(PORT, () => {
 		console.log(`Example app listening on port ${PORT}`);
-		console.log('Database: ', db);
-	});
-})
+	})
 
+ :
+
+	client.connect(function(err) {
+		if(err) {
+			console.error('Cant connect to MongoDB');
+			throw err;
+		}
+
+		console.log('Connected successfully to server');
+
+		const db = client.db(dbName);
+
+		server.listen(PORT, () => {
+			console.log(`Example app listening on port ${PORT}`);
+			console.log('Database: ', db);
+		});
+	})
+
+
+// Начинаем подключаться к БД
+sequelize
+  .authenticate()
+  .then(() => {
+    // eslint-disable-next-line no-console
+    console.log("Connection has been established successfully.");
+  })
+  .catch(err => {
+    // eslint-disable-next-line no-console
+    console.error("Unable to connect to the database:", err);
+  });
+
+  IS_DEV ? 
+  // параметр force насильно пересоздает таблицу в БД с заданными нами значениями. Для отладки, поэтому тут условие на ДЕВ
+  // Сначала вызываем sync чтобы создать пустые таблицы которые мы описали в другом файле
+  sequelize.sync({force: true}).then(() => {
+	  // Названия всех Инициированных таблиц лежат в объекте models. Берем оттуда таблицу с темами и сразу записываем нужные нам данные. Они не будут меняться по запросу
+	sequelize.models.Themes.bulkCreate([{
+		theme_id: 'light',
+		theme_name: 'light'
+	}, {
+		theme_id: 'dark',
+		theme_name: 'dark'
+	}],{
+		// Этот параметр для того чтоб посмотреть что мы там сделали
+		returning: true
+	})
+	// eslint-disable-next-line no-console
+	.then(() => console.log('Themes created'))
+	.catch(err => console.error(err))
+	// eslint-disable-next-line no-console
+    console.log('Tables created', sequelize.models)
+})
+	.catch(err => {
+		// eslint-disable-next-line no-console
+		console.error("Unable to create tables:", err)
+	}) 
+	
+	:
+	// А вот тут уже боевое подключение в продакшн
+	sequelize.sync().then(() => {
+		sequelize.models.Themes.bulkCreate([{
+			theme_id: 'light',
+			theme_name: 'Темная'
+		}, {
+			theme_id: 'dark',
+			theme_name: 'Светлая'
+		}])
+		// eslint-disable-next-line no-console
+		.then(() => console.log('Themes created'))
+		.catch(err => console.error(err))
+		// eslint-disable-next-line no-console
+		console.log('Tables created')
+	})
+		.catch(err => {
+			// eslint-disable-next-line no-console
+			console.error("Unable to create tables:", err)
+		})
 
 
 

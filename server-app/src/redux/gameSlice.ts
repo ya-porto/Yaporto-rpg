@@ -1,7 +1,8 @@
 import {createSlice} from '@reduxjs/toolkit';
+import {sliceNames} from './slicenames';
 
 export const gameSlice = createSlice({
-	name: 'game',
+	name: sliceNames.game,
 	initialState: {
 		time: {min: '00', sec: '00'},
 		lvl: 1

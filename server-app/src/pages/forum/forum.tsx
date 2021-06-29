@@ -21,7 +21,7 @@ class Forum extends Component<ForumProps> {
 	render() {
 		const {threads} = this.state;
 		return (
-			<div className={this.props.user.lightTheme ? "page" : "page_dark"}>
+			<div className={`${this.props.user.theme} page`}>
 				<Menu />
 				<div className = "forum">
 					<div className = "card px-16 pb-10 pt-10">

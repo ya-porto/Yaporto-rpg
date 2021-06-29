@@ -12,7 +12,7 @@ import {Menu} from '../../components/menu/menu';
 import {Modal} from '../../components/modal';
 import {authController} from '../../controllers/auth';
 import {IChangePassword, IChangeUserInfo, userController} from '../../controllers/user';
-import {fetchUserBy, resetUserData} from '../../redux/userSlice';
+import {fetchUserBy, resetUserData, updateTheme} from '../../redux/userSlice';
 import './style.css';
 
 const document = getDocument();
@@ -34,7 +34,7 @@ interface IProfile {
 	inputsPassword: IInputCompPropsWithRefs[],
 	userInfo: IUserInfo[],
 	userAvatar: string,
-	lightTheme: boolean
+
 }
 
 interface ProfileProps extends RouteComponentProps {
@@ -43,7 +43,6 @@ interface ProfileProps extends RouteComponentProps {
 }
 class Profile extends React.Component<ProfileProps> {
 	state: Readonly<IProfile> = {
-		lightTheme: this.props.user.lightTheme,
 		isUserInfoShown: true,
 		isEditUserInfoShown: false,
 		isEditPasswordShown: false,
@@ -161,7 +160,7 @@ class Profile extends React.Component<ProfileProps> {
 	};
 
 	componentDidUpdate(prevProps: ProfileProps) {
-		if (this.props.user !== prevProps.user) {
+		if (this.props.user.userInfo !== prevProps.user.userInfo) {
 			const {userInfo} = this.state;
 			userInfo.map(item => {
 				this.props.user.hasOwnProperty(item.name) ? item.value = this.props.user[item.name] : false;
@@ -219,6 +218,18 @@ class Profile extends React.Component<ProfileProps> {
 		this.setState({
 			isModalShown: !this.state.isModalShown
 		});
+	}
+
+	changeTheme = (theme_id: string) => {
+		const data = {
+			user_id: this.props.user.id,
+			theme_id: theme_id
+		}
+
+		userController.changeTheme(data)
+		.then(() => {
+			this.props.dispatch(updateTheme(theme_id))})
+		.catch(err => console.error(err))
 	}
 
 
@@ -301,6 +312,22 @@ class Profile extends React.Component<ProfileProps> {
 		});
 	}
 
+	showChangeThemeOption =( ) => {
+		if (this.props.user.themes?.length > 0) {
+			return (
+				<div className="mt-5">
+					<p>Выберите тему</p>
+					{this.props.user.themes?.map((theme: {[key in string]: string}, id) => {
+						return (
+							<Button className="mr-3" key={id} onClick={() => this.changeTheme(theme.theme_id)}>{theme.theme_name}</Button>
+						)
+					})}
+				</div>
+			)
+		} else {
+			return null
+		}
+	}
 
 	userInfoTemplate = (): JSX.Element => {
 		const {userInfo} = this.state;
@@ -321,6 +348,8 @@ class Profile extends React.Component<ProfileProps> {
 					<Button onClick={this.showEditUserInfo} className="mt-5">Изменить данные</Button>
 					<Button onClick={this.showEditPassword} className="mt-5">Изменить пароль</Button>
 					<Link to="/"><Button onClick={this.signoutClick} className="mt-5">Выйти</Button></Link>
+					{this.showChangeThemeOption()}
+					
 				</div>
 			</div>
 		);
@@ -389,7 +418,7 @@ class Profile extends React.Component<ProfileProps> {
 					</Modal>
 				</CSSTransition>
 
-				<div className={this.state.lightTheme ? 'page' : 'page_dark'}>
+				<div className={`page ${this.props.user.theme}`}>
 					<Menu />
 					<div className="card_big">
 						<div className="profile-avatar d-flex absolute flex-column justify-center align-center">

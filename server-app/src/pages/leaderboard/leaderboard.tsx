@@ -8,18 +8,12 @@ import {LeaderboardComp, ILeaderboardComp} from '../../components/leaderboard';
 import {Menu} from '../../components/menu/menu';
 
 import './style.css';
-
-interface ILeadreboard extends ILeaderboardComp {
-	lightTheme: boolean;
-}
-
 interface LeaderboardProps {
 	user: RootState;
 	dispatch: Dispatch;
 }
 class Leaderboard extends React.Component<LeaderboardProps> {
-	state: ILeadreboard = {
-		lightTheme: true,
+	state: ILeaderboardComp = {
 		leaderboardData: [],
 	};
 
@@ -37,7 +31,7 @@ class Leaderboard extends React.Component<LeaderboardProps> {
 		const {leaderboardData} = this.state;
 		return (
 			
-			<div className={this.props.user.lightTheme ? 'page page-leaderboard d-flex flex-column justify-center align-center' : 'page_dark page-leaderboard d-flex flex-column justify-center align-center'}>
+			<div className={`${this.props.user.theme} page page-leaderboard d-flex flex-column justify-center align-center`}>
 				<Menu />
 				<div className="card shadow d-flex flex-column justify-start align-center px-10 py-8">
 					<h1 className="title mt-5">Leaderboard</h1>

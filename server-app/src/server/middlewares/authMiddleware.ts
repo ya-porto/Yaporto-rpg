@@ -2,7 +2,7 @@ import axios from 'axios';
 import {NextFunction, Request, Response} from 'express';
 import httpContext from 'express-http-context';
 
-import {setAuthFlag} from '../utils/setAuthFlag';
+import {sliceNames} from '../../redux/slicenames';
 
 const PRAKTIKUM_AUTH_ENDPOINT = 'https://ya-praktikum.tech/api/v2/auth/user';
 
@@ -15,15 +15,13 @@ async function authMiddleware(req: Request, res: Response, next: NextFunction) {
 	try {
 		const {data} = await axios.get(PRAKTIKUM_AUTH_ENDPOINT, {
 			headers: {Cookie: cookies}
-		});
-		//  Меняем флаг для рендера меню
-		setAuthFlag(data, true);
-
-		httpContext.set('user', data);
-	/* eslint-disbale-next-line */
-	} catch (err) {
-		console.log(err)
+		})
+		data['isAuth'] = true
+		httpContext.set(sliceNames.user, data);
+	} catch(err) {
+		console.log(err.response.status)
 	}
+
 	await next();
 }
 
