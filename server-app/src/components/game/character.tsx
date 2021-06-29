@@ -4,6 +4,8 @@ import {isEnemyCross} from './isEnemyCross';
 import {NumberAnimate} from './numberAnimate';
 import {objPersonaj} from './game.objPersonaj';
 import {getDocument} from 'ssr-window';
+import { store } from '../../client';
+import { decrimentEnemiesAmount, stopTimer, toggleModalDeath, toggleModalWin } from '../../redux/gameSlice';
 const document = getDocument();
 
 export class Character {
@@ -102,7 +104,17 @@ export class Character {
 				this.hp = 0;
 				let time = performance.now();
 				this.deathCharacter(time, 400);
-				console.log('die');
+				
+				if (this.isEnemy) {
+					store.dispatch(decrimentEnemiesAmount())
+					if (store.getState().game.enemiesAmount <= 0) {
+						store.dispatch(stopTimer())
+						store.dispatch(toggleModalWin(true))
+					}
+				} else {
+					store.dispatch(stopTimer())
+					store.dispatch(toggleModalDeath(true))
+				}
 			}
 
 			return;
@@ -147,7 +159,7 @@ export class Character {
 
 	attackHero() {
 		this.attackInterval = window.setInterval(() => {
-			if (!this.isDead) {
+			if (!this.isDead && store.getState().game.timerId !== null) {
 				let char = isEnemyCross(this.getPosition(), this.canvasMatrix);
 				if (char) {
 					this.startTime = performance.now();
