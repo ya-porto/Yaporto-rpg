@@ -2,7 +2,7 @@ interface IModalCompProps {
   modalClassName?: string,
   modalContentClassName?: string,
   show: boolean
-  onClick: () => void
+  onClick?: () => void
 }
 
 export {IModalCompProps};

@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {store} from '../../client/index';
 
-import {changeTime} from '../../redux/gameSlice';
+import {changeTime, setTimerId, stopTimer} from '../../redux/gameSlice';
 import {Game as GameCanvas} from '../../components/game/index';
 import {Button} from '../../components/button/index';
 import './style.css';
@@ -40,7 +40,9 @@ class Game extends React.Component {
 				sec = '00';
 			}
 
-			store.dispatch(changeTime({min: min, sec: sec}));
+			store.dispatch(changeTime({ min: min, sec: sec, timerId: timer }));
+			store.dispatch(setTimerId(timer))
+			
 			this.setState({
 				time: {
 					min,
@@ -51,9 +53,9 @@ class Game extends React.Component {
 		}, 1000);
 	}
 
-	timerPause = () => {
+	toggleTimer = () => {
 		if (this.state.time.id) {
-			clearInterval(this.state.time.id);
+			store.dispatch(stopTimer())
 			this.setState({
 				time: {
 					min: this.state.time.min,
@@ -61,6 +63,8 @@ class Game extends React.Component {
 					id: null
 				}
 			});
+		} else {
+			this.timerStart()
 		}
 	}
 
@@ -88,13 +92,13 @@ class Game extends React.Component {
 						</div>
 					</div>
 					<div className="game-header__right d-flex justify-space-between align-center">
-						<Button className="mr-3" onClick={this.timerPause}><i className="fas fa-pause"></i></Button>
+						<Button className="mr-3" onClick={this.toggleTimer}><i className={`fas fa-${time.id ? 'pause' : 'play'}`}></i></Button>
 						<Link to="/gameshop"><Button className="mr-3" onClick={this.showShopMenu}><i className="fas fa-store-alt"></i></Button></Link>
 						<Link to="/profile"><Button onClick={this.showCharacterMenu}><i className="fas fa-user"></i></Button></Link>
 					</div>
 				</header>
 				<div className="game">
-					<GameCanvas></GameCanvas>
+					<GameCanvas />
 				</div>
 			</div>
 
