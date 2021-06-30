@@ -2,7 +2,6 @@ import {Response, Request, NextFunction} from 'express';
 import {UserThemes} from '../../../db/sequelize';
 
 async function changeThemeApi (req: Request, res: Response, next: NextFunction) {
-    console.log(req.body)
     const result = await UserThemes.update ({
         user_id: req.body.user_id,
         theme_id: req.body.theme_id
