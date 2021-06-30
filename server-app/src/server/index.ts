@@ -91,10 +91,10 @@ sequelize
 	  // Названия всех Инициированных таблиц лежат в объекте models. Берем оттуда таблицу с темами и сразу записываем нужные нам данные. Они не будут меняться по запросу
 	sequelize.models.Themes.bulkCreate([{
 		theme_id: 'light',
-		theme_name: 'light'
+		theme_name: 'Светлая'
 	}, {
 		theme_id: 'dark',
-		theme_name: 'dark'
+		theme_name: 'Темная'
 	}],{
 		// Этот параметр для того чтоб посмотреть что мы там сделали
 		returning: true
@@ -120,10 +120,10 @@ sequelize
 	sequelize.sync().then(() => {
 		sequelize.models.Themes.bulkCreate([{
 			theme_id: 'light',
-			theme_name: 'Темная'
+			theme_name: 'Светлая'
 		}, {
 			theme_id: 'dark',
-			theme_name: 'Светлая'
+			theme_name: 'Темная'
 		}])
 		// eslint-disable-next-line no-console
 		.then(() => console.log('Themes created'))
