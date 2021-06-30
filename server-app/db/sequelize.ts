@@ -14,12 +14,18 @@ const sequelizeOptions: SequelizeOptions = {
 const sequelize = new Sequelize(sequelizeOptions);
 
 const UserThemes = sequelize.define('UserThemes', {
-    user_id: DataType.INTEGER,
+    user_id: {
+        type: DataType.INTEGER,
+        unique: true
+    },
     theme_id: DataType.TEXT
 })
 
 const Themes = sequelize.define('Themes', {
-    theme_id: DataType.TEXT,
+    theme_id: {
+        type: DataType.TEXT,
+        unique: true
+    },
     theme_name: DataType.TEXT
 })
 
