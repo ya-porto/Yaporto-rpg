@@ -23,7 +23,12 @@ class Controller {
 	}
 
 	changeTheme(data: {}) {
-		return http.put(`${serverUrl}${restEndpoints.changeTheme}`, data)
+		return http.post(`${serverUrl}${restEndpoints.changeTheme}`, data)
+			.catch((e: AxiosError) => Promise.reject(e.response?.data.reason));
+	}
+
+	setTheme(data: {}) {
+		return http.post(`${serverUrl}${restEndpoints.changeTheme}`, data)
 			.catch((e: AxiosError) => Promise.reject(e.response?.data.reason));
 	}
 

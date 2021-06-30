@@ -10,6 +10,7 @@ import {Input, IInputCompProps} from '../../components/input';
 import {Menu} from '../../components/menu/menu';
 import {authController, ISignupData} from '../../controllers/auth';
 import './style.css';
+import { userController } from '../../controllers/user';
 
 interface IButton extends IButtonCompProps {
 	text: string
@@ -117,6 +118,15 @@ class Signup extends React.Component<SignupProps> {
 		await this.props.dispatch(fetchUserBy());
 	}
 
+	setDefaultTheme = (user_id: number) => {
+		const data = {
+			user_id: user_id,
+			theme_id: this.props.user.theme
+		}
+
+		userController.setTheme(data)
+	}
+
 	signupClick = () => {
 		const inputList = this.state.inputsData;
 		let data: ISignupData | {} = {};
@@ -138,6 +148,7 @@ class Signup extends React.Component<SignupProps> {
 		// @ts-ignore
 		authController.signup(data).then(() => {
 			this.getUserInfo();
+			this.setDefaultTheme(this.props.user.id)
 		}).catch(e => {
 			console.log(e);
 		});

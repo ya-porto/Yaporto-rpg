@@ -317,7 +317,7 @@ class Profile extends React.Component<ProfileProps> {
 			return (
 				<div className="mt-5">
 					<p>Выберите тему</p>
-					{this.props.user.themes?.map((theme: {[key in string]: string}, id) => {
+					{this.props.user.themes?.map((theme: {[key in string]: string}, id: number) => {
 						return (
 							<Button className="mr-3" key={id} onClick={() => this.changeTheme(theme.theme_id)}>{theme.theme_name}</Button>
 						)
