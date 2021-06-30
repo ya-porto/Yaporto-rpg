@@ -9,8 +9,10 @@ import {Button, IButtonCompProps} from '../../components/button';
 import {Input, IInputCompProps} from '../../components/input';
 import {Menu} from '../../components/menu/menu';
 import {authController, ISignupData} from '../../controllers/auth';
-import './style.css';
+import {Navigation} from '../../client/constants';
 import { userController } from '../../controllers/user';
+import './style.css';
+
 
 interface IButton extends IButtonCompProps {
 	text: string
@@ -146,9 +148,8 @@ class Signup extends React.Component<SignupProps> {
 
 		// Все норм. Я валидирую
 		// @ts-ignore
-		authController.signup(data).then(() => {
-			this.getUserInfo();
-			this.setDefaultTheme(this.props.user.id)
+		authController.signup(data).then((res) => {
+			this.setDefaultTheme(res.data.id)
 		}).catch(e => {
 			console.log(e);
 		});
@@ -184,12 +185,12 @@ class Signup extends React.Component<SignupProps> {
 							<h1 className="signup_header mt-5">Регистрация</h1>
 							
 							<div className="signup_buttons d-flex flex-column align-end mb-7">
-								<Link to="/">
+								<Link to={Navigation.Signin}>
 									<Button onClick={signupButton.onClick}>
 										{signupButton.text}
 									</Button>
 								</Link>
-									<Link className="link mt-2" to="/signin">
+									<Link className="link mt-2" to={Navigation.Signin}>
 										Есть аккаунт
 								</Link>
 							</div>

@@ -1,35 +1,38 @@
+import {Navigation} from './constants'
+
 export const ROUTES = {
 	MAIN: {
 		NAME: 'Домашяя',
-		INDEX: '/'
+		INDEX: Navigation.Main
 	},
 	PROFILE: {
 		NAME: 'Профиль',
-		INDEX: '/profile',
+		INDEX: Navigation.Profile,
 		AUTH: true
 	},
 	SIGNIN: {
 		NAME: 'Войти',
-		INDEX: '/signin',
+		INDEX: Navigation.Signin,
 		AUTH: false
 	},
 	SIGNUP: {
 		NAME: 'Регистрация',
-		INDEX: '/signup',
+		INDEX: Navigation.Signup,
 		AUTH: false
 	},
 	GAME: {
 		NAME: 'Играть',
-		INDEX: '/game',
+		INDEX: Navigation.Game,
 		AUTH: true
 	},
 	FORUM: {
 		NAME: 'Форум',
-		INDEX: '/forum',
+		INDEX: Navigation.Game,
 		AUTH: true
 	},
 	LEADERBOARD: {
 		NAME: 'Лидерборд',
-		INDEX: '/leaderboard'
+		INDEX: Navigation.Leaderboard,
+		AUTH: true
 	},
 };
