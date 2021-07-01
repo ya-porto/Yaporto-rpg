@@ -1,4 +1,11 @@
-export const ROUTES = {
+interface IROUTES {
+	[key: string]: {
+		NAME: string,
+		INDEX: string,
+		AUTH?: boolean
+	}
+}
+export const ROUTES: IROUTES = {
 	MAIN: {
 		NAME: 'Домашяя',
 		INDEX: '/'
