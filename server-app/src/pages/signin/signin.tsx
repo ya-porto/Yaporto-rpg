@@ -152,6 +152,7 @@ class Signin extends React.Component<SigninProps> {
 								{signinButton.text}
 							</Button>
 						</Link>
+						<Button className="primary mt-5" onClick={this.yaSignin}>Войте с помощью <span style={{color: 'yellow'}}>Я</span>ндекс</Button>
 						<div className="signin_buttons d-flex flex-column align-center">
 							<Link to="/signup" className="link mt-4">Нет аккаунта?</Link>
 						</div>
