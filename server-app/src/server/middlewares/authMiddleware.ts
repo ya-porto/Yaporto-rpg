@@ -26,7 +26,7 @@ async function authMiddleware(req: Request, res: Response, next: NextFunction) {
 		httpContext.set(sliceNames.user, data);
 
 		// Если авторизован, то не пускаю на страницы авторизации
-		if (req.url === ROUTES['SIGNIN'].INDEX && req.url === ROUTES['SIGNUP'].INDEX) {
+		if (req.url === ROUTES['SIGNIN'].INDEX || req.url === ROUTES['SIGNUP'].INDEX) {
 			res.redirect(ROUTES['MAIN'].INDEX);
 		}
 	} catch (err) {
