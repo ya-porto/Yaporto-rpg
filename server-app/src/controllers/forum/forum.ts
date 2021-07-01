@@ -1,4 +1,4 @@
-import {threadMocks} from '_mocks/forumMocks';
+import {threadMocks} from '../../_mocks/forumMocks';
 import { ThreadProps, ToggleLikeCommentProps, CreateThreadProps, CreateCommentProps } from './forum.type';
 
 class Controller {

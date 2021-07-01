@@ -1,5 +1,5 @@
-import {yaBaseApiUrl} from 'client/constants';
 import {http, AxiosError, AxiosResponse} from '../../modules/http';
+import {yaBaseApiUrl} from '../../utils/baseUrls';
 import {IAddToLeaderboard, IGetLeaderboard, ILeaderBoardData, ILeaderBoardDataFields} from './leaderboard.type';
 
 const ratingFieldName = 'portoTime';

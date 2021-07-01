@@ -6,8 +6,8 @@ import {ThreadProps} from '../../controllers/forum/forum.type';
 import {Button} from '../../components/button/index';
 import {Input} from '../../components/input/index';
 import {Menu} from '../../components/menu/menu';
-import {parseQueryString} from 'utils/parseQueryString';
-import {forumController} from 'controllers/forum';
+import {parseQueryString} from '../../utils/parseQueryString';
+import {forumController} from '../../controllers/forum/index';
 
 import {getWindow} from 'ssr-window';
 const window = getWindow();

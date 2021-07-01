@@ -1,8 +1,7 @@
 /* eslint-disable camelcase */
-import {yaBaseApiUrl} from 'client/constants';
 import {http, AxiosError, AxiosResponse} from '../../modules/http';
 import {ISigninData, ISignupData, IUserInfoData, IYaOauthData} from './auth.type';
-
+import {yaBaseApiUrl} from '../../utils/baseUrls';
 class Controller {
 	signup(data: ISignupData) {
 		return http.post(`${yaBaseApiUrl}auth/signup`, data)
