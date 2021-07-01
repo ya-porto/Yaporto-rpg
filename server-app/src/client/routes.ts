@@ -28,8 +28,13 @@ export const ROUTES = {
 		INDEX: '/forum',
 		AUTH: true
 	},
+	THREAD: {
+		NAME: 'Тред',
+		INDEX: '/thread',
+		AUTH: true
+	},
 	LEADERBOARD: {
 		NAME: 'Лидерборд',
 		INDEX: '/leaderboard'
-	},
+	}
 };

@@ -3,18 +3,13 @@ export interface AuthorProps {
     avatar?: string,
     name: string
 }
-export interface ThreadProps {
+export interface ThreadProps extends CreateThreadProps {
     id: number,
-    author: AuthorProps,
-    title: string,
-    text: string,
     comments?: CommentProps[]
 }
 
-export interface CommentProps {
+export interface CommentProps extends CreateCommentProps {
     id: number,
-    author: AuthorProps,
-    text: string,
     likes: number[]
 }
 
