@@ -95,9 +95,6 @@ sequelize
 		theme_id: 'light'
 	})
 	// eslint-disable-next-line no-console
-	.then(() => console.log('Themes created'))
-	.catch(err => console.error(err))
-	// eslint-disable-next-line no-console
     console.log('Tables created', sequelize.models)
 })
 	.catch(err => {

@@ -29,7 +29,45 @@ const Themes = sequelize.define('Themes', {
     theme_name: DataType.TEXT
 })
 
+const Threads = sequelize.define('Threads', {
+    thread_id: {
+        type: DataType.INTEGER,
+        unique: true
+    },
+    author_id: DataType.INTEGER,
+    author_info: DataType.TEXT,
+    title: DataType.TEXT,
+    text: DataType.TEXT
+})
+
+const Comments = sequelize.define('Comments', {
+    thread_id: {
+        type: DataType.INTEGER,
+        references: {
+            model: 'Threads',
+            key: 'thread_id'
+        }
+    },
+    comment_id: {
+        type: DataType.INTEGER,
+        unique: true,
+    },
+    author_id: DataType.INTEGER,
+    author_info: DataType.TEXT,
+    text: DataType.TEXT
+})
+
+const Likes = sequelize.define('Likes', {
+    comment_id: {
+        type: DataType.INTEGER,
+        references: {
+            model: 'Comments',
+            key: 'comment_id'
+        }
+    },
+    author_id: DataType.INTEGER
+})
 
 
 
-export {sequelize, UserThemes, Themes}
+export {sequelize, UserThemes, Themes, Threads, Comments, Likes}
