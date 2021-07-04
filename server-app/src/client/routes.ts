@@ -27,7 +27,7 @@ export const ROUTES = {
 	},
 	FORUM: {
 		NAME: 'Форум',
-		INDEX: Navigation.Game,
+		INDEX: Navigation.Forum,
 		AUTH: true
 	},
 	LEADERBOARD: {

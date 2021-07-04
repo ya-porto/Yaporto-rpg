@@ -1,12 +1,13 @@
 interface IInputCompProps {
-  value: string | undefined,
+  value?: string | undefined,
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void,
   type: string,
   placeholder?: string,
   name?: string,
   validation?: IValidationProps
   className?: string,
-  error?: boolean
+  error?: boolean,
+  defaultValue?: string
 }
 
 interface IInputCompState {

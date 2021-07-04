@@ -1,24 +1,22 @@
 
 import {http, AxiosError, AxiosResponse} from '../../modules/http';
 import {IChangeUserInfo, IChangePassword} from './user.type';
-import {serverUrl} from '../../utils/baseUrls';
+import {serverUrl, yaBaseApiUrl} from '../../utils/baseUrls';
 import {restEndpoints} from '../../utils/restEndpoints';
-
-const baseUrl = 'https://ya-praktikum.tech/api/v2/';
 
 class Controller {
 	changePassword(data: IChangePassword) {
-		return http.put(`${baseUrl}user/password`, data, {withCredentials: true})
+		return http.put(`${yaBaseApiUrl}user/password`, data, {withCredentials: true})
 			.catch((e: AxiosError) => Promise.reject(e.response?.data.reason));
 	}
 
 	changeUserInfo(data: IChangeUserInfo) {
-		return http.put(`${baseUrl}user/profile`, data, {withCredentials: true})
+		return http.put(`${yaBaseApiUrl}user/profile`, data, {withCredentials: true})
 			.catch((e: AxiosError) => Promise.reject(e.response?.data.reason));
 	}
 
 	changeAvatar(data: FormData) {
-		return http.put(`${baseUrl}user/profile/avatar`, data, {withCredentials: true})
+		return http.put(`${yaBaseApiUrl}user/profile/avatar`, data, {withCredentials: true})
 			.catch((e: AxiosError) => Promise.reject(e.response?.data.reason));
 	}
 
