@@ -26,13 +26,17 @@ async function authMiddleware(req: Request, res: Response, next: NextFunction) {
 		httpContext.set(sliceNames.user, data);
 
 		// Если авторизован, то не пускаю на страницы авторизации
-		if (req.url === ROUTES['SIGNIN'].INDEX || req.url === ROUTES['SIGNUP'].INDEX) {
-			res.redirect(ROUTES['MAIN'].INDEX);
+		if (req.url === ROUTES.SIGNIN.INDEX || req.url === ROUTES.SIGNUP.INDEX) {
+			res.redirect(ROUTES.MAIN.INDEX);
 		}
 	} catch (err) {
 		// Если неавторизован, а надо, то пускаю на авторизацию
 		if (isNeedAuth) {
-			res.redirect(ROUTES['SIGNIN'].INDEX);
+			if (err.response.status === 401) {
+				res.redirect(ROUTES.SIGNIN.INDEX);
+			} else {
+				console.log(err);
+			}
 		}
 		// Если неавторизован и это не надо, то ничего не делаю (ниже пускаю куда стучался)
 	}
