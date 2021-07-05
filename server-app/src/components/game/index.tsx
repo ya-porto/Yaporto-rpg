@@ -1,8 +1,12 @@
-import React, {Component} from 'react';
-import {GameCanvas} from './canvasGenerate';
-import {lvlGenerate} from './lvlgenerate';
-import {getDocument} from 'ssr-window';
+import React, { Component } from 'react';
+import { GameCanvas } from './canvasGenerate';
+import { lvlGenerate } from './lvlgenerate';
+import { getDocument } from 'ssr-window';
+
 const document = getDocument();
+
+import { store } from '../../client';
+import { setEnemiesAmount } from '../../redux/gameSlice';
 
 import '../App.css';
 
@@ -66,62 +70,70 @@ export class Game extends Component {
 	componentDidMount() {
 		setTimeout(() => {
 			let Characters = lvlGenerate(lvlMatrix, xSize, ySize, 'canvas');
+			let enemiesAmount = 0
 
 			for (let key in Characters) {
 				if (Object.prototype.hasOwnProperty.call(Characters, key)) {
-					Characters[key].addEnemy(Characters.C);
+					const obj = Characters[key];
+
+					obj.addEnemy(Characters.C);
+					if (obj.isEnemy) {
+						enemiesAmount++
+					}
 				}
 			}
 
-			document.addEventListener('keydown', function (event) {
-				if (!isActive) {
+			store.dispatch(setEnemiesAmount(enemiesAmount))
+
+			document.addEventListener('keydown', (event) => {
+				if (!isActive && !store.getState().game.isPause) {
 					isActive = true;
 					switch (event.code) {
-					case 'ArrowUp':
-					case 'KeyW':
-						Characters.C.moveCharacter('up');
-						setTimeout(() => {
-							isActive = false;
-						}, MOVEDELAY);
-						break;
+						case 'ArrowUp':
+						case 'KeyW':
+							Characters.C.moveCharacter('up');
+							setTimeout(() => {
+								isActive = false;
+							}, MOVEDELAY);
+							break;
 
-					case 'ArrowDown':
-					case 'KeyS':
-						Characters.C.moveCharacter('down');
-						setTimeout(() => {
-							isActive = false;
-						}, MOVEDELAY);
-						break;
+						case 'ArrowDown':
+						case 'KeyS':
+							Characters.C.moveCharacter('down');
+							setTimeout(() => {
+								isActive = false;
+							}, MOVEDELAY);
+							break;
 
-					case 'ArrowRight':
-					case 'KeyD':
-						Characters.C.moveCharacter('right');
-						setTimeout(() => {
-							isActive = false;
-						}, MOVEDELAY);
-						break;
+						case 'ArrowRight':
+						case 'KeyD':
+							Characters.C.moveCharacter('right');
+							setTimeout(() => {
+								isActive = false;
+							}, MOVEDELAY);
+							break;
 
-					case 'ArrowLeft':
-					case 'KeyA':
-						Characters.C.moveCharacter('left');
-						setTimeout(() => {
-							isActive = false;
-						}, MOVEDELAY);
-						break;
+						case 'ArrowLeft':
+						case 'KeyA':
+							Characters.C.moveCharacter('left');
+							setTimeout(() => {
+								isActive = false;
+							}, MOVEDELAY);
+							break;
 
-					default:
-						setTimeout(() => {
-							isActive = false;
-						}, MOVEDELAY);
-						break;
+						default:
+							setTimeout(() => {
+								isActive = false;
+							}, MOVEDELAY);
+							break;
 					}
 				}
 			});
 
 			let canvasListen = document.getElementById('canvas');
 			if (canvasListen) {
-				canvasListen.addEventListener('mousedown', function (event) {
-					if (!isActive) {
+				canvasListen.addEventListener('mousedown', (event) => {
+					if (!isActive && !store.getState().game.isPause) {
 						isActive = true;
 						let time = performance.now();
 						setTimeout(() => {
