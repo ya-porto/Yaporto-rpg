@@ -20,8 +20,22 @@ interface IGameProps extends RouteComponentProps {
 	dispatch: Dispatch
 }
 class Game extends React.Component<IGameProps> {
+	state = {
+		isFullscreen: false
+	}
+
 	componentDidMount() {
 		this.timerStart();
+	}
+
+	toggleFullscreen = () => {
+		const {isFullscreen} = this.state
+		if (isFullscreen) {
+			document.exitFullscreen()
+		} else {
+			document.documentElement.requestFullscreen()
+		}
+		this.setState({isFullscreen: !isFullscreen})
 	}
 
 	timerStart = () => {
@@ -80,6 +94,7 @@ class Game extends React.Component<IGameProps> {
 	}
 
 	render() {
+		const {isFullscreen} = this.state
 		const { time, timerId, lvl, isDead, isWin } = this.props.game
 
 		const prevLvl = lvl - 1;
@@ -107,8 +122,8 @@ class Game extends React.Component<IGameProps> {
 							</div>
 						</div>
 					</Modal>
-					
 				</CSSTransition>
+
 				<div className="page-game d-flex flex-column justify-start align-center">
 					<header className="game-header d-flex justify-space-between align-center px-5">
 						<div className="game-header__left d-flex justify-space-between align-center">
@@ -125,6 +140,7 @@ class Game extends React.Component<IGameProps> {
 							<Button className="mr-3" onClick={this.toggleTimer}><i className={`fas fa-${timerId ? 'pause' : 'play'}`}></i></Button>
 							<Link to="/gameshop"><Button className="mr-3" onClick={this.showShopMenu}><i className="fas fa-store-alt"></i></Button></Link>
 							<Link to="/profile"><Button onClick={this.showCharacterMenu}><i className="fas fa-user"></i></Button></Link>
+							<Button className="ml-3" onClick={this.toggleFullscreen}><i className={`fas fa-${isFullscreen ? 'compress' : 'expand'}`}></i></Button>
 						</div>
 					</header>
 					<div className="game">
