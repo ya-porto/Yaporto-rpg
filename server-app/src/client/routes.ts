@@ -7,7 +7,6 @@ enum ENUMROUTES {
 	SIGNUP,
 	GAME,
 	FORUM,
-	THREAD,
 	LEADERBOARD
 }
 type IROUTES = {
@@ -45,11 +44,6 @@ export const ROUTES: IROUTES = {
 	FORUM: {
 		NAME: 'Форум',
 		INDEX: Navigation.Game,
-		AUTH: true
-	},
-	THREAD: {
-		NAME: 'Тред',
-		INDEX: '/thread',
 		AUTH: true
 	},
 	LEADERBOARD: {
