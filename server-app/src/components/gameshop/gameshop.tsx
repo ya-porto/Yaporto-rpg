@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import {ViewedClothCard} from '../viewedClothCard/viewedClothCard';
 import {ClothProps, ClothButton} from '../clothButton/clothButton';
 import {Button} from '../button/index';
-import {Menu} from '../menu/menu';
-
 import './gameshop.css';
 
 interface GameShopState {

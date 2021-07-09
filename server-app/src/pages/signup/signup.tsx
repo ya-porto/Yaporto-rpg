@@ -19,7 +19,7 @@ interface IInputCompPropsWithRefs extends IInputCompProps {
 }
 interface ISignup {
 	inputsData: IInputCompPropsWithRefs[],
-	signupButton: IButton
+	signupButton: IButton,
 }
 
 interface SignupProps extends RouteComponentProps {
@@ -146,7 +146,7 @@ class Signup extends React.Component<SignupProps> {
 	render() {
 		const {inputsData, signupButton} = this.state;
 		return (
-			<div className="page">
+			<div className={`page ${this.props.user.theme}`}>
 				<Menu />
 				<div className="card_big">
 					<div className="signup_card_inner d-flex justify-space-between">

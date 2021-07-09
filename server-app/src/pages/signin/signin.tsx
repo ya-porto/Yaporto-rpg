@@ -4,7 +4,7 @@ import {Dispatch} from 'redux';
 import {connect} from 'react-redux';
 import {Link, RouteComponentProps} from 'react-router-dom';
 
-import {fetchUserBy} from '../../redux/userSlice';
+import {fetchUserBy, getAllThemes, getUserTheme} from '../../redux/userSlice';
 import {RootState} from '../../redux/types';
 import {Button, IButtonCompProps} from '../../components/button';
 import {IInputCompProps, Input} from '../../components/input';
@@ -73,6 +73,14 @@ class Signin extends React.Component<SigninProps> {
 		await this.props.dispatch(fetchUserBy());
 	}
 
+	getAllThemes = async () => {
+		await this.props.dispatch(getAllThemes())
+	}
+
+	getUserTheme = async () => {
+		await this.props.dispatch(getUserTheme(this.props.user.id))
+	}
+
 	signinClick = () => {
 		const inputList = this.state.inputsData;
 		let data: ISigninData | {} = {};
@@ -93,8 +101,12 @@ class Signin extends React.Component<SigninProps> {
 		// Все норм. Я валидирую
 		// @ts-ignore
 		authController.signin(data).then(() => {
-			this.getUserInfo();
-		}).catch(e => {
+			this.getUserInfo()
+				.then(() => {
+					this.getUserTheme()})
+			this.getAllThemes();
+		})
+		.catch(e => {
 			console.log(e);
 		});
 	}
@@ -112,10 +124,9 @@ class Signin extends React.Component<SigninProps> {
 	}
 
 	render() {
-		console.log(this.props.user)
 		const {inputsData, signinButton} = this.state;
 		return (
-			<div className={this.props.user.lightTheme ? 'page' : 'page_dark'}>
+			<div className={`page ${this.props.user.theme}`}>
 				<Menu />
 				<div className="card_big">
 					<div className="card_big_inner d-flex flex-column align-center">

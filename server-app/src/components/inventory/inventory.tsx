@@ -2,10 +2,10 @@ import React, {Component} from 'react';
 import {NavLink} from 'react-router-dom';
 import {BackpackCard} from '../backpackCard/backpackCard';
 import {ViewedClothCard} from '../viewedClothCard/viewedClothCard';
-import {CharacterCard} from '../characterCard/characterCard';
+import CharacterCard from '../characterCard/characterCard';
 import {ClothProps} from '../clothButton/clothButton';
 import {Button} from '../button/index';
-import {Menu} from '../menu/menu';
+
 
 import './inventory.css';
 

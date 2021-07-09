@@ -2,12 +2,14 @@ import React from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import {CSSTransition} from 'react-transition-group'
 
-import { changeTime, setTimerId, stopTimer } from '../../redux/gameSlice';
+import { changeTime, setTimerId, stopTimer, toggleShop } from '../../redux/gameSlice';
 import { Game as GameCanvas } from '../../components/game/index';
 import { Button } from '../../components/button/index';
 import { RootState } from '../../redux/types';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
+import { Inventory } from '../../components/inventory';
+import { GameShop } from '../../components/gameshop';
 
 import { leaderboardController } from '../../controllers/leaderboardController';
 import { Modal } from '../../components/modal';
@@ -50,8 +52,9 @@ class Game extends React.Component<IGameProps> {
 
 	getExpPercent = (): string => ((this.props.game.exp.now * 100) / this.props.game.exp.max).toString() + '%';
 
-	showShopMenu = () => console.log('Показываем модалку магазина');
-	showCharacterMenu = () => console.log('Показываем модалку персонажа');
+	showShopMenu = () => {
+		this.props.dispatch(toggleShop())
+	};
 
 	startAgain = () => {
 		document.location.reload()
@@ -123,13 +126,15 @@ class Game extends React.Component<IGameProps> {
 						</div>
 						<div className="game-header__right d-flex justify-space-between align-center">
 							<Button className="mr-3" onClick={this.toggleTimer}><i className={`fas fa-${timerId ? 'pause' : 'play'}`}></i></Button>
-							<Link to="/gameshop"><Button className="mr-3" onClick={this.showShopMenu}><i className="fas fa-store-alt"></i></Button></Link>
-							<Link to="/profile"><Button onClick={this.showCharacterMenu}><i className="fas fa-user"></i></Button></Link>
+							<Button className="mr-3" onClick={this.showShopMenu}><i className="fas fa-store-alt"></i></Button>
+							<Link to="/profile"><Button><i className="fas fa-user"></i></Button></Link>
 						</div>
 					</header>
 					<div className="game">
 						<GameCanvas />
 					</div>
+					{this.props.game.isPause ? <Inventory /> : null}
+					{this.props.game.isShop ? <GameShop /> : null}
 				</div>
 			</>
 		);

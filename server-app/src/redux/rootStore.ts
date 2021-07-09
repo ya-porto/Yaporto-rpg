@@ -7,7 +7,7 @@ import userReducer from './userSlice';
 export function createStore(reducers: reducers, preloadedState = {}): EnhancedStore {
 	return configureStore({
 		reducer: reducers,
-		preloadedState
+		preloadedState,
 	});
 }
 // Линтер не понимает что тут объявляется интерфейс
@@ -15,7 +15,7 @@ export function createStore(reducers: reducers, preloadedState = {}): EnhancedSt
 interface reducers { 
 	user: typeof userReducer,
 	game: typeof gameReducer,
-	character: typeof characterReducer
+	character: typeof characterReducer,
 }
 
 export const reducers = {
