@@ -17,4 +17,4 @@ async function changeThemeApi (req: Request, res: Response, next: NextFunction) 
     next()
 }
 
-export default changeThemeApi
+export {changeThemeApi}

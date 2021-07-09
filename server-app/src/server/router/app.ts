@@ -20,7 +20,6 @@ const middleware: Array<RequestHandler | ErrorRequestHandler | any> = [
 	cookieParserMiddleware(),
 	csrfMiddleware({cookie: true}),
 	httpContext.middleware,
-	express.json(),
 	authMiddleware,
 	userThemeMiddleware
 ];

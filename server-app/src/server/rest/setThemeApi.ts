@@ -18,4 +18,4 @@ async function setThemeApi (req: Request, res: Response, next: NextFunction) {
     next()
 }
 
-export default setThemeApi
+export {setThemeApi}
