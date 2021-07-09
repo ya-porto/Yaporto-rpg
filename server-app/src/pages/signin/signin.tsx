@@ -10,6 +10,7 @@ import {Button, IButtonCompProps} from '../../components/button';
 import {IInputCompProps, Input} from '../../components/input';
 import {Menu} from '../../components/menu/menu';
 import {authController, ISigninData} from '../../controllers/auth';
+import {Navigation} from '../../client/constants';
 import './style.css';
 
 interface IButton extends IButtonCompProps {
@@ -73,12 +74,12 @@ class Signin extends React.Component<SigninProps> {
 		await this.props.dispatch(fetchUserBy());
 	}
 
-	getAllThemes = async () => {
-		await this.props.dispatch(getAllThemes())
+	getAllThemes =  () => {
+		this.props.dispatch(getAllThemes())
 	}
 
-	getUserTheme = async () => {
-		await this.props.dispatch(getUserTheme(this.props.user.id))
+	getUserTheme = () => {
+		this.props.dispatch(getUserTheme(this.props.user.id))
 	}
 
 	signinClick = () => {
@@ -147,14 +148,14 @@ class Signin extends React.Component<SigninProps> {
 								))
 							}
 						</form>
-						<Link to="/">
+						<Link to={Navigation.Main}>
 							<Button className={signinButton.className} onClick={signinButton.onClick}>
 								{signinButton.text}
 							</Button>
 						</Link>
 						<Button className="primary mt-5" onClick={this.yaSignin}>Войте с помощью <span style={{color: 'yellow'}}>Я</span>ндекс</Button>
 						<div className="signin_buttons d-flex flex-column align-center">
-							<Link to="/signup" className="link mt-4">Нет аккаунта?</Link>
+							<Link to={Navigation.Signup} className="link mt-4">Нет аккаунта?</Link>
 						</div>
 					</div>
 				</div>

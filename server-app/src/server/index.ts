@@ -11,6 +11,7 @@ import {restEndpoints} from '../utils/restEndpoints';
 import getAllThemes from './rest/getAllThemes';
 import changeThemeApi from './rest/changeThemeApi';
 import getUserTheme from './rest/getUserTheme';
+import setThemeApi from './rest/setThemeApi';
 
 const key = fs.readFileSync(__dirname + '/selfsigned.key');
 const cert = fs.readFileSync(__dirname + '/selfsigned.crt');
@@ -27,7 +28,8 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json())
 app.get(restEndpoints.getAllThemes, getAllThemes)
 app.get(restEndpoints.getUserTheme, getUserTheme)
-app.put(restEndpoints.changeTheme, changeThemeApi)
+app.post(restEndpoints.changeTheme, changeThemeApi)
+app.put(restEndpoints.changeTheme, setThemeApi)
 app.use(router);
 
 
@@ -89,13 +91,18 @@ sequelize
 	  // Названия всех Инициированных таблиц лежат в объекте models. Берем оттуда таблицу с темами и сразу записываем нужные нам данные. Они не будут меняться по запросу
 	sequelize.models.Themes.bulkCreate([{
 		theme_id: 'light',
-		theme_name: 'light'
+		theme_name: 'Светлая'
 	}, {
 		theme_id: 'dark',
-		theme_name: 'dark'
+		theme_name: 'Темная'
 	}],{
 		// Этот параметр для того чтоб посмотреть что мы там сделали
 		returning: true
+	})
+
+	sequelize.models.UserThemes.create({
+		user_id: 585,
+		theme_id: 'light'
 	})
 	// eslint-disable-next-line no-console
 	.then(() => console.log('Themes created'))
@@ -113,10 +120,10 @@ sequelize
 	sequelize.sync().then(() => {
 		sequelize.models.Themes.bulkCreate([{
 			theme_id: 'light',
-			theme_name: 'Темная'
+			theme_name: 'Светлая'
 		}, {
 			theme_id: 'dark',
-			theme_name: 'Светлая'
+			theme_name: 'Темная'
 		}])
 		// eslint-disable-next-line no-console
 		.then(() => console.log('Themes created'))
