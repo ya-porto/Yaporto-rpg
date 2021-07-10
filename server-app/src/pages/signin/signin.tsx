@@ -71,7 +71,8 @@ class Signin extends React.Component<SigninProps> {
 	}
 
 	getUserInfo = async () => {
-		await this.props.dispatch(fetchUserBy());
+		await this.props.dispatch(fetchUserBy())
+			.then(() => this.getUserTheme())
 	}
 
 	getAllThemes =  () => {
@@ -103,8 +104,6 @@ class Signin extends React.Component<SigninProps> {
 		// @ts-ignore
 		authController.signin(data).then(() => {
 			this.getUserInfo()
-				.then(() => {
-					this.getUserTheme()})
 			this.getAllThemes();
 		})
 		.catch(e => {

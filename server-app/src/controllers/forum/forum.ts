@@ -1,12 +1,14 @@
+import {http, AxiosError, AxiosResponse} from '../../modules/http';
+import {serverUrl} from '../../utils/baseUrls';
+import {restEndpoints} from '../../utils/restEndpoints';
 import {threadMocks} from '../../_mocks/forumMocks';
-import { ThreadProps, ToggleLikeCommentProps, CreateThreadProps, CreateCommentProps } from './forum.type';
+import { ThreadProps } from './forum.type';
 
 class Controller {
-	async getAllThreads(): Promise<ThreadProps[]> {
-		await setTimeout(() => {
-			console.log('getting data');
-		}, 1);
-		return threadMocks;
+	async getAllThreads() {
+		return http.get(`${serverUrl}${restEndpoints.forumThread}`)
+			.then((res: AxiosResponse) => res.data)
+			.catch((e: AxiosError) => Promise.reject(e.response?.data.reason));
 	}
 
 	async getThreadById(id: number): Promise<ThreadProps | undefined> {
@@ -16,16 +18,19 @@ class Controller {
 		return threadMocks.find(x => x.id === id);
 	}
 
-	async toggleLikeComment(data: ToggleLikeCommentProps) {
-		console.log(data);
+	async postThread(data: {}) {
+		return http.post(`${serverUrl}${restEndpoints.forumThread}`, data)
+			.catch((e: AxiosError) => Promise.reject(e.response?.data.reason));
 	}
 
-	async createThread(data: CreateThreadProps) {
-		console.log(data);
+	async postComment(data: {}) {
+		return http.post(`${serverUrl}${restEndpoints.forumComment}`, data)
+			.catch((e: AxiosError) => Promise.reject(e.response?.data.reason));
 	}
 
-	async createComment(data: CreateCommentProps) {
-		console.log(data);
+	async postLike(data: {}) {
+		return http.post(`${serverUrl}${restEndpoints.forumLike}`, data)
+			.catch((e: AxiosError) => Promise.reject(e.response?.data.reason));
 	}
 }
 

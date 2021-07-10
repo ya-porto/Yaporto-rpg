@@ -3,6 +3,7 @@ import cookieParserMiddleware from 'cookie-parser';
 import csrfMiddleware from 'csurf';
 import {authMiddleware} from '../middlewares/authMiddleware';
 import {userThemeMiddleware} from '../middlewares/userThemeMiddleware';
+import {forumMiddleware} from '../middlewares/forumMiddleware';
 import httpContext from 'express-http-context';
 
 import render from '../middlewares/server-render-middleware';
@@ -21,7 +22,8 @@ const middleware: Array<RequestHandler | ErrorRequestHandler | any> = [
 	csrfMiddleware({cookie: true}),
 	httpContext.middleware,
 	authMiddleware,
-	userThemeMiddleware
+	userThemeMiddleware,
+	forumMiddleware
 ];
 
 export function appRoutes(router: Router) {

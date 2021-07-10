@@ -1,16 +1,15 @@
 import {Response, Request, NextFunction} from 'express';
-import {UserThemes} from '../../../db/sequelize';
+import {Users} from '../../../db/sequelize';
 
-async function setThemeApi (req: Request, res: Response, next: NextFunction) {
+async function setUserInfo (req: Request, res: Response, next: NextFunction) {
     const id = req.body.user_id
-    console.log(id)
     if (id) {
-        const result = await UserThemes.create ({
+        const result = await Users.upsert ({
             user_id: req.body.user_id,
-            theme_id: req.body.theme_id
+            user_info: JSON.stringify({display_name: req.body.display_name})
         })
         .catch(err => console.error(err))
-
+    
         res.status(200).send(result)
     }
     res.status(500)
@@ -18,4 +17,4 @@ async function setThemeApi (req: Request, res: Response, next: NextFunction) {
     next()
 }
 
-export {setThemeApi}
+export {setUserInfo}

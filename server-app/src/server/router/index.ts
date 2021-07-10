@@ -1,9 +1,19 @@
-import express, {Router} from 'express';
+import express, { Router } from 'express';
 
-import {appRoutes} from './app';
-import {staticRoutes} from './startc';
-import {changeThemeApi, getAllThemes, getUserTheme, setThemeApi} from '../rest/index';
-import {restEndpoints} from '../../utils/restEndpoints';
+import { appRoutes } from './app';
+import { staticRoutes } from './startc';
+import {
+    changeThemeApi,
+    getAllThemes,
+    getUserTheme, 
+    setThemeApi, 
+    postThread, 
+    postComment, 
+    postLike, 
+    setUserInfo, 
+    getAllThreads 
+} from '../rest/index';
+import { restEndpoints } from '../../utils/restEndpoints';
 
 // eslint-disable-next-line new-cap
 const router: Router = express.Router();
@@ -15,5 +25,10 @@ router.get(restEndpoints.getAllThemes, getAllThemes)
 router.get(restEndpoints.getUserTheme, getUserTheme)
 router.post(restEndpoints.changeTheme, changeThemeApi)
 router.put(restEndpoints.changeTheme, setThemeApi)
+router.post(restEndpoints.forumThread, postThread)
+router.get(restEndpoints.forumThread, getAllThreads)
+router.post(restEndpoints.forumComment, postComment)
+router.post(restEndpoints.forumLike, postLike)
+router.post(restEndpoints.userInfo, setUserInfo)
 
 export default router;

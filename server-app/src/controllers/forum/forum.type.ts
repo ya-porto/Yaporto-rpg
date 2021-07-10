@@ -1,16 +1,14 @@
 export interface AuthorProps {
-    id: number,
-    avatar?: string,
-    name: string
+    display_name: string
 }
 export interface ThreadProps extends CreateThreadProps {
-    id: number,
-    comments?: CommentProps[]
+    thread_id: number,
+    comments?: number
 }
 
 export interface CommentProps extends CreateCommentProps {
     id: number,
-    likes: number[]
+    likes?: number
 }
 
 export interface ToggleLikeCommentProps {
@@ -20,12 +18,12 @@ export interface ToggleLikeCommentProps {
 }
 
 export interface CreateThreadProps {
-    author: AuthorProps,
+    user_info: string,
     title: string,
     text: string
 }
 export interface CreateCommentProps {
-    author: AuthorProps,
+    user_info: string,
     threadId: number,
     text: string
 }

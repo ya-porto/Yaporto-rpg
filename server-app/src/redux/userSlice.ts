@@ -11,6 +11,7 @@ const fetchUserBy: any = createAsyncThunk(
 	async () => {
 		const response = await authController.getUserInfo();
 		response['isAuth'] = true
+		 
 		return response;
 	}
 );
@@ -32,33 +33,39 @@ const getUserTheme: any = createAsyncThunk(
 )
 
 const userInitialState = {
-	isAuth: false,
-	email: null,
-	login: null,
+	id: null,
 	first_name: null,
 	second_name: null,
 	display_name: null,
+	login: null,
+	avatar: null,
+	email: null,
 	phone: null,
+	isAuth: false,
 	theme: 'light',
-	themes: []
+	themes: null,
 };
 
 const userSlice = createSlice({
 	name: sliceNames.user,
-	initialState: userInitialState,
+	initialState: {
+		isAuth: userInitialState.isAuth,
+		email: userInitialState.email,
+		login: userInitialState.login,
+		first_name: userInitialState.first_name,
+		second_name: userInitialState.second_name,
+		display_name: userInitialState.display_name,
+		avatar: userInitialState.avatar,
+		phone: userInitialState.phone,
+		theme: 'light',
+		themes: [],
+	},
 	reducers: {
 		updateTheme: (state, action) => {
 			state.theme = action.payload
 		},
 		updateUserData: (state, action) => {
-			state.display_name = action.payload.display_name
-			state.email = action.payload.email
-			state.login = action.payload.login
-			state.first_name = action.payload.first_name
-			state.second_name = action.payload.second_name
-			state.phone = action.payload.phone
-			state.theme = action.payload.theme
-			state.isAuth = action.payload.isAuth
+			Object.assign(state, action.payload)
 		},
 		resetUserData: state => {
 			Object.assign(state, userInitialState)
@@ -66,14 +73,7 @@ const userSlice = createSlice({
 	},
 	extraReducers: {
 		[fetchUserBy.fulfilled]: (state, action) => {
-			state.display_name = action.payload.display_name
-			state.email = action.payload.email
-			state.login = action.payload.login
-			state.first_name = action.payload.first_name
-			state.second_name = action.payload.second_name
-			state.phone = action.payload.phone
-			state.theme = action.payload.theme
-			state.isAuth = action.payload.isAuth
+			Object.assign(state, action.payload)
 		},
 		[getAllThemes.fulfilled]: (state, action) => {
 			state.themes = action.payload
@@ -85,6 +85,6 @@ const userSlice = createSlice({
 });
 
 export const {updateUserData, resetUserData, updateTheme} = userSlice.actions;
-export {fetchUserBy, getAllThemes, getUserTheme}
+export {fetchUserBy, getAllThemes, getUserTheme, userInitialState}
 
 export default userSlice.reducer;

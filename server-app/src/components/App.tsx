@@ -24,7 +24,6 @@ function App(): JSX.Element {
 				<Route exact path={NavigationList.Profile} component={Profile} />
 				<Route exact path={NavigationList.Leaderboard} component={Leaderboard} />
 				<Route exact path={NavigationList.Forum} component={forum} />
-				<Route exact path={NavigationList.Thread} component={thread} />
 			</Switch>
 		</div>
 	);

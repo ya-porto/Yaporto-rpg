@@ -1,15 +1,19 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-
+import {NavLink} from 'react-router-dom';
 import {RootState} from '../../redux/types';
-import {ThreadProps} from '../../controllers/forum/forum.type';
-import {Menu} from '../../components/menu/menu';
+import {getWindow} from 'ssr-window';
 
-import './forum.css';
+import {ThreadProps, AuthorProps} from '../../controllers/forum/forum.type';
+import {Menu} from '../../components/menu/menu';
 import {Button} from '../../components/button';
 import {Input} from '../../components/input';
 import {forumController} from '../../controllers/forum';
-import {NavLink} from 'react-router-dom';
+import {ForumContext} from '../../utils/forumContext';
+import {isServer} from '../../utils/isServerEnvChecker'
+import './forum.css';
+
+const window = getWindow()
 
 interface ForumProps {
 	user: RootState
@@ -21,10 +25,20 @@ interface ForumProps {
 
 class Forum extends Component<ForumProps> {
 	state = {
-		threads: [],
 		isCreateMode: false,
 		title: '',
-		text: ''
+		text: '',
+		threads: isServer ? this.context.threads : JSON.parse(localStorage.forum).threads
+	}
+
+	async getAllThreads() {
+		forumController.getAllThreads()
+			.then(res => {
+				const forum = JSON.parse(localStorage.forum)
+				forum.threads = res
+				localStorage.setItem('forum',JSON.stringify(forum))
+				
+			})
 	}
 
 	toggleCreateMode = () => {
@@ -33,30 +47,41 @@ class Forum extends Component<ForumProps> {
 
 	createThread = (e: Event) => {
 		e.preventDefault();
-		console.log('im here')
 		const {text, title} = this.state;
 		if (title === '' || text === '') {
 			return;
 		}
-
-		const {id, avatar, name} = this.props.user;
-		forumController.createThread({
-			author: {id, avatar, name},
+		const {id, display_name} = this.props.user;
+		const thread = {
+			user_id: id,
+			user_info: JSON.stringify({id, display_name}),
 			text,
 			title
-		})
-			.then(() => {
+		}
+		
+		forumController.postThread(thread)
+			.then((res) => {
+				const threads = this.state.threads
+				res.data.user_info = JSON.stringify({display_name: this.props.user.display_name})
+				threads.push(res.data)
 				this.setState({
 					title: '',
-					text: ''
+					text: '',
+					isCreateMode: false,
+					threads: threads
 				})
 			}).catch(e => {
 				console.log(e);
 			});
+
+		this.getAllThreads()
+		
 	}
 
 	render() {
-		const {threads} = this.state;
+		// Положить в контекст? передать в контекст и в локалсторадж?
+		const threads = this.state.threads
+		
 		return (
 			<div className={`${this.props.user.theme} page`}>
 				<Menu />
@@ -75,12 +100,14 @@ class Forum extends Component<ForumProps> {
 									<div className="create__title" onClick={this.toggleCreateMode}>Создать тред</div>
 									<div className="topics d-flex flex-column justify-start">
 										{threads?.map((thread: ThreadProps) => {
+											const {thread_id, title, user_info, text} = thread
+											const display_name = JSON.parse(user_info).display_name
 											return (
-												<NavLink className="topic d-flex flex-column pt-4 pb-2 px-4 mb-4" to={`thread?id=${thread.id}`} key={thread.id}>
-													<span className="thread_created mb-1">Создан: {thread.author.name}</span>
-													<span className="thread_theme mb-2">{thread.title}</span>
-													<span className="thread_message px-1 py-2 mb-2">{thread.text}</span>
-													<span className="thread_comments">Коммментарии: {thread.comments?.length}</span>
+												<NavLink className="topic d-flex flex-column pt-4 pb-2 px-4 mb-4" to={`thread?id=${thread_id}`} key={thread_id}>
+													<span className="thread_created mb-1">Создан: {display_name ? display_name : 'Неопознанный енот'}</span>
+													<span className="thread_theme mb-2">{title}</span>
+													<span className="thread_message px-1 py-2 mb-2">{text}</span>
+													<span className="thread_comments">Коммментарии: {thread.comments ? thread.comments : 0}</span>
 												</NavLink>
 											);
 										})}
@@ -94,6 +121,8 @@ class Forum extends Component<ForumProps> {
 		);
 	}
 }
+
+Forum.contextType = ForumContext
 
 const mapStateToProps = (state: RootState) => ({
 	user: state.user

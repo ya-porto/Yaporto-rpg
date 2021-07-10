@@ -3,6 +3,7 @@ import {NextFunction, Request, Response} from 'express';
 import httpContext from 'express-http-context';
 
 import {sliceNames} from '../../redux/slicenames';
+import {userInitialState} from '../../redux/userSlice'
 
 const PRAKTIKUM_AUTH_ENDPOINT = 'https://ya-praktikum.tech/api/v2/auth/user';
 
@@ -19,7 +20,8 @@ async function authMiddleware(req: Request, res: Response, next: NextFunction) {
 		data['isAuth'] = true
 		httpContext.set(sliceNames.user, data);
 	} catch(err) {
-		console.log(err.response.status)
+		httpContext.set(sliceNames.user, userInitialState)
+		console.error(err.response.status)
 	}
 
 	await next();

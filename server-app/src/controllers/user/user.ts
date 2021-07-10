@@ -26,7 +26,7 @@ class Controller {
 	}
 
 	setTheme(data: {}) {
-		return http.post(`${serverUrl}${restEndpoints.changeTheme}`, data)
+		return http.put(`${serverUrl}${restEndpoints.changeTheme}`, data)
 			.catch((e: AxiosError) => Promise.reject(e.response?.data.reason));
 	}
 
@@ -39,6 +39,11 @@ class Controller {
 	getUserTheme(id: number) {
 		return http.get(`${serverUrl}${restEndpoints.getUserTheme}id=${id}`)
 			.then((res: AxiosResponse) => res.data)
+			.catch((e: AxiosError) => Promise.reject(e.response?.data.reason));
+	}
+
+	setUserInfo(data: {}) {
+		return http.post(`${serverUrl}${restEndpoints.userInfo}`, data)
 			.catch((e: AxiosError) => Promise.reject(e.response?.data.reason));
 	}
 }
