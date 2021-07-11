@@ -2,21 +2,6 @@
 version: "3"
 
 services:
-    # MongoDB ставим впереди server-app, так как тот server-app от этого сервиса
-    mongo:
-        # Здесь именно image, потому что мы его сами не пишем, он будет взят с докерхаба
-        image: mongo
-        environment:
-            MONGO_INITDB_ROOT_USERNAME: user
-            MONGO_INITDB_ROOT_PASSWORD: password
-        volumes:
-          - ./mongo:/data/db
-        ports:
-          - "27017:27017"
-        # Появился новый параметр — networks, о нём ниже
-        networks:
-            # Назвать сеть можно как угодно
-            - awesome
 
     postgres:
         image: postgres:12
@@ -51,8 +36,6 @@ services:
             - awesome
 
     server-app:
-        environment:
-            - MONGO_HOST=mongo
         env_file:
             ./dev.env
         # Этим ключом мы скажем docker-compose, чтобы он собирал докерфайл, который 
@@ -64,14 +47,13 @@ services:
           - "3000:3000"
         # Зависимость от сервиса mongo
         depends_on:
-            - mongo
             - postgres
             - pgadmin
         restart: always
         # Важно добавить сеть всем сервисам, которые должны взаимодействовать между собой
         networks:
             - awesome
-        command: ./wait-for.sh postgres:5432 mongo:27017 -- npm run start
+        command: ./wait-for.sh postgres:5432 -- npm run start
 
 volumes:
     pgadmin-data:
