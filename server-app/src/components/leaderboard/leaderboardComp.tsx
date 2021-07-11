@@ -15,8 +15,6 @@ class LeaderboardComp extends React.Component<ILeaderboardComp> {
 								name={item.data.name}
 								avatar={item.data.avatar}
 								portoTime={item.data.portoTime}
-								min={item.data.min}
-								sec={item.data.sec}
 								place={i + 1}
 							/>
 						</li>;

@@ -34,7 +34,6 @@ async function userThemeMiddleware (res: Response, req: Request, next: NextFunct
         .then(res => {return res?.getDataValue('theme_id')})
         .catch(err => console.error(err))
 
-        console.log('response', response)
         // Проверяем что ответ пришел и он не undefined прежде чем переписывать переменную
         if (response) {
             userTheme = response
@@ -42,7 +41,6 @@ async function userThemeMiddleware (res: Response, req: Request, next: NextFunct
     } 
 
     const allthemes = await UserThemes.findAll({raw: true}).then(res => res)
-    console.log('allthemes', allthemes)
     // Складываем в контекст чтобы передать дальше в миддлвару рендера страницы
     const user = httpContext.get(sliceNames.user)
     Object.assign(user, {themes: themes, theme: userTheme})

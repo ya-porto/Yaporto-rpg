@@ -3,7 +3,6 @@ import {UserThemes} from '../../../db/sequelize';
 
 async function setThemeApi (req: Request, res: Response, next: NextFunction) {
     const id = req.body.user_id
-    console.log(id)
     if (id) {
         const result = await UserThemes.create ({
             user_id: req.body.user_id,

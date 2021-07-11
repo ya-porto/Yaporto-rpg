@@ -23,7 +23,7 @@ interface ForumProps {
 	text: string
 }
 
-class Forum extends Component<ForumProps> {
+class Threads extends Component<ForumProps> {
 	state = {
 		isCreateMode: false,
 		title: '',
@@ -122,10 +122,10 @@ class Forum extends Component<ForumProps> {
 	}
 }
 
-Forum.contextType = ForumContext
+Threads.contextType = ForumContext
 
 const mapStateToProps = (state: RootState) => ({
 	user: state.user
 });
 
-export default connect(mapStateToProps)(Forum);
+export default connect(mapStateToProps)(Threads);

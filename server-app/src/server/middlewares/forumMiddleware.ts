@@ -4,8 +4,8 @@ import {NextFunction, Request, Response} from 'express';
 import {Threads, Comments, Likes, Users} from '../../../db/sequelize';
 import {sliceNames} from '../../redux/slicenames';
 
-async function forumMiddleware (res: Response, req: Request, next: NextFunction) {
-    // Проверяем ьыл ли авторизован пользователь прежде чем вообще идти за данными по форуму
+async function forumMiddleware (req: Request, res: Response,  next: NextFunction) {
+    // Проверяем был ли авторизован пользователь прежде чем вообще идти за данными по форуму
     const user = httpContext.get(sliceNames.user)
     if (!user.id) {
         next()
@@ -34,23 +34,66 @@ async function forumMiddleware (res: Response, req: Request, next: NextFunction)
         .then(res => {return res})
         .catch(err => console.error(err))
 
-    // const allComments = await Comments.findAll({raw:true})
-    // console.log('threads', threads)
-    // console.log('allComments', allComments)
-
-    // const likes = await Likes.findAll({raw: true}).then(res => res).catch(e => console.error(e))
-    // const users = await Users.findAll({raw: true}).then(res => res).catch(e => console.error(e))
-    // console.log('likes', likes)
-    // console.log('users', users)
 
     threads?.forEach(thread => {
        const commentsForThread = comments?.find((comment: { [x: string]: number | string; }) => thread['thread_id'] === comment['thread_id'])
        Object.assign(thread, {count: commentsForThread?.count})
     });
 
-
-    
     httpContext.set('threads', threads)
+
+    // А теперь проверяем не захотел ли пользователь открыт конкретный тред
+    const {id} = req.query
+    console.log('id', id)
+    
+    if (id) {
+
+        const comments = await Comments.findAll({
+            raw: true,
+            where: {
+                thread_id: id
+            },
+            include: [{model: Users}]
+        })
+            .then((res) => {
+                res.map(r => {
+                    delete r['User.user_id'];
+                    r['user_info'] = r['User.user_info']
+                    delete r['User.user_info']
+                })
+                return res
+            })
+            .catch(err => console.error(err))
+        
+        const likes: any = await Likes.count({
+            col: 'comment_id',
+            group: ['comment_id']
+        })
+
+
+        console.log('comments', comments)
+        console.log('likes', likes)
+
+        // comments?.forEach(comment => {
+        //     const likesForComment = likes?.find((like: { [x: string]: number | string; }) => comment['comment_id'] === like['comment_id'])
+        //     Object.assign(comment, {count: likesForComment?.count})
+        //  });
+
+        const likedByUser: any = Likes.findAll({
+            raw: true,
+            where: {
+                user_id: user.id
+            }
+        })
+
+        // likedByUser?.forEach((like: { [x: string]: number | string; }) => {
+        //     comments?.forEach(comment => {
+        //         like['comment_id'] === comment['comment_id'] ? comment['liked'] = true : comment['liked'] = false
+        //     })
+        // });
+
+        next ()
+    }
 
     next ()
 }
