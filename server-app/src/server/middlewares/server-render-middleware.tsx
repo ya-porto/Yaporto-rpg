@@ -24,7 +24,6 @@ export default (req: Request, res: Response) => {
 	const userData = httpContext.get(sliceNames.user)
 	const threads = httpContext.get('threads')
 	const forum = {threads: threads, comments: []}
-	console.log('got it', threads)
 
 	const preloadedData = {user: userData}
 	const store = createStore(reducers, preloadedData);
@@ -58,7 +57,7 @@ function makeHTMLPage(reactDom: string, chunkExtractor: ChunkExtractor, reduxSta
 		<html lang="ru">
 			<head>
 				<title>From SSR with Love</title>
-				<link rel="stylesheet" href="./css/style.css"></link>
+				<link rel="stylesheet" href="/css/style.css"></link>
 			</head>
 			<body>
 				<main id="app">{parse(reactDom)}</main>

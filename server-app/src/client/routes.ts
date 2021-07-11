@@ -1,6 +1,22 @@
 import {Navigation} from './constants'
 
-export const ROUTES = {
+enum ENUMROUTES {
+	MAIN,
+	PROFILE,
+	SIGNIN,
+	SIGNUP,
+	GAME,
+	FORUM,
+	LEADERBOARD
+}
+type IROUTES = {
+	[key in keyof typeof ENUMROUTES]: {
+		NAME: string;
+		INDEX: string;
+		AUTH?: boolean;
+	};
+};
+export const ROUTES: IROUTES = {
 	MAIN: {
 		NAME: 'Домашяя',
 		INDEX: Navigation.Main

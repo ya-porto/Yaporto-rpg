@@ -4,6 +4,8 @@ import {isEnemyCross} from './isEnemyCross';
 import {NumberAnimate} from './numberAnimate';
 import {objPersonaj} from './game.objPersonaj';
 import {getDocument} from 'ssr-window';
+import { store } from '../../client';
+import { decrimentEnemiesAmount, setDeath, setWin, stopTimer } from '../../redux/gameSlice';
 const document = getDocument();
 
 export class Character {
@@ -102,7 +104,17 @@ export class Character {
 				this.hp = 0;
 				let time = performance.now();
 				this.deathCharacter(time, 400);
-				console.log('die');
+				
+				if (this.isEnemy) {
+					store.dispatch(decrimentEnemiesAmount())
+					if (store.getState().game.enemiesAmount <= 0) {
+						store.dispatch(stopTimer())
+						store.dispatch(setWin())
+					}
+				} else {
+					store.dispatch(stopTimer())
+					store.dispatch(setDeath())
+				}
 			}
 
 			return;
@@ -147,7 +159,7 @@ export class Character {
 
 	attackHero() {
 		this.attackInterval = window.setInterval(() => {
-			if (!this.isDead) {
+			if (!this.isDead && !store.getState().game.isPause) {
 				let char = isEnemyCross(this.getPosition(), this.canvasMatrix);
 				if (char) {
 					this.startTime = performance.now();
@@ -198,7 +210,7 @@ export class Character {
 				if (this.canvasMatrix[this.prevY / this.ySize][this.prevX / this.xSize] === null) {
 					this.xPosition = this.prevX / this.xSize;
 					this.yPosition = this.prevY / this.ySize;
-					console.log(this.xPosition, this.yPosition);
+					
 					this.ctx.clearRect(clearX, clearY, this.image.width, this.image.height);
 					this.ctx.beginPath();
 					this.ctx.strokeText(this.hp.toString(), this.prevX + 25, this.prevY + 10);

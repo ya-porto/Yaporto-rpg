@@ -1,6 +1,4 @@
 interface ILeaderBoardDataFields {
-  min: string,
-  sec: string,
   name: string,
   avatar: string,
   portoTime: string
