@@ -25,8 +25,8 @@ const initialState = isServer ? getWindow().__INITIAL_STATE__ : window.__INITIAL
 export const store = createStore(reducers, initialState);
 
 if(!isServer) {
-	const threads = isServer ? getWindow().storage.threads : window.storage.threads;
-	localStorage.setItem('forum', JSON.stringify({threads: threads, comments: []}))
+	const forum = isServer ? getWindow().storage : window.storage;
+	localStorage.setItem('forum', JSON.stringify(forum))
 }
 
 if (!IS_DEV) {

@@ -23,7 +23,8 @@ export default (req: Request, res: Response) => {
 
 	const userData = httpContext.get(sliceNames.user)
 	const threads = httpContext.get('threads')
-	const forum = {threads: threads, comments: []}
+	const thread = httpContext.get('thread')
+	const forum = {threads: threads, thread: thread}
 
 	const preloadedData = {user: userData}
 	const store = createStore(reducers, preloadedData);

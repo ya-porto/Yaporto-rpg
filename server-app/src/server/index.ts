@@ -81,18 +81,26 @@ sequelize
         user_id: 3,
         title: 'title',
         text: 'text'
-    }]).catch(e => console.error(e))
+	}])
+	.then(()=> {
+		sequelize.models.Comments.create({
+			thread_id: 1,
+			user_id: 3,
+			text: 'text'
+		})
+		.then(() => {
+			sequelize.models.Likes.create({
+				user_id: 3,
+				comment_id: 1
+			}).catch(e => console.error(e))
+		})
+		.catch(e => console.error(e))
+	})
+	.catch(e => console.error(e))
 
-    // sequelize.models.Comments.create({
-    //     thread_id: 1,
-    //     user_id: 585,
-    //     text: 'text'
-    // }).catch(e => console.error(e))
 
-    // sequelize.models.Likes.create({
-    //     user_id: 585,
-    //     comment_id: 1
-    // }).catch(e => console.error(e))
+
+
 
 	// eslint-disable-next-line no-console
     console.log('Tables created', sequelize.models)

@@ -16,14 +16,17 @@ import './forum.css';
 const window = getWindow()
 
 interface ForumProps {
-	user: RootState
+	user?: RootState
+}
+
+interface IForum {
 	threads: ThreadProps[] | null,
 	isCreateMode: boolean,
 	title: string,
 	text: string
 }
 
-class Threads extends Component<ForumProps> {
+class Threads extends Component<ForumProps, IForum> {
 	state = {
 		isCreateMode: false,
 		title: '',

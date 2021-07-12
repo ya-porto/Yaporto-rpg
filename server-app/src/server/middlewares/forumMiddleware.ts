@@ -44,9 +44,24 @@ async function forumMiddleware (req: Request, res: Response,  next: NextFunction
 
     // А теперь проверяем не захотел ли пользователь открыт конкретный тред
     const {id} = req.query
-    console.log('id', id)
     
     if (id) {
+
+        const thread = await Threads.findOne({
+            raw: true,
+            where: {
+                thread_id: id
+            },
+            include: [{model: Users}]
+        }).then((res) => {
+            if (res) {
+                delete res['User.user_id'];
+                res['user_info'] = res['User.user_info']
+                delete res['User.user_info']
+            }
+            return res
+        })
+        .catch(err => console.error(err))
 
         const comments = await Comments.findAll({
             raw: true,
@@ -71,28 +86,29 @@ async function forumMiddleware (req: Request, res: Response,  next: NextFunction
         })
 
 
-        console.log('comments', comments)
-        console.log('likes', likes)
 
-        // comments?.forEach(comment => {
-        //     const likesForComment = likes?.find((like: { [x: string]: number | string; }) => comment['comment_id'] === like['comment_id'])
-        //     Object.assign(comment, {count: likesForComment?.count})
-        //  });
 
-        const likedByUser: any = Likes.findAll({
+        comments?.forEach(comment => {
+            const likesForComment = likes?.find((like: { [x: string]: number | string; }) => comment['comment_id'] === like['comment_id'])
+            Object.assign(comment, {count: likesForComment?.count})
+         });
+
+        const likedByUser: any = await Likes.findAll({
             raw: true,
             where: {
                 user_id: user.id
             }
         })
 
-        // likedByUser?.forEach((like: { [x: string]: number | string; }) => {
-        //     comments?.forEach(comment => {
-        //         like['comment_id'] === comment['comment_id'] ? comment['liked'] = true : comment['liked'] = false
-        //     })
-        // });
+        likedByUser?.forEach((like: { [x: string]: number | string; }) => {
+            comments?.forEach(comment => {
+                like['comment_id'] === comment['comment_id'] ? comment['liked'] = true : comment['liked'] = false
+            })
+        });
 
-        next ()
+        Object.assign(thread, {comments: comments})
+
+        httpContext.set('thread', thread)
     }
 
     next ()

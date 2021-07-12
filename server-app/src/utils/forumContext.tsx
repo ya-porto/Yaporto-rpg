@@ -2,5 +2,5 @@ import React from 'react';
 
 export const ForumContext = React.createContext({
     threads: [],
-    comments: []
+    thread: []
 })

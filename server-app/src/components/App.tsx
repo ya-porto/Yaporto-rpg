@@ -21,6 +21,7 @@ function useQuery() {
 
 function App(): JSX.Element {
 	const query = useQuery()
+	const id = query.get('id')
 	return (
 		<div>
 			<Switch>
@@ -30,7 +31,9 @@ function App(): JSX.Element {
 				<Route exact path={NavigationList.Signin} component={Signin} />
 				<Route exact path={NavigationList.Profile} component={Profile} />
 				<Route exact path={NavigationList.Leaderboard} component={Leaderboard} />
-				<Route exact path={NavigationList.Forum} render={(props) => <Forum thread={query.get("thread")} />} />
+				<Route exact path={NavigationList.Forum}>
+					<Forum thread={id} />
+				</Route>
 			</Switch>
 		</div>
 	);

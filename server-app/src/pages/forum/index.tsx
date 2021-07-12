@@ -1,16 +1,22 @@
-import React from 'react'
+import React, {Component} from 'react';
 
 import Threads from './forum';
 import Thread from './ thread';
 
 
-export function Forum ( {thread}: {thread: string | null} ) {
-    return (
-        <>
-            {
-                thread ? Thread : Threads
-            }
-        </>
-    )
+
+
+class Forum extends Component<{thread?: string | null}> {
+    render() {
+        return (
+            <div>
+                {
+                    this.props.thread ? <Thread /> : <Threads/>
+                }
+            </div>
+        )
+    }
 }
+
+export {Forum, Threads}
 
