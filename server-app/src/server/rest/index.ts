@@ -7,3 +7,4 @@ export {postComment} from './postComment';
 export {postLike} from './postLike';
 export {setUserInfo} from './setUserInfo';
 export {getAllThreads} from './getAllThreads';
+export {getThreadById} from './getThreadById';

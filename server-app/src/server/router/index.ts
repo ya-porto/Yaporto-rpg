@@ -11,7 +11,8 @@ import {
     postComment, 
     postLike, 
     setUserInfo, 
-    getAllThreads 
+    getAllThreads,
+    getThreadById
 } from '../rest/index';
 import { restEndpoints } from '../../utils/restEndpoints';
 
@@ -26,7 +27,8 @@ router.get(restEndpoints.getUserTheme, getUserTheme)
 router.post(restEndpoints.changeTheme, changeThemeApi)
 router.put(restEndpoints.changeTheme, setThemeApi)
 router.post(restEndpoints.forumThread, postThread)
-router.get(restEndpoints.forumThread, getAllThreads)
+router.get(restEndpoints.getALlThreads, getAllThreads)
+router.get(restEndpoints.forumThread, getThreadById)
 router.post(restEndpoints.forumComment, postComment)
 router.post(restEndpoints.forumLike, postLike)
 router.post(restEndpoints.userInfo, setUserInfo)

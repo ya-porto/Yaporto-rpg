@@ -62,12 +62,12 @@ sequelize
 	})
 
 	sequelize.models.UserThemes.create({
-		user_id: 2199,
+		user_id: 487,
 		theme_id: 'light'
 	})
 
 	sequelize.models.Users.bulkCreate([{
-        user_id: 2199,
+        user_id: 487,
         user_info: JSON.stringify({display_name: 'name'})
     }, {
         user_id: 10,

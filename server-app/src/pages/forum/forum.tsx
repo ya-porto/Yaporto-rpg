@@ -10,7 +10,9 @@ import {Button} from '../../components/button';
 import {Input} from '../../components/input';
 import {forumController} from '../../controllers/forum';
 import {ForumContext} from '../../utils/forumContext';
-import {isServer} from '../../utils/isServerEnvChecker'
+import {isServer} from '../../utils/isServerEnvChecker';
+import {Navigation} from '../../client/constants';
+
 import './forum.css';
 
 const window = getWindow()
@@ -106,7 +108,7 @@ class Threads extends Component<ForumProps, IForum> {
 											const {thread_id, title, user_info, text} = thread
 											const display_name = JSON.parse(user_info).display_name
 											return (
-												<NavLink className="topic d-flex flex-column pt-4 pb-2 px-4 mb-4" to={`thread?id=${thread_id}`} key={thread_id}>
+												<NavLink className="topic d-flex flex-column pt-4 pb-2 px-4 mb-4" to={`${Navigation.Forum}?id=${thread_id}`} key={thread_id}>
 													<span className="thread_created mb-1">Создан: {display_name ? display_name : 'Неопознанный енот'}</span>
 													<span className="thread_theme mb-2">{title}</span>
 													<span className="thread_message px-1 py-2 mb-2">{text}</span>

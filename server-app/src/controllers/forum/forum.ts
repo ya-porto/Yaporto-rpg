@@ -6,16 +6,15 @@ import { ThreadProps } from './forum.type';
 
 class Controller {
 	async getAllThreads() {
-		return http.get(`${serverUrl}${restEndpoints.forumThread}`)
+		return http.get(`${serverUrl}${restEndpoints.getALlThreads}`)
 			.then((res: AxiosResponse) => res.data)
 			.catch((e: AxiosError) => Promise.reject(e.response?.data.reason));
 	}
 
-	async getThreadById(id: number): Promise<ThreadProps | undefined> {
-		await setTimeout(() => {
-			console.log('getting data');
-		}, 1);
-		return threadMocks.find(x => x.id === id);
+	async getThreadById(id: number, user_id: number) {
+		return http.get(`${serverUrl}${restEndpoints.forumThread}?id=${id}&user_id=${user_id}`)
+			.then((res: AxiosResponse) => res.data)
+			.catch((e: AxiosError) => Promise.reject(e.response?.data.reason));
 	}
 
 	async postThread(data: {}) {
