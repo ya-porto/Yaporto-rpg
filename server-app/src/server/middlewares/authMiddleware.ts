@@ -1,7 +1,6 @@
 import axios from 'axios';
 import {NextFunction, Request, Response} from 'express';
 import httpContext from 'express-http-context';
-import { Navigation } from '../../client/constants';
 import {sliceNames} from '../../redux/slicenames';
 import {userInitialState} from '../../redux/userSlice'
 import { ROUTES } from './../../client/routes';
