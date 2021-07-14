@@ -49,17 +49,51 @@ class Thread extends PureComponent<Props, IThread> {
 		this.setState({comment: `"${commentMessage.slice(0, 25)}..."`});
 	}
 
-	toggleLike = (comment_id: number) => {
-		this.setState((state) => {
-			const thread = this.state.thread
-			thread?.comments?.find(comment => {
-				comment.comment_id === comment_id ? !comment.liked : false
+	toggleLike = (comment_id: number, isLiked: boolean) => {
+		if (isLiked) {
+			forumController.deleteLike({
+				comment_id: comment_id,
+				user_id: this.props.user.id
 			})
-			return {thread: thread}
-		})
-		console.log('renewed state',this.state.thread)
-		// @ts-ignore
-
+				.then(() => {
+					const thread = this.state.thread
+					for (let i = 0; i < thread?.comments.length; i++) {
+						const comment = thread?.comments[i];
+						if (comment.comment_id === comment_id) {
+							comment.liked = !isLiked || false
+							comment.count = parseInt(comment.count) - 1
+							break;
+						}
+					}
+					this.setState({ thread })
+					// Приходитсязаставлятть его. Стейт обновляется, а реактивность не срабатывает
+					this.forceUpdate()
+				})
+				.catch(e => {
+					console.log(e);
+				})
+		} else {
+			forumController.postLike({
+				comment_id: comment_id,
+				user_id: this.props.user.id
+			})
+				.then(() => {
+					const thread = this.state.thread
+					for (let i = 0; i < thread?.comments.length; i++) {
+						const comment = thread?.comments[i];
+						if (comment.comment_id === comment_id) {
+							comment.liked = !isLiked || true
+							comment.count = parseInt(comment.count) + 1
+							break;
+						}
+					}
+					this.setState({ thread })
+					this.forceUpdate()
+				})
+				.catch(e => {
+					console.log(e);
+				})
+		}
 	}
 
 	createComment = (event: Event) => {
@@ -131,7 +165,7 @@ class Thread extends PureComponent<Props, IThread> {
 													<div className="thread_comment_message py-6 px-3">
 														{text}
 													</div>
-													<i className={`${liked ? 'fas' : 'far'} fa-heart like-icon pointer`} onClick={() => this.toggleLike(comment_id)}></i>
+													<i className={`${liked ? 'fas' : 'far'} fa-heart like-icon pointer`} onClick={() => this.toggleLike(comment_id, liked)}>{count || ''}</i>
 												</div>
 											);
 										})}   

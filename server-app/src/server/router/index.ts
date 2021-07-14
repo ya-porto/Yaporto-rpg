@@ -9,7 +9,8 @@ import {
     setThemeApi, 
     postThread, 
     postComment, 
-    postLike, 
+    postLike,
+    deleteLike,
     setUserInfo, 
     getAllThreads,
     getThreadById
@@ -31,6 +32,7 @@ router.get(restEndpoints.getALlThreads, getAllThreads)
 router.get(restEndpoints.forumThread, getThreadById)
 router.post(restEndpoints.forumComment, postComment)
 router.post(restEndpoints.forumLike, postLike)
+router.post(restEndpoints.deleteLike, deleteLike)
 router.post(restEndpoints.userInfo, setUserInfo)
 
 export default router;
