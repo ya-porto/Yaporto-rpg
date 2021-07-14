@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import Threads from './forum';
+import Threads from './threads';
 import Thread from './ thread';
 
 

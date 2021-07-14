@@ -7,7 +7,6 @@ interface IInputCompProps {
   validation?: IValidationProps
   className?: string,
   error?: boolean,
-  defaultValue?: string
 }
 
 interface IInputCompState {

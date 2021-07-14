@@ -22,29 +22,29 @@ class Controller {
 
 	changeTheme(data: {}) {
 		return http.post(`${serverUrl}${restEndpoints.changeTheme}`, data)
-			.catch((e: AxiosError) => Promise.reject(e.response?.data.reason));
+			.catch((e: AxiosError) => Promise.reject(e));
 	}
 
 	setTheme(data: {}) {
 		return http.put(`${serverUrl}${restEndpoints.changeTheme}`, data)
-			.catch((e: AxiosError) => Promise.reject(e.response?.data.reason));
+			.catch((e: AxiosError) => Promise.reject(e));
 	}
 
 	getAllThemes() {
 		return http.get(`${serverUrl}${restEndpoints.getAllThemes}`)
 			.then((res: AxiosResponse) => res.data)
-			.catch((e: AxiosError) => Promise.reject(e.response?.data.reason));
+			.catch((e: AxiosError) => Promise.reject(e));
 	}
 
 	getUserTheme(id: number) {
 		return http.get(`${serverUrl}${restEndpoints.getUserTheme}id=${id}`)
 			.then((res: AxiosResponse) => res.data)
-			.catch((e: AxiosError) => Promise.reject(e.response?.data.reason));
+			.catch((e: AxiosError) => Promise.reject(e));
 	}
 
 	setUserInfo(data: {}) {
 		return http.post(`${serverUrl}${restEndpoints.userInfo}`, data)
-			.catch((e: AxiosError) => Promise.reject(e.response?.data.reason));
+			.catch((e: AxiosError) => Promise.reject(e));
 	}
 }
 

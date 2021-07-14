@@ -4,7 +4,7 @@ import {NavLink} from 'react-router-dom';
 import {RootState} from '../../redux/types';
 import {getWindow} from 'ssr-window';
 
-import {ThreadProps, AuthorProps} from '../../controllers/forum/forum.type';
+import {ThreadProps} from '../../controllers/forum/forum.type';
 import {Menu} from '../../components/menu/menu';
 import {Button} from '../../components/button';
 import {Input} from '../../components/input';
