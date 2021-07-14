@@ -10,6 +10,7 @@ import parse from 'html-react-parser';
 import httpContext from 'express-http-context';
 
 import {App} from '../../components/App';
+import {ErrorBoundary}  from '../../components/errorBoundary/errorBoundary';
 import {createStore, reducers} from '../../redux/rootStore';
 import {sliceNames} from '../../redux/slicenames';
 
@@ -28,7 +29,9 @@ export default (req: Request, res: Response) => {
 	const appContent = chunkExtractor.collectChunks(
 		<Provider store={store}>
 			<StaticRouter context={context} location={location}>
-				<App />
+				<ErrorBoundary>
+					<App />
+				</ErrorBoundary>
 			</StaticRouter>
 		</Provider>
 	);

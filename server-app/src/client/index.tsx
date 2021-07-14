@@ -9,6 +9,7 @@ import {IS_DEV} from '../../webpack/env';
 import {isServer} from '../utils/isServerEnvChecker';
 import {createStore, reducers} from '../redux/rootStore';
 import {App} from '../components/App';
+import {ErrorBoundary} from '../components/errorBoundary/errorBoundary';
 import '../styles/style.css';
 
 declare global {
@@ -42,7 +43,9 @@ if (!isServer) {
 		ReactDOM.hydrate(
 			<Provider store={store}>
 				<BrowserRouter>
-					<App />
+					<ErrorBoundary>
+						<App />
+					</ErrorBoundary>
 				</BrowserRouter>
 			</Provider>,
 			document.getElementById('app')
