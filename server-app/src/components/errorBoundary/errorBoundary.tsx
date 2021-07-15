@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {isServer} from '../../utils/isServerEnvChecker'
 
 import './errorBoundary.css';
 
@@ -7,7 +8,7 @@ class ErrorBoundary extends Component< {}, {error: null | Error, startLoad: numb
 		super(props);
 		this.state = {
 			error: null,
-			startLoad: performance.now()
+			startLoad: isServer ? 0 :  performance.now()
 		};
 	}
 

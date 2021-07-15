@@ -72,15 +72,16 @@ class Signin extends React.Component<SigninProps> {
 
 	getUserInfo = async () => {
 		await this.props.dispatch(fetchUserBy())
-			.then(() => this.getUserTheme())
+			.unwrap()
+			.then((res) => this.getUserTheme(res.id))
 	}
 
 	getAllThemes =  () => {
 		this.props.dispatch(getAllThemes())
 	}
 
-	getUserTheme = () => {
-		this.props.dispatch(getUserTheme(this.props.user.id))
+	getUserTheme = (id: number) => {
+		this.props.dispatch(getUserTheme(id))
 	}
 
 	signinClick = () => {
