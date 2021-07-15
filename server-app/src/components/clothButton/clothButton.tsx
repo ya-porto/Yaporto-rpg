@@ -9,7 +9,7 @@ export interface ClothProps {
     img?: string;
     type?: string;
     name?: string;
-    baf: string;
+    buff: string;
     description?: string;
     isBought?: boolean;
     isPutOn?: boolean;

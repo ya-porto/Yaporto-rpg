@@ -23,7 +23,7 @@ export class GameShop extends Component<GameShopProps, GameShopState> {
 		this.INITIAL_STATE = {
 			isViewed: false,
 			viewedItem: {
-				baf: '0',
+				buff: '0',
 				onClick: this.viewedItem
 			},
 			sorted: 'Всё'
@@ -89,9 +89,9 @@ export class GameShop extends Component<GameShopProps, GameShopState> {
 						<div className="shop card mx-2 px-6 py-4 d-flex flex-column align-center align-self-stretch justify-space-between">
 							<span className="shop_header">{this.state.sorted}</span>
 
-							{this.clothes?.map(({type, img, baf}, i) => (
+							{this.clothes?.map(({type, img, buff}, i) => (
 								<span className="clothes_button ma-2" key={i}>
-									<ClothButton type={type} baf={baf} onClick={this.viewedItem} img={img} />
+									<ClothButton type={type} buff={buff} onClick={this.viewedItem} img={img} />
 								</span>
 							))}
 						</div>

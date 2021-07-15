@@ -73,7 +73,6 @@ export class Character {
 				this.hp = store.getState().character.startedHp;
 			}
 	
-			console.log(store.getState())
 		})
 
 		setTimeout(() => {
@@ -129,16 +128,13 @@ export class Character {
 				
 				if (this.isEnemy) {
 					store.dispatch(decrimentEnemiesAmount())
-					console.log(store.getState())
 					if (store.getState().game.enemiesAmount <= 0) {
 						store.dispatch(stopTimer())
 						store.dispatch(setWin())
-						console.log(store.getState())
 					}
 				} else {
 					store.dispatch(stopTimer())
 					store.dispatch(setDeath())
-					console.log(store.getState())
 				}
 			}
 

@@ -20,7 +20,7 @@ export class Inventory extends Component<{}, InventoryType> {
 		this.state = {
 			isViewed: false,
 			viewedItem: {
-				baf: '0',
+				buff: '0',
 				onClick: this.viewedItem
 			}
 		};
@@ -47,13 +47,13 @@ export class Inventory extends Component<{}, InventoryType> {
 								<CharacterCard />
 								<BackpackCard clothes={[{
 									type: 'armor',
-									baf: '0',
+									buff: '0',
 									onClick: this.viewedItem,
 									img: ''
 								},
 								{
 									type: 'armor',
-									baf: '0',
+									buff: '0',
 									onClick: this.viewedItem,
 									img: ''
 
