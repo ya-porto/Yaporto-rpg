@@ -1,8 +1,6 @@
 import {http, AxiosError, AxiosResponse} from '../../modules/http';
 import {serverUrl} from '../../utils/baseUrls';
 import {restEndpoints} from '../../utils/restEndpoints';
-import {threadMocks} from '../../_mocks/forumMocks';
-import { ThreadProps } from './forum.type';
 
 class Controller {
 	async getAllThreads() {
@@ -30,6 +28,11 @@ class Controller {
 	async postLike(data: {}) {
 		return http.post(`${serverUrl}${restEndpoints.forumLike}`, data)
 			.catch((e: AxiosError) => Promise.reject(e));
+	}
+
+	async deleteLike(data: {}) {
+		return http.post(`${serverUrl}${restEndpoints.deleteLike}`, data)
+			.catch((e: AxiosError) => Promise.reject(e.response?.data.reason));
 	}
 }
 

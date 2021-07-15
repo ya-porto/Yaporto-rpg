@@ -6,5 +6,6 @@ export const restEndpoints = {
     forumThread: '/api/forum/thread',
     forumComment: '/api/forum/comment',
     forumLike: '/api/forum/like',
+    deleteLike: '/api/forum/unlike',
     userInfo: '/api/forum/user'
 }
