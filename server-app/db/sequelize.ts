@@ -1,10 +1,8 @@
 import { Sequelize, SequelizeOptions, DataType, Model, Table, Column } from 'sequelize-typescript';
-import {IS_DEV} from '../webpack/env';
-
 
 // Задаем параметры для подключения к БД
 const sequelizeOptions: SequelizeOptions = {
-    host: IS_DEV ? 'localhost' : 'postgres',
+    host: 'postgres',
     port: 5432,
     username: 'postgres',
     password: 'newPassword',
