@@ -68,7 +68,8 @@ async function forumMiddleware (req: Request, res: Response,  next: NextFunction
             where: {
                 thread_id: id
             },
-            include: [{model: Users}]
+            include: [{model: Users}],
+            order: ['comment_id']
         })
             .then((res) => {
                 res.map(r => {
