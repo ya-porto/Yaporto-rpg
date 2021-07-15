@@ -10,6 +10,7 @@ import parse from 'html-react-parser';
 import httpContext from 'express-http-context';
 
 import {App} from '../../components/App';
+import {ErrorBoundary}  from '../../components/errorBoundary/errorBoundary';
 import {createStore, reducers} from '../../redux/rootStore';
 import {sliceNames} from '../../redux/slicenames';
 import {ForumContext} from '../../utils/forumContext';
@@ -33,7 +34,9 @@ export default (req: Request, res: Response) => {
 		<Provider store={store}>
 			<StaticRouter context={context} location={location}>
 				<ForumContext.Provider value={forum}>
-					<App />
+					<ErrorBoundary>
+						<App />
+					</ErrorBoundary>
 				</ForumContext.Provider>
 			</StaticRouter>
 		</Provider>

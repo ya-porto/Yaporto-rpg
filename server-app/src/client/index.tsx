@@ -9,6 +9,7 @@ import {IS_DEV} from '../../webpack/env';
 import {isServer} from '../utils/isServerEnvChecker';
 import {createStore, reducers} from '../redux/rootStore';
 import {App} from '../components/App';
+import {ErrorBoundary} from '../components/errorBoundary/errorBoundary';
 import {ForumContext} from '../utils/forumContext';
 import '../styles/style.css';
 
@@ -51,7 +52,9 @@ if (!isServer) {
 			<Provider store={store}>
 				<BrowserRouter>
 					<ForumContext.Provider value={JSON.parse(localStorage.forum)}>
-						<App />
+						<ErrorBoundary>
+							<App />
+						</ErrorBoundary>
 					</ForumContext.Provider>	
 				</BrowserRouter>
 			</Provider>,
