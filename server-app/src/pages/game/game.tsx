@@ -134,7 +134,12 @@ class Game extends React.Component<IGameProps> {
 						<GameCanvas />
 					</div>
 					{this.props.game.isPause ? <Inventory /> : null}
-					{this.props.game.isShop ? <GameShop /> : null}
+					{this.props.game.isShop ? <GameShop 
+					clothes={[
+						{img: '../images/sword_1.png', type: "Оружие", baf: '5'},
+						{img: '../images/sword_2.png', type: "Оружие", baf: '10'},
+						{img: '../images/sword_3.png', type: "Оружие", baf: '15'}
+					]}/> : null}
 				</div>
 			</>
 		);

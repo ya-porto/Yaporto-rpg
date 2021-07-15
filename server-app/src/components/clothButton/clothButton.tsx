@@ -9,11 +9,11 @@ export interface ClothProps {
     img?: string;
     type?: string;
     name?: string;
-    baf?: string;
+    baf: string;
     description?: string;
     isBought?: boolean;
     isPutOn?: boolean;
-    onClick: (data: ClothProps) => void;
+    onClick?: (data: ClothProps) => void;
 }
 
 export class ClothButton extends PureComponent<ClothProps> {
@@ -26,7 +26,9 @@ export class ClothButton extends PureComponent<ClothProps> {
 	}
 
 	giveOwnProps = () => {
-		this.props.onClick(this.props);
+		if(this.props.onClick){
+			this.props.onClick(this.props);
+		}
 	}
 
 	render() {

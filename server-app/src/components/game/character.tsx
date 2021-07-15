@@ -5,6 +5,7 @@ import {NumberAnimate} from './numberAnimate';
 import {objPersonaj} from './game.objPersonaj';
 import {getDocument} from 'ssr-window';
 import { store } from '../../client';
+import {changeCurrentHp} from '../../redux/characterSlice';
 import { decrimentEnemiesAmount, setDeath, setWin, stopTimer } from '../../redux/gameSlice';
 const document = getDocument();
 
@@ -36,14 +37,11 @@ export class Character {
 	constructor(startX: number, startY: number, image: HTMLImageElement, canvasId: string, attackMass: Array<HTMLImageElement>,
 		deathMass: Array<HTMLImageElement> = [], hp: number = 100, attack: number = 10, armor: number = 0, canvasMatrix: Array<Array<objPersonaj | null>>,
 		xSize: number, ySize: number, isEnemy: boolean) {
-		this.hp = hp;
 		this.isDead = false;
 		this.canvasMatrix = canvasMatrix;
 		this.xSize = xSize;
 		this.ySize = ySize;
 		this.deathMass = deathMass;
-		this.attack = attack;
-		this.armor = armor;
 		this.isEnemy = isEnemy;
 		this.attackFrame = 0;
 		const canvas = document.getElementById(canvasId) as HTMLCanvasElement;
@@ -57,6 +55,26 @@ export class Character {
 		this.prevY = startY;
 		this.yPosition = this.prevY / this.ySize;
 		this.xPosition = this.prevX / this.xSize;
+
+		if(!isEnemy){
+			this.attack = store.getState().character.startedDps;
+			this.armor = store.getState().character.startedArmor;
+			this.hp = store.getState().character.startedHp;
+		}else{
+			this.attack = attack;
+			this.armor = armor;
+			this.hp = hp;
+		}
+
+		store.subscribe(() => {
+			if(!isEnemy){
+				this.attack = store.getState().character.startedDps;
+				this.armor = store.getState().character.startedArmor;
+				this.hp = store.getState().character.startedHp;
+			}
+	
+			console.log(store.getState())
+		})
 
 		setTimeout(() => {
 			if (this.ctx) {
@@ -98,6 +116,10 @@ export class Character {
 
 	getDamage(dmg: number) {
 		this.hp -= (dmg - this.armor);
+		if(!this.isEnemy){
+			store.dispatch(changeCurrentHp(this.hp))
+		}
+
 		if (this.hp <= 0) {
 			if (!this.isDead) {
 				this.isDead = true;
@@ -107,13 +129,16 @@ export class Character {
 				
 				if (this.isEnemy) {
 					store.dispatch(decrimentEnemiesAmount())
+					console.log(store.getState())
 					if (store.getState().game.enemiesAmount <= 0) {
 						store.dispatch(stopTimer())
 						store.dispatch(setWin())
+						console.log(store.getState())
 					}
 				} else {
 					store.dispatch(stopTimer())
 					store.dispatch(setDeath())
+					console.log(store.getState())
 				}
 			}
 
@@ -134,7 +159,7 @@ export class Character {
 		this.animationTime = animationTime;
 		this.attackId = window.setInterval(() => {
 			this.deathAnimate();
-		}, animationTime / (this.deathMass.length - 1));
+		}, animationTime / (this.deathMass.length - 2));
 	}
 
 	deathAnimate() {

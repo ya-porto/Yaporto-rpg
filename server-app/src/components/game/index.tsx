@@ -79,11 +79,13 @@ export class Game extends Component {
 					obj.addEnemy(Characters.C);
 					if (obj.isEnemy) {
 						enemiesAmount++
+						console.log(enemiesAmount)
 					}
 				}
 			}
 
 			store.dispatch(setEnemiesAmount(enemiesAmount))
+			console.log(store.getState())
 
 			document.addEventListener('keydown', (event) => {
 				if (!isActive && !store.getState().game.isPause) {

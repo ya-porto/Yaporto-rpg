@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {ViewedClothCard} from '../viewedClothCard/viewedClothCard';
+import ViewedClothCard from '../viewedClothCard/viewedClothCard';
 import {ClothProps, ClothButton} from '../clothButton/clothButton';
 import {Button} from '../button/index';
 import './gameshop.css';
@@ -7,7 +7,7 @@ import './gameshop.css';
 interface GameShopState {
     isViewed: boolean,
 	viewedItem: ClothProps,
-	sorted: string
+	sorted: string,
 }
 
 interface GameShopProps {
@@ -23,6 +23,7 @@ export class GameShop extends Component<GameShopProps, GameShopState> {
 		this.INITIAL_STATE = {
 			isViewed: false,
 			viewedItem: {
+				baf: '0',
 				onClick: this.viewedItem
 			},
 			sorted: 'Всё'
@@ -32,10 +33,11 @@ export class GameShop extends Component<GameShopProps, GameShopState> {
 		this.clothes = this.props.clothes;
 	}
 
-	viewedItem = (data: ClothProps): void => {
+	viewedItem = (data: ClothProps): any => {
+		console.log(data);
 		this.setState({
 			viewedItem: data,
-			isViewed: true
+			isViewed: true,
 		});
 	}
 
@@ -87,9 +89,9 @@ export class GameShop extends Component<GameShopProps, GameShopState> {
 						<div className="shop card mx-2 px-6 py-4 d-flex flex-column align-center align-self-stretch justify-space-between">
 							<span className="shop_header">{this.state.sorted}</span>
 
-							{this.clothes?.map(({type, img}, i) => (
+							{this.clothes?.map(({type, img, baf}, i) => (
 								<span className="clothes_button ma-2" key={i}>
-									<ClothButton type={type} onClick={this.viewedItem} img={img} />
+									<ClothButton type={type} baf={baf} onClick={this.viewedItem} img={img} />
 								</span>
 							))}
 						</div>
