@@ -12,6 +12,7 @@ import httpContext from 'express-http-context';
 import {App} from '../../components/App';
 import {createStore, reducers} from '../../redux/rootStore';
 import {sliceNames} from '../../redux/slicenames';
+import {ForumContext} from '../../utils/forumContext';
 
 export default (req: Request, res: Response) => {
 	const statsFile = path.resolve('./dist/loadable-stats.json');
@@ -21,14 +22,19 @@ export default (req: Request, res: Response) => {
 	const context: StaticRouterContext = {};
 
 	const userData = httpContext.get(sliceNames.user)
+	const threads = httpContext.get('threads')
+	const thread = httpContext.get('thread')
+	const forum = {threads: threads, thread: thread}
 
-	const preloadedData = {user: userData ? Object.assign(userData, httpContext.get('userThemes')) : userData}
+	const preloadedData = {user: userData}
 	const store = createStore(reducers, preloadedData);
 
 	const appContent = chunkExtractor.collectChunks(
 		<Provider store={store}>
 			<StaticRouter context={context} location={location}>
-				<App />
+				<ForumContext.Provider value={forum}>
+					<App />
+				</ForumContext.Provider>
 			</StaticRouter>
 		</Provider>
 	);
@@ -41,11 +47,10 @@ export default (req: Request, res: Response) => {
 		return;
 	}
 
-	res.send(makeHTMLPage(reactDom, chunkExtractor, reduxState));
+	res.send(makeHTMLPage(reactDom, chunkExtractor, reduxState, forum));
 };
 
-function makeHTMLPage(reactDom: string, chunkExtractor: ChunkExtractor, reduxState = {}) {
-	// Нужно будет понять зачем и как это рендерить
+function makeHTMLPage(reactDom: string, chunkExtractor: ChunkExtractor, reduxState = {}, forum ={}) {
 	const scriptTags = chunkExtractor.getScriptTags();
 
 	// Тут мы создаем страницу, которую будем раздавать
@@ -53,12 +58,15 @@ function makeHTMLPage(reactDom: string, chunkExtractor: ChunkExtractor, reduxSta
 		<html lang="ru">
 			<head>
 				<title>From SSR with Love</title>
-				<link rel="stylesheet" href="./css/style.css"></link>
+				<link rel="stylesheet" href="/css/style.css"></link>
 			</head>
 			<body>
 				<main id="app">{parse(reactDom)}</main>
 				<script dangerouslySetInnerHTML={{
 					__html: `window.__INITIAL_STATE__ = ${JSON.stringify(reduxState)}`
+				}} />
+				<script dangerouslySetInnerHTML={{
+					__html: `window.storage = ${JSON.stringify(forum)}`
 				}} />
 				{parse(scriptTags)}
 			</body>

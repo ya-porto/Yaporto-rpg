@@ -43,7 +43,7 @@ export const ROUTES: IROUTES = {
 	},
 	FORUM: {
 		NAME: 'Форум',
-		INDEX: Navigation.Game,
+		INDEX: Navigation.Forum,
 		AUTH: true
 	},
 	LEADERBOARD: {

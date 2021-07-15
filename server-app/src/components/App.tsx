@@ -4,16 +4,24 @@ import Main from '../pages/main';
 import Profile from '../pages/profile';
 import Signin from '../pages/signin';
 import Signup from '../pages/signup';
-import {forum, thread} from '../pages/forum';
+import {Forum} from '../pages/forum/index';
 
 import React from 'react';
 import {hot} from 'react-hot-loader/root';
-import {Switch, Route} from 'react-router-dom';
+import {Switch, Route, useLocation} from 'react-router-dom';
 import {Navigation as NavigationList} from '../client/constants';
 
-import './App.css';
+import './App.css'
+
+function useQuery() {
+	return new URLSearchParams(useLocation().search);
+  }
+
+
 
 function App(): JSX.Element {
+	const query = useQuery()
+	const id = query.get('id')
 	return (
 		<div>
 			<Switch>
@@ -23,8 +31,9 @@ function App(): JSX.Element {
 				<Route exact path={NavigationList.Signin} component={Signin} />
 				<Route exact path={NavigationList.Profile} component={Profile} />
 				<Route exact path={NavigationList.Leaderboard} component={Leaderboard} />
-				<Route exact path={NavigationList.Forum} component={forum} />
-				<Route exact path={NavigationList.Thread} component={thread} />
+				<Route exact path={NavigationList.Forum}>
+					<Forum thread={id} />
+				</Route>
 			</Switch>
 		</div>
 	);

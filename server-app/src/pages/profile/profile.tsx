@@ -171,7 +171,14 @@ class Profile extends React.Component<ProfileProps> {
 	}
 
 	getUserInfo = async () => {
-		this.props.dispatch(fetchUserBy());
+		this.props.dispatch(fetchUserBy())
+			.unwrap()
+			.then(async (res: {[k in string]: any}) => {
+				await userController.setUserInfo({
+					user_id: res.id,
+					display_name: res.display_name
+				}).catch(e => console.error(e))
+			})
 	}
 
 	inputChange = (data: IUserInfo, inputsArray: string) => {

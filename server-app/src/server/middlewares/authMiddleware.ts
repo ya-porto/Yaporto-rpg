@@ -1,9 +1,8 @@
 import axios from 'axios';
 import {NextFunction, Request, Response} from 'express';
 import httpContext from 'express-http-context';
-import { Navigation } from '../../client/constants';
-
 import {sliceNames} from '../../redux/slicenames';
+import {userInitialState} from '../../redux/userSlice'
 import { ROUTES } from './../../client/routes';
 
 const PRAKTIKUM_AUTH_ENDPOINT = 'https://ya-praktikum.tech/api/v2/auth/user';
@@ -29,7 +28,9 @@ async function authMiddleware(req: Request, res: Response, next: NextFunction) {
 		if (req.url === ROUTES.SIGNIN.INDEX || req.url === ROUTES.SIGNUP.INDEX) {
 			res.redirect(ROUTES.MAIN.INDEX);
 		}
+		
 	} catch (err) {
+		httpContext.set(sliceNames.user, userInitialState)
 		// Если неавторизован, а надо, то пускаю на авторизацию
 		if (isNeedAuth) {
 			if (err.response.status === 401) {

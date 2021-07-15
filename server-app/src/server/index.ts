@@ -62,12 +62,46 @@ sequelize
 	})
 
 	sequelize.models.UserThemes.create({
-		user_id: 585,
+		user_id: 487,
 		theme_id: 'light'
 	})
-	// eslint-disable-next-line no-console
-	.then(() => console.log('Themes created'))
-	.catch(err => console.error(err))
+
+	sequelize.models.Users.bulkCreate([{
+        user_id: 487,
+        user_info: JSON.stringify({display_name: 'name'})
+    }, {
+        user_id: 10,
+        user_info: JSON.stringify({display_name: 'name'})
+    }, {
+        user_id: 3,
+        user_info: JSON.stringify({display_name: 'name'})
+    }]).catch(e => console.error(e))
+
+    sequelize.models.Threads.bulkCreate([{
+        user_id: 3,
+        title: 'title',
+        text: 'text'
+	}])
+	.then(()=> {
+		sequelize.models.Comments.create({
+			thread_id: 1,
+			user_id: 3,
+			text: 'text'
+		})
+		.then(() => {
+			sequelize.models.Likes.create({
+				user_id: 3,
+				comment_id: 1
+			}).catch(e => console.error(e))
+		})
+		.catch(e => console.error(e))
+	})
+	.catch(e => console.error(e))
+
+
+
+
+
 	// eslint-disable-next-line no-console
     console.log('Tables created', sequelize.models)
 })
