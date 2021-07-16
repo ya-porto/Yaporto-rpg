@@ -1,5 +1,7 @@
 .clothes {
     width: 40%;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .clothes_header {

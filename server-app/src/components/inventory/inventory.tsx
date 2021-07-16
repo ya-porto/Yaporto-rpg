@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {NavLink} from 'react-router-dom';
-import {BackpackCard} from '../backpackCard/backpackCard';
+import {BackpackCard} from '../backpackCard/BackpackCard'
 import ViewedClothCard from '../viewedClothCard/viewedClothCard';
-import CharacterCard from '../characterCard/characterCard';
+import CharacterCard from '../characterCard/CharacterCard';
 import {ClothProps} from '../clothButton/clothButton';
 import {Button} from '../button/index';
 
@@ -45,7 +45,7 @@ export class Inventory extends Component<{}, InventoryType> {
 
 							<div className="inventory d-flex flex-column justify-space-between">
 								<CharacterCard />
-								<BackpackCard clothes={[{
+								{/* <BackpackCard clothes={[{
 									type: 'armor',
 									buff: '0',
 									onClick: this.viewedItem,
@@ -57,10 +57,10 @@ export class Inventory extends Component<{}, InventoryType> {
 									onClick: this.viewedItem,
 									img: ''
 
-								}]} header="Рюкзак"/>
+								}]} header="Рюкзак"/> */}
 							</div>
 
-							<ViewedClothCard isViewed={this.state.isViewed} viewedItem={this.state.viewedItem} buttonText="Надеть" />
+							{/* <ViewedClothCard isViewed={this.state.isViewed} viewedItem={this.state.viewedItem} buttonText="Надеть" /> */}
 
 						<div className="inventory_buttons d-flex flex-column justify-space-betweend">
 							<NavLink className="green inventory_button" to="/gameshop">

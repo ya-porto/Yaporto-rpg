@@ -15,6 +15,7 @@
 .shop {
     height: 100%;
     width: 60%;
+    overflow: scroll;
 }
 
 .shop_header {

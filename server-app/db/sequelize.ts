@@ -2,7 +2,7 @@ import { Sequelize, SequelizeOptions, DataType, Model, Table, Column } from 'seq
 
 // Задаем параметры для подключения к БД
 const sequelizeOptions: SequelizeOptions = {
-    host: 'postgres',
+    host: 'localhost',
     port: 5432,
     username: 'postgres',
     password: 'newPassword',

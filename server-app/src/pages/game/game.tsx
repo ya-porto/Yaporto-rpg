@@ -142,8 +142,6 @@ class Game extends React.Component<IGameProps> {
 						<div className="game-header__right d-flex justify-space-between align-center">
 							<Button className="mr-3" onClick={this.toggleTimer}><i className={`fas fa-${timerId ? 'pause' : 'play'}`}></i></Button>
 							<Button className="mr-3" onClick={this.showShopMenu}><i className="fas fa-store-alt"></i></Button>
-							<Link to="/profile"><Button><i className="fas fa-user"></i></Button></Link>
-							<Button className="mr-3" onClick={this.showShopMenu}><i className="fas fa-store-alt"></i></Button>
 							<Button className="ml-3" onClick={this.toggleFullscreen}><i className={`fas fa-${isFullscreen ? 'compress' : 'expand'}`}></i></Button>
 						</div>
 					</header>

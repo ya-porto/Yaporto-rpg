@@ -40,12 +40,11 @@ export class GameShop extends Component<GameShopProps, GameShopState> {
 		});
 	}
 
-	sortItems =(event: { target: HTMLElement; }) => {
-		const key = event.target?.innerHTML;
+	sortItems = (key: string) => {
 		switch (key) {
 		case ('Оружие'):
 			this.clothes = this.clothes?.filter((cloth: ClothProps) => {
-				return cloth.type === 'weapon';
+				return cloth.type === 'Оружие';
 			});
 			this.setState({
 				isViewed: this.INITIAL_STATE.isViewed,
@@ -56,7 +55,7 @@ export class GameShop extends Component<GameShopProps, GameShopState> {
 
 		case ('Броня'):
 			this.clothes = this.clothes?.filter((cloth: ClothProps) => {
-				return cloth.type === 'armor';
+				return cloth.type === 'Броня';
 			});
 			this.setState({
 				isViewed: this.INITIAL_STATE.isViewed,
@@ -99,9 +98,9 @@ export class GameShop extends Component<GameShopProps, GameShopState> {
 
 					</div>
 					<div className="gameshop_buttons d-flex flex-column justify-space-between">
-						<Button className="green gameshop_button" children={'Оружие'} onClick={this.sortItems}/>
-						<Button className="green gameshop_button" children={'Броня'} onClick={this.sortItems}/>
-						<Button className="green gameshop_button" children={'Всё'} onClick={this.sortItems}/>
+						<Button className="green gameshop_button" children={'Оружие'} onClick={() => this.sortItems('Оружие')}/>
+						<Button className="green gameshop_button" children={'Броня'} onClick={() => this.sortItems('Броня')}/>
+						<Button className="green gameshop_button" children={'Всё'} onClick={() => this.sortItems('Всё')}/>
 					</div>
 				</div>
 		);

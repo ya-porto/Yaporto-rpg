@@ -4,9 +4,9 @@ import {ClothButton, ClothProps} from '../clothButton/clothButton';
 
 import './backpack.css';
 interface BackpackCardProps {
-		clothes: ClothProps[],
-		header: string
-	}
+	clothes: ClothProps[],
+	header: string
+}
 
 export class BackpackCard extends Component<BackpackCardProps> {
 	render() {
@@ -15,8 +15,8 @@ export class BackpackCard extends Component<BackpackCardProps> {
 			<div className="backpack mx-2 px-6 py-4 card d-flex flex-column align-center">
 				<span className="backpack_header mb-2">{this.props.header}</span>
 
-				{clothes.map(({type, onClick, img}, i) => (
-					<ClothButton className="clothes_button ma-2" type={type} onClick={onClick} img={img} key={i}/>
+				{clothes.map(({type, onClick, img, buff}, i) => (
+					<ClothButton className="clothes_button ma-2" type={type} buff={buff} onClick={onClick} img={img} key={i}/>
 				))}
 			</div>
 		);
