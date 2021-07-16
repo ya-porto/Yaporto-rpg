@@ -3,7 +3,13 @@
     height: 50px;
     background: #060606;
 }
-
+.page-game {
+    background-image: url(../images/forest-background.jpeg);
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 .page-game .game-header .game-header__left {
     color: #fff;
 }

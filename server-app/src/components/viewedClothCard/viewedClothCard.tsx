@@ -27,6 +27,18 @@ class ViewedClothCard extends PureComponent<ClothCardProps> {
 			this.props.dispatch(changeArmor(stats))
 		}
 	}
+
+	returnBuff = () => {
+		const stats = this.props.viewedItem.buff;
+
+		if(this.props.viewedItem.type == 'Оружие'){
+			return `Урон + ${stats}`
+		}
+
+		if(this.props.viewedItem.type == 'Броня'){
+			return `Броня + ${stats}`
+		}
+	}
 	render() {
 		const {img} = this.props.viewedItem;
 		const {isViewed} = this.props;
@@ -39,7 +51,7 @@ class ViewedClothCard extends PureComponent<ClothCardProps> {
 							<img src={img} width="100%" height="100%"></img>
 						</span>
 
-						<span className="my-7 pa-2 align-self-stretch text-center baffs">Бафы</span>
+						<span className="my-7 pa-2 align-self-stretch text-center baffs">Бафы: {this.returnBuff()}</span>
 
 						<span className="text-center">Мега пыщ-пыщ описание шмотки</span>
 					</div>
