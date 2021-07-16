@@ -1,6 +1,5 @@
 import { Sequelize, SequelizeOptions, DataType, Model, Table, Column } from 'sequelize-typescript';
 
-
 // Задаем параметры для подключения к БД
 const sequelizeOptions: SequelizeOptions = {
     host: 'postgres',
