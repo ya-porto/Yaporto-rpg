@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import {NavLink} from 'react-router-dom';
 import {BackpackCard} from '../backpackCard/backpackCard';
-import {ViewedClothCard} from '../viewedClothCard/viewedClothCard';
-import {CharacterCard} from '../characterCard/characterCard';
+import ViewedClothCard from '../viewedClothCard/viewedClothCard';
+import CharacterCard from '../characterCard/characterCard';
 import {ClothProps} from '../clothButton/clothButton';
 import {Button} from '../button/index';
-import {Menu} from '../menu/menu';
+
 
 import './inventory.css';
 
@@ -20,6 +20,7 @@ export class Inventory extends Component<{}, InventoryType> {
 		this.state = {
 			isViewed: false,
 			viewedItem: {
+				buff: '0',
 				onClick: this.viewedItem
 			}
 		};
@@ -46,11 +47,13 @@ export class Inventory extends Component<{}, InventoryType> {
 								<CharacterCard />
 								<BackpackCard clothes={[{
 									type: 'armor',
+									buff: '0',
 									onClick: this.viewedItem,
 									img: ''
 								},
 								{
 									type: 'armor',
+									buff: '0',
 									onClick: this.viewedItem,
 									img: ''
 

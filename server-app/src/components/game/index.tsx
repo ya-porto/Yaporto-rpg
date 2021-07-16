@@ -52,8 +52,8 @@ const lvlMatrix = [
 	[list, list, list, list, list, null, null, null, null, null, null, null, list],
 	[list, char1, null, null, null, null, null, null, null, null, null, null, list],
 	[list, null, null, null, null, null, null, null, null, null, null, null, list],
-	[list, null, null, null, null, char2, null, null, null, null, null, null, list],
-	[list, list, null, char3, null, null, null, null, null, char4, null, null, list],
+	[list, null, null, null, null, null, null, null, null, null, null, null, list],
+	[list, list, null, null, null, null, null, null, null, char4, null, null, list],
 	[list, list, list, null, null, null, null, null, null, null, null, null, list],
 	[list, list, list, list, list, list, list, list, list, list, list, list, list]
 ];
@@ -79,11 +79,13 @@ export class Game extends Component {
 					obj.addEnemy(Characters.C);
 					if (obj.isEnemy) {
 						enemiesAmount++
+						console.log(enemiesAmount)
 					}
 				}
 			}
 
 			store.dispatch(setEnemiesAmount(enemiesAmount))
+			console.log(store.getState())
 
 			document.addEventListener('keydown', (event) => {
 				if (!isActive && !store.getState().game.isPause) {

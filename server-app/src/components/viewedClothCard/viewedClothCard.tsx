@@ -1,6 +1,11 @@
 import React, {PureComponent} from 'react';
 import {Button} from '../button/index';
 import {ClothProps} from '../clothButton/clothButton';
+import { Dispatch } from 'redux';
+import {changeArmor, changeDps} from '../../redux/characterSlice';
+import { connect } from 'react-redux';
+import { RootState } from '../../redux/types';
+
 
 import './viewedClothCard.css';
 
@@ -8,10 +13,20 @@ interface ClothCardProps {
     img?: string,
     viewedItem: ClothProps
 	isViewed: boolean,
-	buttonText: string
+	buttonText: string,
+	character: RootState,
+	dispatch: Dispatch,
 }
-
-export class ViewedClothCard extends PureComponent<ClothCardProps> {
+class ViewedClothCard extends PureComponent<ClothCardProps> {
+	addStats = () => {
+		const stats = +this.props.viewedItem.buff;
+		if(this.props.viewedItem.type == 'Оружие'){
+			this.props.dispatch(changeDps(stats))
+		}
+		if(this.props.viewedItem.type == 'Броня'){
+			this.props.dispatch(changeArmor(stats))
+		}
+	}
 	render() {
 		const {img} = this.props.viewedItem;
 		const {isViewed} = this.props;
@@ -29,7 +44,7 @@ export class ViewedClothCard extends PureComponent<ClothCardProps> {
 						<span className="text-center">Мега пыщ-пыщ описание шмотки</span>
 					</div>
 					<Button
-						onClick={() => ''}
+						onClick={this.addStats}
 						children={this.props.buttonText}
 						className = "green"
 					/>
@@ -42,3 +57,9 @@ export class ViewedClothCard extends PureComponent<ClothCardProps> {
 		);
 	}
 }
+
+const mapStateToProps = (state: RootState) => ({
+	character: state.character,
+});
+
+export default connect(mapStateToProps)(ViewedClothCard);

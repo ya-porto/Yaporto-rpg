@@ -14,7 +14,8 @@ export const gameSlice = createSlice({
 		isPause: false,
 		isDead: false,
 		isWin: false,
-		enemiesAmount: 0
+		enemiesAmount: 0,
+		isShop: false,
 	},
 	reducers: {
 		changeTime: (state: any, action: any) => {
@@ -28,6 +29,9 @@ export const gameSlice = createSlice({
 			clearInterval(state.timerId)
 			state.timerId = null
 			state.isPause = true
+		},
+		toggleShop: (state: any) => {
+			state.isShop = !state.isShop;
 		},
 		setDeath: (state: any) => {
 			state.isDead = true
@@ -44,6 +48,6 @@ export const gameSlice = createSlice({
 	}
 });
 
-export const {changeTime, setTimerId, stopTimer, setDeath, setWin, setEnemiesAmount, decrimentEnemiesAmount} = gameSlice.actions;
+export const {changeTime, setTimerId, stopTimer, setDeath, setWin, toggleShop, setEnemiesAmount, decrimentEnemiesAmount} = gameSlice.actions;
 
 export default gameSlice.reducer;
