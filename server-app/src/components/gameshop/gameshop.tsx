@@ -34,7 +34,6 @@ export class GameShop extends Component<GameShopProps, GameShopState> {
 	}
 
 	viewedItem = (data: ClothProps): any => {
-		console.log(data);
 		this.setState({
 			viewedItem: data,
 			isViewed: true,

@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
+import {isServer} from '../../utils/isServerEnvChecker'
 
 import './errorBoundary.css';
 
-export class ErrorBoundary extends Component< {}, {error: null | Error, startLoad: number}> {
+class ErrorBoundary extends Component< {}, {error: null | Error, startLoad: number}> {
 	constructor(props: {children: React.ReactChild}) {
 		super(props);
 		this.state = {
 			error: null,
-			startLoad: performance.now()
+			startLoad: isServer ? 0 :  performance.now()
 		};
 	}
 
@@ -34,3 +35,5 @@ export class ErrorBoundary extends Component< {}, {error: null | Error, startLoa
 		return this.props.children;
 	}
 }
+
+export {ErrorBoundary}

@@ -39,8 +39,12 @@ async function userThemeMiddleware (res: Response, req: Request, next: NextFunct
             userTheme = response
         }
     } 
+
+    const allthemes = await UserThemes.findAll({raw: true}).then(res => res)
     // Складываем в контекст чтобы передать дальше в миддлвару рендера страницы
-    httpContext.set('userThemes', {themes: themes, theme: userTheme})
+    const user = httpContext.get(sliceNames.user)
+    Object.assign(user, {themes: themes, theme: userTheme})
+    httpContext.set(sliceNames.user, user)
     // Передаем управление следующей миддлваре
     next()
 }

@@ -13,7 +13,7 @@ import {Modal} from '../../components/modal';
 import {authController} from '../../controllers/auth';
 import {IChangePassword, IChangeUserInfo, userController} from '../../controllers/user';
 import {fetchUserBy, resetUserData, updateTheme} from '../../redux/userSlice';
-import './style.css';
+import './profile.css';
 
 const document = getDocument();
 interface IUserInfo {
@@ -171,7 +171,14 @@ class Profile extends React.Component<ProfileProps> {
 	}
 
 	getUserInfo = async () => {
-		this.props.dispatch(fetchUserBy());
+		this.props.dispatch(fetchUserBy())
+			.unwrap()
+			.then(async (res: {[k in string]: any}) => {
+				await userController.setUserInfo({
+					user_id: res.id,
+					display_name: res.display_name
+				}).catch(e => console.error(e))
+			})
 	}
 
 	inputChange = (data: IUserInfo, inputsArray: string) => {
@@ -315,9 +322,9 @@ class Profile extends React.Component<ProfileProps> {
 	showChangeThemeOption =( ) => {
 		if (this.props.user.themes?.length > 0) {
 			return (
-				<div className="mt-5">
-					<p>Выберите тему</p>
-					{this.props.user.themes?.map((theme: {[key in string]: string}, id) => {
+				<div className="change_theme">
+					<p className="mb-1">Выберите тему</p>
+					{this.props.user.themes?.map((theme: {[key in string]: string}, id: number) => {
 						return (
 							<Button className="mr-3" key={id} onClick={() => this.changeTheme(theme.theme_id)}>{theme.theme_name}</Button>
 						)

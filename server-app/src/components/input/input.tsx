@@ -83,7 +83,7 @@ class Input extends React.PureComponent<IInputCompProps> {
 	}
 
 	render() {
-		const {value, type, placeholder, name, className, onChange, children} = this.props;
+		const {value,defaultValue, type, placeholder, name, className, onChange, children} = this.props;
 		const {error} = this.state;
 		const fieldClassName = `input ${className ?? ''}`;
 		return (
@@ -91,7 +91,8 @@ class Input extends React.PureComponent<IInputCompProps> {
 				<input
 					className="form__field"
 					type={type}
-					defaultValue={value}
+					defaultValue={defaultValue}
+					value={value}
 					placeholder={placeholder}
 					name={name}
 					onChange={onChange}

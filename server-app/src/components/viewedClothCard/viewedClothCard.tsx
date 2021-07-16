@@ -19,17 +19,13 @@ interface ClothCardProps {
 }
 class ViewedClothCard extends PureComponent<ClothCardProps> {
 	addStats = () => {
-		const stats = +this.props.viewedItem.baf;
-		console.log(stats)
+		const stats = +this.props.viewedItem.buff;
 		if(this.props.viewedItem.type == 'Оружие'){
-			console.log('Оружие')
 			this.props.dispatch(changeDps(stats))
 		}
 		if(this.props.viewedItem.type == 'Броня'){
-			console.log('Броня')
 			this.props.dispatch(changeArmor(stats))
 		}
-		console.log(this.props.character)
 	}
 	render() {
 		const {img} = this.props.viewedItem;

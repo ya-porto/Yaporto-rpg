@@ -1,31 +1,32 @@
 export interface AuthorProps {
-    id: number,
-    avatar?: string,
-    name: string
+    display_name: string
 }
 export interface ThreadProps extends CreateThreadProps {
-    id: number,
-    comments?: CommentProps[]
+    thread_id?: number,
+    comments?: number,
+
 }
 
 export interface CommentProps extends CreateCommentProps {
-    id: number,
-    likes: number[]
+    comment_id: number,
+    likes?: number,
+    liked?: boolean,
+    
 }
 
 export interface ToggleLikeCommentProps {
-    userId: number,
-    threadId: number,
-    commentId: number
+    user_id: number,
+    thread_id: number,
+    comment_id: number
 }
 
 export interface CreateThreadProps {
-    author: AuthorProps,
-    title: string,
-    text: string
+    user_info?: string,
+    title?: string,
+    text?: string
 }
 export interface CreateCommentProps {
-    author: AuthorProps,
+    user_info: string,
     threadId: number,
     text: string
 }
